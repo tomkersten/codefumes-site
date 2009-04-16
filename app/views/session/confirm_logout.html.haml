@@ -1,0 +1,8 @@
+%h1 Logout confirmation
+%p
+  You must be logged out to view the page requested.
+%p
+  Are you sure you want to log out?
+  %ul
+    %li= link_to "Yes, log me out", logout_path, :id => :logout_confirmation
+    %li= link_to "No, take me back to the home page", root_path, :id => :cancel_and_go_home
