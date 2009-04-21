@@ -1,10 +1,10 @@
 %div
   %p
     - if logged_in?
-      Yes...it was really that easy. Now go write your app...
+      You are logged in
       = link_to "[Logout]", logout_path, :id => "logout"
     - else
-      Hello. Welcome to the future.
+      Hello. You are logged out.
       = link_to "Sign in", login_path, :id => "login_link"
       or
       = link_to "Sign up", signup_path, :id => "signup_link"
