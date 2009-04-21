@@ -1,0 +1,12 @@
+= render :partial => 'layouts/standard/shared/doctype_definition'
+%html
+  %head
+    = stylesheet_link_tag 'tenplate'
+    = yield :head
+  %body
+    .master
+      = render :partial => "layouts/main_navigation"
+      = yield(:master)
+    .detail
+      = yield
+  = render :partial => "layouts/standard/shared/javascript"
