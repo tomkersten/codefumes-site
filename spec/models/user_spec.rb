@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe User do
   context "deliver_password_reset_instructions!" do
     before(:each) do
-      @typical_user = Factory(:typical_user)
+      @typical_user = User.make(:typical_user)
     end
 
     it "resets the user's perishable token" do

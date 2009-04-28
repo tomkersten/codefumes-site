@@ -9,7 +9,8 @@ config.gem 'diff-lcs', :lib => 'diff/lcs'
 config.gem 'nokogiri'
 config.gem 'treetop'
 config.gem 'term-ansicolor', :lib => 'term/ansicolor'
-config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
+config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com', :version => '>= 0.3.1'
+config.gem 'faker', :version => '>= 0.3.1'
 config.gem 'bmabey-email_spec', :lib => 'email_spec', :source => 'http://gems.github.com'
 
 # The test environment is used exclusively to run your application's
