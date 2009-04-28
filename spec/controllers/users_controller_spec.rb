@@ -67,4 +67,7 @@ describe UsersController do
     end
   end
 
+  it "fails miserably" do
+    false.should be_true
+  end
 end
