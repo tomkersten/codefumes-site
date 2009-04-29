@@ -1,8 +1,15 @@
 #grid, .grid
   :min-width 94em
+  :margin 0 auto
+  :background-color= !background_color
 
 
 body
+  :background-color= !page_color
+  pre
+    :font-family monospace
+    :color  #555
+
   #grid
     .main,
     .rail,
@@ -13,4 +20,45 @@ body
       :float right
       +rounded
 
-@import navigation.sass
+    /* Home page styles
+    #detail
+      +clearfix
+      .overview
+        :float left
+        :width 48em
+        :margin 3em 0em 0em 3em
+      .get_started
+        :float right
+        :margin 3em 0em 0em 3em
+        ol li
+          :list-style-type decimal
+
+    #header
+      :height 7em
+      :background url(/images/admin/head.png) no-repeat top center
+      :margin 1em 0 0
+      :border-bottom 1px solid #DDD
+      h1
+        :font-size 1em
+        a
+          :display block
+          :font-size 3em
+          :line-height 1em
+      h2
+        :display none
+
+    #footer
+      :margin-top 1em
+      :border-top 1px solid #DDD
+      :text-align center
+      ul
+        +clearfix
+        :background none
+        :margin 1em 0em 0em 0em
+        li
+          :float left
+          :margin 0em 1em
+          :background none
+          :list-style-type none
+          :font-size 1em
+

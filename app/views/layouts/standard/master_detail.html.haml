@@ -6,11 +6,13 @@
   %body
     #grid
       #header
-        Codometer
+        awesome_logo
       #master
-        = render :partial => "layouts/main_navigation"
         = yield(:master)
       #detail
         = render :partial => "layouts/flashes"
         = yield
+      #footer
+        %ul
+          %li Copyright info here
   = render :partial => "layouts/standard/shared/javascript"
