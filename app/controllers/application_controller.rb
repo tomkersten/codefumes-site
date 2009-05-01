@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  layout "layouts/standard/master_detail"
-
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   helper_method :current_user_session, :current_user, :logged_in?

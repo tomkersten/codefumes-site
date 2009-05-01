@@ -1,0 +1,26 @@
+- if !ie?
+  !!! XML
+!!! Strict
+%html
+  %head
+    = stylesheet_link_tag 'tenplate'
+    = yield :head
+  %body
+    #grid
+      #header
+        awesome_logo
+      #master
+        = yield(:master)
+      #detail
+        = render :partial => "layouts/flashes"
+        = yield
+      #footer
+        %ul
+          %li Copyright info here
+  = javascript_include_tag :all
+
+  = yield :javascript
+  :javascript
+    document.observe("dom:loaded",function(ev){
+      #{yield :onReady}
+    });
