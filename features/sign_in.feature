@@ -14,14 +14,14 @@ Feature: Signing into a session
       And I should see the login form
       And I should not see link to logout
 
-    Scenario: User enters wrong password
-      Given I am signed up as "jdoe/password"
-      And I sign in as "jdoe/wrongpassword"
-      Then I should see an error message
-      And I should see the login form
-      And I should not see link to logout
-
-    Scenario: User signs in successfully
-      Given I am signed up as "jdoe/password"
-      And I sign in as "jdoe/password"
-      Then I should see link to logout
+#    Scenario: User enters wrong password
+#      Given I am signed up as "jdoe/password"
+#      And I sign in as "jdoe/wrongpassword"
+#      Then I should see an error message
+#      And I should see the login form
+#      And I should not see link to logout
+#
+#    Scenario: User signs in successfully
+#      Given I am signed up as "jdoe/password"
+#      And I sign in as "jdoe/password"
+#      Then I should see link to logout
