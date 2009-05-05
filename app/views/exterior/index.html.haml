@@ -10,8 +10,8 @@
       %li
         Run this:
         %pre
-          prompt $ [command_name]
+          = "prompt $ [command_name] --some-flag #{@project_key}"
       %li
         Review:
         %pre
-          = link_to "http://url.for.your/key"
+          = link_to "http://url.for.key/#{@project_key}"

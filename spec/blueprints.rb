@@ -6,6 +6,7 @@ Sham.define do
   name      {Faker::Name.name}
 end
 
+# START: User blueprints
 User.blueprint do
   login {Sham.user_name}
   email
@@ -28,6 +29,12 @@ User.blueprint(:oscar) do
 end
 
 User.blueprint(:dora) do
-  f.email "dora@midco.com"
-  f.login "dora.developer"
+  email "dora@midco.com"
+  login "dora.developer"
+end
+# END: User blueprints
+
+# START: Project blueprints
+Project.blueprint do
+  name {Faker::Lorem.words(2).join(' ')}
 end
