@@ -1,9 +1,10 @@
 Sham.define do
-  title     {Faker::Lorem.words(4).join(' ')}
-  body      {Faker::Lorem.paragraphs(3).join('\n\n')}
-  email     {Faker::Internet.email}
-  user_name {Faker::Internet.user_name}
-  name      {Faker::Name.name}
+  title       {Faker::Lorem.words(4).join(' ')}
+  body        {Faker::Lorem.paragraphs(3).join('\n\n')}
+  email       {Faker::Internet.email}
+  user_name   {Faker::Internet.user_name}
+  name        {Faker::Name.name}
+  public_key  {Digest::SHA1.hexdigest(Time.now.to_s + Kernel.rand(1000).to_s)[0..5]}
 end
 
 # START: User blueprints
@@ -24,8 +25,8 @@ User.blueprint(:sam) do
 end
 
 User.blueprint(:oscar) do
-  f.email "oscar@haxit.com"
-  f.login "oscar.opensource"
+  email "oscar@haxit.com"
+  login "oscar.opensource"
 end
 
 User.blueprint(:dora) do
@@ -36,5 +37,6 @@ end
 
 # START: Project blueprints
 Project.blueprint do
-  name {Faker::Lorem.words(2).join(' ')}
+  name        {Faker::Lorem.words(2).join(' ')}
+  public_key
 end

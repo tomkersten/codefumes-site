@@ -13,7 +13,7 @@ describe ExteriorController do
 
     it "assigns a project key for the view template" do
       perform_request
-      assigns(:project_key).should_not be_nil
+      assigns(:public_key).should_not be_nil
     end
   end
 end

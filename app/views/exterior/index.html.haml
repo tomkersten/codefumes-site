@@ -10,8 +10,8 @@
       %li
         Run this:
         %pre
-          = "prompt $ [command_name] --some-flag #{@project_key}"
+          = "prompt $ [command_name] --some-flag #{@public_key}"
       %li
         Review:
         %pre
-          = link_to "http://url.for.key/#{@project_key}"
+          = link_to short_uri_url(@public_key), short_uri_url(@public_key), :id => :short_uri

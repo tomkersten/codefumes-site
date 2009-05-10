@@ -1,16 +1,36 @@
 class Project < ActiveRecord::Base
   TOKEN_LENGTH = 4
+  validates_uniqueness_of :public_key
+  validates_uniqueness_of :private_key
+  before_validation_on_create :assign_public_key
+  before_validation_on_create :assign_private_key
 
-  def self.generate_key
+  def self.generate_public_key
     generate_unique_key
   end
 
   private
+    def assign_public_key
+      if self.public_key.blank?
+        self.public_key = self.class.generate_public_key
+      end
+    end
+
+    def assign_private_key
+      self.private_key = self.class.generate_private_key
+    end
+
+    def self.generate_private_key
+      srand
+      rand_string = 10.times.map {random_key}.join
+      Digest::SHA1.hexdigest(rand_string)
+    end
+
     # Borrowed heavily from RubyURL source
     # http://github.com/robbyrussell/rubyurl/tree/master
     def self.generate_unique_key
-      if (temp_token = random_key) # and find_by_token(temp_token).nil?
-        return temp_token
+      if (temp_key = random_key) && find_by_public_key(temp_key).nil?
+        return temp_key
       else
         generate_unique_key
       end
