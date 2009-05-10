@@ -9,6 +9,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session, :controller => 'session'
   map.root :controller => 'exterior'
 
+  map.namespace :api do |api|
+    api.namespace :v1 do |v1|
+      v1.resources :projects, :path_prefix => '/api/v1/:format'
+    end
+  end
+
   map.namespace :support do |support|
     support.resource :password_reset_request, :controller => "PasswordResetRequest"
   end
