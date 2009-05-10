@@ -17,6 +17,7 @@ require 'webrat'
 
 Webrat.configure do |config|
   config.mode = :rails
+  config.open_error_files = false
 end
 
 # Comment out the next two lines if you're not using RSpec's matchers (should / should_not) in your steps.
