@@ -4,10 +4,6 @@ class Community::ProjectsController < ApplicationController
   end
 
   def short_uri
-    project = Project.find_by_public_key(params[:public_key])
-    unless project.nil?
-      redirect_to community_project_path(project)
-      return
-    end
+    @project = Project.find_by_public_key(params[:public_key])
   end
 end

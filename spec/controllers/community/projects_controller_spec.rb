@@ -32,9 +32,9 @@ describe Community::ProjectsController do
         @project = Project.make
       end
 
-      it "redirects to the project's community page" do
+      it "assigns the project with the specified public key for the view template" do
         get :short_uri, :public_key => @project.public_key
-        response.should redirect_to(community_project_path(@project))
+        assigns[:project].should == @project
       end
     end
   end

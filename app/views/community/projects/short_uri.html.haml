@@ -1,7 +1,28 @@
-%h1 This URI has not been activated yet
+- if @project.nil?
+  %h1 This URI has not been activated yet
 
-%h2 If you'd like to reserve it, follow these steps:
-%ul.instructions
-  %li Install this gem...
-  %li Run this command
-  %li Reload this page
+  %h2 If you'd like to reserve it, follow these steps:
+  %ul.instructions
+    %li Install this gem...
+    %li Run this command
+    %li Reload this page
+
+- else
+  %h1= "Project #{@project.public_key}"
+  %h2 Stats & other awesome things will go here...
+  %p
+    This project publicly available via the following URI:
+    = link_to short_uri_url(@project.public_key), short_uri_url(@project.public_key)
+  %p
+    Feel free to use it for free for as long as you like.
+  %ul.actions
+    %li
+      You can allow people to find this project via searches and browsing by
+      = link_to "publishing it in the community.", :class => :publish_project
+    %li
+      If this is an internal project and you want to limit who can access it, you can
+      = link_to "make it private.", :class => :secure_project
+    %li
+      Or...if you would prefer to remove this project and all associated data from the
+      site, you can
+      = link_to "delete it.", :class => :delete_project
