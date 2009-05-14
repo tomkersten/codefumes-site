@@ -113,7 +113,7 @@ set :git_enable_submodules, 1
 # set :keep_releases, 3
 
 
-after 'deploy:update', :symlink_configs
+after 'deploy:update_code', :symlink_configs
 task :symlink_configs, :roles => :db do
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/"
 end
