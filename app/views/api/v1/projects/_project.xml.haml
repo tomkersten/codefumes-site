@@ -1,0 +1,8 @@
+%project
+  %public_key= project.public_key
+  %private_key= project.private_key
+  %api_uri= api_v1_project_url(:format => params[:format], :id => project)
+  %short_uri= short_uri_url(project.public_key)
+  %community_uri= community_project_url(project)
+  %created_at= project.created_at
+  %updated_at= project.updated_at

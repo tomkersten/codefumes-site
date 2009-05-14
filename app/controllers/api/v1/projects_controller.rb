@@ -3,7 +3,14 @@ class Api::V1::ProjectsController < ApplicationController
     @projects = Project.all
 
     respond_to do |format|
-      format.xml {render :xml => @projects}
+      format.xml {}
+    end
+  end
+
+  def show
+    @project = Project.find(params[:id])
+    respond_to do |format|
+      format.xml {render :status => :created, :location => api_v1_project_url(:xml, @project)}
     end
   end
 
@@ -12,7 +19,7 @@ class Api::V1::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.xml {render :xml => @project, :status => :created, :location => api_v1_project_url(:xml, @project)}
+        format.xml {render :status => :created, :location => api_v1_project_url(:xml, @project)}
       else
         format.xml {render :xml => @project.errors, :status => :unprocessable_entity}
       end
