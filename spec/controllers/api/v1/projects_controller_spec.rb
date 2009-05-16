@@ -68,7 +68,7 @@ describe Api::V1::ProjectsController do
     end
 
     def perform_request
-      delete :destroy, :id => @project
+      delete :destroy, :id => @project.id
     end
 
     it "deletes the specified project" do
