@@ -37,16 +37,11 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if project.nil?
-        @project = Project.new(params[:project])
-        if project.save
-          format.xml {render :status => :created, :location => api_v1_project_url(:xml, project)}
-        else
-          format.xml {render :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
-        end
-      else
-        params[:project] && params[:project].delete(:public_key)
+    if project.nil?
+      create
+    else
+      params[:project] && params[:project].delete(:public_key)
+      respond_to do |format|
         if project.update_attributes(params[:project])
           format.xml {render :location => api_v1_project_url(:xml, project)}
         else
