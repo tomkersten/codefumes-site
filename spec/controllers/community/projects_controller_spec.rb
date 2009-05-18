@@ -9,7 +9,7 @@ describe Community::ProjectsController do
     end
 
     it "assigns the requested project for the view template" do
-      get :show, :id => @project.id
+      get :show, :id => @project.public_key
       assigns[:project].should == @project
     end
   end

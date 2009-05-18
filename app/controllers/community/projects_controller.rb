@@ -1,6 +1,6 @@
 class Community::ProjectsController < ApplicationController
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find(:first, :conditions => ["public_key = ?", params[:id]])
   end
 
   def short_uri

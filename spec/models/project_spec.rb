@@ -46,4 +46,25 @@ describe Project do
       end
     end
   end
+
+  describe "to_param" do
+    it "returns the public key instead of the id" do
+      project = Project.make
+      project.to_param.should == project.public_key
+    end
+  end
+
+  describe "attributes protected from mass assignment include:" do
+    before(:each) do
+      @project = Project.make
+    end
+
+    it "private_key" do
+      original_private_key = @project.private_key
+      new_private_key = @project.private_key + "_different_value"
+      @project.update_attributes(:private_key => new_private_key)
+      @project.reload
+      @project.private_key.should == original_private_key
+    end
+  end
 end

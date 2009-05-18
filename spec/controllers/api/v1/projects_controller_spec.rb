@@ -52,13 +52,36 @@ describe Api::V1::ProjectsController do
   end
 
   describe "a GET to show" do
-    before(:each) do
-      @project = Project.make
+    def perform_request
+      get :show, :id => @project.public_key
     end
 
-    it "assigns the specified project for the view template" do
-      get :show, :id => @project.id
-      assigns[:project].should == @project
+    context "when the requested resource exists" do
+      before(:each) do
+        @project = Project.make
+      end
+
+      it "assigns the specified project for the view template" do
+        perform_request
+        assigns[:project].should == @project
+      end
+
+      it "returns a response code of 200 OK" do
+        perform_request
+        response.status.should == "200 OK"
+      end
+    end
+
+    context "when the requested resource exists" do
+      before(:each) do
+        Project.destroy_all
+        @project = Project.new(Project.plan)
+      end
+
+      it "returns a response code of 404 Not Found" do
+        perform_request
+        response.status.should == "404 Not Found"
+      end
     end
   end
 
@@ -68,7 +91,7 @@ describe Api::V1::ProjectsController do
     end
 
     def perform_request
-      delete :destroy, :id => @project.id
+      delete :destroy, :id => @project.public_key
     end
 
     it "deletes the specified project" do
@@ -100,19 +123,64 @@ describe Api::V1::ProjectsController do
     end
 
     def perform_request
-      put :update, :id => @project.id, :project => @update_params
+      put :update, :id => @project.public_key, :project => @update_params
     end
 
     context "with valid parameters" do
-      it "returns a response code of 200 OK" do
-        perform_request
-        response.should be_success
+      context "for an existing public_key" do
+        it "returns a response code of 200 OK" do
+          perform_request
+          response.should be_success
+        end
+
+        it "updates the specified project with the supplied values" do
+          perform_request
+          @project.reload
+          @project.name.should == @update_params[:name]
+        end
+
+        it "does not update the public_key" do
+          original_public_key = @project.public_key
+          perform_request
+          @project.reload
+          @project.public_key.should == original_public_key
+        end
+
+        it "does not update the private_key" do
+          @update_params[:private_key] = @project.private_key
+          original_private_key = @project.private_key
+          perform_request
+          @project.reload
+          @project.private_key.should == original_private_key
+        end
       end
 
-      it "updates the specified project with the supplied values" do
-        perform_request
-        @project.reload
-        @project.name.should == @update_params[:name]
+      context "for a new public_key" do
+        before(:each) do
+          @update_params = Project.plan
+          @new_public_key = @update_params[:public_key]
+        end
+
+        def perform_request
+          put :update, :id => @new_public_key, :project => @update_params
+        end
+
+        it "returns a response code of 201 Created" do
+          perform_request
+          response.status.should == "201 Created"
+        end
+
+        it "creates a project" do
+          lambda {
+            perform_request
+          }.should change(Project, :count).by(1)
+        end
+
+        it "set the 'Location' header to the API URI of the created project" do
+          perform_request
+          project = Project.find_by_public_key(@new_public_key)
+          response.headers["Location"].should == api_v1_project_url(:format => :xml, :id => project)
+        end
       end
     end
 
@@ -123,6 +191,7 @@ describe Api::V1::ProjectsController do
       end
 
       it "returns a response code of 422 Unprocessable Entity" do
+        pending "Need to define more validations on Project model to test this"
         perform_request
         response.status.should == "422 Unprocessable Entity"
       end

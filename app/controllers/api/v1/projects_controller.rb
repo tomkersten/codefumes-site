@@ -8,7 +8,11 @@ class Api::V1::ProjectsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.xml {render :status => :created, :location => api_v1_project_url(:xml, project)}
+      if project.nil?
+        format.xml {render :status => :not_found}
+      else
+        format.xml {render :location => api_v1_project_url(:xml, project)}
+      end
     end
   end
 
@@ -25,7 +29,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def destroy
-    @project ||= Project.find_by_id(params[:id])
+    @project ||= Project.find_by_public_key(params[:id])
     @project.destroy unless @project.nil?
     respond_to do |format|
       format.xml {render :text => nil }
@@ -34,16 +38,26 @@ class Api::V1::ProjectsController < ApplicationController
 
   def update
     respond_to do |format|
-      if project.update_attributes(params[:project])
-        format.xml {render :location => api_v1_project_url(:xml, project)}
+      if project.nil?
+        @project = Project.new(params[:project])
+        if project.save
+          format.xml {render :status => :created, :location => api_v1_project_url(:xml, project)}
+        else
+          format.xml {render :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
+        end
       else
-        format.xml {render :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
+        params[:project] && params[:project].delete(:public_key)
+        if project.update_attributes(params[:project])
+          format.xml {render :location => api_v1_project_url(:xml, project)}
+        else
+          format.xml {render :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
+        end
       end
     end
   end
 
   private
     def project
-      @project ||= Project.find(params[:id])
+      @project ||= Project.find(:first, :conditions => ["public_key = ?", params[:id]])
     end
 end

@@ -5,8 +5,14 @@ class Project < ActiveRecord::Base
   before_validation_on_create :assign_public_key
   before_validation_on_create :assign_private_key
 
+  attr_accessible :name, :public_key
+
   def self.generate_public_key
     generate_unique_key
+  end
+
+  def to_param
+    public_key
   end
 
   private
