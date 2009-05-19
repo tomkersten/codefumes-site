@@ -45,9 +45,18 @@ describe Api::V1::ProjectsController do
 
       it "set the 'Location' header to the API URI of the created project" do
         perform_request
-        project = Project.find_by_public_key(@params[:public_key])
+        project = Project.find_by_name(@params[:name])
         response.headers["Location"].should == api_v1_project_url(:format => :xml, :id => project)
       end
+
+      it "does not allow the user to specify their public key" do
+        perform_request
+        Project.find_by_public_key(@params[:public_key]).should be_nil
+      end
+    end
+
+    describe "with invalid parameters" do
+      it "does not set the location header"
     end
   end
 
@@ -158,11 +167,11 @@ describe Api::V1::ProjectsController do
       context "for a new public_key" do
         before(:each) do
           @update_params = Project.plan
-          @new_public_key = @update_params[:public_key]
+          @public_key_supplied = Project.plan[:public_key]
         end
 
         def perform_request
-          put :update, :id => @new_public_key, :project => @update_params
+          put :update, :id => @public_key_supplied, :project => @update_params
         end
 
         it "returns a response code of 201 Created" do
@@ -178,8 +187,13 @@ describe Api::V1::ProjectsController do
 
         it "set the 'Location' header to the API URI of the created project" do
           perform_request
-          project = Project.find_by_public_key(@new_public_key)
+          project = Project.find_by_public_key(@public_key_supplied)
           response.headers["Location"].should == api_v1_project_url(:format => :xml, :id => project)
+        end
+
+        xit "sets the value of 'public_key' to the value provided in the request URI" do
+          perform_request
+          Project.find_by_public_key(@params[:public_key]).should be_nil
         end
       end
     end
@@ -194,6 +208,12 @@ describe Api::V1::ProjectsController do
         pending "Need to define more validations on Project model to test this"
         perform_request
         response.status.should == "422 Unprocessable Entity"
+      end
+
+      it "does not set a value for the 'Location' header" do
+        pending "Need to define more validations on Project model to test this"
+        perform_request
+        response.headers["Location"].should  be_nil
       end
     end
   end

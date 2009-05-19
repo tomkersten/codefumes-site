@@ -17,6 +17,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def create
+    clean_up_request_params
     @project = Project.new(params[:project])
 
     respond_to do |format|
@@ -40,7 +41,7 @@ class Api::V1::ProjectsController < ApplicationController
     if project.nil?
       create
     else
-      params[:project] && params[:project].delete(:public_key)
+      clean_up_request_params
       respond_to do |format|
         if project.update_attributes(params[:project])
           format.xml {render :location => api_v1_project_url(:xml, project)}
@@ -54,5 +55,17 @@ class Api::V1::ProjectsController < ApplicationController
   private
     def project
       @project ||= Project.find(:first, :conditions => ["public_key = ?", params[:id]])
+    end
+
+    def project_request_params
+      params[:project] || {}
+    end
+
+    def clean_up_request_params
+      if request.post?
+        project_request_params.delete(:public_key)
+      elsif request.put?
+        project_request_params[:public_key] = params[:id]
+      end
     end
 end
