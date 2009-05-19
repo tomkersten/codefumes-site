@@ -48,11 +48,6 @@ describe Api::V1::ProjectsController do
         project = Project.find_by_name(@params[:name])
         response.headers["Location"].should == api_v1_project_url(:format => :xml, :id => project)
       end
-
-      it "does not allow the user to specify their public key" do
-        perform_request
-        Project.find_by_public_key(@params[:public_key]).should be_nil
-      end
     end
 
     describe "with invalid parameters" do
@@ -161,39 +156,6 @@ describe Api::V1::ProjectsController do
           perform_request
           @project.reload
           @project.private_key.should == original_private_key
-        end
-      end
-
-      context "for a new public_key" do
-        before(:each) do
-          @update_params = Project.plan
-          @public_key_supplied = Project.plan[:public_key]
-        end
-
-        def perform_request
-          put :update, :id => @public_key_supplied, :project => @update_params
-        end
-
-        it "returns a response code of 201 Created" do
-          perform_request
-          response.status.should == "201 Created"
-        end
-
-        it "creates a project" do
-          lambda {
-            perform_request
-          }.should change(Project, :count).by(1)
-        end
-
-        it "set the 'Location' header to the API URI of the created project" do
-          perform_request
-          project = Project.find_by_public_key(@public_key_supplied)
-          response.headers["Location"].should == api_v1_project_url(:format => :xml, :id => project)
-        end
-
-        xit "sets the value of 'public_key' to the value provided in the request URI" do
-          perform_request
-          Project.find_by_public_key(@params[:public_key]).should be_nil
         end
       end
     end
