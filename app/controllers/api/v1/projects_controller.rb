@@ -1,4 +1,4 @@
-class Api::V1::ProjectsController < ApplicationController
+class Api::V1::ProjectsController < Api::BaseController
   def index
     @projects = Project.all
     respond_to do |format|
