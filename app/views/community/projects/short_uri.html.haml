@@ -8,7 +8,7 @@
     %li Reload this page
 
 - else
-  %h1= "Project #{@project.public_key}"
+  %h1= @project
   %h2 Stats & other awesome things will go here...
   %p
     This project publicly available via the following URI:
@@ -18,11 +18,11 @@
   %ul.actions
     %li
       You can allow people to find this project via searches and browsing by
-      = link_to "publishing it in the community.", :class => :publish_project
+      = link_to "publishing it in the community.", nil, :class => :publish_project
     %li
       If this is an internal project and you want to limit who can access it, you can
-      = link_to "make it private.", :class => :secure_project
+      = link_to "make it private.", nil, :class => :secure_project
     %li
       Or...if you would prefer to remove this project and all associated data from the
       site, you can
-      = link_to "delete it.", :class => :delete_project
+      = link_to "delete it.", nil, :class => :delete_project

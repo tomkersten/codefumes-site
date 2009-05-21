@@ -54,6 +54,29 @@ describe Project do
     end
   end
 
+  describe "to_s" do
+    context "when the project name has been set" do
+      before(:each) do
+        @a_name = "Some name"
+        @project = Project.make(:name => @a_name)
+      end
+
+      it "returns the project name" do
+        @project.to_s.should == @a_name
+      end
+    end
+
+    context "when the project name has not been set" do
+      before(:each) do
+        @project = Project.make(:name => nil)
+      end
+
+      it "returns the project's public key" do
+        @project.to_s.should == @project.public_key
+      end
+    end
+  end
+
   describe "attributes protected from mass assignment include:" do
     before(:each) do
       @project = Project.make

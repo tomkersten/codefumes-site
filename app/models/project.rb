@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
     public_key
   end
 
+  def to_s
+    name.blank? ? public_key : name
+  end
+
   private
     def assign_public_key
       if self.public_key.blank?
