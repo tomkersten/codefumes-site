@@ -9,7 +9,7 @@ class Api::V1::ProjectsController < Api::BaseController
   def show
     respond_to do |format|
       if project.nil?
-        format.xml {render :status => :not_found}
+        format.xml {render :nothing => true, :status => :not_found}
       else
         format.xml {render :location => api_v1_project_url(:xml, project)}
       end
@@ -32,7 +32,7 @@ class Api::V1::ProjectsController < Api::BaseController
     @project ||= Project.find_by_public_key(params[:id])
     @project.destroy unless @project.nil?
     respond_to do |format|
-      format.xml {render :text => nil}
+      format.xml {render :nothing => true}
     end
   end
 
@@ -42,7 +42,7 @@ class Api::V1::ProjectsController < Api::BaseController
       if !project.nil? && project.update_attributes(params[:project])
         format.xml {render :location => api_v1_project_url(:xml, project)}
       else
-        format.xml {render :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
+        format.xml {render :nothing => true, :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
       end
     end
   end
