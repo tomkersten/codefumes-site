@@ -7,7 +7,6 @@ Sham.define do
   public_key  {Digest::SHA1.hexdigest(Time.now.to_s + Kernel.rand(1000).to_s)[0..5]}
 end
 
-# START: User blueprints
 User.blueprint do
   login {Sham.user_name}
   email
@@ -33,10 +32,28 @@ User.blueprint(:dora) do
   email "dora@midco.com"
   login "dora.developer"
 end
-# END: User blueprints
 
-# START: Project blueprints
 Project.blueprint do
   name        {Faker::Lorem.words(2).join(' ')}
   public_key
+end
+
+Project.blueprint(:twitter_tagger) do
+  name        "Twitter Tagger"
+  public_key  "twitter_tagger"
+end
+
+Revision.blueprint do
+  project_id {Project.make.id}
+  commit_id {Commit.make.id}
+end
+
+Commit.blueprint do
+  identifier      {Digest::SHA1.hexdigest(rand(100).to_s)}
+  short_message   {Faker::Lorem.words(4).join(' ')}
+  message         {Faker::Lorem.words(10).join(' ')}
+  author_name     {Faker::Name.name}
+  author_email    {Faker::Internet.email}
+  committer_email {Faker::Internet.email}
+  committer_name  {Faker::Name.name}
 end

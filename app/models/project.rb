@@ -7,6 +7,9 @@ class Project < ActiveRecord::Base
 
   attr_accessible :name, :public_key
 
+  has_many :revisions, :dependent => :destroy
+  has_many :commits, :through => :revisions
+
   def self.generate_public_key
     generate_unique_key
   end

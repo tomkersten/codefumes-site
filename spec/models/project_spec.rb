@@ -90,4 +90,39 @@ describe Project do
       @project.private_key.should == original_private_key
     end
   end
+
+  describe "revisions" do
+    before(:each) do
+      @project = Project.make
+      @revision = Revision.make(:project_id => @project.id)
+    end
+
+    it "is associated with revisions" do
+      lambda {@project.revisions << @revision}.should_not raise_error
+    end
+
+    it "destroys associated revisions when destroyed" do
+      Revision.find_by_id(@revision.id).should == @revision
+      @project.destroy
+      Revision.find_by_id(@revision.id).should be_nil
+    end
+  end
+
+  describe "commits" do
+    before(:each) do
+      @project = Project.make
+      @commit = Commit.make
+      @revision = Revision.make(:project_id => @project.id, :commit_id => @commit.id)
+    end
+
+    it "is associated with many commits" do
+      lambda {@project.commits << @commit}.should_not raise_error
+    end
+
+    it "does not destroy associated commits when destroyed" do
+      Commit.find_by_id(@commit.id).should == @commit
+      @project.destroy
+      Commit.find_by_id(@commit.id).should == @commit
+    end
+  end
 end

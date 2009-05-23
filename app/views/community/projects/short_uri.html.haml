@@ -10,6 +10,14 @@
 - else
   %h1= @project
   %h2 Stats & other awesome things will go here...
+
+  - if @project.commits.empty?
+    %p.no_commits
+      No commits posted yet
+  - else
+    %ul.commits
+      - for commit in @project.commits
+        %li= commit.identifier
   %p
     This project publicly available via the following URI:
     = link_to short_uri_url(@project.public_key), short_uri_url(@project.public_key)
