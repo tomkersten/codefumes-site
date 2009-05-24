@@ -57,3 +57,8 @@ Commit.blueprint do
   committer_email {Faker::Internet.email}
   committer_name  {Faker::Name.name}
 end
+
+Payload.blueprint do
+  project_id {Project.make.id}
+  content {Faker::Lorem.words(10)}
+end

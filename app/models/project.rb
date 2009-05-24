@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
 
   has_many :revisions, :dependent => :destroy
   has_many :commits, :through => :revisions
+  has_many :payloads, :dependent => :destroy
 
   def self.generate_public_key
     generate_unique_key

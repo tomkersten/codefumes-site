@@ -125,4 +125,22 @@ describe Project do
       Commit.find_by_id(@commit.id).should == @commit
     end
   end
+
+  describe "commits" do
+    before(:each) do
+      @project = Project.make
+      @payload = Payload.make(:project_id => @project.id)
+    end
+
+    it "is associated with many payloads" do
+      lambda {@project.payloads << @payload}.should_not raise_error
+    end
+
+    it "destroys associated payloads when destroyed" do
+      finding_payload = lambda {Payload.find(@payload.id)}
+      finding_payload.should_not raise_error
+      @project.destroy
+      finding_payload.should raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end
