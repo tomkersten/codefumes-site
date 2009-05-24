@@ -35,4 +35,19 @@ describe Commit do
       Project.find_by_id(@project.id).should == @project
     end
   end
+
+  describe "validations" do
+    it "requires an identifier" do
+      commit = Commit.new(Commit.plan(:identifier => nil))
+      commit.should_not be_valid
+      commit.errors.on(:identifier).should_not == nil
+    end
+  end
+
+  describe "to_param" do
+    it "returns the commit identifier instead of the id" do
+      commit = Commit.make
+      commit.to_param.should == commit.identifier
+    end
+  end
 end
