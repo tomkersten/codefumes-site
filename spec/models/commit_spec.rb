@@ -50,4 +50,24 @@ describe Commit do
       commit.to_param.should == commit.identifier
     end
   end
+
+  context "helper methods" do
+    before(:each) do
+      @commit = Commit.make
+    end
+
+    describe "committer" do
+      it "returns the name & email of the comitter as a single string" do
+        @commit.committer.should have_text(/#{@commit.committer_name}/)
+        @commit.committer.should have_text(/#{@commit.committer_email}/)
+      end
+    end
+
+    describe "author" do
+      it "returns the name & email of the author as a single string" do
+        @commit.author.should have_text(/#{@commit.author_name}/)
+        @commit.author.should have_text(/#{@commit.author_email}/)
+      end
+    end
+  end
 end

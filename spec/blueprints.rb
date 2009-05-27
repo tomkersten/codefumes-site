@@ -60,5 +60,5 @@ end
 
 Payload.blueprint do
   project_id {Project.make.id}
-  content {Faker::Lorem.words(10)}
+  content "commits" => []
 end

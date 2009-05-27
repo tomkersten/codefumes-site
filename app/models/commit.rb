@@ -6,4 +6,12 @@ class Commit < ActiveRecord::Base
   def to_param
     identifier
   end
+
+  def committer
+    "#{committer_name} [#{committer_email}]"
+  end
+
+  def author
+    "#{author_name} [#{author_email}]"
+  end
 end

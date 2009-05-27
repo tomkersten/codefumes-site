@@ -8,7 +8,8 @@ describe Api::V1::PayloadsController do
   describe "a POST to create" do
     before(:each) do
       @project = Project.make
-      @payload_params = {"commits" => [1,2,3], "after" => 'sha1_after', "before" => 'sha1_before'}
+      commit_params = 3.times.map {Commit.plan.stringify_keys}
+      @payload_params = {"commits" => commit_params, "after" => 'sha1_after', "before" => 'sha1_before'}
     end
 
     def perform_request
