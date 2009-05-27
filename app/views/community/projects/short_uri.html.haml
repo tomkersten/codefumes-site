@@ -9,6 +9,23 @@
 
 - else
   %h1= @project
+
+  %div.project_help
+    %p
+      This project publicly available via the following URI:
+      = link_to short_uri_url(@project.public_key), short_uri_url(@project.public_key)
+    %ul.actions
+      %li
+        You can allow people to find this project via searches and browsing by
+        = link_to "publishing it in the community.", nil, :class => :publish_project
+      %li
+        If this is an internal project and you want to limit who can access it, you can
+        = link_to "make it private.", nil, :class => :secure_project
+      %li
+        Or...if you would prefer to remove this project and all associated data from the
+        site, you can
+        = link_to "delete it.", nil, :class => :delete_project
+
   %h2 Stats & other awesome things will go here...
 
   - if @project.commits.empty?
@@ -17,20 +34,11 @@
   - else
     %ul.commits
       - for commit in @project.commits
-        %li= commit.identifier
-  %p
-    This project publicly available via the following URI:
-    = link_to short_uri_url(@project.public_key), short_uri_url(@project.public_key)
-  %p
-    Feel free to use it for free for as long as you like.
-  %ul.actions
-    %li
-      You can allow people to find this project via searches and browsing by
-      = link_to "publishing it in the community.", nil, :class => :publish_project
-    %li
-      If this is an internal project and you want to limit who can access it, you can
-      = link_to "make it private.", nil, :class => :secure_project
-    %li
-      Or...if you would prefer to remove this project and all associated data from the
-      site, you can
-      = link_to "delete it.", nil, :class => :delete_project
+        %li
+          %h2= commit.message.sub("\n", "<br/>")
+          %ul
+            %li= "Identifier: #{commit.identifier}"
+            %li= "Author: #{commit.author}"
+            %li= "Committer #{commit.committer}"
+            %li= "Authored at: #{commit.authored_at}"
+            %li= "Committed at: #{commit.committed_at}"
