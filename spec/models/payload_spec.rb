@@ -1,11 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Payload do
-
   it "serializes the value of 'content' to/from YAML" do
-    payload_params = {"commits" => [1,2,3], "after" => 'sha1_after', "before" => 'sha1_before'}
+    payload_params = {"commits" => [], "after" => 'sha1_after', "before" => 'sha1_before'}
     payload = Payload.make(:content => payload_params)
     payload.content.should == payload_params
+  end
+
+  context "after creation" do
+    it "attempts to process itself with the PayloadProcessor" do
+      payload = Payload.new(Payload.plan)
+      PayloadProcessor.should_receive(:process!).with(payload)
+      payload.save
+    end
   end
 
   describe "associations" do
