@@ -23,6 +23,10 @@ class Project < ActiveRecord::Base
     name.blank? ? public_key : name
   end
 
+  def commit_head
+    commits.find(:first, :order => ["commits.committed_at DESC"])
+  end
+
   private
     def assign_public_key
       if self.public_key.blank?

@@ -143,4 +143,32 @@ describe Project do
       finding_payload.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
+
+  describe "commit_head" do
+    before(:each) do
+      @project = Project.make
+      @commits = 3.times.map {Commit.make(:committed_at => 2.days.ago)}
+      @commits << Commit.make
+    end
+
+    context "when the project has commits associated with it" do
+      before(:each) do
+        @project.commits << @commits
+      end
+
+      it "returns the most recent commit associated to the project" do
+        @project.commit_head.should == @commits.last
+      end
+    end
+
+    context "when the project does not have any commits associated with it" do
+      before(:each) do
+        @project.commits.destroy_all
+      end
+
+      it "returns nil" do
+        @project.commit_head.should == nil
+      end
+    end
+  end
 end

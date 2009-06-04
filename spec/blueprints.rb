@@ -56,6 +56,8 @@ Commit.blueprint do
   author_email    {Faker::Internet.email}
   committer_email {Faker::Internet.email}
   committer_name  {Faker::Name.name}
+  committed_at    Time.now
+  authored_at     30.minutes.ago
 end
 
 Payload.blueprint do
