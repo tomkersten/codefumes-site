@@ -112,7 +112,6 @@ describe Project do
     before(:each) do
       @project = Project.make
       @commit = Commit.make
-      @revision = Revision.make(:project_id => @project.id, :commit_id => @commit.id)
     end
 
     it "is associated with many commits" do
@@ -149,6 +148,11 @@ describe Project do
       @project = Project.make
       @commits = 3.times.map {Commit.make(:committed_at => 2.days.ago)}
       @commits << Commit.make
+      # Build out the commit hierarchy
+      @commits.each_with_index do |commit, index|
+        identifier = @commits[index+1] && @commits[index+1].identifier
+        commit.child_identifiers = identifier || ""
+      end
     end
 
     context "when the project has commits associated with it" do

@@ -16,6 +16,13 @@ describe Revision do
   end
 
   describe "validations" do
+    it "does not allow duplicate project_id-commit_id entries" do
+      existing_revision = Revision.make
+      custom_params = {:project_id => existing_revision.project_id, :commit_id  => existing_revision.commit_id}
+      new_revision = Revision.new(Revision.plan(custom_params))
+      new_revision.should_not be_valid
+    end
+
     it "requires a commit_id" do
       revision = Revision.new(Revision.plan(:commit_id => nil))
       lambda {

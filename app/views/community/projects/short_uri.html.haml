@@ -35,7 +35,10 @@
     %ul.commits
       - for commit in @project.commits
         %li
-          %h2= commit.message.sub("\n", "<br/>")
+          - if commit.message.blank?
+            %h2.no_commit_message [Tsk! Tsk! No commit message?]
+          - else
+            %h2= commit.message.gsub("\n", "<br/>")
           %ul
             %li= "Identifier: #{commit.identifier}"
             %li= "Author: #{commit.author}"

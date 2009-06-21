@@ -24,7 +24,7 @@ class Project < ActiveRecord::Base
   end
 
   def commit_head
-    commits.find(:first, :order => ["commits.committed_at DESC"])
+    commits.find(:first, :conditions => "revision_bridges.parent_id IS NULL", :include => [:bridges_as_parent])
   end
 
   private

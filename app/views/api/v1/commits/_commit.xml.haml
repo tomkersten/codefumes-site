@@ -6,6 +6,7 @@
   %committer_email= commit.committer_email
   %short_message= commit.short_message
   %message= commit.message
+  %parent_identifiers= commit.parents.map(&:identifier).join(',')
   %committed_at= commit.committed_at
   %authored_at= commit.authored_at
   %uploaded_at= commit.created_at

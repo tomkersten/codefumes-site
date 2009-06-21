@@ -92,6 +92,11 @@ describe Api::V1::CommitsController do
       @commits = commit_count.times.map {Commit.make(:committed_at => 2.days.ago)}
       @commit = Commit.make
       @commits << @commit
+      # Build out the commit hierarchy
+      @commits.each_with_index do |commit, index|
+        identifier = @commits[index+1] && @commits[index+1].identifier
+        commit.child_identifiers = identifier || ""
+      end
       @project.commits << @commits
     end
 

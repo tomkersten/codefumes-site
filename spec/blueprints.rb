@@ -49,7 +49,7 @@ Revision.blueprint do
 end
 
 Commit.blueprint do
-  identifier      {Digest::SHA1.hexdigest(rand(100).to_s)}
+  identifier      {Faker::Lorem.words(3).to_s}
   short_message   {Faker::Lorem.words(4).join(' ')}
   message         {Faker::Lorem.words(10).join(' ')}
   author_name     {Faker::Name.name}
@@ -63,4 +63,9 @@ end
 Payload.blueprint do
   project_id {Project.make.id}
   content "commits" => []
+end
+
+RevisionBridge.blueprint do
+  parent_id {Commit.make.id}
+  child_id  {Commit.make.id}
 end
