@@ -253,4 +253,43 @@ describe Commit do
       child_commit.parents.should == parent_commits
     end
   end
+
+  describe "merge?" do
+    it "returns true when a commit has multiple parents" do
+      commit = Commit.make
+      parents = [Commit.make, Commit.make]
+      commit.parents << parents
+      commit.merge?.should == true
+    end
+
+    it "returns false when a commit has a single parent" do
+      commit = Commit.make
+      parent = Commit.make
+      commit.parents << parent
+      commit.merge?.should == false
+    end
+  end
+
+  describe "parent_identifiers" do
+    it "returns a list of the parent identifiers of a commit" do
+      commit = Commit.make
+      parents = [Commit.make, Commit.make]
+      commit.parents << parents
+      commit.parent_identifiers.should == parents.map(&:identifier)
+    end
+
+    it "returns an empty list when no parents exist" do
+      Commit.make.parent_identifiers.should == []
+    end
+
+    context "when passed in a parameter of ':short'" do
+      it "returns a list of the parent identifiers of a commit" do
+        commit = Commit.make
+        parents = [Commit.make, Commit.make]
+        commit.parents << parents
+        shortended_identifiers = parents.map(&:identifier).map {|ident| ident[0..5]}
+        commit.parent_identifiers(:short).should == shortended_identifiers
+      end
+    end
+  end
 end

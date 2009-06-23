@@ -27,6 +27,20 @@ class Project < ActiveRecord::Base
     commits.find(:first, :conditions => "revision_bridges.parent_id IS NULL", :include => [:bridges_as_parent])
   end
 
+  def recent_commits(ancestry_count = 5)
+    return [] if commits.empty?
+    # we've started 1-level deep by starting w/ 'commit_head',
+    # so the level count must reduce by one
+    number = ancestry_count.to_i - 1
+    number.times.inject([commit_head]) do |lst, index|
+      if lst[index].nil?
+        lst
+      else
+        lst << lst[index].parents.first
+      end
+    end
+  end
+
   private
     def assign_public_key
       if self.public_key.blank?

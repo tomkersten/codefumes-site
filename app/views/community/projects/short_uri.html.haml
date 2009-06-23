@@ -28,17 +28,19 @@
 
   %h2 Stats & other awesome things will go here...
 
-  - if @project.commits.empty?
+  - if @project.recent_commits.empty?
     %p.no_commits
       No commits posted yet
   - else
     %ul.commits
-      - for commit in @project.commits
-        %li
+      - for commit in @project.recent_commits
+        %li{:class => commit.merge? ? "merge" : nil}
           - if commit.message.blank?
-            %h2.no_commit_message [Tsk! Tsk! No commit message?]
+            %h2.no_commit_message [No commit message? Tsk! Tsk!]
           - else
             %h2= commit.message.gsub("\n", "<br/>")
+          - if commit.merge?
+            %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
           %ul
             %li= "Identifier: #{commit.identifier}"
             %li= "Author: #{commit.author}"

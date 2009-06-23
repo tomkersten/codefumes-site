@@ -31,4 +31,12 @@ class Commit < ActiveRecord::Base
   def author
     "#{author_name} [#{author_email}]"
   end
+
+  def merge?
+    parents.size > 1
+  end
+
+  def parent_identifiers(format = :full)
+    parents.map {|parent| format == :full ? parent.identifier : parent.identifier[0..5]}
+  end
 end

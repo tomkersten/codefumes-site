@@ -125,7 +125,7 @@ describe Project do
     end
   end
 
-  describe "commits" do
+  describe "payloads" do
     before(:each) do
       @project = Project.make
       @payload = Payload.make(:project_id => @project.id)
@@ -172,6 +172,45 @@ describe Project do
 
       it "returns nil" do
         @project.commit_head.should == nil
+      end
+    end
+  end
+
+  describe "recent_commits" do
+    before(:each) do
+      @project = Project.make
+    end
+
+    context "when a project has no commits" do
+      before(:each) do
+        @project.commits.destroy_all
+      end
+
+      it "returns an empty list" do
+        @project.recent_commits.should be_empty
+      end
+    end
+
+    context "when a project has multiple commits" do
+      before(:each) do
+        @commits = 5.times.map {Commit.make}
+        @commits.each_with_index do |commit, index|
+          identifier = @commits[index+1] && @commits[index+1].identifier
+          commit.child_identifiers = identifier || ""
+        end
+        @project.commits << @commits
+      end
+
+      it "returns a list of the specified size with commit objects" do
+        @project.recent_commits(3).size.should == 3
+      end
+
+      it "the first element in the array is the 'commit_head'" do
+        @project.recent_commits(3).first.should == @project.commit_head
+      end
+
+      it "the last element in the array is the third commit from most recent" do
+        @project.recent_commits(3).last.should == @commits[2]
       end
     end
   end
