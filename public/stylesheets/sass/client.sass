@@ -6,6 +6,7 @@
 
 body
   :background-color= !page_color
+  :background-color= #AAA
   pre
     :font-family monospace
     :color  #555
@@ -54,10 +55,17 @@ body
             :color #777
 
     #header
-      :height 7em
-      :background url(/images/admin/head.png) no-repeat top center
-      :margin 1em 0 0
+      :height 9em
+      :background url(/images/logo_bdub.png) no-repeat top left
+      :background-color #000
       :border-bottom 1px solid #DDD
+      :margin 0 -1em
+      a
+        :display block
+        :width 44em
+        :height 9em
+        :text-indent -99em
+        :outline 0
       h1
         :font-size 1em
         a
