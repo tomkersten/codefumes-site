@@ -10,6 +10,7 @@ require 'tasks/rails'
 
 begin
   require 'vlad'
+  require 'hoe'
   Vlad.load :scm => :git
 rescue LoadError
   # do nothing (in case server doesn't have Vlad, etc)
