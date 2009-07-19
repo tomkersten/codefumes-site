@@ -17,7 +17,6 @@ namespace :vlad do
   set :web_command, "sudo /etc/init.d/apache2"
 
   desc "Updates the symlinks for shared paths".cleanup
-
   remote_task :update_symlinks, :roles => :app do
     run "ln -s #{shared_path}/config/database.yml #{current_release}/config/"
   end
@@ -27,3 +26,6 @@ namespace :vlad do
     run "touch #{current_release}/tmp/restart.txt"
   end
 end
+
+desc "Deploys application, migrates db, symlinks, and cycles web/app servers"
+task :deploy => %w[vlad:update vlad:migrate vlad:start vlad:cleanup]
