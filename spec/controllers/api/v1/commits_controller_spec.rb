@@ -112,5 +112,21 @@ describe Api::V1::CommitsController do
         assigns[:commit].should == @commit
       end
     end
+
+    context "when the project does not have any commits yet" do
+      before(:each) do
+        @project.commits.destroy_all
+      end
+
+      it "sets the location header to nil" do
+        perform_request
+        response.headers['Location'].should == nil
+      end
+
+      it "renders the show view template" do
+        perform_request
+        response.should render_template("api/v1/commits/show.xml.haml")
+      end
+    end
   end
 end

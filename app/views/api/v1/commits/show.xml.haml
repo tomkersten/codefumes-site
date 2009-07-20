@@ -1,1 +1,4 @@
-= render :partial => 'commit', :locals => {:commit => @commit}
+- if @commit.blank?
+  %commit
+- else
+  = render :partial => 'commit', :locals => {:commit => @commit}
