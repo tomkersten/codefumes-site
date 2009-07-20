@@ -10,4 +10,8 @@
   %committed_at= commit.committed_at
   %authored_at= commit.authored_at
   %uploaded_at= commit.created_at
+  %line_additions= commit.line_additions
+  %line_deletions= commit.line_deletions
+  %line_total= commit.line_total
+  %affected_file_count= commit.affected_file_count
   %api_uri= api_v1_commit_url(:format => params[:format], :id => commit)

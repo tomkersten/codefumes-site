@@ -47,3 +47,7 @@
             %li= "Committer #{commit.committer}"
             %li= "Authored at: #{commit.authored_at}"
             %li= "Committed at: #{commit.committed_at}"
+            %li= "Lines added: #{commit.line_additions}"
+            %li= "Lines deleted: #{commit.line_deletions}"
+            %li= "Total lines: #{commit.line_total}"
+            %li= "Files affected: #{commit.affected_file_count}"
