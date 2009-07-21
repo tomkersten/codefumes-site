@@ -123,6 +123,11 @@ describe Api::V1::CommitsController do
         response.headers['Location'].should == nil
       end
 
+      it "returns a status code of '404 Not found'" do
+        perform_request
+        response.status.should == '404 Not Found'
+      end
+
       it "renders the show view template" do
         perform_request
         response.should render_template("api/v1/commits/show.xml.haml")

@@ -22,7 +22,7 @@ class Api::V1::CommitsController < ApplicationController
 
     respond_to do |format|
       if @commit.nil?
-        format.xml {render :action => :show, :location => nil}
+        format.xml {render :action => :show, :status => :not_found, :location => nil}
       else
         format.xml {render :action => :show, :location => api_v1_commit_url(@commit)}
       end
