@@ -25,6 +25,12 @@ namespace :vlad do
   remote_task :start_app, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
   end
+
+  # Enhances existing update w/ chown/chmod commands
+  remote_task :update, :roles => :app do
+    run "sudo chown -R http:www-data #{deploy_to}"
+    run "sudo chmod 775 -R #{deploy_to}"
+  end
 end
 
 desc "Deploys application, migrates db, symlinks, and cycles web/app servers"
