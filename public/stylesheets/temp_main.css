@@ -4,7 +4,18 @@ html {
 
 div {
   width: 500px;
-  background: url(/images/logo_bdub.png);
+  background: url(/images/logo_bdub.png) no-repeat;
   height: 100px;
-  width: 440px;
-  margin: 150px auto; }
+  margin: 100px auto;
+}
+
+div.notify_form {
+  background: #DDD;
+  margin: 150px auto;
+  width: 500px;
+  height: 200px;
+}
+
+div.notify_form h2 {
+  text-align: center;
+}
