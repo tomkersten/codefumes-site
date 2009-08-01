@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login  '/login',  :controller => 'session', :action => 'new', :method => :get
 
   map.short_uri '/p/:public_key', :controller => 'Community::Projects', :action => 'short_uri', :method => :get
+  map.resources :p, :controller => 'Community::Projects'
   map.namespace :community do |community|
     community.resources :projects
   end

@@ -1,6 +1,10 @@
 class Community::ProjectsController < ApplicationController
   def show
     @project = Project.find(:first, :conditions => ["public_key = ?", params[:id]])
+    respond_to do |format|
+      format.html
+      format.js {render :json => @project.to_json(:include => [:commits])}
+    end
   end
 
   def short_uri
