@@ -17,6 +17,7 @@ config.gem 'topfunky-gruff', :version => '0.3.5', :lib => 'gruff', :source => 'h
 config.gem 'flay', :version => ">= 1.3.0"
 config.gem 'sexp_processor', :version => ">= 3.0.1"
 config.gem 'ruby_parser', :version => ">= 2.0.2"
+config.gem 'flog', :version => ">= 2.1.2"
 
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
