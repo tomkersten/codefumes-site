@@ -14,6 +14,7 @@ config.gem 'faker', :version => '>= 0.3.1'
 config.gem 'bmabey-email_spec', :lib => 'email_spec', :source => 'http://gems.github.com'
 config.gem 'jscruggs-metric_fu', :version => '1.1.4', :lib => 'metric_fu', :source => 'http://gems.github.com'
 config.gem 'topfunky-gruff', :version => '0.3.5', :lib => 'gruff', :source => 'http://gems.github.com'
+config.gem 'flay', :version => ">= 1.3.0"
 
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
