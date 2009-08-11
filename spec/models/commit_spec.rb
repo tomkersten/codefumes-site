@@ -292,4 +292,37 @@ describe Commit do
       end
     end
   end
+
+  describe "normalizing attribute lists" do
+    before(:each) do
+      @params = {:identifier => "1234", :line_additions => "10"}
+    end
+
+    it "does not modify the original object passed in" do
+      params = @params.dup
+      Commit.normalize_params(@params)
+      params.should == @params
+    end
+
+    context "when passing in a standard keypairs only" do
+      it "does not return a 'custom_attributes' key" do
+        Commit.normalize_params(@params).should_not include(:custom_attributes)
+      end
+    end
+
+    context "when passing in a custom key in the root level of the params argument" do
+      before(:each) do
+        @custom_keypair = {:custom_field => "random_value"}
+        @params.merge!(@custom_keypair)
+      end
+
+      it "returns a 'custom_attributes' key" do
+        Commit.normalize_params(@params).should include(:custom_attributes)
+      end
+
+      it "nests the custom key/value pair under the 'custom_attributes' key" do
+        Commit.normalize_params(@params)[:custom_attributes].should == @custom_keypair
+      end
+    end
+  end
 end

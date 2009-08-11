@@ -39,4 +39,26 @@ class Commit < ActiveRecord::Base
   def parent_identifiers(format = :full)
     parents.map {|parent| format == :full ? parent.identifier : parent.identifier[0..5]}
   end
+
+  def custom_attributes=(custom_attrs = {})
+    custom_attrs
+  end
+
+  def self.normalize_params(params)
+    params.inject({}) do |normalized_params, key_value_pair|
+      key, value = key_value_pair
+      if standard_attribute?(key)
+        normalized_params.merge! key => value
+      else
+        normalized_params[:custom_attributes] ||= {}
+        normalized_params[:custom_attributes].merge! key => value
+        normalized_params
+      end
+    end
+  end
+
+  private
+    def self.standard_attribute?(some_key)
+      column_names.include?(some_key.to_s)
+    end
 end
