@@ -1,12 +1,23 @@
 class Commit < ActiveRecord::Base
+  # Validations
   validates_presence_of :identifier
   validates_uniqueness_of :identifier
+
+  # Associations
   has_many :revisions, :dependent => :destroy
   has_many :projects, :through => :revisions
   has_many :bridges_as_parent, :class_name => "RevisionBridge", :foreign_key => :parent_id, :dependent => :destroy
   has_many :bridges_as_child, :class_name => "RevisionBridge", :foreign_key => :child_id, :dependent => :destroy
   has_many :children, :through => :bridges_as_parent, :class_name => "Commit"
   has_many :parents, :through => :bridges_as_child, :class_name => "Commit"
+  has_many :custom_attributes, :class_name => "CommitAttribute" do
+    def [](name)
+      first(:conditions => {:name => name.to_s})
+    end
+  end
+
+  # Lifecycle hooks
+  after_save :store_custom_attributes
 
   def to_param
     identifier
@@ -40,25 +51,37 @@ class Commit < ActiveRecord::Base
     parents.map {|parent| format == :full ? parent.identifier : parent.identifier[0..5]}
   end
 
-  def custom_attributes=(custom_attrs = {})
-    custom_attrs
-  end
-
   def self.normalize_params(params)
     params.inject({}) do |normalized_params, key_value_pair|
       key, value = key_value_pair
-      if standard_attribute?(key)
+      if standard_attribute?(key) || key.to_sym == :custom_attributes
         normalized_params.merge! key => value
       else
-        normalized_params[:custom_attributes] ||= {}
-        normalized_params[:custom_attributes].merge! key => value
         normalized_params
       end
     end
   end
 
+  def custom_attributes=(a_hash)
+    raise ArgumentErorr, "Hash expected" unless a_hash.is_a?(Hash)
+    @custom_attributes = a_hash.delete_if {|key, value| key == :custom_attributes}
+  end
+
   private
     def self.standard_attribute?(some_key)
-      column_names.include?(some_key.to_s)
+      some_key.to_s == 'parent_identifiers' || column_names.include?(some_key.to_s)
+    end
+
+    # This is messy
+    # TODO: clean this up
+    def store_custom_attributes
+      return if @custom_attributes.blank?
+      unless @custom_attributes.is_a?(Hash)
+        raise ArgumentError, "Custom attributes must be key-value pairs"
+      end
+
+      @custom_attributes.each do |name, value|
+        custom_attributes.find_or_create_by_name(:name => name.to_s, :value => value.to_s)
+      end
     end
 end

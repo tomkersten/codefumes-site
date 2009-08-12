@@ -304,6 +304,14 @@ describe Commit do
       params.should == @params
     end
 
+    it "allows 'parent_identifiers' to be set" do
+      parent_ids = "abc, 123"
+      @params.merge!(:parent_identifiers => parent_ids)
+      results = Commit.normalize_params(@params)
+      results.should include(:parent_identifiers)
+      results[:parent_identifiers].should == parent_ids
+    end
+
     context "when passing in a standard keypairs only" do
       it "does not return a 'custom_attributes' key" do
         Commit.normalize_params(@params).should_not include(:custom_attributes)
@@ -314,14 +322,42 @@ describe Commit do
       before(:each) do
         @custom_keypair = {:custom_field => "random_value"}
         @params.merge!(@custom_keypair)
+        @results = Commit.normalize_params(@params)
       end
 
-      it "returns a 'custom_attributes' key" do
-        Commit.normalize_params(@params).should include(:custom_attributes)
+      it "passes through the valid/standard parameters" do
+        @results[:identifier].should == "1234"
+        @results[:line_additions].should == "10"
+        @results.should have(2).keys
       end
 
-      it "nests the custom key/value pair under the 'custom_attributes' key" do
-        Commit.normalize_params(@params)[:custom_attributes].should == @custom_keypair
+      it "is silently removed" do
+        @results[:custom_attributes].should be_nil
+        @results[:custom_field].should be_nil
+      end
+    end
+  end
+
+  describe "setting custom attributes" do
+    before(:each) do
+      @params = {:identifier => "1234", :line_additions => "10"}
+    end
+
+    context "when not nested under the ':custom_attributes' key" do
+      before(:each) do
+        @params.merge!(:custom_attributes => {:rcov => "100"})
+      end
+
+      it "retains the standard commit attribute values" do
+        commit = Commit.make(Commit.normalize_params(@params))
+        commit.identifier.should == @params[:identifier]
+        commit.line_additions.should == @params[:line_additions].to_i
+      end
+
+      it "creates a new commit attribute with the key-value pair supplied" do
+        commit = Commit.make(Commit.normalize_params(@params))
+        commit.custom_attributes[:rcov].should_not be_nil
+        commit.custom_attributes[:rcov].value.should == "100"
       end
     end
   end
