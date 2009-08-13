@@ -4,7 +4,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
 require 'spec/autorun'
 require 'spec/rails'
-
+require 'machinist/active_record'
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 
 # This simplifies testing mailers with RSpec
