@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :public_key
 
   has_many :revisions, :dependent => :destroy
-  has_many :commits, :through => :revisions
+  has_many :commits, :through => :revisions, :include => [:custom_attributes, :parents]
   has_many :payloads, :dependent => :destroy
 
   def self.generate_public_key

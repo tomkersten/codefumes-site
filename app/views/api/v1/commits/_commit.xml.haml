@@ -15,3 +15,7 @@
   %line_total= commit.line_total
   %affected_file_count= commit.affected_file_count
   %api_uri= api_v1_commit_url(:format => params[:format], :id => commit)
+  - unless commit.custom_attributes.empty?
+    %custom_attributes
+      - for custom_attribute in commit.custom_attributes
+        = "<#{custom_attribute.name}>#{custom_attribute.value}</#{custom_attribute.name}>"
