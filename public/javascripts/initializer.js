@@ -1,11 +1,11 @@
 $(function(){
   $('ul.commits li ul').css("display","none")
-  $('ul.commits').toggle(
+  $('ul.commits li h2').toggle(
   function(){
-    $(this).find('li ul').show();
+    $(this).parent().find('ul').show();
   },
   function(){
-    $(this).find('li ul').hide();
+    $(this).parent().find('ul').hide();
   }
   );
 });
