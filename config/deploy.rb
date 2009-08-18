@@ -12,6 +12,12 @@ task :prod do
   set :deploy_to, "/var/www/#{application}"
 end
 
+task :test do
+  set :domain, "test.codefumes.com"
+  set :application, "codefumes_test_site"
+  set :deploy_to, "/var/www/#{application}"
+end
+
 namespace :vlad do
   Rake.clear_tasks('vlad:start_app')
   set :web_command, "sudo /etc/init.d/apache2"
