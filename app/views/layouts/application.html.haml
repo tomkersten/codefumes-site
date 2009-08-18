@@ -21,6 +21,4 @@
 
   = yield :javascript
   :javascript
-    document.observe("dom:loaded",function(ev){
-      #{yield :onReady}
-    });
+    $(#{yield :onReady});
