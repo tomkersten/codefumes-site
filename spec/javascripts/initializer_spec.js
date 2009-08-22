@@ -1,4 +1,5 @@
 require("spec_helper.js");
+require("../../public/javascripts/jquery.js");
 require("../../public/javascripts/initializer.js");
 
 Screw.Unit(function(){
