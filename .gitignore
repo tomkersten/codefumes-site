@@ -9,5 +9,5 @@ doc/api
 doc/app
 config/database.yml
 coverage/**/*
-*.css
+public/**/*.css
 *.swp
