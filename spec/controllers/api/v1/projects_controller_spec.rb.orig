@@ -147,7 +147,11 @@ describe Api::V1::ProjectsController do
     end
 
     def perform_request
-      put :update, :id => @public_key, :private_key => @project.private_key, :project => @update_params
+<<<<<<< HEAD:spec/controllers/api/v1/projects_controller_spec.rb
+      put :update, :id => @public_key, :project => @update_params
+=======
+      put :update, :id => @project.public_key, :private_key => @project.private_key, :project => @update_params
+>>>>>>> use private_key to authorize api requests:spec/controllers/api/v1/projects_controller_spec.rb
     end
 
     context "with valid parameters" do

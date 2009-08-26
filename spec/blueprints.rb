@@ -5,6 +5,7 @@ Sham.define do
   user_name   {Faker::Internet.user_name}
   name        {Faker::Name.name}
   public_key  {Digest::SHA1.hexdigest(Time.now.to_s + Kernel.rand(1000).to_s)[0..5]}
+  private_key {Project.generate_private_key}
 end
 
 User.blueprint do
@@ -36,6 +37,7 @@ end
 Project.blueprint do
   name        {Faker::Lorem.words(2).join(' ')}
   public_key
+  private_key
 end
 
 Project.blueprint(:twitter_tagger) do

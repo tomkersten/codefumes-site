@@ -1,4 +1,5 @@
 class Api::V1::PayloadsController < Api::BaseController
+  
   def create
     @payload = Payload.new(:content => params[:payload])
 
@@ -10,7 +11,7 @@ class Api::V1::PayloadsController < Api::BaseController
       end
     end
   end
-
+  
   private
     def assign_to_project
       @payload.project = Project.find_by_public_key(params[:project_id])

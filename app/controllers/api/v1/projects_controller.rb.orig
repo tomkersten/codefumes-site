@@ -56,5 +56,8 @@ class Api::V1::ProjectsController < Api::BaseController
     def project_request_params
       params[:project] || {}
     end
+<<<<<<< HEAD:app/controllers/api/v1/projects_controller.rb
+=======
 
+>>>>>>> use private_key to authorize api requests:app/controllers/api/v1/projects_controller.rb
 end

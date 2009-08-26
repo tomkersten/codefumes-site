@@ -7,4 +7,6 @@ describe Api::BaseController do
     controller.should be_an_instance_of(Api::BaseController)
   end
 
+  
+
 end

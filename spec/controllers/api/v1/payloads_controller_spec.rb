@@ -13,7 +13,7 @@ describe Api::V1::PayloadsController do
     end
 
     def perform_request
-      post :create, :project_id => @project.public_key, :payload => @payload_params
+      post :create, :project_id => @project.public_key, :private_key => @project.private_key, :payload => @payload_params
     end
 
     context "with valid parameters" do
@@ -69,6 +69,14 @@ describe Api::V1::PayloadsController do
 
       it "does not create a new payload" do
         lambda {perform_request}.should_not change(Payload, :count)
+      end
+    end
+    
+    context "without a valid private_key of a project" do
+      it "returns 401 unauthorized" do
+        post :create, :project_id => @project.public_key, :payload => @payload_params
+        puts response.status
+        response.status.should == "401 Unauthorized"
       end
     end
   end

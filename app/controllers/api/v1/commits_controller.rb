@@ -1,4 +1,4 @@
-class Api::V1::CommitsController < ApplicationController
+class Api::V1::CommitsController < Api::BaseController
   def index
     @commits = project.commits
     respond_to do |format|
@@ -29,8 +29,4 @@ class Api::V1::CommitsController < ApplicationController
     end
   end
 
-  private
-    def project
-      @project ||= Project.find_by_public_key(params[:project_id])
-    end
 end

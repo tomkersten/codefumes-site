@@ -1,7 +1,6 @@
 class Project < ActiveRecord::Base
   TOKEN_LENGTH = 4
   validates_uniqueness_of :public_key
-  validates_uniqueness_of :private_key
   before_validation_on_create :assign_public_key
   before_validation_on_create :assign_private_key
 
