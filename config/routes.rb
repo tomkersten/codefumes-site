@@ -14,11 +14,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session, :controller => 'session'
   map.root :controller => 'exterior'
 
+  map.api_v1_commit '/api/v1/:format/commits/:id', :controller => "Api::V1::Commits", :action => 'show', :method => :get
   map.namespace :api do |api|
     api.namespace :v1 do |v1|
       v1.resources :projects, :path_prefix => '/api/v1/:format' do |project|
         project.resources :payloads, :shallow => true
-        project.resources :commits, :shallow => true, :collection => {:latest => :get}
+        project.resources :commits, :collection => {:latest => :get}
       end
     end
   end

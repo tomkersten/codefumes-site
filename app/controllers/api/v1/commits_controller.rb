@@ -7,12 +7,11 @@ class Api::V1::CommitsController < Api::BaseController
   end
 
   def show
-    @commit = project.commits.find_by_identifier(params[:id])
     respond_to do |format|
-      if @commit.nil?
+      if commit.nil?
         format.xml {render :nothing => true, :status => :not_found}
       else
-        format.xml {render :location => api_v1_commit_url(@commit)}
+        format.xml {render :location => api_v1_commit_url(commit)}
       end
     end
   end
@@ -29,4 +28,12 @@ class Api::V1::CommitsController < Api::BaseController
     end
   end
 
+  private
+    def commit
+      if project.nil?
+        @commit ||= Commit.find_by_identifier(params[:id])
+      else
+        @commit ||= project.commits.find_by_identifier(params[:id])
+      end
+    end
 end
