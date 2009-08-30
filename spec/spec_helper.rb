@@ -9,8 +9,8 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 
 # This simplifies testing mailers with RSpec
 # Read more here: http://github.com/bmabey/email-spec/tree/master
-require "email_spec/helpers"
-require "email_spec/matchers"
+#require "email_spec/helpers"
+#require "email_spec/matchers"
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
@@ -54,8 +54,8 @@ Spec::Runner.configure do |config|
 
   # This simplifies testing mailers with RSpec
   # Read more here: http://github.com/bmabey/email-spec/tree/master
-  config.include(EmailSpec::Helpers)
-  config.include(EmailSpec::Matchers)
+  #config.include(EmailSpec::Helpers)
+  #config.include(EmailSpec::Matchers)
 
   # Resets machinist Shams before each test
   config.before(:each) do
