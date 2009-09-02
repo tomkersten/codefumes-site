@@ -37,7 +37,7 @@ class Project < ActiveRecord::Base
       else
         lst << lst[index].parents.first
       end
-    end
+    end.compact
   end
 
   private
