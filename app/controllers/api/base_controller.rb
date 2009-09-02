@@ -8,7 +8,7 @@ class Api::BaseController < ApplicationController
     end
     
     def require_project_authorization
-      return true if request.get? || project.blank? || project.private_key == params[:private_key]
+      return true if request.get? || project.blank? || authenticate_with_http_basic{|pub, priv| project.public_key == pub && project.private_key == priv}
       
       respond_to do |format|
         format.xml {render :status => :unauthorized}

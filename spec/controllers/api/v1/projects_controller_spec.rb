@@ -105,10 +105,11 @@ describe Api::V1::ProjectsController do
   describe "a DELETE to destroy" do
     before(:each) do
       @project = Project.make
+      setup_basic_auth(@project.public_key, @project.private_key)
     end
 
     def perform_request
-      delete :destroy, :id => @project.public_key, :private_key => @project.private_key
+      delete :destroy, :id => @project.public_key
     end
 
     it "deletes the specified project" do
@@ -134,6 +135,7 @@ describe Api::V1::ProjectsController do
     
     context "with invalid private key" do
       it "returns 401 unauthorized" do
+        setup_basic_auth('some', 'garbage')
         delete :destroy, :id => @project.public_key
         response.status.should == "401 Unauthorized"
       end
@@ -144,10 +146,11 @@ describe Api::V1::ProjectsController do
     before(:each) do
       @project = Project.make
       @public_key = @project.public_key
+      setup_basic_auth(@project.public_key, @project.private_key)
     end
 
     def perform_request
-      put :update, :id => @public_key, :private_key => @project.private_key, :project => @update_params
+      put :update, :id => @public_key, :project => @update_params
     end
 
     context "with valid parameters" do
@@ -202,9 +205,11 @@ describe Api::V1::ProjectsController do
     
     context "with invalid private key" do
       it "returns 401 unauthorized" do
+        setup_basic_auth('some', 'garbage')
         put :update, :id => @project.public_key, :project => @update_params
         response.status.should == "401 Unauthorized"
       end
     end
   end
 end
+

@@ -62,3 +62,7 @@ Spec::Runner.configure do |config|
     Sham.reset
   end
 end
+
+def setup_basic_auth(username, password)
+  request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(username, password).gsub(/\n/,'')
+end
