@@ -21,4 +21,8 @@
 
   = yield :javascript
   :javascript
-    $(#{yield :onReady});
+    $(
+    function(){
+    #{yield :onReady}
+    }
+    );

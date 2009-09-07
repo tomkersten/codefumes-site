@@ -57,3 +57,5 @@
                 %ul
                   - for custom_attribute in commit.custom_attributes
                     %li= "#{custom_attribute.name}: #{custom_attribute.value}"
+-content_for :onReady do
+  vis = new Visualizer("canvas");

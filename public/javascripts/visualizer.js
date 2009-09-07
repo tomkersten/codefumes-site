@@ -2,6 +2,8 @@ var Visualizer = function(canvas){
   var self = this;
   this.canvas = canvas;
   this.years = [];
+  this.authors = [];
+  this.colors = ["#ffa500","#90EE90"];
   $.getJSON(
     document.location.href+".js",
     function(data){
@@ -33,7 +35,7 @@ Visualizer.prototype = {
         self.drawNode(this);
       
       });
-      console.log(self.years)
+
       this.drawGraph();
       
   },
@@ -41,8 +43,9 @@ Visualizer.prototype = {
     
     for(i=0;i<=11;i++){
     
-      this.page.text(i*40,350,i+1);
-      this.page.path({stroke: "#ccc", opacity: .5}).moveTo(i*40,100).lineTo(i*40,350);   
+      this.page.text(i*40+20,350,i+1);
+      this.page.path({stroke: "#ccc", opacity: .5}).moveTo(i*40+20,100).lineTo(i*40+20,350);   
+    
     }
     for(i=24;i>-0;i--){
 
@@ -54,16 +57,17 @@ Visualizer.prototype = {
   },
   drawNode: function(commit){
     var self = this;
-    var x = commit.committed_at.getMonth()*40;
-    var y = (commit.committed_at.getHours()*10)+100;
-    if (commit.line_total < 100){
+    //self.checkCommitter(commit.author_email);
+    var x = commit.committed_at.getMonth()*40+20;
+    var y = (commit.committed_at.getHours()*10)+100+(commit.committed_at.getMinutes()/10);
+    if (commit.line_total < 40){
       var s = commit.line_total;
     }else{
-      var s = 100;
+      var s = 40;
     }
     var c = this.page.circle(x,y,s);
-    c.attr("stroke","#333");
-    c.attr("fill","#666");
+    c.attr("stroke","#ffa500");
+    c.attr("fill","#ffa500");
     c.attr("fill-opacity",".2");
     c.attr("opacity",.5);
     var d = this.page.circle(x,y,1);
@@ -71,8 +75,19 @@ Visualizer.prototype = {
     d.attr("fill","#999");
     d.attr("opacity",1);
     c.node.onclick = function(){
-      var text = self.page.text(x,y,commit.message);
+      var text = self.page.text(x,y,
+      "message: "+
+      commit.message+"\nline total: "+commit.line_total+"\nhour: "+commit.committed_at.getHours());
       setTimeout(function(){text.hide()},3000);
     }
+  },
+  checkCommitter: function(email){
+    check = $.grep(this.authors,function(a){
+      return a == email;
+    });
+    if(check.length == 0){
+      this.authors.push({email: {email: this.colors[this.authors.length]}})
+    }
+
   }
 }
