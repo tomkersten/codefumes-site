@@ -3,10 +3,12 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 require 'cucumber/rails/world'
 require 'cucumber/formatters/unicode' # Comment out this line if you don't want Cucumber Unicode support
+require 'faker'
+require File.expand_path(File.dirname(__FILE__) + "/../../spec/spec_helper")
 
 # This adds support for email matchers in cucumber
 # Read more here: http://github.com/bmabey/email-spec/tree/master
-require 'email_spec/cucumber'
+#require 'email_spec/cucumber'
 
 # Loads blueprints for machinist
 require File.expand_path(File.dirname(__FILE__) + "/../../spec/blueprints")

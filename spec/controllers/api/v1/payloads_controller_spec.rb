@@ -8,6 +8,7 @@ describe Api::V1::PayloadsController do
   describe "a POST to create" do
     before(:each) do
       @project = Project.make
+      setup_basic_auth(@project.public_key, @project.private_key)
       commit_params = 3.times.map {Commit.plan.stringify_keys}
       @payload_params = {"commits" => commit_params, "after" => 'sha1_after', "before" => 'sha1_before'}
     end
@@ -69,6 +70,15 @@ describe Api::V1::PayloadsController do
 
       it "does not create a new payload" do
         lambda {perform_request}.should_not change(Payload, :count)
+      end
+    end
+    
+    context "without a valid private_key of a project" do
+      it "returns 401 unauthorized" do
+        setup_basic_auth('some', 'garbage')
+        post :create, :project_id => @project.public_key, :payload => @payload_params
+        puts response.status
+        response.status.should == "401 Unauthorized"
       end
     end
   end

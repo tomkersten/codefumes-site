@@ -70,6 +70,19 @@ describe Api::V1::CommitsController do
         perform_request
         assigns[:commit].should == @commit
       end
+
+      context "without a project_id" do
+        def perform_request
+          get :show, :id => @commit.identifier
+        end
+
+        it_should_behave_like "Any valid GET request to a specific commit"
+
+        it "assigns the specified commit for the view template" do
+          perform_request
+          assigns[:commit].should == @commit
+        end
+      end
     end
 
     context "an invalid request" do

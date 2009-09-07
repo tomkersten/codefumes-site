@@ -1,4 +1,5 @@
 class Api::V1::ProjectsController < Api::BaseController
+  
   def index
     @projects = Project.all
     respond_to do |format|
@@ -29,8 +30,7 @@ class Api::V1::ProjectsController < Api::BaseController
   end
 
   def destroy
-    @project ||= Project.find_by_public_key(params[:id])
-    @project.destroy unless @project.nil?
+    project.destroy unless project.nil?
     respond_to do |format|
       format.xml {render :nothing => true}
     end
@@ -38,11 +38,12 @@ class Api::V1::ProjectsController < Api::BaseController
 
   def update
     project_request_params.delete(:public_key)
+
     respond_to do |format|
       if !project.nil? && project.update_attributes(params[:project])
         format.xml {render :location => api_v1_project_url(:xml, project)}
       else
-        format.xml {render :nothing => true, :status => :unprocessable_entity, :location => api_v1_project_url(:xml, project)}
+        format.xml {render :nothing => true, :status => :unprocessable_entity}
       end
     end
   end
@@ -51,16 +52,9 @@ class Api::V1::ProjectsController < Api::BaseController
     def project
       @project ||= Project.find_by_public_key(params[:id])
     end
-
+    
     def project_request_params
       params[:project] || {}
     end
 
-    def clean_up_request_params
-      if request.post?
-        project_request_params.delete(:public_key)
-      elsif request.put?
-        project_request_params[:public_key] = params[:id]
-      end
-    end
 end

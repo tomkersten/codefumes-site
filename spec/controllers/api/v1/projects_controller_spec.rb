@@ -28,13 +28,13 @@ describe Api::V1::ProjectsController do
   end
 
   describe "a POST to create" do
-    describe "with valid params" do
+    def perform_request
+      post :create, :project => @params
+    end
+
+    context "with valid params" do
       before(:each) do
         @params = Project.plan
-      end
-
-      def perform_request
-        post :create, :project => @params
       end
 
       it "creates a project" do
@@ -50,8 +50,21 @@ describe Api::V1::ProjectsController do
       end
     end
 
-    describe "with invalid parameters" do
-      it "does not set the location header"
+    context "with invalid parameters" do
+      before(:each) do
+        existing_project = Project.make
+        @params = Project.plan.merge(:public_key => existing_project.public_key)
+      end
+
+      it "does not set the location header" do
+        perform_request
+        response.headers["Location"].should  be_nil
+      end
+
+      it "returns a 422 Unprocessible entity status code" do
+        perform_request
+        response.status.should == "422 Unprocessable Entity"
+      end
     end
   end
 
@@ -92,6 +105,7 @@ describe Api::V1::ProjectsController do
   describe "a DELETE to destroy" do
     before(:each) do
       @project = Project.make
+      setup_basic_auth(@project.public_key, @project.private_key)
     end
 
     def perform_request
@@ -118,19 +132,32 @@ describe Api::V1::ProjectsController do
         response.should be_success
       end
     end
+    
+    context "with invalid private key" do
+      it "returns 401 unauthorized" do
+        setup_basic_auth('some', 'garbage')
+        delete :destroy, :id => @project.public_key
+        response.status.should == "401 Unauthorized"
+      end
+    end
   end
 
   describe "a PUT to update" do
     before(:each) do
       @project = Project.make
-      @update_params = Project.plan
+      @public_key = @project.public_key
+      setup_basic_auth(@project.public_key, @project.private_key)
     end
 
     def perform_request
-      put :update, :id => @project.public_key, :project => @update_params
+      put :update, :id => @public_key, :project => @update_params
     end
 
     context "with valid parameters" do
+      before(:each) do
+        @update_params = Project.plan
+      end
+
       context "for an existing public_key" do
         it "returns a response code of 200 OK" do
           perform_request
@@ -162,21 +189,27 @@ describe Api::V1::ProjectsController do
 
     context "with invalid parameters" do
       before(:each) do
-        @project2 = Project.make
-        @update_params = {:public_key => @project2.public_key}
+        @public_key = "non-existant-public-key"
       end
 
       it "returns a response code of 422 Unprocessable Entity" do
-        pending "Need to define more validations on Project model to test this"
         perform_request
         response.status.should == "422 Unprocessable Entity"
       end
 
       it "does not set a value for the 'Location' header" do
-        pending "Need to define more validations on Project model to test this"
         perform_request
         response.headers["Location"].should  be_nil
       end
     end
+    
+    context "with invalid private key" do
+      it "returns 401 unauthorized" do
+        setup_basic_auth('some', 'garbage')
+        put :update, :id => @project.public_key, :project => @update_params
+        response.status.should == "401 Unauthorized"
+      end
+    end
   end
 end
+

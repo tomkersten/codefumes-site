@@ -325,13 +325,13 @@ describe Commit do
         @results = Commit.normalize_params(@params)
       end
 
-      it "passes through the valid/standard parameters" do
+      it "passes the valid/standard parameters straight through" do
         @results[:identifier].should == "1234"
         @results[:line_additions].should == "10"
         @results.should have(2).keys
       end
 
-      it "is silently removed" do
+      it "silently ignores/removes non-supported attributes" do
         @results[:custom_attributes].should be_nil
         @results[:custom_field].should be_nil
       end
