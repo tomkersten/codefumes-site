@@ -53,6 +53,7 @@ Visualizer.prototype = {
     
   },
   drawNode: function(commit){
+    var self = this;
     var x = commit.committed_at.getMonth()*40;
     var y = (commit.committed_at.getHours()*10)+100;
     if (commit.line_total < 100){
@@ -69,5 +70,9 @@ Visualizer.prototype = {
     d.attr("stroke","#999");
     d.attr("fill","#999");
     d.attr("opacity",1);
+    c.node.onclick = function(){
+      var text = self.page.text(x,y,commit.message);
+      setTimeout(function(){text.hide()},3000);
+    }
   }
 }
