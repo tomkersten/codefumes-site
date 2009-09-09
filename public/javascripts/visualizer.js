@@ -19,8 +19,7 @@ Visualizer.prototype = {
     var tmpYear = "";
     pageHeight = 400;
     this.page = Raphael(document.getElementById(this.canvas), data.project.commits.length*50, pageHeight);
-    var line = this.page.path({stroke: "#ffa500", "stroke-opacity": 1,"stroke-width": 10, "stroke-linecap": "round","stroke-linejoin": "round"}).moveTo(40, 100);
-    
+ 
     $(data.project.commits).each(  
       function(){
         d = this.committed_at.split("T");
@@ -44,13 +43,15 @@ Visualizer.prototype = {
     for(i=0;i<=11;i++){
     
       this.page.text(i*40+20,350,i+1);
-      this.page.path({stroke: "#ccc", opacity: .5}).moveTo(i*40+20,100).lineTo(i*40+20,350);   
+      //this.page.path(i*40+20,100).attr({stroke: "#ccc", opacity: .5}).lineTo(i*40+20,350);
+      this.page.path("M"+(i*40+20)+" 100L"+(i*40+20)+" 350").attr({stroke: "#ccc", opacity: .5}) 
     
     }
     for(i=24;i>-0;i--){
 
       this.page.text(5,i*10+100,i);
-      this.page.path({stroke: "#ccc", opacity: .5}).moveTo(5,i*10+100).lineTo(40*12,i*10+100); 
+      //this.page.path(5,i*10+100).attr({stroke: "#ccc", opacity: .5}).lineTo(40*12,i*10+100);
+      this.page.path("M5 "+(i*10+100)+"L"+(40*12)+" "+(i*10+100)).attr({stroke: "#ccc", opacity: .5}) 
     
     }
     
