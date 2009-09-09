@@ -49,7 +49,7 @@ Visualizer.prototype = {
     }
     for(i=24;i>-0;i--){
 
-      this.page.text(5,i*10+100,i);
+      this.page.text(15,i*10+100,i+":00");
       //this.page.path(5,i*10+100).attr({stroke: "#ccc", opacity: .5}).lineTo(40*12,i*10+100);
       this.page.path("M5 {0} L{1} {2}",(i*10+100),(40*12),(i*10+100)).attr({stroke: "#ccc", opacity: .5}) 
     
