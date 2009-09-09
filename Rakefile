@@ -11,6 +11,8 @@ require 'metric_fu'
 require 'codefumes_harvester'
 
 begin
+  # NOTE: be sure to install vlad-git gem if you want to do deployments,
+  # it is no longer included in vlad's core.
   require 'vlad'
   require 'hoe'
   Vlad.load :scm => :git
