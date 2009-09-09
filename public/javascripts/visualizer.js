@@ -43,15 +43,15 @@ Visualizer.prototype = {
     for(i=0;i<=11;i++){
     
       this.page.text(i*40+20,350,i+1);
-      //this.page.path(i*40+20,100).attr({stroke: "#ccc", opacity: .5}).lineTo(i*40+20,350);
-      this.page.path("M"+(i*40+20)+" 100L"+(i*40+20)+" 350").attr({stroke: "#ccc", opacity: .5}) 
+      this.page.path("M"+(i*40+20)+" 100L"+(i*40+20)+" 350").attr({stroke: "#ccc", opacity: .5})
+      this.page.path("M{0} 100L{1} 350",(i*40+20),(i*40+20)).attr({stroke: "#ccc", opacity: .5}) 
     
     }
     for(i=24;i>-0;i--){
 
       this.page.text(5,i*10+100,i);
       //this.page.path(5,i*10+100).attr({stroke: "#ccc", opacity: .5}).lineTo(40*12,i*10+100);
-      this.page.path("M5 "+(i*10+100)+"L"+(40*12)+" "+(i*10+100)).attr({stroke: "#ccc", opacity: .5}) 
+      this.page.path("M5 {0} L{1} {2}",(i*10+100),(40*12),(i*10+100)).attr({stroke: "#ccc", opacity: .5}) 
     
     }
     
@@ -81,7 +81,7 @@ Visualizer.prototype = {
       commit.message+"\nline total: "+commit.line_total+"\nhour: "+commit.committed_at.getHours());
       setTimeout(function(){text.hide()},3000);
     }
-  },
+  }/*,
   checkCommitter: function(email){
     check = $.grep(this.authors,function(a){
       return a == email;
@@ -90,5 +90,5 @@ Visualizer.prototype = {
       this.authors.push({email: {email: this.colors[this.authors.length]}})
     }
 
-  }
+  }*/
 }
