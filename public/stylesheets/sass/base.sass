@@ -88,6 +88,25 @@
   :border-collapse separate
   :border-spacing 0
   :vertical-align middle
+=column_calc(!col_size)
+  :width= (!col_size)-(!page_padding*2)+(!border_size*2)+"em"
+  :padding= !page_padding/2+"em"
+  :margin= (!page_padding/2)+"em"
+  :border= !border_size+"em" !border_style !border_color
+  +rounded
+  +clearfix
+  * html &
+    /:width= (!col_size)+(!border_size*2)+"em"
+=baseline_calc(!size)
+  :font-size= !font_size + !size+"em"
+  :margin= (!line_height/(!font_size + !size))+"em" 0
+  
+=grid_list
+  :display -moz-inline-stack
+  :display inline-block
+  :vertical-align top
+  :zoom 1
+  :*display inline
 +global-reset
 body
   :font-size 62.5%
@@ -102,17 +121,13 @@ body
     :text-transform capitalize
     :font-weight bold
   h1
-    :font-size= !font_size + .6+"em"
-    :margin= (!line_height/(!font_size + .6))+"em" 0
+    +baseline_calc( .6 )
   h2
-    :font-size= !font_size + .3+"em"
-    :margin= (!line_height/(!font_size + .3))+"em" 0
+    +baseline_calc( .3)
   h3
-    :font-size= !font_size + .2+"em"
-    :margin-bottom= -(!line_height/(!font_size + .2))+"em"
+    +baseline_calc( .2)
   h4
-    :font-size= !font_size + .1+"em"
-    :margin-top= !line_height/(!font_size + .1)+"em"
+    +baseline_calc( .1)
     :margin-bottom= -(!line_height/(!font_size + .1))+"em"
   h5
     :font-size= !font_size+"em"

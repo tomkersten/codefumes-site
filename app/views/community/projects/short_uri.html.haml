@@ -8,54 +8,55 @@
     %li Reload this page
 
 - else
-  %h1= @project
+  .main
+    %h1= @project
+    #canvas
+    - if @project.recent_commits.empty?
+      %p.no_commits
+        No commits posted yet
+    - else
+      .picture_frame
+        %h2 Stats & other awesome things will go here...
 
-  %div.project_help
-    %p
-      This project publicly available via the following URI:
-      = link_to short_uri_url(@project.public_key), short_uri_url(@project.public_key)
-    %ul.actions
-      %li
-        You can allow people to find this project via searches and browsing by
-        = link_to "publishing it in the community.", nil, :class => :publish_project
-      %li
-        If this is an internal project and you want to limit who can access it, you can
-        = link_to "make it private.", nil, :class => :secure_project
-      %li
-        Or...if you would prefer to remove this project and all associated data from the
-        site, you can
-        = link_to "delete it.", nil, :class => :delete_project
-  #canvas
-  - if @project.recent_commits.empty?
-    %p.no_commits
-      No commits posted yet
-  - else
-    .picture_frame
-      %h2 Stats & other awesome things will go here...
-
-    %ul.commits
-      - for commit in @project.recent_commits
-        %li{:class => commit.merge? ? "merge" : nil}
-          - if commit.message.blank?
-            %h2.no_commit_message [No commit message? Tsk! Tsk!]
-          - else
-            %h2= commit.message.gsub("\n", "<br/>")
-          - if commit.merge?
-            %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-          %ul
-            %li= "Identifier: #{commit.identifier}"
-            %li= "Author: #{commit.author}"
-            %li= "Committer #{commit.committer}"
-            %li= "Authored at: #{commit.authored_at}"
-            %li= "Committed at: #{commit.committed_at}"
-            %li= "Lines added: #{commit.line_additions}"
-            %li= "Lines deleted: #{commit.line_deletions}"
-            %li= "Total lines: #{commit.line_total}"
-            %li= "Files affected: #{commit.affected_file_count}"
-            - unless commit.custom_attributes.empty?
-              %li.custom_attributes
-                %ul
-                  - for custom_attribute in commit.custom_attributes
-                    %li= "#{custom_attribute.name}: #{custom_attribute.value}"
+      %ul.commits
+        - for commit in @project.recent_commits
+          %li{:class => commit.merge? ? "merge" : nil}
+            - if commit.message.blank?
+              %h2.no_commit_message [No commit message? Tsk! Tsk!]
+            - else
+              %h2= commit.message.gsub("\n", "<br/>")
+            - if commit.merge?
+              %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
+            %ul
+              %li= "Identifier: #{commit.identifier}"
+              %li= "Author: #{commit.author}"
+              %li= "Committer #{commit.committer}"
+              %li= "Authored at: #{commit.authored_at}"
+              %li= "Committed at: #{commit.committed_at}"
+              %li= "Lines added: #{commit.line_additions}"
+              %li= "Lines deleted: #{commit.line_deletions}"
+              %li= "Total lines: #{commit.line_total}"
+              %li= "Files affected: #{commit.affected_file_count}"
+              - unless commit.custom_attributes.empty?
+                %li.custom_attributes
+                  %ul
+                    - for custom_attribute in commit.custom_attributes
+                      %li= "#{custom_attribute.name}: #{custom_attribute.value}"
+  .rail
+    %div.project_help
+      %p
+        This project publicly available via the following URI:
+        = link_to short_uri_url(@project.public_key), short_uri_url(@project.public_key)
+      %ul.actions
+        %li
+          You can allow people to find this project via searches and browsing by
+          = link_to "publishing it in the community.", nil, :class => :publish_project
+        %li
+          If this is an internal project and you want to limit who can access it, you can
+          = link_to "make it private.", nil, :class => :secure_project
+        %li
+          Or...if you would prefer to remove this project and all associated data from the
+          site, you can
+          = link_to "delete it.", nil, :class => :delete_project
 -content_for :onReady do
   vis = new Visualizer("canvas");

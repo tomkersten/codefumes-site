@@ -18,7 +18,7 @@ Visualizer.prototype = {
     var self = this;
     var tmpYear = "";
     pageHeight = 400;
-    this.page = Raphael(document.getElementById(this.canvas), data.project.commits.length*50, pageHeight);
+    this.page = Raphael(document.getElementById(this.canvas), 550, pageHeight);
  
     $(data.project.commits).each(  
       function(){
@@ -42,16 +42,16 @@ Visualizer.prototype = {
     
     for(i=0;i<=11;i++){
     
-      this.page.text(i*40+20,350,i+1);
-      this.page.path("M"+(i*40+20)+" 100L"+(i*40+20)+" 350").attr({stroke: "#ccc", opacity: .5})
-      this.page.path("M{0} 100L{1} 350",(i*40+20),(i*40+20)).attr({stroke: "#ccc", opacity: .5}) 
+      this.page.text(i*40+20,280,i+1);
+      //this.page.path("M"+(i*40+20)+" 20L"+(i*40+20)+" 250").attr({stroke: "#ccc", opacity: .5})
+      this.page.path("M{0} 20L{1} 270",(i*40+20),(i*40+20)).attr({stroke: "#ccc", opacity: .5}) 
     
     }
     for(i=24;i>-0;i--){
 
-      this.page.text(15,i*10+100,i+":00");
+      this.page.text(15,i*10+20,i+":00");
       //this.page.path(5,i*10+100).attr({stroke: "#ccc", opacity: .5}).lineTo(40*12,i*10+100);
-      this.page.path("M5 {0} L{1} {2}",(i*10+100),(40*12),(i*10+100)).attr({stroke: "#ccc", opacity: .5}) 
+      this.page.path("M5 {0} L{1} {2}",(i*10+20),(40*12),(i*10+20)).attr({stroke: "#ccc", opacity: .5}) 
     
     }
     
@@ -60,7 +60,7 @@ Visualizer.prototype = {
     var self = this;
     //self.checkCommitter(commit.author_email);
     var x = commit.committed_at.getMonth()*40+20;
-    var y = (commit.committed_at.getHours()*10)+100+(commit.committed_at.getMinutes()/10);
+    var y = (commit.committed_at.getHours()*10)+20+(commit.committed_at.getMinutes()/10);
     if (commit.line_total < 40){
       var s = commit.line_total;
     }else{
@@ -81,6 +81,9 @@ Visualizer.prototype = {
       commit.message+"\nline total: "+commit.line_total+"\nhour: "+commit.committed_at.getHours());
       setTimeout(function(){text.hide()},3000);
     }
+  },
+  clear: function(){
+    this.page.remove();
   }/*,
   checkCommitter: function(email){
     check = $.grep(this.authors,function(a){

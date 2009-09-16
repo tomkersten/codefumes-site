@@ -1,11 +1,21 @@
-var MyVisual = function(canvas){
-  var self = this;
+var MyVisual = function(canvas,url,options){
 
-  //create a 500x300px raphael svg on the canvas div.
-  this.svg = Raphael(document.getElementById(canvas), 500, 300);
+  this.options = $.extend({
+      grid: {x:500/8, y:20},
+      axis: {x:8, y:13},
+      width: 500,
+      height: 20*13
+  }, options);
+  
+  var self = this;
+  this.pathData = [];
+  
+  //create a grid svg on the canvas div.
+  this.svg = new Grid(canvas,this.options);
+  
   //grab our json object from the server
   $.getJSON(
-    document.location.href+".js",
+    url,
     function(data){
       //now that we got it do stuff.
       self.parseData(data);
@@ -18,15 +28,19 @@ MyVisual.prototype = {
   parseData: function(data){
     
     var self = this;
-    
-    //cycle through each commit in the object.
+//    cycle through each commit in the object.
+//    var commits = $.grep(data.project.commits, function(c,i){
+//      return (c.committed_at.getHours() < 18 && c.committed_at.getHours() > 5)
+//    });
     $(data.project.commits).each(
-      function(){
+      function(index){
         self.createDate(this);
-        self.drawPoint(this);
+        //console.log(this.committed_at.getDay());
+          //if(this.committed_at.getHours() < 18 && this.committed_at.getHours() > 5){
+          self.drawPoint(this,index);
+          //}
       }
     );
-    
   },
   createDate: function(commit){
       
@@ -36,14 +50,21 @@ MyVisual.prototype = {
       commit.committed_at = theDate;
 
   },
-  drawPoint: function(commit){
-    var x = commit.committed_at.getMonth()*40+20;
-    var y = (commit.committed_at.getHours()*10)+100+(commit.committed_at.getMinutes()/10);
-    
-    var c = this.svg.circle(x,y,10);
-    c.attr("stroke","#ffa500");
-    c.attr("fill","#ffa500");
-    c.attr("fill-opacity",".2");
+  drawPoint: function(commit,index){
+    var x = (commit.committed_at.getDay()+1)*this.options.grid.x;
+    var y = (commit.committed_at.getHours()*this.options.grid.y)+(commit.committed_at.getMinutes()/3);
+    if(index==0){
+      this.pathData.push("M"+x+" "+y);
+    }else{
+      this.pathData.push("L"+x+" "+y);
+    }
+    var c = this.svg.circle(x,y,8);
+    c.attr("stroke","#336699");
+    c.attr("fill","#FFCC00");
+    c.attr("fill-opacity",".5");
     c.attr("opacity",.5);
+  },
+  clear: function(){
+    this.svg.remove();
   }
 }
