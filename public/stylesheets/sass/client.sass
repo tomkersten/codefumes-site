@@ -1,15 +1,45 @@
+// not exactly sure where these go, but here for now
+// background of modules, content
+!page_color = #4D4D4D
+// text
+!kind_of_blue = #00aeef
+!tag_line = !kind_of_blue
+
 #grid, .grid
   :min-width 94em
   :margin 0 auto
-  :background-color= !background_color
+  //:background-color= !background_color
 
 
 body
-  :background-color= !page_color
-  :background-color= #AAA
+  :background url(../../images/bg_grid.gif) repeat 10px 65px
   pre
     :font-family monospace
     :color  #555
+
+  #header
+    :height 5.4em
+    :background-color= !page_color
+    :border= 1px "solid" !page_color - #111
+      :left none
+      :right none
+    :margin-top 3.6em
+    h1, p
+      :float left
+    h1
+      :margin 0
+      img
+        &.logo
+          :position relative
+          &.visual
+            :top -1.5em
+          &.textual
+            :top -2.1em
+            :padding-left 0.4em
+    p
+      :padding 0.4em 0 0 1em
+      :font-size 1.5em
+      :color = !tag_line
 
   #grid
     .main,
@@ -21,7 +51,7 @@ body
       :float left
       +rounded
 
-    /* Home page styles
+    // Home page styles
     #detail
       +clearfix
       .overview
@@ -54,26 +84,7 @@ body
             :list-style-type none
             :color #777
 
-    #header
-      :height 9em
-      :background url(/images/logo_bdub.png) no-repeat top left
-      :background-color #000
-      :border-bottom 1px solid #DDD
-      :margin 0 -1em
-      a
-        :display block
-        :width 44em
-        :height 9em
-        :text-indent -99em
-        :outline 0
-      h1
-        :font-size 1em
-        a
-          :display block
-          :font-size 3em
-          :line-height 1em
-      h2
-        :display none
+    /* header was here . . . */
 
     #footer
       :margin-top 1em
@@ -89,4 +100,3 @@ body
           :background none
           :list-style-type none
           :font-size 1em
-
