@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :api do |api|
     api.namespace :v1 do |v1|
       v1.resources :projects, :path_prefix => '/api/v1/:format' do |project|
-        project.resource  :claim
+        project.resource  :claim, :controller => "Claim"
         project.resources :payloads, :shallow => true
         project.resources :commits, :collection => {:latest => :get}
       end
