@@ -8,13 +8,29 @@ class Api::BaseController < ApplicationController
     end
     
     def require_project_authorization
-      return true if request.get? || project.blank? || authenticate_with_http_basic{|pub, priv| project.public_key == pub && project.private_key == priv}
-      
-      respond_to do |format|
-        format.xml {render :status => :unauthorized}
+      unless request.get? || project.blank? || authenticate_with_http_basic{|pub, priv| project.public_key == pub && project.private_key == priv}
+        return unauthorized
       end
-      
-      return false
     end
-  
+    
+    def require_user
+      unless current_user
+        return unauthorized
+      end
+    end
+    
+    def require_project_unclaimed
+      return unauthorized if project.claimed?
+    end
+    
+    def require_project_unclaimed_or_owned
+      return unauthorized if project.claimed? && project.user != current_user
+    end
+    
+    def unauthorized
+      respond_to do |format|
+        format.xml {render :status => :unauthorized, :nothing => true}
+      end
+      false
+    end
 end

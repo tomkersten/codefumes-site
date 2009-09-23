@@ -8,7 +8,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
 require 'metric_fu'
-require 'codefumes_harvester'
+
+begin ; require 'codefumes_harvester' ; rescue LoadError ; end
 
 begin
   # NOTE: be sure to install vlad-git gem if you want to do deployments,
