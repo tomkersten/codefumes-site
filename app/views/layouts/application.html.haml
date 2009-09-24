@@ -13,8 +13,8 @@
           = link_to image_tag('logo_textual.png', :alt => 'Codefumes'), root_path, :class => 'logo textual'
         %p What does your code smell like?
         .session
-          = link_to 'Login', new_session_path, :class => 'session', :class => 'login'
-          = link_to 'Sign Up', new_user_path, :class => 'session', :class => 'sign_up'
+          = link_to 'Login', login_path, :class => 'session', :class => 'login'
+          = link_to 'Sign Up', signup_path, :class => 'session', :class => 'sign_up'
     /= render :partial => "layouts/flashes"
     #grid
       = yield

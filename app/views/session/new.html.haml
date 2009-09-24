@@ -1,13 +1,14 @@
-- form_for @user_session, :url => session_path, :method => :post, :html => {:id => :login_form} do |f|
-  = f.error_messages
-  %div
-    = f.label :login
-  %div
-    = f.text_field :login
-  %div
-    = f.label :password
-  %div
-    = f.password_field :password
-  %div
-    = f.submit "Login", :id => :attempt_login
-    = link_to "Forget your password?", new_support_password_reset_request_path
+.main
+  - form_for @user_session, :url => session_path, :method => :post, :html => {:id => :login_form} do |f|
+    = f.error_messages
+    %div
+      = f.label :login
+    %div
+      = f.text_field :login
+    %div
+      = f.label :password
+    %div
+      = f.password_field :password
+    %div
+      = f.submit "Login", :id => :attempt_login
+      = link_to "Forget your password?", new_support_password_reset_request_path
