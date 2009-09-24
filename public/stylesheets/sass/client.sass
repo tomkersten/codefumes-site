@@ -1,45 +1,68 @@
 // not exactly sure where these go, but here for now
+
 // background of modules, content
 !page_color = #4D4D4D
-// text
+
+// text color
+!mtn_dew = #ACD373
+!mtn_blue = #4F788D
+!grayskull = #999
+
 !kind_of_blue = #00aeef
 !tag_line = !kind_of_blue
+
+// fonts
+body
+  h1, h2, h3,
+  .rail p, .rail li,
+  #footer li, #footer p
+    :font
+      :family "Tahoma"
+      :weight normal
+  .rail p
+    :font
+      :size 0.9em
+
+body h3
+  :margin-bottom 0
+
+.em
+  :color = !mtn_dew
+
+/* ------------------------------------------------------------------------- */
 
 #grid, .grid
   :min-width 94em
   :margin 0 auto
-  //:background-color= !background_color
 
 
 body
-  :background url(../../images/bg_grid.gif) repeat 10px 65px
+  :background url(../../images/bg_grid.gif) repeat 15px 75px
   pre
     :font-family monospace
     :color  #555
 
   #header
-    :height 5.4em
-    :background-color= !page_color
-    :border= 1px "solid" !page_color - #111
-      :left none
-      :right none
-    :margin-top 3.6em
-    h1, p
-      :float left
-    h1
-      :margin 0
-      img
-        &.logo
+    :margin-top 1em
+    :background url(../../images/bg_header.gif) repeat-x 0 36px
+    .grid
+      :overflow hidden
+      :height 9.6em
+      h1, p
+        :float left
+        :width 300px
+      h1  
+        :margin 0
+        a.logo
+          :display inline-block
           :position relative
           &.visual
-            :top -1.5em
+            :top 0.2em
           &.textual
-            :top -2.1em
-            :padding-left 0.4em
-    p
-      :padding 0.4em 0 0 1em
-      :font-size 1.5em
-      :color = !tag_line
+            :top -0.4em
+      p
+        :margin-top 3.8em
+        :color = !tag_line
 
   #grid
     .main,
@@ -51,7 +74,96 @@ body
       :float left
       +rounded
 
-    // Home page styles
+  #grid
+    :overflow hidden
+    :margin-top 2.5em
+    .rail, .main
+      :background= transparent
+    .rail, .player
+      :border= 1px "solid" !page_color - #222
+    .rail
+      :width 289px
+      :margin 0 34px 0 0
+      :background= !page_color
+      :padding 0.5em 1em 1em 1em
+      ul
+        :float left
+        li
+          :margin 0.6em 0
+          :color = !grayskull
+          &.compatibility
+            :font-size 1.2em
+      img.affiliates
+        :margin 1em 0
+        &.ruby_forge
+          :float right
+        &.github
+          :float left
+      h2, p
+        :display inline
+      h2
+        :color = !kind_of_blue
+        :margin 0
+        :padding-right 0.2em
+      p
+        :margin 0
+    .main
+      .player
+        :width 535px
+        :height 365px
+        :margin 0 30px 0 0
+        :background= !page_color
+        span
+          :position relative
+          :top 40%
+          :left 40%
+          :font-size 4em
+          :color = !mtn_dew
+
+  #footer
+    :margin-top 3em
+    :background-color= !page_color
+    .grid
+      :width 96em
+      :overflow hidden
+      ul
+        :float left
+        li
+          :float left
+          :width 310px
+          :margin-left 8px
+          &.first
+            :margin-left 0
+          h3
+            :width 300px
+            :padding 0 0 2px 10px
+            :margin 0 0 5px 0
+            :color = !grayskull
+            :border-bottom 1px solid #404040
+          img
+            :padding 0 0 0 10px
+            
+          ul
+            li
+              :margin 0 0 0 10px
+              :font-size 0.8em
+            &.noodles_and_stuff, &.other_things_and_schnoops
+              li
+                :margin
+                  :top 0.15em
+                  :bottom 0.15em
+            &.noodles_and_stuff
+              li
+                :color = !mtn_dew
+            &.other_things_and_schnoops
+              :padding-bottom 1em
+              li
+                :color = !mtn_blue
+          p
+            :margin 0 0.8em
+            :color = !grayskull
+            :font-size 0.8em
+    // Home page styles - from /exterior/index  
     #detail
       +clearfix
       .overview
