@@ -1,32 +1,14 @@
-%div
-  .overview
-    %h1 Let's all suck less together...
-    = image_tag "mockups/video_player.jpg"
-  .get_started
-    %h1 Interested?
-    %ol
-      %li
-        Install [gemname]:
-        %pre
-          prompt $ sudo gem install [gemname]
-      %li
-        Run this:
-        %pre
-          = "prompt $ [command_name] --some-flag #{@public_key}"
-      %li
-        Review:
-        %pre
-          = link_to short_uri_url(@public_key), short_uri_url(@public_key), :id => :short_uri
-%div{:style => "clear: both;"}
-
-#other_languages{:style => "padding-top: 4em;"}
-  %dl
-    %dt
-      %dd
-        %p= link_to "Wait! What if I don't use Ruby or Git?", short_uri_url(@public_key), :id => :short_uri
-        %p We know that only supporting one language and repository type out of the box is lame...
-        %p
-          We'd like to support as many of each as possible. However, we don't have the resources to develop out
-          full stack solutions for all of them yet. However, we'd like to sponsor people willing to help
-          out. Interested?
-          = link_to "Click here for details...", "#"
+.main
+  %ul
+    %li
+      %h2 Step 1. Install codefumes_harvester:
+      %p
+        prompt $ sudo gem install codefumes_harvester
+    %li
+      %h2 Step 2. Run this:
+      %p
+        = "prompt $ harvest_repo_metrics  --project_key #{@public_key}"
+    %li
+      %h2 Step 3. Review:
+      %p
+        = link_to short_uri_url(@public_key), short_uri_url(@public_key), :id => :short_uri

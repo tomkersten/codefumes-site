@@ -1,11 +1,21 @@
 - if @project.nil?
-  %h1 This URI has not been activated yet
+  .main
+    %h1 This URI has not been activated yet
+    %p.reserve If you'd like to reserve it, follow these steps:
+    %ul
+      %li
+        %h2 Step 1. Install codefumes_harvester:
+        %p
+          prompt $ sudo gem install codefumes_harvester
+      %li
+        %h2 Step 2. Run this:
+        %p
+          = "prompt $ harvest_repo_metrics  --project_key #{params[:public_key]}"
+      %li
+        %h2 Step 3. Review:
+        %p
+          = link_to "Reload this page", short_uri_url(:id => params[:id]), :id => :short_uri
 
-  %h2 If you'd like to reserve it, follow these steps:
-  %ul.instructions
-    %li Install this gem...
-    %li Run this command
-    %li Reload this page
 
 - else
   .main

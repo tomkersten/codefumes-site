@@ -29,6 +29,15 @@ body h3
 .em
   :color = !mtn_dew
 
+=base-link-colors
+  color = !mtn_dew
+  &:visited
+    color = !mtn_dew - #222
+  &:hover, &:active
+    color = !mtn_dew + #222
+
+
+
 /* ------------------------------------------------------------------------- */
 
 #grid, .grid
@@ -60,9 +69,23 @@ body
             :top 0.2em
           &.textual
             :top -0.4em
+      p, a.session
+        :color = !tag_line
       p
         :margin-top 3.8em
-        :color = !tag_line
+      .session
+        :float right
+        :width 200px
+        :margin-top 4em
+        a
+          :width 50px
+          :font-size 1.2em
+          +base-link-colors
+          &.login
+            :float right
+          &.sign_up
+            :float left
+            :padding-left 7em
 
   #grid
     .main,
@@ -77,13 +100,11 @@ body
   #grid
     :overflow hidden
     :margin-top 2.5em
-    .rail, .main
+    .main
       :background= transparent
-    .rail, .player
       :border= 1px "solid" !page_color - #222
-    .rail
-      :width 289px
-      :margin 0 34px 0 0
+      :width 915px
+      :margin 0 0 0 11px
       :background= !page_color
       :padding 0.5em 1em 1em 1em
       ul
@@ -91,34 +112,25 @@ body
         li
           :margin 0.6em 0
           :color = !grayskull
-          &.compatibility
-            :font-size 1.2em
-      img.affiliates
-        :margin 1em 0
-        &.ruby_forge
-          :float right
-        &.github
-          :float left
-      h2, p
-        :display inline
       h2
         :color = !kind_of_blue
         :margin 0
         :padding-right 0.2em
       p
         :margin 0
-    .main
-      .player
-        :width 535px
-        :height 365px
-        :margin 0 30px 0 0
-        :background= !page_color
-        span
-          :position relative
-          :top 40%
-          :left 40%
-          :font-size 4em
-          :color = !mtn_dew
+        :padding 10px 0 0 55px
+        :font-family monospace
+        a
+          +base-link-colors
+        &.reserve
+          :font-family Tahoma
+          :padding 0
+          :margin 0 0 0.2em 0
+          :color = !grayskull
+    h1
+      :color = !grayskull
+      :margin 0.5em 0 0.2em 0
+
 
   #footer
     :margin-top 3em

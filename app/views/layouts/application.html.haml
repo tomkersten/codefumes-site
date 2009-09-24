@@ -12,64 +12,13 @@
           = link_to image_tag('logo_visual.png', :alt => ''), root_path, :class => 'logo visual'
           = link_to image_tag('logo_textual.png', :alt => 'Codefumes'), root_path, :class => 'logo textual'
         %p What does your code smell like?
-
+        .session
+          = link_to 'Login', new_session_path, :class => 'session', :class => 'login'
+          = link_to 'Sign Up', new_user_path, :class => 'session', :class => 'sign_up'
+    /= render :partial => "layouts/flashes"
     #grid
-      .rail
-        %ul
-          %li
-            %h2 Step 1.
-            %p First do this thing that will allow you to do this other thing that I'll tell you about later, okay??
-          %li
-            %h2 Step 2.
-            %p Then you're gonna want to do this thing (remember, I talked about it earlier)
-          %li
-            %h2 Step 3.
-            %p Wow man, you're still doing that thing from back in step 2?  Get it together and start working on this thing now.
-          %li{:style => 'overflow:hidden;'}
-            = image_tag 'github.png', :alt => 'github', :class => 'affiliates github'
-            = image_tag 'rubyforge.png', :alt => 'ruby forge', :class => 'affiliates ruby_forge'
-          %li.compatibility Alright, so you want to use this awesome app on another Schnoopertons McGee?? Well, make it compatible yourself you lazy bastard.
-      .main
-        .player
-          %span PLAY
+      = yield
 
-    #footer
-      .grid
-        %ul
-          %li.first
-            %h3 Recent CodeFumes Metrics
-            = image_tag('recent_metrics.png', :alt => 'recent metrics')
-          %li
-            %h3 Noddles and Stuff
-            %ul.noodles_and_stuff
-              %li Lorem Ipsum Doler Set Schnoops Fart.
-              %li One Million Things and Apple Sauce for Breakfast
-              %li Basketballs for Breasts
-              %li What would you possible do with all those corn?
-              %li Ask me again later.
-              %li BOOOOOOOOIIIIING!
-              %li It's Been A Long Time Since I had Coffee.
-              %li Is that REALLY any of your business?
-          %li
-            %h3 Other Things and Schnoops
-            %ul.other_things_and_schnoops
-              %li Other Things and Schnoops
-              %li Other Things and Schnoops
-              %li Other Things and Schnoops
-              %li Other Things and Schnoops
-            %h3 Codefumes
-            %p== Copyleft and <span class="em">information</span> &copy; 2009 in your mutha&ndash;flippin' face. Also some other things you should know about and stuff.
-              
-
-    /   = link_to 'CodeFumes.com', root_path
-    / #master
-    = yield(:master)
-    / #detail
-    /   = render :partial => "layouts/flashes"
-    = yield
-    / #footer
-    /   %ul
-    /     %li Copyright info here
   = javascript_include_tag %w(raphael jquery initializer jquery.dates visualizer template card)
 
   = yield :javascript
