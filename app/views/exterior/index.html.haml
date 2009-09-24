@@ -1,13 +1,14 @@
 .main
+  %h1 Track. Review. Improve.
   %ul
     %li
       %h2 Step 1. Install codefumes_harvester:
       %p
-        prompt $ sudo gem install codefumes_harvester
+        sudo gem install codefumes_harvester
     %li
       %h2 Step 2. Run this:
       %p
-        = "prompt $ harvest_repo_metrics  --project_key #{@public_key}"
+        = "harvest_repo_metrics  --project_key #{@public_key}"
     %li
       %h2 Step 3. Review:
       %p
