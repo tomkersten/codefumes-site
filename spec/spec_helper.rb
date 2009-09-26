@@ -6,6 +6,7 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'machinist/active_record'
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
+require 'authlogic/test_case'
 
 # This simplifies testing mailers with RSpec
 # Read more here: http://github.com/bmabey/email-spec/tree/master
@@ -13,44 +14,9 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 #require "email_spec/matchers"
 
 Spec::Runner.configure do |config|
-  # If you're not using ActiveRecord you should remove these
-  # lines, delete config/database.yml and disable :active_record
-  # in your config/boot.rb
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-
-  # == Fixtures
-  #
-  # You can declare fixtures for each example_group like this:
-  #   describe "...." do
-  #     fixtures :table_a, :table_b
-  #
-  # Alternatively, if you prefer to declare them only once, you can
-  # do so right here. Just uncomment the next line and replace the fixture
-  # names with your fixtures.
-  #
-  # config.global_fixtures = :table_a, :table_b
-  #
-  # If you declare global fixtures, be aware that they will be declared
-  # for all of your examples, even those that don't use them.
-  #
-  # You can also declare which fixtures to use (for example fixtures for test/fixtures):
-  #
-  # config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  #
-  # == Mock Framework
-  #
-  # RSpec uses it's own mocking framework by default. If you prefer to
-  # use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-  #
-  # == Notes
-  # 
-  # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 
   # This simplifies testing mailers with RSpec
   # Read more here: http://github.com/bmabey/email-spec/tree/master
@@ -65,4 +31,10 @@ end
 
 def setup_basic_auth(username, password)
   request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(username, password).gsub(/\n/,'')
+end
+
+def login_as(persona_name)
+  user = User.make(persona_name.to_sym)
+  UserSession.create(:login => user.login, :password => User.plan(persona_name.to_sym))
+  user
 end

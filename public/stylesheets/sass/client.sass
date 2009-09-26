@@ -73,19 +73,17 @@ body
         :color = !tag_line
       p
         :margin-top 3.8em
-      .session
+      ul.session_info
         :float right
-        :width 200px
-        :margin-top 4em
-        a
-          :width 50px
+        :margin-top 2.5em
+        li
           :font-size 1.2em
-          +base-link-colors
-          &.login
-            :float right
-          &.sign_up
-            :float left
-            :padding-left 7em
+          :float left
+          :padding-left 1em
+          :color = !grayskull
+          a
+            :width 50px
+            +base-link-colors
 
   #grid
     .main,
@@ -108,7 +106,6 @@ body
       :background= !page_color
       :padding 0.5em 1em 1em 1em
       ul
-        :float left
         li
           :margin 0.6em 0
           :color = !grayskull

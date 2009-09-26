@@ -9,10 +9,10 @@ Feature: Signing into a session
       Given no users exist
 
     Scenario: User is not signed up
-      And I sign in as "jdoe/password"
-      Then I should see an error message
-      And I should see the login form
-      And I should not see link to logout
+      Given Oscar signs in with incorrect credentials
+      Then he should see an error message
+      And he should see the login form
+      And he should not see link to logout
 
     Scenario: User signs in successfully
       Given Oscar has set up his account
@@ -21,13 +21,13 @@ Feature: Signing into a session
         |Tweeter  |
         |YourSpace|
       When Oscar signs in
-      Then he should see link to logout
+      Then he should see the link to logout
       And he should see a list of his claimed projects
 
-#    Scenario: User enters wrong password
-#      Given I am signed up as "jdoe/password"
-#      And I sign in as "jdoe/wrongpassword"
-#      Then I should see an error message
-#      And I should see the login form
-#      And I should not see link to logout
-#
+    Scenario: User enters wrong password
+      Given Oscar has set up his account
+      And he signs in with incorrect credentials
+      Then he should see an error message
+      And he should see the login form
+      And he should not see link to logout
+

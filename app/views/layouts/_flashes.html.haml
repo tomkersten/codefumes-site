@@ -1,4 +1,5 @@
 - unless flash.empty?
-  #site_notifications
-    - flash.each do |flash_type, flash_text|
-      %div{:class => flash_type}= h flash_text
+  .main
+    #site_notifications
+      - flash.each do |flash_type, flash_text|
+        %div{:class => flash_type}= h flash_text

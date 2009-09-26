@@ -12,4 +12,4 @@ Feature: Viewing Commits
 
   Scenario: Viewing "twitter_tagger" commits
     When Sam goes to the project's short_uri page
-    Then he should see its list of commits with 5 items in it
+    Then he sees a list of commits with 5 items in it

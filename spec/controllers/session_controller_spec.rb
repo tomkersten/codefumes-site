@@ -17,7 +17,7 @@ describe SessionController do
     context "with valid parameters" do
       it "redirects to the root path URI" do
         post :create, :user_session => {:login => @user.login, :password => @password}
-        response.should redirect_to(root_path)
+        response.should redirect_to(my_projects_path)
       end
     end
 
@@ -48,6 +48,13 @@ describe SessionController do
     it "redirects to the login page" do
       delete :destroy
       response.should redirect_to(login_path)
+    end
+  end
+
+  context "a GET to confirm_logout" do
+    it "renders the confirm_logout view template" do
+      get :confirm_logout
+      response.should render_template('session/confirm_logout')
     end
   end
 end

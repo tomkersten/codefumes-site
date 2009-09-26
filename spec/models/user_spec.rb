@@ -17,4 +17,11 @@ describe User do
       @typical_user.deliver_password_reset_instructions!
     end
   end
+
+  describe "handle" do
+    it "returns the value which will be used for 'identification' of a user across the site" do
+      user = User.make
+      user.handle.should == user.email
+    end
+  end
 end

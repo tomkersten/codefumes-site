@@ -9,19 +9,19 @@ Feature: User Sign-Up
       Given no users exist
 
     Scenario: User signs up with invalid data
-      When I go to the sign up page
-      And I fill in "user_login" with "in"
-      And I fill in "user_email" with "invalidemail"
-      And I fill in "user_password" with "password"
-      And I fill in "user_password" with ""
-      And I press the button to create a user
-      Then I should see an error message
+      When Sam goes to the sign up page
+      And he fills in "user_login" with "in"
+      And he fills in "user_email" with "invalidemail"
+      And he fills in "user_password" with "password"
+      And he fills in "user_password" with ""
+      And he presses the button to create a user
+      Then he should see an error message
 
     Scenario: User signs up with valid data
-      When I go to the sign up page
-      And I fill in "user_login" with "valid_login"
-      And I fill in "user_email" with "email@person.com"
-      And I fill in "user_password" with "password"
-      And I fill in "user_password_confirmation" with "password"
-      And I press the button to create a user
-      Then I should see a notification
+      When Sam goes to the sign up page
+      And he fills in "user_login" with "valid_login"
+      And he fills in "user_email" with "email@person.com"
+      And he fills in "user_password" with "password"
+      And he fills in "user_password_confirmation" with "password"
+      And he presses the button to create a user
+      Then he should see a notification

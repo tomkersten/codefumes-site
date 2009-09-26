@@ -10,6 +10,10 @@ ActionController::Routing::Routes.draw do |map|
     community.resources :projects
   end
 
+  map.namespace :my do |my|
+    my.resources :projects
+  end
+
   map.resources :users
   map.resource :session, :controller => 'session'
   map.root :controller => 'exterior'

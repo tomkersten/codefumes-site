@@ -1,0 +1,8 @@
+.main
+  - if @projects.empty?
+    %h1 You haven't claimed any projects yet?
+    %h2 RENDER INSTRUCTIONS HERE
+  - else
+    %ul.projects
+      - for project in @projects
+        %li= link_to project, short_uri_path(:public_key => project)
