@@ -15,8 +15,9 @@
         .session
           = link_to 'Login', login_path, :class => 'session', :class => 'login'
           = link_to 'Sign Up', signup_path, :class => 'session', :class => 'sign_up'
-    /= render :partial => "layouts/flashes"
     #grid
+      .main
+        = render :partial => "layouts/flashes"
       = yield
 
   = javascript_include_tag %w(raphael jquery initializer jquery.dates visualizer template card)
