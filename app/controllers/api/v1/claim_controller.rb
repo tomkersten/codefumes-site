@@ -1,12 +1,11 @@
 class Api::V1::ClaimController < Api::BaseController
   before_filter :require_user
-  before_filter :require_project_unclaimed, :only => :create
-  before_filter :require_project_unclaimed_or_owned, :only => :destroy
+  before_filter :require_project_unclaimed_or_owned
   
-  def create
+  def update
     current_user.claim(project)
     respond_to do |format|
-      format.xml {render :status => :created, :nothing => true}
+      format.xml {render :status => :ok, :nothing => true}
     end
   end
 

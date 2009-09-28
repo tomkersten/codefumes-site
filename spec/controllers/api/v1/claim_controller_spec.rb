@@ -9,18 +9,18 @@ describe Api::V1::ClaimController do
     setup_basic_auth(@project.public_key, @project.private_key)
   end
   
-  describe "a POST to create" do
+  describe "a PUT to update" do
     
     context "with invalid project credentials" do
       before(:each) do
         setup_basic_auth("some", "garbage")
       end
       it "returns 401 unauthorized" do
-        post :create, @params
+        put :update, @params
         response.status.should == "401 Unauthorized"
       end
       it "doesn't change the user on the project" do
-        post :create, @params
+        put :update, @params
         @project.reload.user.should_not == @user
       end
     end
@@ -35,12 +35,27 @@ describe Api::V1::ClaimController do
         end
         context "for an unclaimed project" do
           it "sets the user on the project" do
-            post :create, @params
+            put :update, @params
             @project.reload.user.should == @user
           end
-          it "returns a response of created" do
-            post :create, @params
-            response.status.should == "201 Created"
+          it "returns a response of OK" do
+            put :update, @params
+            response.status.should == "200 OK"
+          end
+        end
+        
+        context "for a project owned by the current_user" do
+          before(:each) do
+            @project.user = @user
+            @project.save!
+          end
+          it "leaves the current_user as the owner of the project" do
+            put :update, @params
+            @project.reload.user.should == @user
+          end
+          it "returns a response of OK" do
+            put :update, @params
+            response.status.should == "200 OK"
           end
         end
         
@@ -50,11 +65,11 @@ describe Api::V1::ClaimController do
             @project.save!
           end
           it "returns 401 unauthorized" do
-            post :create, @params
+            put :update, @params
             response.status.should == "401 Unauthorized"
           end
           it "doesn't change the user on the project" do
-            post :create, @params
+            put :update, @params
             @project.reload.user.should_not == @user
           end
         end  
@@ -64,11 +79,11 @@ describe Api::V1::ClaimController do
           @params.merge!(:api_key => @user.single_access_token + "some junk")
         end
         it "returns 401 unauthorized" do
-          post :create, @params
+          put :update, @params
           response.status.should == "401 Unauthorized"
         end
         it "doesn't change the user on the project" do
-          post :create, @params
+          put :update, @params
           @project.reload.user.should_not == @user
         end
       end
