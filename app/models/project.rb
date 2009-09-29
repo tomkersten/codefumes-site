@@ -1,6 +1,11 @@
 class Project < ActiveRecord::Base
   TOKEN_LENGTH = 4
+  PUBLIC = 'public'
+  PRIVATE = 'private'
+  VISIBILITIES = {"Public" => PUBLIC, "Private" => PRIVATE}
+  
   validates_uniqueness_of :public_key
+  validates_inclusion_of :visibility, :in => VISIBILITIES.values
   before_validation_on_create :assign_public_key
   before_validation_on_create :assign_private_key
 

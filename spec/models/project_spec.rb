@@ -76,19 +76,35 @@ describe Project do
       end
     end
   end
+  
+  describe "visibility" do
+    it "defaults to public" do
+      Project.new.visibility.should == Project::PUBLIC
+    end
+  end
 
   describe "attributes protected from mass assignment include:" do
     before(:each) do
       @project = Project.make
     end
 
-    it "private_key" do
-      original_private_key = @project.private_key
-      new_private_key = @project.private_key + "_different_value"
-      @project.update_attributes(:private_key => new_private_key)
-      @project.reload
-      @project.private_key.should == original_private_key
+    [:private_key].each do |attribute_name|
+      it "attribute.to_s" do
+        original_attribute_value = @project.send(attribute_name)
+        new_attribute_value = original_attribute_value + "_different_value"
+        @project.update_attributes(attribute_name => new_attribute_value)
+        @project.reload
+        @project.send(attribute_name).should == original_attribute_value
+      end
     end
+    
+    it "visibility" do
+      @project.visibility.should == Project::PUBLIC
+      @project.update_attributes(:visibility => Project::PRIVATE)
+      @project.reload
+      @project.visibility.should == Project::PUBLIC
+    end
+    
   end
 
   describe "revisions" do
