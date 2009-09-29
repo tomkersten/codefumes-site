@@ -3,8 +3,15 @@ class User < ActiveRecord::Base
 
   has_many :projects
 
-  def claim(project)
-    projects << project
+  def claim(project, visibility=nil)
+    project.visibility = visibility if visibility
+    if project.save
+      projects << project
+      true
+    else
+      project.reload
+      false
+    end
   end  
 
   def relinquish_claim(project)
