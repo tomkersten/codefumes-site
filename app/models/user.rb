@@ -15,7 +15,13 @@ class User < ActiveRecord::Base
   end  
 
   def relinquish_claim(project)
-    projects.delete(project)
+    if project.user == self
+      projects.delete(project)
+      project.visibility = Project::PUBLIC 
+      project.save
+      project.reload
+    end
+    true
   end
 
   def deliver_password_reset_instructions!
