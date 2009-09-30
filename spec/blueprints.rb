@@ -38,7 +38,13 @@ Project.blueprint do
   name        {Faker::Lorem.words(2).join(' ')}
   public_key
   private_key
-  # visibility  Project::PUBLIC
+end
+
+Project.blueprint(:private) do
+  name        {Faker::Lorem.words(2).join(' ')}
+  public_key
+  private_key
+  visibility  Project::PRIVATE
 end
 
 Project.blueprint(:twitter_tagger) do

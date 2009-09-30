@@ -3,7 +3,7 @@ class Api::V1::ClaimController < Api::BaseController
   before_filter :require_project_unclaimed_or_owned
   
   def update
-    current_user.claim(project)
+    current_user.claim(project, params[:visibility])
     respond_to do |format|
       format.xml {render :status => :ok, :nothing => true}
     end
