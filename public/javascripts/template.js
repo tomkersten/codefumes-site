@@ -62,7 +62,7 @@ MyVisual.prototype = {
     c.attr("stroke","#336699");
     c.attr("fill","#FFCC00");
     c.attr("fill-opacity",".5");
-    c.attr("opacity",.5);
+    //c.attr("opacity",.5);
   },
   clear: function(){
     this.svg.remove();

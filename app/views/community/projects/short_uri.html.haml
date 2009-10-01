@@ -49,4 +49,4 @@
                       %li= "#{custom_attribute.name}: #{custom_attribute.value}"
 
 -content_for :onReady do
-  vis = new Visualizer("canvas");
+  vis = new MyVisual('canvas',document.location.href+'.js',{background: '#336699'})
