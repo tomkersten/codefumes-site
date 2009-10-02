@@ -1,7 +1,20 @@
 .main
   - if @projects.empty?
     %h1 You haven't claimed any projects yet?
-    %h2 RENDER INSTRUCTIONS HERE
+    %ul
+      %li
+        %h2 Step 1. Install codefumes_harvester:
+        %p
+          sudo gem install codefumes_harvester
+      %li
+        %h2 Step 2. Run this:
+        %p
+          - public_key = Project.generate_public_key
+          = "harvest_repo_metrics  --project_key #{public_key}"
+      %li
+        %h2 Step 3. Review:
+        %p
+          = link_to short_uri_url(public_key), short_uri_url(public_key), :id => :short_uri
   - else
     %ul.projects
       - for project in @projects
