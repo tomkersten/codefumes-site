@@ -22,6 +22,8 @@ Feature: Signing into a session
         |YourSpace|
       When Oscar signs in
       Then he should see the link to logout
+      And he should see the link to edit his account
+      And he should see the link to his list of projects
       And he should see a list of his claimed projects
 
     Scenario: User enters wrong password

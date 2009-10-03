@@ -24,7 +24,7 @@ class Api::BaseController < ApplicationController
     end
     
     def require_project_unclaimed_or_owned
-      return unauthorized if project.claimed? && project.user != current_user
+      return unauthorized if project.claimed? && project.owner != current_user
     end
     
     def unauthorized

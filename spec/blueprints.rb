@@ -50,6 +50,15 @@ end
 Project.blueprint(:twitter_tagger) do
   name        "Twitter Tagger"
   public_key  "twitter_tagger"
+  visibility  Project::PUBLIC
+  owner       {User.make(:dora)}
+end
+
+Project.blueprint(:prideo) do
+  name        "Private Video Application"
+  public_key  "prideo"
+  visibility  Project::PRIVATE
+  owner       {User.make(:dora)}
 end
 
 Revision.blueprint do

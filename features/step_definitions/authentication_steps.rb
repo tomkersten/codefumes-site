@@ -25,7 +25,7 @@ When /^(?:Oscar|Sam|Dora|Someone|he|she) signs in with incorrect credentials$/ d
 end
 
 Then /^s?he logs out$/ do
-  click_link("logout")
+  click_link("Log out")
 end
 
 Then /^s?he should see the login form$/ do
@@ -42,6 +42,14 @@ end
 
 Then /^s?he should see the link to logout$/ do
   response.should have_tag("a.logout")
+end
+
+Then /^he should see the link to his list of projects$/ do
+  response.should have_tag("a.project_list")
+end
+
+Then /^he should see the link to edit his account$/ do
+  response.should have_tag("a.edit_account")
 end
 
 Given /^(Oscar|Sam|Dora) has set up his|her account$/ do |persona|

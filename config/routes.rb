@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :my do |my|
     my.resources :projects
+    my.resource :account, :controller => "account"
   end
 
   map.resources :users

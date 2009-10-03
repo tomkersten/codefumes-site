@@ -18,6 +18,13 @@
 
   - else
     %h1= @project
+    - priveleged_user_or_owner_content(@project) do
+      %dl#private_key
+        %dt Public key
+        %dd= @project.public_key
+        %dt Private key
+        %dd= @project.private_key
+
     #canvas
     - if @project.recent_commits.empty?
       %p.no_commits

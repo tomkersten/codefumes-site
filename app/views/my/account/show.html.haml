@@ -1,0 +1,9 @@
+.main
+  %h1 Your Info
+  %dl
+    %dt Login
+    %dd= @user.login
+    %dt API key
+    %dd= @user.single_access_token
+    %dt Email address
+    %dd= @user.email
