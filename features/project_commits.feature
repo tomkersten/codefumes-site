@@ -1,10 +1,8 @@
 Feature: Viewing Commits
-  The value of this site is its ability to collate
-  data around a software project at different points
-  in its history. Commits will be the "points" used
-  for reference, and are therefore, imperative that
-  users of the site can view a history of project
-  commits.
+  The value of this site is its ability to collate data around
+  a software project at different points in time. Commits will
+  be the "points" used for reference, and are therefore, an
+  imperative component of a project 
 
   Scenario: Viewing "twitter_tagger" commits
     Given the "twitter_tagger" project has been created
