@@ -1,5 +1,10 @@
 .main
-  %h1 New subscription form
+  %h1 Select your plan:
   - form_for @subscription, :url => my_subscription_path do |f|
-    %h3 subscription fields to come
+    - unless @visible_plans.empty?
+      %ul.plans
+        - for plan in @visible_plans
+          %li
+            %input{:type => "radio", :name => "subscription[plan_id][]", :value => plan.id, :id => dom_id(plan)}
+            %label{:for => dom_id(plan)}= plan.name
     = f.submit "Review purchase"

@@ -6,7 +6,8 @@ Feature: Subscription Management
 
   # Oscar decides to set up a subscription for an internal project
   Scenario: Setting up a new subscription with an existing account
-    Given Oscar goes to his list of projects
+    Given the database has been set up with the standard plans
+    And Oscar goes to his list of projects
     And he should see the "new_subscription" link
     When he follows "new_subscription"
     And he fills out and submits in the subscription form, selecting the Basic plan

@@ -83,12 +83,28 @@ Payload.blueprint do
   content "commits" => []
 end
 
+Plan.blueprint do
+  name {Sham.title}
+  visibility "public"
+end
+
+Plan.blueprint(:basic) do
+  name "Basic"
+  visibility "public"
+end
+
+Plan.blueprint(:custom) do
+  name "Custom"
+  visibility "private"
+end
+
 RevisionBridge.blueprint do
   parent_id {Commit.make.id}
   child_id  {Commit.make.id}
 end
 
 Subscription.blueprint do
+  plan {Plan.make(:basic)}
 end
 
 Subscription.blueprint(:doras) do

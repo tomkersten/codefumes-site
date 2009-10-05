@@ -1,6 +1,7 @@
 class My::SubscriptionController < ApplicationController
   def new
     @subscription = current_user.subscriptions.new
+    @visible_plans = Plan.visible
   end
 
   def create
