@@ -116,4 +116,15 @@ describe User do
       user.handle.should == user.login
     end
   end
+
+  describe "paying_customer?" do
+    it "returns false when the user does not have any subscriptions" do
+      User.make(:oscar).paying_customer?.should == false
+    end
+
+    it "returns true when the user has a subscription" do
+      user = Subscription.make(:doras).user
+      user.paying_customer?.should == true
+    end
+  end
 end

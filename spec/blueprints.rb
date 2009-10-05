@@ -87,3 +87,10 @@ RevisionBridge.blueprint do
   parent_id {Commit.make.id}
   child_id  {Commit.make.id}
 end
+
+Subscription.blueprint do
+end
+
+Subscription.blueprint(:doras) do
+  user {User.make(:dora)}
+end

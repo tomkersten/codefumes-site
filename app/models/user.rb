@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
 
   has_many :projects, :foreign_key => :owner_id
+  has_many :subscriptions
 
   def claim(project, visibility=nil)
     project.visibility = visibility if visibility
@@ -31,5 +32,9 @@ class User < ActiveRecord::Base
 
   def handle
     login
+  end
+
+  def paying_customer?
+    !subscriptions.empty?
   end
 end
