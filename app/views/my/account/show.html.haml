@@ -7,3 +7,9 @@
     %dd= @user.single_access_token
     %dt Email address
     %dd= @user.email
+    - if @user.paying_customer?
+      %dt#current_plan Current Plan
+      %dd
+        = @user.current_plan
+        = link_to "Edit", edit_my_subscription_path
+

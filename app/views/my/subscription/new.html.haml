@@ -1,10 +1,5 @@
 .main
   %h1 Select your plan:
   - form_for @subscription, :url => my_subscription_path do |f|
-    - unless @visible_plans.empty?
-      %ul.plans
-        - for plan in @visible_plans
-          %li
-            %input{:type => "radio", :name => "subscription[plan_id][]", :value => plan.id, :id => dom_id(plan)}
-            %label{:for => dom_id(plan)}= plan.name
+    = render :partial => 'form', :locals => {:f => f}
     = f.submit "Review purchase"

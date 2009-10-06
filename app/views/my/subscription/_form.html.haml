@@ -1,0 +1,6 @@
+- unless @visible_plans.empty?
+  %ul.plans
+    - for plan in @visible_plans
+      %li
+        = f.radio_button :plan_id, plan.id
+        = f.label :plan_id, plan.name, :for => "subscription_plan_id_#{plan.id}"

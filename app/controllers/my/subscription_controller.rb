@@ -5,7 +5,7 @@ class My::SubscriptionController < ApplicationController
   end
 
   def create
-    subscription = current_user.subscriptions.create(params[:subscription])
+    current_user.subscriptions.create(params[:subscription])
     redirect_to confirm_my_subscription_path
   end
 
@@ -16,6 +16,21 @@ class My::SubscriptionController < ApplicationController
   def confirmed
     # process the transaction
     flash[:notice] = "Successfully updated your subscription"
+    redirect_to my_projects_path
+  end
+
+  def edit
+    @subscription = current_user.current_subscription.clone
+    @visible_plans = Plan.visible
+  end
+
+  def cancel
+  end
+
+  def cancelled
+    @subscription = current_user.current_subscription
+    # cancel subscription
+    flash[:notice] = "Your subscription has been cancelled."
     redirect_to my_projects_path
   end
 end

@@ -1,0 +1,8 @@
+.main
+  %h1 Are you sure?
+  %p
+    By cancelling your subscription, any existing private projects will be converted to "public" projects.
+  - form_for :subscription, :url => cancelled_my_subscription_path, :html => {:method => :put} do |f|
+    = f.submit "Yes, cancel my subscription"
+    or
+    = link_to "Do not cancel my subscription", my_projects_path

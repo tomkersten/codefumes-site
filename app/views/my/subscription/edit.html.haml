@@ -1,0 +1,7 @@
+.main
+  %h1 Update your subscription
+  - form_for @subscription, :url => my_subscription_path do |f|
+    = render :partial => 'form', :locals => {:f => f}
+    = f.submit "Update subscription"
+    or
+    = link_to "Cancel subscription", cancel_my_subscription_path

@@ -37,4 +37,12 @@ class User < ActiveRecord::Base
   def paying_customer?
     !subscriptions.empty?
   end
+
+  def current_plan
+    subscriptions.last.plan
+  end
+
+  def current_subscription
+    subscriptions.last
+  end
 end

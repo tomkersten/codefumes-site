@@ -58,9 +58,18 @@ end
 
 When /^(Oscar|Dora|Sam) signs in$/ do |persona|
   persona_params = User.plan(persona.downcase.to_sym)
-  user = User.find_or_create_by_email(persona_params)
+  @user = User.find_or_create_by_email(persona_params)
+  add_subscriptions_for(@user)
   When "I go to the login page"
-  fill_in("user_session_login", :with => user.login)
+  fill_in("user_session_login", :with => @user.login)
   fill_in("user_session_password", :with => persona_params[:password])
   click_button("attempt_login")
+end
+
+
+def add_subscriptions_for(user)
+  if user.login.match(/dora/i)
+    Subscription.make(:doras, :user => @user)
+    user.reload
+  end
 end
