@@ -86,6 +86,7 @@ end
 Plan.blueprint do
   name {Sham.title}
   visibility "public"
+  private_project_qty 1
 end
 
 Plan.blueprint(:basic) do
