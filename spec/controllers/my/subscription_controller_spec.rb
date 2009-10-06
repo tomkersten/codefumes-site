@@ -74,9 +74,9 @@ describe My::SubscriptionController do
       flash[:notice].should_not be_nil
     end
 
-    it "redirects the user back to their list of projects" do
-      put :confirmed
-      response.should redirect_to(my_projects_path)
+    it "redirects the user back to their account overview page" do
+      put :cancelled
+      response.should redirect_to(my_account_path)
     end
   end
 
@@ -115,9 +115,9 @@ describe My::SubscriptionController do
       flash[:notice].should_not be_nil
     end
 
-    it "redirects the user back to their list of projects" do
+    it "redirects the user back to their account overview page" do
       put :cancelled
-      response.should redirect_to(my_projects_path)
+      response.should redirect_to(my_account_path)
     end
   end
 end

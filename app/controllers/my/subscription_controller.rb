@@ -17,7 +17,7 @@ class My::SubscriptionController < My::BaseController
     @subscription = current_user.subscriptions.unconfirmed.last
     @subscription.confirm!
     flash[:notice] = "Your subscription has been updated."
-    redirect_to my_projects_path
+    redirect_to my_account_path
   end
 
   def edit
@@ -32,6 +32,6 @@ class My::SubscriptionController < My::BaseController
     @subscription = current_user.current_subscription
     @subscription.cancel! unless @subscription.blank?
     flash[:notice] = "Your subscription has been cancelled"
-    redirect_to my_projects_path
+    redirect_to my_account_path
   end
 end

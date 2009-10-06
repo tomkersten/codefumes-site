@@ -75,4 +75,43 @@ describe ViewLogicHelper do
       end
     end
   end
+
+  describe "paying_user_content" do
+    before(:each) do
+      @yielded_content = "it yielded"
+      helper.stub!(:current_user).and_return(@user)
+    end
+
+    context "when logged in" do
+      before(:each) do
+        helper.stub!(:logged_in?).and_return(true)
+      end
+
+      it "does not yield when the user is not a paying customer" do
+        @user = User.make(:oscar)
+        helper.stub!(:current_user).and_return(@user)
+        results = helper.paying_user_content {@yielded_content}
+        results.should be_nil
+      end
+
+      it "yields when the user is a paying customer" do
+        @user = Subscription.make(:doras).user
+        @user.subscriptions.last.confirm!
+        helper.stub!(:current_user).and_return(@user)
+        results = helper.paying_user_content {@yielded_content}
+        results.should == @yielded_content
+      end
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        helper.stub!(:logged_in?).and_return(false)
+      end
+
+      it "yields the specified block" do
+        output = helper.paying_user_content {@yielded_content}
+        output.should be_nil
+      end
+    end
+  end
 end

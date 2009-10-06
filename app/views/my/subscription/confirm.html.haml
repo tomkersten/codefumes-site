@@ -3,3 +3,5 @@
   - form_for @subscription, :url => confirmed_my_subscription_path, :html => {:class => "confirmation"} do |f|
     %h2== You are signing up for the '#{@subscription.plan}' plan
     = f.submit "Confirm purchase", :id => :confirmed
+    or
+    = link_to "Cancel", my_account_path
