@@ -19,6 +19,11 @@
   - else
     %h1= @project
     #canvas
+
+    %div
+      = link_to 'Vis 1', '', :id => 'vis_1'
+      = link_to 'Vis 2', '', :id => 'vis_2'
+
     - if @project.recent_commits.empty?
       %p.no_commits
         No commits posted yet
@@ -50,3 +55,16 @@
 
 -content_for :onReady do
   vis = new Visualizer("canvas");
+
+  $('#vis_1').click(function(){
+  vis.clear();
+  vis = new Visualizer("canvas");
+  return false;
+  });
+  
+  $('#vis_2').click(function(event){
+  vis.clear();
+  vis = new MyVisual('canvas', document.location.href+".js");
+  return false;
+  });
+
