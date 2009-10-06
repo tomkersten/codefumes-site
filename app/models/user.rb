@@ -39,11 +39,11 @@ class User < ActiveRecord::Base
   end
 
   def current_plan
-    subscriptions.last.plan
+    current_subscription.plan
   end
 
   def current_subscription
-    most_recent = subscriptions.last
+    most_recent = subscriptions.confirmed_or_cancelled.last
     most_recent && most_recent.confirmed? ? most_recent : nil
   end
 end

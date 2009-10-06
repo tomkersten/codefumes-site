@@ -22,4 +22,5 @@ class Subscription < ActiveRecord::Base
   named_scope :confirmed, :conditions => {:state => "confirmed"}
   named_scope :unconfirmed, :conditions => {:state => "unconfirmed"}
   named_scope :cancelled, :conditions => {:state => "cancelled"}
+  named_scope :confirmed_or_cancelled, :conditions => ["state in (?)",['confirmed', 'cancelled']]
 end

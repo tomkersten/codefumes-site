@@ -160,8 +160,10 @@ describe User do
     end
 
     context "when the most recent subscription is unconfirmed" do
-      it "returns nil" do
-        @user.current_subscription.should be_nil
+      context "and the user does not have any 'confirmed' subscriptions" do
+        it "returns nil" do
+          @user.current_subscription.should be_nil
+        end
       end
     end
   end
