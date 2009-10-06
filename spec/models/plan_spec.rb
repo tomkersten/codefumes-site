@@ -13,4 +13,9 @@ describe Plan do
       end
     end
   end
+
+  it "has overridden to_s to return the name of the plan" do
+    plan = Plan.make(:basic)
+    plan.to_s.should == plan.name
+  end
 end

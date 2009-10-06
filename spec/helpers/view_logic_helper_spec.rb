@@ -57,6 +57,7 @@ describe ViewLogicHelper do
 
       it "does not yields when the user is a paying customer" do
         @user = Subscription.make(:doras).user
+        @user.subscriptions.last.confirm!
         helper.stub!(:current_user).and_return(@user)
         results = helper.non_paying_user_content {@yielded_content}
         results.should be_nil

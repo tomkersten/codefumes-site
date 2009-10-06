@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe User do
-  context "deliver_password_reset_instructions!" do
+  describe "deliver_password_reset_instructions!" do
     before(:each) do
       @typical_user = User.make(:typical_user)
     end
@@ -118,13 +118,51 @@ describe User do
   end
 
   describe "paying_customer?" do
-    it "returns false when the user does not have any subscriptions" do
-      User.make(:oscar).paying_customer?.should == false
+    before(:each) do
+      @user = Subscription.make(:doras).user
     end
 
-    it "returns true when the user has a subscription" do
-      user = Subscription.make(:doras).user
-      user.paying_customer?.should == true
+    it "returns false when the user's most recent subscription is not in a 'confirmed' state" do
+      @user.subscriptions.should_not be_empty
+      @user.paying_customer?.should == false
+    end
+
+    it "returns false when the user does not have any subscriptions" do
+      @user.subscriptions.destroy_all
+      @user.paying_customer?.should == false
+    end
+
+    it "returns true when the user most recent subscription is in a 'confirmed' state" do
+      @user.subscriptions.last.confirm!
+      @user.paying_customer?.should == true
+    end
+  end
+
+  describe "current_subscription" do
+    before(:each) do
+      @user = User.make(:dora)
+      @subscription = Subscription.make(:basic, :user => @user)
+    end
+
+    context "when the most recent subscription is confirmed" do
+      it "returns said subscription" do
+        @subscription.confirm!
+        @user.current_subscription.should == @subscription
+      end
+    end
+
+    context "when the most recent subscription is cancelled" do
+      it "returns nil" do
+        @subscription.confirm!
+        @subscription.cancel!
+        @user.current_subscription.should be_nil
+      end
+    end
+
+    context "when the most recent subscription is unconfirmed" do
+      it "returns nil" do
+        @user.current_subscription.should be_nil
+      end
     end
   end
 end

@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def paying_customer?
-    !subscriptions.empty?
+    !current_subscription.nil?
   end
 
   def current_plan
@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def current_subscription
-    subscriptions.last
+    most_recent = subscriptions.last
+    most_recent && most_recent.confirmed? ? most_recent : nil
   end
 end

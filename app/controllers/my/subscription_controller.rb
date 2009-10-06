@@ -1,4 +1,4 @@
-class My::SubscriptionController < ApplicationController
+class My::SubscriptionController < My::BaseController
   def new
     @subscription = current_user.subscriptions.new
     @visible_plans = Plan.visible
@@ -10,12 +10,13 @@ class My::SubscriptionController < ApplicationController
   end
 
   def confirm
-    @subscription = current_user.subscriptions.last
+    @subscription = current_user.subscriptions.unconfirmed.last
   end
 
   def confirmed
-    # process the transaction
-    flash[:notice] = "Successfully updated your subscription"
+    @subscription = current_user.subscriptions.unconfirmed.last
+    @subscription.confirm!
+    flash[:notice] = "Your subscription has been updated."
     redirect_to my_projects_path
   end
 
@@ -29,8 +30,8 @@ class My::SubscriptionController < ApplicationController
 
   def cancelled
     @subscription = current_user.current_subscription
-    # cancel subscription
-    flash[:notice] = "Your subscription has been cancelled."
+    @subscription.cancel! unless @subscription.blank?
+    flash[:notice] = "Your subscription has been cancelled"
     redirect_to my_projects_path
   end
 end
