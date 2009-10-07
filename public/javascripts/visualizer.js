@@ -17,7 +17,7 @@ Visualizer.prototype = {
   parseData: function(data){
     var self = this;
     var tmpYear = "";
-    pageHeight = 400;
+    pageHeight = 300;
     this.page = Raphael(document.getElementById(this.canvas), 550, pageHeight);
  
     $(data.project.commits).each(  

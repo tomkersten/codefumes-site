@@ -61,17 +61,17 @@
                       %li= "#{custom_attribute.name}: #{custom_attribute.value}"
 
 -content_for :onReady do
-  vis = new Visualizer("canvas");
+  vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
 
-  $('#vis_1').click(function(){
+  $('#vis_2').click(function(){
   vis.clear();
   vis = new Visualizer("canvas");
   return false;
   });
   
-  $('#vis_2').click(function(event){
+  $('#vis_1').click(function(event){
   vis.clear();
-  vis = new MyVisual('canvas', document.location.href+".js");
+  vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
   return false;
   });
 
