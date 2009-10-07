@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
-  has_many :projects
+  has_many :projects, :foreign_key => :owner_id
+  has_many :subscriptions
 
   def claim(project, visibility=nil)
     project.visibility = visibility if visibility
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
   end  
 
   def relinquish_claim(project)
-    if project.user == self
+    if project.owner == self
       projects.delete(project)
       project.visibility = Project::PUBLIC 
       project.save
@@ -30,6 +31,19 @@ class User < ActiveRecord::Base
   end
 
   def handle
-    email
+    login
+  end
+
+  def paying_customer?
+    !current_subscription.nil?
+  end
+
+  def current_plan
+    subscriptions.last.plan
+  end
+
+  def current_subscription
+    most_recent = subscriptions.last
+    most_recent && most_recent.confirmed? ? most_recent : nil
   end
 end

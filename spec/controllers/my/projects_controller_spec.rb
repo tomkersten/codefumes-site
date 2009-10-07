@@ -11,7 +11,7 @@ describe My::ProjectsController do
     describe "GET to index" do
       before(:each) do
         Project.make
-        @claimed_projects = 2.times.map {Project.make(:user => @user)}
+        @claimed_projects = 2.times.map {Project.make(:owner => @user)}
       end
 
       it "assigns the logged in user's projects for the view template" do

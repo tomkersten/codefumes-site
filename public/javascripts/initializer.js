@@ -1,6 +1,6 @@
 $(function(){
 
-  $('ul.commits li ul').css("display", "none")
+  $('ul.commits li ul').css('display', 'none');
 
   $('ul.commits li h2').hover(
   function(){
@@ -8,17 +8,14 @@ $(function(){
   },
   function(){
     $(this).css({'cursor' : 'pointer'});
-  }
-  );
+  });
 
   $('ul.commits li h2').toggle(
   function(){
-    $(this).parent().find('ul').slideDown('fast');
+    $(this).parent().find('ul').slideToggle('fast');
   },
   function(){
-    $(this).parent().find('ul').slideUp('fast');
-  }
-  );
+    $(this).parent().find('ul').slideToggle('fast');
+  });
 
 });
-

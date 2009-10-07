@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
   has_many :revisions, :dependent => :destroy
   has_many :commits, :through => :revisions, :include => [:custom_attributes, :parents]
   has_many :payloads, :dependent => :destroy
-  belongs_to :user
+  belongs_to :owner, :class_name => "User"
 
   def self.generate_public_key
     generate_unique_key
@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
   end
   
   def claimed?
-    !user.blank?
+    !owner.blank?
   end
 
   def commit_head

@@ -1,16 +1,3 @@
-// not exactly sure where these go, but here for now
-
-// background of modules, content
-!page_color = #4D4D4D
-
-// text color
-!mtn_dew = #ACD373
-!mtn_blue = #4F788D
-!grayskull = #999
-
-!kind_of_blue = #00aeef
-!tag_line = !kind_of_blue
-
 // fonts
 body
   h1, h2, h3,
@@ -46,7 +33,7 @@ body h3
 
 
 body
-  :background url(../../images/bg_grid.gif) repeat 15px 75px
+  :background url(../../images/bg_grid.gif) repeat center
   pre
     :font-family monospace
     :color  #555
@@ -98,13 +85,21 @@ body
   #grid
     :overflow hidden
     :margin-top 2.5em
-    .main
+
+    #site_notifications, .main
       :background= transparent
       :border= 1px "solid" !page_color - #222
       :width 915px
-      :margin 0 0 0 11px
       :background= !page_color
       :padding 0.5em 1em 1em 1em
+
+    #site_notifications
+      .error
+        :font-size 1.2em
+        :color #dd3355
+
+    .main
+      :margin-top 1.6em
       ul
         li
           :margin 0.6em 0
@@ -124,6 +119,8 @@ body
           :padding 0
           :margin 0 0 0.2em 0
           :color = !grayskull
+      form
+        :padding 0
     h1
       :color = !grayskull
       :margin 0.5em 0 0.2em 0

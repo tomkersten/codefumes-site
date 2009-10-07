@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe User do
-  context "deliver_password_reset_instructions!" do
+  describe "deliver_password_reset_instructions!" do
     before(:each) do
       @typical_user = User.make(:typical_user)
     end
@@ -22,7 +22,7 @@ describe User do
     before(:each) do
       @project = Project.make
       @typical_user = User.make(:typical_user)
-      @project.user.should be_nil
+      @project.owner.should be_nil
       @typical_user.projects.should be_empty
       @project.visibility.should == Project::PUBLIC
     end
@@ -31,7 +31,7 @@ describe User do
         @typical_user.claim(@project).should be_true
       end
       it "sets the user on the project" do
-        @project.user.should == @typical_user
+        @project.owner.should == @typical_user
         @typical_user.projects.should include(@project)
       end
       it "doesn't change the project's visibility" do
@@ -45,7 +45,7 @@ describe User do
           @typical_user.claim(@project, Project::PRIVATE).should be_true
         end
         it "sets the user on the project" do
-          @project.user.should == @typical_user
+          @project.owner.should == @typical_user
           @typical_user.projects.should include(@project)
         end
         it "changes the project's visibility" do
@@ -57,7 +57,7 @@ describe User do
           @typical_user.claim(@project, 'some crap').should be_false
         end
         it "doen't set the user on the project" do
-          @project.user.should_not == @typical_user
+          @project.owner.should_not == @typical_user
           @typical_user.projects.should_not include(@project)
         end
         it "doesn't change the project's visibility" do
@@ -71,14 +71,14 @@ describe User do
     before(:each) do
       @project = Project.make
       @typical_user = User.make(:typical_user)
-      @project.user.should be_nil
+      @project.owner.should be_nil
       @typical_user.projects.should be_empty
       @project.visibility.should == Project::PUBLIC
     end
     context "unclaimed project" do
       it "doesn't do anything" do
         @typical_user.relinquish_claim(@project).should be_true
-        @project.user.should be_nil
+        @project.owner.should be_nil
         @typical_user.projects.should be_empty
       end
     end
@@ -88,7 +88,7 @@ describe User do
         @typical_user.relinquish_claim(@project).should be_true
       end
       it "removes the user from the project" do
-        @project.user.should be_nil
+        @project.owner.should be_nil
         @typical_user.projects.should be_empty
       end
       it "resets the status to public" do
@@ -102,7 +102,7 @@ describe User do
       end
       it "doesn't do anything" do
         @typical_user.relinquish_claim(@project).should be_true
-        @project.user.should == @another_user
+        @project.owner.should == @another_user
         @typical_user.projects.should be_empty
         @another_user.projects.should include(@project)
         @project.visibility.should == Project::PRIVATE
@@ -113,7 +113,56 @@ describe User do
   describe "handle" do
     it "returns the value which will be used for 'identification' of a user across the site" do
       user = User.make
-      user.handle.should == user.email
+      user.handle.should == user.login
+    end
+  end
+
+  describe "paying_customer?" do
+    before(:each) do
+      @user = Subscription.make(:doras).user
+    end
+
+    it "returns false when the user's most recent subscription is not in a 'confirmed' state" do
+      @user.subscriptions.should_not be_empty
+      @user.paying_customer?.should == false
+    end
+
+    it "returns false when the user does not have any subscriptions" do
+      @user.subscriptions.destroy_all
+      @user.paying_customer?.should == false
+    end
+
+    it "returns true when the user most recent subscription is in a 'confirmed' state" do
+      @user.subscriptions.last.confirm!
+      @user.paying_customer?.should == true
+    end
+  end
+
+  describe "current_subscription" do
+    before(:each) do
+      @user = User.make(:dora)
+      @subscription = Subscription.make(:basic, :user => @user)
+    end
+
+    context "when the most recent subscription is confirmed" do
+      it "returns said subscription" do
+        @subscription.confirm!
+        @user.current_subscription.should == @subscription
+      end
+    end
+
+    context "when the most recent subscription is cancelled" do
+      it "returns nil" do
+        @subscription.confirm!
+        @subscription.cancel!
+        @user.current_subscription.should be_nil
+      end
+    end
+
+    context "when the most recent subscription is unconfirmed" do
+      it "returns nil" do
+        @user.current_subscription.should be_nil
+      end
     end
   end
 end

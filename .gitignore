@@ -3,7 +3,6 @@ log/*.pid
 db/*.db
 db/*.sqlite3
 db/schema.rb
-tmp/**/*
 .DS_Store
 doc/api
 doc/app
@@ -11,3 +10,4 @@ config/database.yml
 coverage/**/*
 public/**/*.css
 *.swp
+tmp

@@ -3,11 +3,21 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 # Commonly used webrat steps
 # http://github.com/brynary/webrat
 
-Given /^(?:he|she|Sam|Dora|Oscar) is on (.+)$/ do |page_name|
+def login_if_necessary(user)
+  if user.match(/s?he/)
+    raise "@user must be set for this step" unless @user.is_a?(User)
+  else
+    Given "#{user} signs in"
+  end
+end
+
+Given /^(he|she|Sam|Dora|Oscar) is on (.+)$/ do |user, page_name|
+  login_if_necessary(user)
   visit path_to(page_name)
 end
 
-When /^(?:he|she|Sam|Dora|Oscar) goes to (.+)$/ do |page_name|
+When /^(he|she|Sam|Dora|Oscar) goes to (.+)$/ do |user, page_name|
+  login_if_necessary(user) unless page_name == "the sign up page"
   visit path_to(page_name)
 end
 

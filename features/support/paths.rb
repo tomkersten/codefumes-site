@@ -15,6 +15,10 @@ module NavigationHelpers
         login_path
       when /the project's short_uri page/i
         short_uri_path(@project)
+      when /[his|her] account information page/i
+        my_account_path
+      when /[his|her] list of projects/i
+        my_projects_path
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"

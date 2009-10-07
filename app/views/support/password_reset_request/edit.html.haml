@@ -1,14 +1,15 @@
-%h1 Change My Password
+.main
+  %h1 Change My Password
 
-- form_for @user, :url => support_password_reset_request_path(:id => params[:id]), :method => :put do |f|
-  - if f.error_messages
-    .error
-    = f.error_messages
-  %div
-    = f.label :password
-    = f.password_field :password
-  %div
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  %div
-    = f.submit "Update my password and log me in"
+  - form_for @user, :url => support_password_reset_request_path(:id => params[:id]), :method => :put do |f|
+    - if f.error_messages
+      .error
+      = f.error_messages
+    %div
+      = f.label :password
+      = f.password_field :password
+    %div
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+    %div
+      = f.submit "Update my password and log me in"

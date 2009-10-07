@@ -50,6 +50,15 @@ end
 Project.blueprint(:twitter_tagger) do
   name        "Twitter Tagger"
   public_key  "twitter_tagger"
+  visibility  Project::PUBLIC
+  owner       {User.make(:dora)}
+end
+
+Project.blueprint(:prideo) do
+  name        "Private Video Application"
+  public_key  "prideo"
+  visibility  Project::PRIVATE
+  owner       {User.make(:dora)}
 end
 
 Revision.blueprint do
@@ -74,7 +83,30 @@ Payload.blueprint do
   content "commits" => []
 end
 
+Plan.blueprint do
+  name {Sham.title}
+  visibility "public"
+end
+
+Plan.blueprint(:basic) do
+  name "Basic"
+  visibility "public"
+end
+
+Plan.blueprint(:custom) do
+  name "Custom"
+  visibility "private"
+end
+
 RevisionBridge.blueprint do
   parent_id {Commit.make.id}
   child_id  {Commit.make.id}
+end
+
+Subscription.blueprint do
+  plan {Plan.make(:basic)}
+end
+
+Subscription.blueprint(:doras) do
+  user {User.make(:dora)}
 end

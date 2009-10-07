@@ -12,6 +12,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :my do |my|
     my.resources :projects
+    my.resource :account, :controller => "account"
+    my.resource :subscription,  :controller => "subscription",
+                                :member => {
+                                            :confirm => :get,
+                                            :confirmed => :post,
+                                            :cancel => :get,
+                                            :cancelled => :put
+                                           }
   end
 
   map.resources :users

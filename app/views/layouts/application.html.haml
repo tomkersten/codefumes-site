@@ -14,11 +14,12 @@
         %p What does your code smell like?
         .session
           = render :partial => 'layouts/session_info_and_links'
+
     #grid
       = render :partial => "layouts/flashes"
       = yield
 
-  = javascript_include_tag %w(raphael jquery initializer jquery.dates grid visualizer template card)
+  = javascript_include_tag %w(raphael jquery initializer jquery.dates grid visualizer template application)
 
   = yield :javascript
   :javascript
