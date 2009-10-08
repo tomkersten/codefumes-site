@@ -103,11 +103,13 @@ files:
 - test/test_helper.rb
 has_rdoc: true
 homepage: http://ruby.sadi.st/
+licenses: 
 post_install_message: 
 rdoc_options: 
 - --main
 - README.txt
 require_paths: 
+- bin
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
   requirements: 
@@ -124,7 +126,7 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: seattlerb
-rubygems_version: 1.3.1
+rubygems_version: 1.3.5
 signing_key: 
 specification_version: 3
 summary: Flog reports the most tortured code in an easy to read pain report
