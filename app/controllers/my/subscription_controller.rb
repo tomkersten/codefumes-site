@@ -1,11 +1,11 @@
 class My::SubscriptionController < My::BaseController
   def new
-    @subscription = current_user.subscriptions.new
+    @subscription = current_user.subscriptions.new(:plan => Plan.first)
     @visible_plans = Plan.visible
   end
 
   def create
-    current_user.subscriptions.create(params[:subscription])
+    current_user.subscriptions.create!(params[:subscription])
     redirect_to confirm_my_subscription_path
   end
 
