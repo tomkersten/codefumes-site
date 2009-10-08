@@ -2,95 +2,129 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe User do
   describe "deliver_password_reset_instructions!" do
     before(:each) do
-      @typical_user = User.make(:typical_user)
+      @user = User.make(:typical_user)
     end
 
     it "resets the user's perishable token" do
       pending "Investigate when users are enabled"
-      @typical_user.should_receive(:reset_perishable_token!)
-      @typical_user.deliver_password_reset_instructions!
+      @user.should_receive(:reset_perishable_token!)
+      @user.deliver_password_reset_instructions!
     end
 
     it "sends an email to the user with instructions on how to reset their password" do
       pending "Investigate when users are enabled"
-      Notifier.should_receive(:deliver_password_reset_instructions).with(@typical_user)
-      @typical_user.deliver_password_reset_instructions!
+      Notifier.should_receive(:deliver_password_reset_instructions).with(@user)
+      @user.deliver_password_reset_instructions!
     end
   end
-  
+
   describe "claim" do
     before(:each) do
       @project = Project.make
-      @typical_user = User.make(:typical_user)
+      @user = Subscription.make(:doras).user
       @project.owner.should be_nil
-      @typical_user.projects.should be_empty
+      @user.projects.should be_empty
       @project.visibility.should == Project::PUBLIC
     end
+
     context "without specifiying visibility" do
       before(:each) do
-        @typical_user.claim(@project).should be_true
+        @user.claim(@project).should be_true
       end
+
       it "sets the user on the project" do
-        @project.owner.should == @typical_user
-        @typical_user.projects.should include(@project)
+        @project.owner.should == @user
+        @user.projects.should include(@project)
       end
+
       it "doesn't change the project's visibility" do
         @project.visibility.should == Project::PUBLIC
       end
     end
-    
+
     context "when specifying visibility" do
       context "valid visibility" do
         before(:each) do
-          @typical_user.claim(@project, Project::PRIVATE).should be_true
+          @user.claim(@project, Project::PRIVATE).should be_true
         end
+
         it "sets the user on the project" do
-          @project.owner.should == @typical_user
-          @typical_user.projects.should include(@project)
+          @project.owner.should == @user
+          @user.projects.should include(@project)
         end
+
         it "changes the project's visibility" do
           @project.visibility.should == Project::PRIVATE
         end
       end
+
       context "invalid visibility" do
         before(:each) do
-          @typical_user.claim(@project, 'some crap').should be_false
+          @user.claim(@project, 'some crap').should be_false
         end
+
         it "doen't set the user on the project" do
-          @project.owner.should_not == @typical_user
-          @typical_user.projects.should_not include(@project)
+          @project.owner.should_not == @user
+          @user.projects.should_not include(@project)
         end
+
         it "doesn't change the project's visibility" do
           @project.visibility.should == Project::PUBLIC
         end
       end
     end
+
+    context "a new private projects" do
+      context "when the user has not reached their plan's limit of projects" do
+        it "they can make a private claim" do
+          @user.claim(Project.make(:private), "private") # reached limit now
+
+        end
+      end
+      
+      context "when the user has reached their plan's limit of projects" do
+        before(:each) do
+          @user.claim(Project.make(:private), "private") # reached limit now
+        end
+
+        it "raises an UpgradeOpportunity notification" do
+          new_project = Project.new(Project.plan(:private))
+          lambda {
+            @user.claim(new_project, "private")
+          }.should raise_error(UpgradeOpportunity)
+        end
+      end
+    end
   end
-  
+
   describe "relinquish_claim" do
     before(:each) do
       @project = Project.make
-      @typical_user = User.make(:typical_user)
+      @user = Subscription.make(:doras).user
       @project.owner.should be_nil
-      @typical_user.projects.should be_empty
+      @user.projects.should be_empty
       @project.visibility.should == Project::PUBLIC
     end
+
     context "unclaimed project" do
       it "doesn't do anything" do
-        @typical_user.relinquish_claim(@project).should be_true
+        @user.relinquish_claim(@project).should be_true
         @project.owner.should be_nil
-        @typical_user.projects.should be_empty
+        @user.projects.should be_empty
       end
     end
+
     context "project owned by user" do
       before(:each) do
-        @typical_user.claim(@project, Project::PRIVATE).should be_true
-        @typical_user.relinquish_claim(@project).should be_true
+        @user.claim(@project, Project::PRIVATE).should be_true
+        @user.relinquish_claim(@project).should be_true
       end
+
       it "removes the user from the project" do
         @project.owner.should be_nil
-        @typical_user.projects.should be_empty
+        @user.projects.should be_empty
       end
+
       it "resets the status to public" do
         @project.visibility.should == Project::PUBLIC
       end
@@ -98,12 +132,13 @@ describe User do
     context "project owned by other user" do
       before(:each) do
         @another_user = User.make(:typical_user)
+        Subscription.make(:confirmed, :user => @another_user)
         @another_user.claim(@project, Project::PRIVATE).should be_true
       end
       it "doesn't do anything" do
-        @typical_user.relinquish_claim(@project).should be_true
+        @user.relinquish_claim(@project).should be_true
         @project.owner.should == @another_user
-        @typical_user.projects.should be_empty
+        @user.projects.should be_empty
         @another_user.projects.should include(@project)
         @project.visibility.should == Project::PRIVATE
       end
@@ -119,7 +154,7 @@ describe User do
 
   describe "paying_customer?" do
     before(:each) do
-      @user = Subscription.make(:doras).user
+      @user = Subscription.make(:doras, :state => "unconfirmed").user
     end
 
     it "returns false when the user's most recent subscription is not in a 'confirmed' state" do

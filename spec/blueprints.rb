@@ -38,6 +38,10 @@ Project.blueprint do
   name        {Faker::Lorem.words(2).join(' ')}
   public_key
   private_key
+  visibility   Project::PUBLIC
+end
+
+Project.blueprint(:public) do
 end
 
 Project.blueprint(:private) do
@@ -108,6 +112,12 @@ Subscription.blueprint do
   plan {Plan.make(:basic)}
 end
 
+Subscription.blueprint(:confirmed) do
+  plan {Plan.make(:basic)}
+  state "confirmed"
+end
+
 Subscription.blueprint(:doras) do
   user {User.make(:dora)}
+  state "confirmed"
 end

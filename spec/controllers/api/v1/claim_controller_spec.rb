@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 describe Api::V1::ClaimController do
   before(:each) do
     @project = Project.make
-    @user = User.make
+    @user = Subscription.make(:doras).user
     @params = {:project_id => @project.public_key, :visibility => Project::PRIVATE}
     setup_basic_auth(@project.public_key, @project.private_key)
   end

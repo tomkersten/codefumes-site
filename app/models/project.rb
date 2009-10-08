@@ -15,6 +15,8 @@ class Project < ActiveRecord::Base
   has_many :commits, :through => :revisions, :include => [:custom_attributes, :parents]
   has_many :payloads, :dependent => :destroy
   belongs_to :owner, :class_name => "User"
+  
+  named_scope :private, :conditions => {:visibility => PRIVATE}
 
   def self.generate_public_key
     generate_unique_key
