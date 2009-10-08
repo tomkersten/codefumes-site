@@ -77,8 +77,7 @@ describe User do
     context "a new private projects" do
       context "when the user has not reached their plan's limit of projects" do
         it "they can make a private claim" do
-          @user.claim(Project.make(:private), "private") # reached limit now
-
+          @user.claim(Project.make(:private), "private").should be_true
         end
       end
       

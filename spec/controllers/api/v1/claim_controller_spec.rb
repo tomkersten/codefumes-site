@@ -100,7 +100,7 @@ describe Api::V1::ClaimController do
       context "with an invalid api_key" do
         before(:each) do
           @params.merge!(:api_key => @user.single_access_token + "some junk")
-          put :update, @params 
+          put :update, @params
         end
 
         it "returns 401 unauthorized" do
@@ -113,6 +113,18 @@ describe Api::V1::ClaimController do
 
         it "doesn't change the visibility on the project" do
           @project.reload.visibility.should == Project::PUBLIC
+        end
+      end
+
+      context "when the user will be exceeding their private project quota" do
+        before(:each) do
+          Project.make(:private, :owner => @user) # at limit
+          @params.merge!(:api_key => @user.single_access_token)
+        end
+
+        it "log an UpgradeOpportunity notification" do
+          controller.should_receive(:log_update_opportunity)
+          put :update, @params.merge(:test => "this is it")
         end
       end
     end

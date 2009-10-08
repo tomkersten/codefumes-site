@@ -4,6 +4,9 @@ class Api::V1::ClaimController < Api::BaseController
 
   def update
     current_user.claim(project, params[:visibility])
+    rescue UpgradeOpportunity => notification
+      log_update_opportunity(notification)
+
     respond_to do |format|
       format.xml {render :status => :ok, :nothing => true}
     end
@@ -19,5 +22,9 @@ class Api::V1::ClaimController < Api::BaseController
   private
     def single_access_allowed?
       true
+    end
+
+    def log_update_opportunity(exception_object)
+      logger.info "UPDATE_OPPORTUNITY: #{exception_object.message}"
     end
 end
