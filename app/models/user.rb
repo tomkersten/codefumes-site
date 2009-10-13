@@ -1,17 +1,12 @@
-class UpgradeOpportunity < StandardError; end
-
 class User < ActiveRecord::Base
   acts_as_authentic
 
-  has_many :projects, :foreign_key => :owner_id
+  has_many :projects, :foreign_key => :owner_id, :order => [:privatized_at]
   has_many :subscriptions
 
   def claim(project, visibility=nil)
-    if visibility == Project::PRIVATE && claiming_another_private_disallowed?
-      raise UpgradeOpportunity, "#{self} (ID: #{self.id}) attempted to make private claim. Currently has '#{current_plan}' plan."
-    end
-
     project.visibility = visibility if visibility
+    project.privatized_at = Time.now
     if project.save
       projects << project
       true
@@ -24,6 +19,7 @@ class User < ActiveRecord::Base
   def relinquish_claim(project)
     if project.owner == self
       projects.delete(project)
+      project.privatized_at = nil
       project.visibility = Project::PUBLIC
       project.save
       project.reload
@@ -39,7 +35,7 @@ class User < ActiveRecord::Base
   def handle
     login
   end
-  
+
   def to_s
     handle
   end
@@ -57,9 +53,8 @@ class User < ActiveRecord::Base
     most_recent && most_recent.confirmed? ? most_recent : nil
   end
 
-  private
-    def claiming_another_private_disallowed?
-      return true if current_plan.blank?
-      self.projects.private.count >= current_plan.private_project_qty
-    end
+  def covered_projects
+    return [] if current_subscription.nil? || projects.private.empty?
+    projects.private.find(:all, :limit => current_plan.private_project_qty)
+  end
 end
