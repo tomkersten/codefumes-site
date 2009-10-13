@@ -115,18 +115,6 @@ describe Api::V1::ClaimController do
           @project.reload.visibility.should == Project::PUBLIC
         end
       end
-
-      context "when the user will be exceeding their private project quota" do
-        before(:each) do
-          Project.make(:private, :owner => @user) # at limit
-          @params.merge!(:api_key => @user.single_access_token)
-        end
-
-        it "log an UpgradeOpportunity notification" do
-          controller.should_receive(:log_update_opportunity)
-          put :update, @params.merge(:test => "this is it")
-        end
-      end
     end
   end
 

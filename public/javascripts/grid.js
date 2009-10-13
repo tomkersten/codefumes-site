@@ -46,12 +46,12 @@ Raphael.el.clone = function(paper){
     res = paper[this.type]();
     res.attr(this.attrs);
   }
-  console.log(paper.canvas);
+  //console.log(paper.canvas);
   return paper.canvas.cloneNode(this);
 }
 
 Raphael.el.cloneN = function(paper,x,y){
-  console.log(this);
+  //console.log(this);
   var clone = this.node.cloneNode(false);
   //console.log(clone+"\nx:"+x+"\ny:"+y);
   return paper.canvas.appendChild(clone);
