@@ -25,11 +25,15 @@
         %dt Private key
         %dd= @project.private_key
 
-    #canvas
+    - if @project.covered_by_plan?
+      #canvas
 
-    %div
-      = link_to 'Vis 1', '', :id => 'vis_1'
-      = link_to 'Vis 2', '', :id => 'vis_2'
+      %div
+        = link_to 'Vis 1', '', :id => 'vis_1'
+        = link_to 'Vis 2', '', :id => 'vis_2'
+    - else
+      .upgrade_required
+        %h3 Visuals would be here. Please upgrade your account.
 
     - if @project.recent_commits.empty?
       %p.no_commits

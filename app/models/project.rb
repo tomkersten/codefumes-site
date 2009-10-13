@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   validates_inclusion_of :visibility, :in => VISIBILITIES.values
   before_validation_on_create :assign_public_key
   before_validation_on_create :assign_private_key
+  before_validation :set_privatized_at
 
   attr_accessible :name, :public_key
 
@@ -17,6 +18,7 @@ class Project < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   
   named_scope :private, :conditions => {:visibility => PRIVATE}
+  named_scope :public,  :conditions => {:visibility => PUBLIC}
 
   def self.generate_public_key
     generate_unique_key
@@ -50,6 +52,19 @@ class Project < ActiveRecord::Base
         lst << lst[index].parents.first
       end
     end.compact
+  end
+
+  def public?
+    visibility == PUBLIC
+  end
+
+  def private?
+    visibility == PRIVATE
+  end
+
+  def covered_by_plan?
+    return true if public?
+    owner.covered_projects.include?(self)
   end
 
   private
@@ -90,5 +105,11 @@ class Project < ActiveRecord::Base
         temp_token += characters[pos..pos]
       end
       temp_token
+    end
+
+    def set_privatized_at
+      if private? and privatized_at.blank?
+        self.privatized_at = Time.now.utc
+      end
     end
 end

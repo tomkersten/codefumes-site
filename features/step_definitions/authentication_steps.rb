@@ -69,7 +69,7 @@ end
 
 def add_subscriptions_for(user)
   if user.login.match(/dora/i)
-    Subscription.make(:doras, :user => @user).confirm!
+    Subscription.make(:doras, :user => @user)
     user.reload
   end
 end

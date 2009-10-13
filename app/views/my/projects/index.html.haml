@@ -18,7 +18,9 @@
   - else
     %ul.projects
       - for project in @projects
-        %li= link_to project, short_uri_path(:public_key => project)
+        %li{:class => project.visibility}
+          = link_to project, short_uri_path(:public_key => project)
+          = "(#{project.visibility})"
 
   - non_paying_user_content do
     = link_to "Track your private projects too", new_my_subscription_path, :id => 'new_subscription'

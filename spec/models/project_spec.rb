@@ -45,6 +45,23 @@ describe Project do
         @project.public_key.should_not be_nil
       end
     end
+
+    context "when saving a private project" do
+      context "when privatized_at is not set" do
+        it "sets it" do
+          project = Project.make(:private, :privatized_at => nil)
+          project.privatized_at.should_not be_nil
+        end
+      end
+
+      context "when privatized_at is" do
+        it "doesn't modify the value" do
+          cached_time = 15.minutes.ago
+          project = Project.make(:private, :privatized_at => cached_time)
+          project.privatized_at.to_s.should == cached_time.to_s
+        end
+      end
+    end
   end
 
   describe "to_param" do
@@ -227,6 +244,39 @@ describe Project do
 
       it "the last element in the array is the third commit from most recent" do
         @project.recent_commits(3).last.should == @commits[2]
+      end
+    end
+  end
+
+  describe "covered_by_plan?" do
+    context "on public projects" do
+      it "returns true" do
+        Project.make(:public).should be_covered_by_plan
+      end
+    end
+
+    context "on private projects" do
+      before(:each) do
+        @project = Project.make(:privatized_at => 1.week.ago)
+        @user = Subscription.make(:doras).user
+        @user.claim(@project, "private")
+      end
+
+      context "when the account has two projects, both privatized over a week ago, and a Basic subscription" do
+        before(:each) do
+          @project.update_attribute(:privatized_at, 9.days.ago.utc)
+          @second_project = Project.make
+          @user.claim(@second_project, "private")
+          @second_project.update_attribute(:privatized_at, 8.days.ago.utc)
+        end
+
+        it "returns false for the second (uncovered) project" do
+          @second_project.should_not be_covered_by_plan
+        end
+
+        it "returns true for the first (covered) project" do
+          @project.should be_covered_by_plan
+        end
       end
     end
   end
