@@ -45,7 +45,7 @@ Then /^he should see a list of his claimed projects$/ do
 end
 
 Then /^s?he sees the private key of the project$/ do
-  response.should have_tag("#private_key")
+  response.should have_tag("#project_keys")
 end
 
 Then /^s?he does not see the private key of the project$/ do

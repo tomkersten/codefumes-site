@@ -287,9 +287,16 @@ describe Commit do
         commit = Commit.make
         parents = [Commit.make, Commit.make]
         commit.parents << parents
-        shortended_identifiers = parents.map(&:identifier).map {|ident| ident[0..5]}
+        shortended_identifiers = parents.map(&:short_identifier)
         commit.parent_identifiers(:short).should == shortended_identifiers
       end
+    end
+  end
+
+  describe "short_identifier" do
+    it "returns the first 9 characters of the commit identifier" do
+      commit = Commit.make
+      commit.short_identifier.should == commit.identifier[0...8]
     end
   end
 

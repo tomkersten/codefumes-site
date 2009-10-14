@@ -48,7 +48,7 @@ class Commit < ActiveRecord::Base
   end
 
   def parent_identifiers(format = :full)
-    parents.map {|parent| format == :full ? parent.identifier : parent.identifier[0..5]}
+    parents.map {|parent| format == :full ? parent.identifier : parent.short_identifier}
   end
 
   def self.normalize_params(params)
@@ -65,6 +65,10 @@ class Commit < ActiveRecord::Base
   def custom_attributes=(a_hash)
     raise ArgumentErorr, "Hash expected" unless a_hash.is_a?(Hash)
     @custom_attributes = a_hash.delete_if {|key, value| key == :custom_attributes}
+  end
+
+  def short_identifier
+    identifier[0...8]
   end
 
   private

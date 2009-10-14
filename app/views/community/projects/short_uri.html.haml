@@ -19,7 +19,7 @@
   - else
     %h1= @project
     - priveleged_user_or_owner_content(@project) do
-      %dl#private_key
+      %dl#project_keys
         %dt Public key
         %dd= @project.public_key
         %dt Private key
@@ -27,42 +27,42 @@
 
     - if @project.covered_by_plan?
       #canvas
-
-      %div
-        = link_to 'Vis 1', '', :id => 'vis_1'
-        = link_to 'Vis 2', '', :id => 'vis_2'
+        %ul#visualizations
+          %li= link_to 'Visual 1', '', :id => 'vis_1'
+          %li= link_to 'Visual 2', '', :id => 'vis_2'
     - else
-      .upgrade_required
+      #upgrade_required
         %h3 Visuals would be here. Please upgrade your account.
 
-    - if @project.recent_commits.empty?
-      %p.no_commits
-        No commits posted yet
-    - else
-      %ul.commits
-        - for commit in @project.recent_commits
-          %li{:class => commit.merge? ? "merge" : nil}
-            - if commit.message.blank?
-              %h2.no_commit_message [No commit message? Tsk! Tsk!]
-            - else
-              %h2= commit.message.gsub("\n", "<br/>")
-            - if commit.merge?
-              %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-            %ul
-              %li= "Identifier: #{commit.identifier}"
-              %li= "Author: #{commit.author}"
-              %li= "Committer #{commit.committer}"
-              %li= "Authored at: #{commit.authored_at}"
-              %li= "Committed at: #{commit.committed_at}"
-              %li= "Lines added: #{commit.line_additions}"
-              %li= "Lines deleted: #{commit.line_deletions}"
-              %li= "Total lines: #{commit.line_total}"
-              %li= "Files affected: #{commit.affected_file_count}"
-              - unless commit.custom_attributes.empty?
-                %li.custom_attributes
-                  %ul
-                    - for custom_attribute in commit.custom_attributes
-                      %li= "#{custom_attribute.name}: #{custom_attribute.value}"
+    #details
+      - if @project.recent_commits.empty?
+        %p.no_commits
+          No commits posted yet
+      - else
+        %ul.commits
+          - for commit in @project.recent_commits
+            %li{:class => commit.merge? ? "merge" : nil}
+              - if commit.message.blank?
+                %h2.no_commit_message [No commit message? Tsk! Tsk!]
+              - else
+                %h2= commit.message.gsub("\n", "<br/>")
+              - if commit.merge?
+                %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
+              %ul
+                %li= "Identifier: #{commit.short_identifier}"
+                %li= "Author: #{commit.author}"
+                %li= "Committer #{commit.committer}"
+                %li= "Authored at: #{commit.authored_at}"
+                %li= "Committed at: #{commit.committed_at}"
+                %li= "Lines added: #{commit.line_additions}"
+                %li= "Lines deleted: #{commit.line_deletions}"
+                %li= "Total lines: #{commit.line_total}"
+                %li= "Files affected: #{commit.affected_file_count}"
+                - unless commit.custom_attributes.empty?
+                  %li.custom_attributes
+                    %ul
+                      - for custom_attribute in commit.custom_attributes
+                        %li= "#{custom_attribute.name}: #{custom_attribute.value}"
 
 -content_for :onReady do
   vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})

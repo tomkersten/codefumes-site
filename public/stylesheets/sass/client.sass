@@ -34,6 +34,7 @@ body h3
 
 body
   :background url(../../images/bg_grid.gif) repeat center
+  :color= !grayskull - #111
   pre
     :font-family monospace
     :color  #555
@@ -119,10 +120,19 @@ body
           :padding 0
           :margin 0 0 0.2em 0
           :color = !grayskull
-      #canvas
-        :height 35em
       form
         :padding 0
+      #canvas, #upgrade_required
+        :float left
+      #details
+        :float left
+        :padding-left 2em
+        ul.commits
+          :padding-top .6em
+      dl#project_keys
+        dt
+          :float left
+          :padding-right 1em
     h1
       :color = !grayskull
       :margin 0.5em 0 0.2em 0
