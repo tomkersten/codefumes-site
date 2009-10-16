@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
   PUBLIC = 'public'
   PRIVATE = 'private'
   VISIBILITIES = {"Public" => PUBLIC, "Private" => PRIVATE}
-  
+
   validates_uniqueness_of :public_key
   validates_inclusion_of :visibility, :in => VISIBILITIES.values
   before_validation_on_create :assign_public_key
@@ -12,11 +12,10 @@ class Project < ActiveRecord::Base
 
   attr_accessible :name, :public_key
 
-  has_many :revisions, :dependent => :destroy
-  has_many :commits, :through => :revisions, :include => [:custom_attributes, :parents]
+  has_many :commits, :include => [:custom_attributes, :parents]
   has_many :payloads, :dependent => :destroy
   belongs_to :owner, :class_name => "User"
-  
+
   named_scope :private, :conditions => {:visibility => PRIVATE}
   named_scope :public,  :conditions => {:visibility => PUBLIC}
 
@@ -31,13 +30,14 @@ class Project < ActiveRecord::Base
   def to_s
     name.blank? ? public_key : name
   end
-  
+
   def claimed?
     !owner.blank?
   end
 
   def commit_head
-    commits.find(:first, :conditions => "revision_bridges.parent_id IS NULL", :include => [:bridges_as_parent])
+    return commits.first if commits.count == 1
+    commits.find(:first, :conditions => "revision_bridges.parent_id IS NULL", :include => [:project, :bridges_as_parent])
   end
 
   def recent_commits(ancestry_count = 5)

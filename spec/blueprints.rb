@@ -65,11 +65,6 @@ Project.blueprint(:prideo) do
   owner       {User.make(:dora)}
 end
 
-Revision.blueprint do
-  project_id {Project.make.id}
-  commit_id {Commit.make.id}
-end
-
 Commit.blueprint do
   identifier      {Faker::Lorem.words(3).to_s}
   short_message   {Faker::Lorem.words(4).join(' ')}
@@ -80,6 +75,7 @@ Commit.blueprint do
   committer_name  {Faker::Name.name}
   committed_at    Time.now
   authored_at     30.minutes.ago
+  project_id {Project.make.id}
 end
 
 Payload.blueprint do

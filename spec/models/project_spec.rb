@@ -124,23 +124,6 @@ describe Project do
     
   end
 
-  describe "revisions" do
-    before(:each) do
-      @project = Project.make
-      @revision = Revision.make(:project_id => @project.id)
-    end
-
-    it "is associated with revisions" do
-      lambda {@project.revisions << @revision}.should_not raise_error
-    end
-
-    it "destroys associated revisions when destroyed" do
-      Revision.find_by_id(@revision.id).should == @revision
-      @project.destroy
-      Revision.find_by_id(@revision.id).should be_nil
-    end
-  end
-
   describe "commits" do
     before(:each) do
       @project = Project.make
@@ -205,6 +188,25 @@ describe Project do
 
       it "returns nil" do
         @project.commit_head.should == nil
+      end
+    end
+
+    context "Project 1 has commits [A], Project 2 has commits [A,B]" do
+      before(:each) do
+        @commit_1a = Commit.make
+        @commit_2a = Commit.make
+        @commit_2b = Commit.make(:parent_identifiers => @commit_2a.identifier)
+        @commit_2b.parents.first.should == @commit_2a
+        @project_1 = Project.make(:public_key => "Project 1", :commits => [@commit_1a])
+        @project_2 = Project.make(:public_key => "Project 2", :commits => [@commit_2a, @commit_2b])
+      end
+
+      it "calling commit_head on Project 1, returns commit A's identifier'" do
+        @project_1.commit_head.should == @commit_1a
+      end
+
+      it "calling commit_head on Project 2, returns commit B's identifier'" do
+        @project_2.commit_head.should == @commit_2b
       end
     end
   end

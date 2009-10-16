@@ -1,11 +1,10 @@
 class Commit < ActiveRecord::Base
   # Validations
   validates_presence_of :identifier
-  validates_uniqueness_of :identifier
+  validates_uniqueness_of :identifier, :scope => :project_id
 
   # Associations
-  has_many :revisions, :dependent => :destroy
-  has_many :projects, :through => :revisions
+  belongs_to :project
   has_many :bridges_as_parent, :class_name => "RevisionBridge", :foreign_key => :parent_id, :dependent => :destroy
   has_many :bridges_as_child, :class_name => "RevisionBridge", :foreign_key => :child_id, :dependent => :destroy
   has_many :children, :through => :bridges_as_parent, :class_name => "Commit"
