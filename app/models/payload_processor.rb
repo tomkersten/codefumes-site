@@ -6,13 +6,12 @@ class PayloadProcessor
     # TODO: Clean this code up
     for commit_params in content["commits"] do
       normalized_commit_params = Commit.normalize_params(commit_params)
-      commit = Commit.find_by_identifier(normalized_commit_params["identifier"])
+      commit = project.commits.find_by_identifier(normalized_commit_params["identifier"])
       if commit
         commit.update_attributes(normalized_commit_params)
       else
-        commit = Commit.create!(normalized_commit_params) # fails fast
+        commit = project.commits.create!(normalized_commit_params) # fails fast
       end
-      project.commits << commit unless project.commits.include?(commit)
     end
   rescue => exception
     RAILS_DEFAULT_LOGGER.error "Error processing Payload!"
