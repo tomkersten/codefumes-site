@@ -12,11 +12,11 @@ end
 
 Given /^the project has (\d+) commits$/ do |count|
   raise "@project must be set" unless @project.is_a?(Project)
-  revisions = count.to_i.times.map {Revision.make(:project => @project)}
+  commits = count.to_i.times.map {Commit.make(:project => @project)}
 
-  revisions.each_with_index do |revision, index|
-    next unless revisions[index.succ]
-    RevisionBridge.make(:parent => revision.commit, :child => revisions[index.succ].commit)
+  commits.each_with_index do |commit, index|
+    next unless commits[index.succ]
+    RevisionBridge.make(:parent => commit, :child => commits[index.succ])
   end
 
   raise "Commits not created correctly" unless @project.commits.count == count.to_i
