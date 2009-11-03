@@ -15,3 +15,7 @@ When /she visits the "(\w+)" project page$/ do |project_public_key|
   raise "No project found with #{project_public_key}" if @project.nil?
   visit short_uri_path(@project)
 end
+
+When /^s?he follows the link to edit the  project$/ do
+  click_link(".edit.project")
+end

@@ -1,0 +1,7 @@
+.main
+  - form_for [:my, @project] do |f|
+    = f.label :name
+    = f.text_field :name
+    = f.submit "Save changes"
+    or
+    = link_to "Cancel", short_uri_path(@project)

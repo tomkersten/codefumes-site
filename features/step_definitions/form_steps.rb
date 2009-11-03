@@ -11,3 +11,7 @@ end
 When /^he confirms the information$/ do
   click_button("confirmed")
 end
+
+When /^s?he submits the form$/ do
+  click_button
+end
