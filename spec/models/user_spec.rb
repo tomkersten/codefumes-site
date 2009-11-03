@@ -254,4 +254,23 @@ describe User do
       end
     end
   end
+
+  describe "finding via the association proxy" do
+    before(:each) do
+      @user = User.make(:dora)
+      @owned_project = Project.make(:owner => @user)
+      @unowned_project = Project.make(:owner => nil)
+      @user.reload
+    end
+
+    it "accepts a public_key as a search parameter" do
+      @user.projects[@owned_project.public_key].should == @owned_project
+      lambda {@user.projects[@unowned_project.public_key]}.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "accepts a public_key as a search parameter" do
+      @user.projects[@owned_project].should == @owned_project
+      lambda {@user.projects[@unowned_project]}.should raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end

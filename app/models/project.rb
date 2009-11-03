@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   PRIVATE = 'private'
   VISIBILITIES = {"Public" => PUBLIC, "Private" => PRIVATE}
 
+  identifier :public_key
+
   validates_uniqueness_of :public_key
   validates_inclusion_of :visibility, :in => VISIBILITIES.values
   before_validation_on_create :assign_public_key

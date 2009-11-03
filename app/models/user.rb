@@ -1,7 +1,19 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
-  has_many :projects, :foreign_key => :owner_id, :order => [:privatized_at]
+  has_many :projects, :foreign_key => :owner_id, :order => [:privatized_at] do
+    def [](acceptable_search_key)
+      public_key = case acceptable_search_key
+                     when String : acceptable_search_key
+                     when Project : acceptable_search_key.public_key
+                     else raise ArgumentError
+                   end
+      returning(find(:first, :conditions => {:public_key => public_key})) do |result|
+        raise ActiveRecord::RecordNotFound if result.nil?
+      end
+    end
+  end
+
   has_many :subscriptions
 
   def claim(project, visibility=nil)
