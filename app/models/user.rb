@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  identifier :login
   acts_as_authentic
 
   has_many :projects, :foreign_key => :owner_id, :order => [:privatized_at] do
