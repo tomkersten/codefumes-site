@@ -76,6 +76,28 @@ describe My::ProjectsController do
         end
       end
     end
+
+    describe "a PUT to set_visibility" do
+      before(:each) do
+        @project = Project.make(:public, :owner => @user)
+      end
+
+      def perform_request
+        put :set_visibility, :id => @project.to_param, :project => {:visibility => "private"}
+      end
+
+      it "updates the visibility to the value provided" do
+        @project.should_not be_private
+        perform_request
+        @project.reload
+        @project.should be_private
+      end
+
+      it "redirects to the short_uri path" do
+        perform_request
+        response.should redirect_to(short_uri_path(@project))
+      end
+    end
   end
 
   context "an anonymous request" do

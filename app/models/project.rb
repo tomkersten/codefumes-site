@@ -69,6 +69,10 @@ class Project < ActiveRecord::Base
     owner.covered_projects.include?(self)
   end
 
+  def set_visibility_to(visibility_type)
+    update_attribute(:visibility, visibility_type.to_s)
+  end
+
   private
     def assign_public_key
       if self.public_key.blank?

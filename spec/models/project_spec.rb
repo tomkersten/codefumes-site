@@ -282,4 +282,37 @@ describe Project do
       end
     end
   end
+
+  describe "set_visibility_to" do
+    before(:each) do
+      @project = Project.make(:public)
+    end
+
+    it "does not accept an invalid visibility_type" do
+      @project.set_visibility_to(:unsupported)
+      @project.should_not be_valid
+    end
+
+    it "accepts a Symbol as the visibility_type" do
+      @project.set_visibility_to(:private)
+      @project.should be_private
+    end
+
+    it "supports setting visibility to 'private'" do
+      @project.set_visibility_to('private')
+      @project.should be_private
+    end
+
+    it "supports setting visibility to 'public'" do
+      @project.update_attribute(:visibility, Project::PRIVATE)
+      @project.should_not be_public
+      @project.set_visibility_to('public')
+      @project.should be_public
+    end
+
+    xit "raises an ArgumentError with an invalid or nil visibility" do
+      lambda {@project.set_visibility_to(nil)}.should raise_error(ArgumentError)
+      lambda {@project.set_visibility_to("unsupported")}.should raise_error(ArgumentError)
+    end
+  end
 end

@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :my do |my|
-    my.resources :projects
+    my.resources :projects, :member => {:set_visibility => :put}
     my.resource :account, :controller => "account"
     my.resource :subscription,  :controller => "subscription",
                                 :member => {
