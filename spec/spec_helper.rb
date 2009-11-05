@@ -7,6 +7,14 @@ require 'spec/rails'
 require 'machinist/active_record'
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 require 'authlogic/test_case'
+require 'webrat'
+
+
+Webrat.configure do |config|
+  config.mode = :rails
+  config.open_error_files = false
+end
+
 
 # This simplifies testing mailers with RSpec
 # Read more here: http://github.com/bmabey/email-spec/tree/master
@@ -18,6 +26,8 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
+  config.include(Webrat::Matchers, :type => [:integration])
+
   # This simplifies testing mailers with RSpec
   # Read more here: http://github.com/bmabey/email-spec/tree/master
   #config.include(EmailSpec::Helpers)
@@ -27,6 +37,7 @@ Spec::Runner.configure do |config|
   config.before(:each) do
     Sham.reset
   end
+
 end
 
 def setup_basic_auth(username, password)
@@ -34,7 +45,9 @@ def setup_basic_auth(username, password)
 end
 
 def login_as(persona_name)
-  user = User.make(persona_name.to_sym)
+  user = User.find_by_email(User.plan(persona_name.to_sym)[:email]) || User.make(persona_name.to_sym)
   UserSession.create(:login => user.login, :password => User.plan(persona_name.to_sym))
   user
 end
+
+class ActionController::Integration::Session; include Spec::Matchers; end
