@@ -19,12 +19,14 @@
   - else
     %h1
       = @project
-      - priveleged_user_or_owner_content(@project) do
-        = link_to 'edit name', edit_my_project_path(@project), :title => "Edit Project"
-        %span.visibility{:class => @project.visibility}= @project.visibility
-        - form_for [:my, @project], :url => set_visibility_my_project_path(@project) do |f|
-          = f.hidden_field :visibility, :value => inverted_visibility_of(@project)
-          %button{:type => :submit, :id => 'update_visibility'}= "make #{inverted_visibility_of(@project)}"
+      = link_to 'edit', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit_project'
+    - priveleged_user_or_owner_content(@project) do
+      %ul.project_administration
+        %li.visibility{:class => @project.visibility}= @project.visibility
+        %li
+          - form_for [:my, @project], :url => set_visibility_my_project_path(@project), :html => {:id => 'update_visibility'} do |f|
+            = f.hidden_field :visibility, :value => inverted_visibility_of(@project)
+            %button{:type => :submit}= "make #{inverted_visibility_of(@project)}"
     - priveleged_user_or_owner_content(@project) do
       %dl#project_keys
         %dt Public key
