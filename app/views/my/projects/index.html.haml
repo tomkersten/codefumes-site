@@ -18,7 +18,7 @@
   - else
     %ul.projects
       - for project in @projects
-        %li{:class => project.visibility}
+        %li{:class => [project.visibility, build_status_class_for(project)].join(" ")}
           = link_to project, short_uri_path(:public_key => project)
           = "(#{project.visibility})"
 

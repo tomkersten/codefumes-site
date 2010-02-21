@@ -315,4 +315,15 @@ describe Project do
       lambda {@project.set_visibility_to("unsupported")}.should raise_error(ArgumentError)
     end
   end
+
+  describe "build_status" do
+    xit "delegates the call down to the project's commit head" do
+      project = Project.make(:public)
+      build_state = "call_delegated"
+      mock_commit = mock('Commit', :build_status => build_state)
+
+      project.should_receive(:commit_head).and_return(mock_commit)
+      project.build_status.should == build_state
+    end
+  end
 end

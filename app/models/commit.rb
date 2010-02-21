@@ -1,10 +1,15 @@
 class Commit < ActiveRecord::Base
+  PASSING_BUILD= "passing_build"
+  NOBUILDS     = "nobuilds"
+  FAILED_BUILD = "failed_build"
+
   # Validations
   validates_presence_of :identifier
   validates_uniqueness_of :identifier, :scope => :project_id
 
   # Associations
   belongs_to :project
+  has_many :builds
   has_many :bridges_as_parent, :class_name => "RevisionBridge", :foreign_key => :parent_id, :dependent => :destroy
   has_many :bridges_as_child, :class_name => "RevisionBridge", :foreign_key => :child_id, :dependent => :destroy
   has_many :children, :through => :bridges_as_parent, :class_name => "Commit"
@@ -68,6 +73,11 @@ class Commit < ActiveRecord::Base
 
   def short_identifier
     identifier[0...8]
+  end
+
+  def build_status
+    return NOBUILDS if builds.empty?
+    builds.failing.empty? ? PASSING_BUILD : FAILED_BUILD
   end
 
   private

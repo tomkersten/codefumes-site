@@ -19,3 +19,11 @@
     %custom_attributes
       - for custom_attribute in commit.custom_attributes
         = "<#{custom_attribute.name}>#{custom_attribute.value}</#{custom_attribute.name}>"
+  - unless commit.builds.empty?
+    %builds
+      - for build in commit.builds
+        %build
+          %name= build.name
+          %status= build.state
+          %started_at= build.started_at
+          %ended_at= build.ended_at

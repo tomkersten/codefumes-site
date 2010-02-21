@@ -73,6 +73,10 @@ class Project < ActiveRecord::Base
     update_attribute(:visibility, visibility_type.to_s)
   end
 
+  def build_status
+    commit_head && commit_head.build_status
+  end
+
   private
     def assign_public_key
       if self.public_key.blank?

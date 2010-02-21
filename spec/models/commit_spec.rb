@@ -351,4 +351,25 @@ describe Commit do
       end
     end
   end
+
+  describe "build_status" do
+    before(:each) do
+      @commit = Commit.make
+    end
+
+    it "returns the value of Commit::NOBUILDS when no builds are associated with the commit" do
+      @commit.build_status.should  == Commit::NOBUILDS
+    end
+
+    it "returns the value of Commit::PASSING_BUILD when only passing builds are associated with the commit" do
+      @commit.builds.create!(Build.plan(:success))
+      @commit.build_status.should  == Commit::PASSING_BUILD
+    end
+
+    it "returns the value of Commit::FAILED_BUILD when a build in a 'failure' state is associated with the commit" do
+      @commit.builds.create!(Build.plan(:success))
+      @commit.builds.create!(Build.plan(:failure))
+      @commit.build_status.should == Commit::FAILED_BUILD
+    end
+  end
 end

@@ -117,3 +117,18 @@ Subscription.blueprint(:doras) do
   user {User.make(:dora)}
   state "confirmed"
 end
+
+Build.blueprint do
+  commit_id  {Commit.make.id}
+  name       {Sham.name}
+  start_time {Time.now - 2.minutes}
+  end_time   {Time.now}
+end
+
+Build.blueprint(:failure) do
+  state "failure"
+end
+
+Build.blueprint(:success) do
+  state "success"
+end

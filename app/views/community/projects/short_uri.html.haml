@@ -51,7 +51,7 @@
       - else
         %ul.commits
           - for commit in @project.recent_commits
-            %li{:class => commit.merge? ? "merge" : nil}
+            %li{:class => commit_classes_for(commit)}
               - if commit.message.blank?
                 %h2.no_commit_message [No commit message? Tsk! Tsk!]
               - else
