@@ -4,8 +4,8 @@ describe Build do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
-      :start_time => Time.now,
-      :end_time => Time.now,
+      :started_at => Time.now,
+      :ended_at => Time.now,
       :state => "value for status"
     }
   end

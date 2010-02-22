@@ -3,6 +3,8 @@ class Commit < ActiveRecord::Base
   NOBUILDS     = "nobuilds"
   FAILED_BUILD = "failed_build"
 
+  identifier :identifier
+
   # Validations
   validates_presence_of :identifier
   validates_uniqueness_of :identifier, :scope => :project_id

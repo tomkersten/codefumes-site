@@ -32,7 +32,9 @@ ActionController::Routing::Routes.draw do |map|
       v1.resources :projects, :path_prefix => '/api/v1/:format' do |project|
         project.resource  :claim, :controller => "Claim"
         project.resources :payloads, :shallow => true
-        project.resources :commits, :collection => {:latest => :get}
+        project.resources :commits, :collection => {:latest => :get} do |commit|
+          commit.resources :builds
+        end
       end
     end
   end

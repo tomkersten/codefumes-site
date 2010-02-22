@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < Api::BaseController
-  
+
   def index
     @projects = Project.all
     respond_to do |format|
@@ -18,7 +18,7 @@ class Api::V1::ProjectsController < Api::BaseController
   end
 
   def create
-    @project = Project.new(params[:project])
+    @project = Project.new(project_request_params)
 
     respond_to do |format|
       if @project.save
@@ -40,7 +40,7 @@ class Api::V1::ProjectsController < Api::BaseController
     project_request_params.delete(:public_key)
 
     respond_to do |format|
-      if !project.nil? && project.update_attributes(params[:project])
+      if !project.nil? && project.update_attributes(project_request_params)
         format.xml {render :location => api_v1_project_url(:xml, project)}
       else
         format.xml {render :nothing => true, :status => :unprocessable_entity}
@@ -52,9 +52,8 @@ class Api::V1::ProjectsController < Api::BaseController
     def project
       @project ||= Project.find_by_public_key(params[:id])
     end
-    
-    def project_request_params
-      params[:project] || {}
-    end
 
+    def project_request_params
+      @req_params ||= params[:project] || {}
+    end
 end

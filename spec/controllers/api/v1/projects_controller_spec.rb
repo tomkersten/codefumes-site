@@ -89,7 +89,7 @@ describe Api::V1::ProjectsController do
       end
     end
 
-    context "when the requested resource exists" do
+    context "when the requested resource does not exist" do
       before(:each) do
         Project.destroy_all
         @project = Project.new(Project.plan)

@@ -121,8 +121,8 @@ end
 Build.blueprint do
   commit_id  {Commit.make.id}
   name       {Sham.name}
-  start_time {Time.now - 2.minutes}
-  end_time   {Time.now}
+  started_at {Time.now - 2.minutes}
+  ended_at   {Time.now}
 end
 
 Build.blueprint(:failure) do
