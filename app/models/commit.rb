@@ -2,6 +2,7 @@ class Commit < ActiveRecord::Base
   PASSING_BUILD= "passing_build"
   NOBUILDS     = "nobuilds"
   FAILED_BUILD = "failed_build"
+  RUNNING_BUILD = "running_build"
 
   identifier :identifier
 
@@ -11,7 +12,7 @@ class Commit < ActiveRecord::Base
 
   # Associations
   belongs_to :project
-  has_many :builds
+  has_many :builds, :dependent => :destroy
   has_many :bridges_as_parent, :class_name => "RevisionBridge", :foreign_key => :parent_id, :dependent => :destroy
   has_many :bridges_as_child, :class_name => "RevisionBridge", :foreign_key => :child_id, :dependent => :destroy
   has_many :children, :through => :bridges_as_parent, :class_name => "Commit"
@@ -79,6 +80,7 @@ class Commit < ActiveRecord::Base
 
   def build_status
     return NOBUILDS if builds.empty?
+    return RUNNING_BUILD unless builds.running.empty?
     builds.failing.empty? ? PASSING_BUILD : FAILED_BUILD
   end
 

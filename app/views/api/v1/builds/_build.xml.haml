@@ -1,8 +1,11 @@
 %build
+  %identifier= build.to_param
   %name= build.name
-  %status= build.state
+  %state= build.state
   %started_at= build.started_at
   %ended_at= build.ended_at
+  %created_at= build.created_at
   %commit_identifier= build.commit.identifier
   - unless build.new_record?
-    %build_api_uri= api_v1_project_commit_build_url(:project_id => build.commit.project, :commit_id => build.commit, :id => build, :format => :xml)
+    %public_key= build.commit.project.public_key
+    %api_uri= api_v1_project_commit_build_url(:project_id => build.commit.project, :commit_id => build.commit, :id => build, :format => :xml)

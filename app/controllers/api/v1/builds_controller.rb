@@ -45,7 +45,7 @@ class Api::V1::BuildsController < Api::BaseController
   private
     def commit
       @commit ||= project.commits.find_by_identifier(params[:commit_id])
-      @commit.nil? ? raise(ActiveRecord::RecordNotFound) : @commit
+      @commit.nil? ? project.commits.create!(:identifier => params[:commit_id]) : @commit
     end
 
     def build

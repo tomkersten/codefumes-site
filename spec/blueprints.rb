@@ -123,12 +123,9 @@ Build.blueprint do
   name       {Sham.name}
   started_at {Time.now - 2.minutes}
   ended_at   {Time.now}
+  state      "running"
 end
 
-Build.blueprint(:failure) do
-  state "failure"
-end
-
-Build.blueprint(:success) do
-  state "success"
-end
+Build.blueprint(:failure) {state "failure"}
+Build.blueprint(:success) {state "success"}
+Build.blueprint(:running) {}

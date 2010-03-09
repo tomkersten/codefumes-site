@@ -6,7 +6,7 @@ describe Build do
       :name => "value for name",
       :started_at => Time.now,
       :ended_at => Time.now,
-      :state => "value for status"
+      :state => "running"
     }
   end
 

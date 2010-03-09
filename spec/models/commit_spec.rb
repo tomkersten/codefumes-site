@@ -371,5 +371,12 @@ describe Commit do
       @commit.builds.create!(Build.plan(:failure))
       @commit.build_status.should == Commit::FAILED_BUILD
     end
+
+    it "returns the value of Commit::RUNNING when there is a build in a 'running' state associated with the commit" do
+      @commit.builds.create!(Build.plan(:success))
+      @commit.builds.create!(Build.plan(:running))
+      @commit.builds.create!(Build.plan(:failure))
+      @commit.build_status.should == Commit::RUNNING_BUILD
+    end
   end
 end

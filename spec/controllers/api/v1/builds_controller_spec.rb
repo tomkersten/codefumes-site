@@ -98,6 +98,14 @@ describe Api::V1::BuildsController do
           perform_request
           response.headers["Location"].should == api_v1_project_commit_build_url(:xml, @project, @commit, assigns[:build])
         end
+
+        context "when the commit identifier supplied has not been associated with the project yet" do
+          it "creates adds a new commit" do
+            @commit = Commit.new(Commit.plan)
+            perform_request
+            @project.commits.find_by_identifier(@commit.identifier)
+          end
+        end
       end
 
       context "when an invalid request is made" do
