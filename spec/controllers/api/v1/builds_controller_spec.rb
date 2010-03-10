@@ -59,6 +59,31 @@ describe Api::V1::BuildsController do
         response.status.should == "404 Not Found"
       end
     end
+
+    context "when supplying the name of the build instead of the ID" do
+      def perform_request
+        get :show, :project_id => @project.to_param, :commit_id => @commit.to_param, :id => @build.name
+      end
+
+      before(:each) do
+        @build = @commit.builds.create!(Build.plan)
+      end
+
+      it "assigns the specified project for the view template" do
+        perform_request
+        assigns[:build].should == @build
+      end
+
+      it "returns a response code of 200 OK" do
+        perform_request
+        response.status.should == "200 OK"
+      end
+
+      it "sets the 'Location' header to the build URI" do
+        perform_request
+        response.headers["Location"].should == api_v1_project_commit_build_url(:xml, @project, @commit, @build)
+      end
+    end
   end
 
   describe "a POST to create" do

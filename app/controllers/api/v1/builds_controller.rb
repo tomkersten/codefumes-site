@@ -49,7 +49,7 @@ class Api::V1::BuildsController < Api::BaseController
     end
 
     def build
-      @build ||= commit.builds.find_by_id(params[:id])
+      @build ||= commit.builds.find_by_id(params[:id]) || commit.builds.find_by_name(params[:id])
     end
 
     def build_params
