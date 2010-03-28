@@ -20,6 +20,5 @@ class PayloadProcessor
     RAILS_DEFAULT_LOGGER.error "########## Backtrace:"
     RAILS_DEFAULT_LOGGER.error exception.backtrace
     RAILS_DEFAULT_LOGGER.error "########## End of backtrace"
-    raise exception
   end
 end

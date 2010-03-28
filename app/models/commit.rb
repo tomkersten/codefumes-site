@@ -94,7 +94,7 @@ class Commit < ActiveRecord::Base
     def store_custom_attributes
       return if @custom_attributes.blank?
       unless @custom_attributes.is_a?(Hash)
-        raise ArgumentError, "Custom attributes must be key-value pairs"
+        raise ArgumentError, "Custom attributes must be key-value pairs (supplied: @custom_attributes.inspect)"
       end
 
       @custom_attributes.each do |name, value|
