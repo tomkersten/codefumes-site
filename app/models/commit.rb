@@ -70,7 +70,7 @@ class Commit < ActiveRecord::Base
   end
 
   def custom_attributes=(a_hash)
-    raise ArgumentErorr, "Hash expected" unless a_hash.is_a?(Hash)
+    raise ArgumentErorr, "Hash expected (got: #{a_hash.inspect})" unless a_hash.is_a?(Hash)
     @custom_attributes = a_hash.delete_if {|key, value| key == :custom_attributes}
   end
 
@@ -93,12 +93,25 @@ class Commit < ActiveRecord::Base
     # TODO: clean this up
     def store_custom_attributes
       return if @custom_attributes.blank?
-      unless @custom_attributes.is_a?(Hash)
-        raise ArgumentError, "Custom attributes must be key-value pairs (supplied: @custom_attributes.inspect)"
+
+      hashed_custom_attributes.each do |name, value|
+        custom_attributes.find_or_create_by_name(:name => name.to_s, :value => value.to_s)
+      end
+    end
+
+    def hashed_custom_attributes
+      return @custom_attributes if @custom_attributes.is_a?(Hash)
+
+      # TODO: Make this suck less...
+      # makes sure @custom attributes is an array of CommitAttribute objects
+      unless @custom_attributes.is_a?(Array) && @custom_attributes.reject {|attr| attr.is_a?(CommitAttribute)}.empty?
+        msg = "Custom attributes must be key-value pairs or collection "
+        msg += "of CommitAttribute objects (supplied: @custom_attributes.inspect)"
+        raise ArgumentError, msg
       end
 
-      @custom_attributes.each do |name, value|
-        custom_attributes.find_or_create_by_name(:name => name.to_s, :value => value.to_s)
+      @custom_attributes.inject({}) do |collection,current|
+        collection.merge(current.name => current.value)
       end
     end
 end
