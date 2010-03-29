@@ -38,7 +38,7 @@ class Commit < ActiveRecord::Base
     bridges_as_parent.destroy_all && bridges_as_parent.reload
     identifiers = csv_identifier_list.split(",").map(&:strip)
     children << identifiers.flatten.map do |identifier|
-      Commit.find_or_create_by_identifier(:identifier => identifier, :project_id => project_id)
+      Commit.find_or_create_by_identifier_and_project_id(:identifier => identifier, :project_id => project_id)
     end
   end
 
@@ -46,7 +46,7 @@ class Commit < ActiveRecord::Base
     bridges_as_child.destroy_all && bridges_as_child.reload
     identifiers = csv_identifier_list.split(",").map(&:strip)
     parents << identifiers.flatten.map do |identifier|
-      Commit.find_or_create_by_identifier(:identifier => identifier, :project_id => project_id)
+      Commit.find_or_create_by_identifier_and_project_id(:identifier => identifier, :project_id => project_id)
     end
   end
 

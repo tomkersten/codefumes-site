@@ -66,9 +66,9 @@ describe Commit do
     end
 
     context "when given a comma-separated list of identifiers" do
-      context "and the commit identifiers already exist" do
+      context "and the commit identifiers already exist (in the same project)" do
         before(:each) do
-          @associated_commits = 3.times.map {Commit.make}
+          @associated_commits = 3.times.map {Commit.make(:project_id => @commit.project_id)}
           @identifiers = @associated_commits.map {|c| c.identifier}.join(", ")
         end
 
@@ -138,9 +138,9 @@ describe Commit do
     end
 
     context "when given a comma-separated list of identifiers" do
-      context "and the commit identifiers already exist" do
+      context "and the commit identifiers already exist (in the same project)" do
         before(:each) do
-          @associated_commits = 3.times.map {Commit.make}
+          @associated_commits = 3.times.map {Commit.make(:project_id => @commit.project_id)}
           @identifiers = @associated_commits.map {|c| c.identifier}.join(", ")
         end
 

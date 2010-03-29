@@ -191,14 +191,16 @@ describe Project do
       end
     end
 
+    # Necessary after shifting to commits being project-specific?
     context "Project 1 has commits [A], Project 2 has commits [A,B]" do
       before(:each) do
-        @commit_1a = Commit.make
-        @commit_2a = Commit.make
-        @commit_2b = Commit.make(:parent_identifiers => @commit_2a.identifier)
+        @project_1 = Project.make(:public_key => "Project 1")
+        @project_2 = Project.make(:public_key => "Project 2")
+        @commit_1a = Commit.make(:project_id => @project_1.id)
+        @commit_2a = Commit.make(:project_id => @project_2.id)
+        @commit_2b = Commit.make(:project_id => @commit_2a.project_id)
+        @commit_2b.parent_identifiers = @commit_2a.identifier
         @commit_2b.parents.first.should == @commit_2a
-        @project_1 = Project.make(:public_key => "Project 1", :commits => [@commit_1a])
-        @project_2 = Project.make(:public_key => "Project 2", :commits => [@commit_2a, @commit_2b])
       end
 
       it "calling commit_head on Project 1, returns commit A's identifier'" do
@@ -228,7 +230,7 @@ describe Project do
 
     context "when a project has multiple commits" do
       before(:each) do
-        @commits = 5.times.map {Commit.make}
+        @commits = 5.times.map {Commit.make(:project_id => @project.id)}
         @commits.each_with_index do |commit, index|
           identifier = @commits[index+1] && @commits[index+1].identifier
           commit.child_identifiers = identifier || ""
