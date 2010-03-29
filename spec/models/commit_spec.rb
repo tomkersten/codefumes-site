@@ -106,6 +106,12 @@ describe Commit do
             @commit.child_identifiers = @identifiers
           }.should change(Commit, :count).by(3)
         end
+
+        it "associates the newly created parent commits with the same project" do
+          @commit.child_identifiers = @identifiers
+          @commit.project_id.should_not be_nil #sanity check
+          @commit.children.map {|c_commit| c_commit.project_id.should == @commit.project_id}
+        end
       end
 
       context "and the commit already has identifiers associated to it" do
@@ -173,21 +179,11 @@ describe Commit do
             @commit.parent_identifiers = @identifier_string
           }.should change(Commit, :count).by(3)
         end
-      end
 
-      context "and the commit already has identifiers associated to it" do
-        before(:each) do
-          existing = 2.times.map {Commit.make}
-          new_children = 2.times.map {Commit.make}
-          @existing_ids = existing.map(&:identifier).join(', ')
-          @new_ids = new_children.map(&:identifier).join(', ')
-          @commit.parent_identifiers = @existing_ids
-        end
-
-        it "associates the new commit identifiers as children" do
-          @commit.parent_identifiers = @new_ids
-          associated_identifiers = @commit.parents.map(&:identifier)
-          associated_identifiers.should == @new_ids.gsub(/\s/,'').split(",")
+        it "associates the newly created parent commits with the same project" do
+          @commit.parent_identifiers = @identifier_string
+          @commit.project_id.should_not be_nil #sanity check
+          @commit.parents.map {|p_commit| p_commit.project_id.should == @commit.project_id}
         end
       end
     end
