@@ -198,8 +198,9 @@ describe Project do
         @project_2 = Project.make(:public_key => "Project 2")
         @commit_1a = Commit.make(:project_id => @project_1.id)
         @commit_2a = Commit.make(:project_id => @project_2.id)
-        @commit_2b = Commit.make(:project_id => @commit_2a.project_id)
-        @commit_2b.parent_identifiers = @commit_2a.identifier
+
+        commit_2b_attrs = Commit.plan.merge(:parent_identifiers => @commit_2a.identifier, :project_id => @commit_2a.project_id)
+        @commit_2b = Commit.create!(commit_2b_attrs)
         @commit_2b.parents.first.should == @commit_2a
       end
 

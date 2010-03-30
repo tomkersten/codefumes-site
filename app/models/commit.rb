@@ -25,6 +25,7 @@ class Commit < ActiveRecord::Base
 
   # Lifecycle hooks
   after_save :store_custom_attributes
+  attribute_assignment_order :project_id, :identifier
 
   def to_param
     identifier
