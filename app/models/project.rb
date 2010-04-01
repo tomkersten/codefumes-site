@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
 
   attr_accessible :name, :public_key
 
-  has_many :commits, :include => [:custom_attributes, :parents]
+  has_many :commits, :include => [:custom_attributes, :parents], :dependent => :destroy
   has_many :payloads, :dependent => :destroy
   belongs_to :owner, :class_name => "User"
 

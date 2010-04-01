@@ -127,17 +127,12 @@ describe Project do
   describe "commits" do
     before(:each) do
       @project = Project.make
-      @commit = Commit.make
+      @commit = @project.commits.create!(Commit.plan)
     end
 
-    it "is associated with many commits" do
-      lambda {@project.commits << @commit}.should_not raise_error
-    end
-
-    it "does not destroy associated commits when destroyed" do
-      Commit.find_by_id(@commit.id).should == @commit
+    it "destroys associated commits when destroyed" do
       @project.destroy
-      Commit.find_by_id(@commit.id).should == @commit
+      Commit.find_by_id(@commit.id).should be_nil
     end
   end
 
