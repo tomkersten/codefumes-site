@@ -5,9 +5,10 @@ class Commit < ActiveRecord::Base
   RUNNING_BUILD = "running_build"
 
   identifier :identifier
+  attribute_assignment_order :project_id, :identifier
 
   # Validations
-  validates_presence_of :identifier
+  validates_presence_of :identifier, :project_id
   validates_uniqueness_of :identifier, :scope => :project_id
 
   # Associations
@@ -25,7 +26,6 @@ class Commit < ActiveRecord::Base
 
   # Lifecycle hooks
   after_save :store_custom_attributes
-  attribute_assignment_order :project_id, :identifier
 
   def to_param
     identifier

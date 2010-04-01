@@ -10,7 +10,8 @@ class PayloadProcessor
       if commit
         commit.update_attributes(normalized_commit_params)
       else
-        commit = project.commits.create!(normalized_commit_params) # fails fast
+        # merging in project_id is necessary for parent_identifiers=
+        commit = project.commits.create!(normalized_commit_params.merge(:project_id => project.id)) # fails fast
       end
     end
   rescue => exception
