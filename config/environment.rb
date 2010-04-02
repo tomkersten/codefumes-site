@@ -7,8 +7,9 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  config.gem 'compass', :version => '>= 0.8.17'
+  config.gem 'haml', :version => '>=2.2.20'
   config.gem 'authlogic'
-  config.gem 'haml'
   config.gem 'rubyist-aasm', :lib => 'aasm', :source => "http://gems.github.com"
 
   # Settings in config/environments/* take precedence over those specified here.
