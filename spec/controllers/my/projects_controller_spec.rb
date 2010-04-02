@@ -98,6 +98,26 @@ describe My::ProjectsController do
         response.should redirect_to(short_uri_path(@project))
       end
     end
+
+    describe "a DELETE to destroy" do
+      before(:each) do
+        @project = Project.make(:public, :owner => @user)
+      end
+
+      def perform_request
+        delete :destroy, :id => @project
+      end
+
+      it "redirects to my list of projects" do
+        perform_request
+        response.should redirect_to(my_projects_path)
+      end
+
+      it "deletes the project from my account" do
+        perform_request
+        Project[@project].should be_nil
+      end
+    end
   end
 
   context "an anonymous request" do

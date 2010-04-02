@@ -22,6 +22,12 @@ class My::ProjectsController < My::BaseController
     redirect_to short_uri_path(project)
   end
 
+  def destroy
+    project.destroy
+    flash[:notice] = "'#{project}' project and associated content has been removed."
+    redirect_to my_projects_path
+  end
+
   private
     def project
       @project ||= current_user.projects[params[:id]]

@@ -28,6 +28,7 @@ class Project < ActiveRecord::Base
   def to_param
     public_key
   end
+  alias_method :permalink, :to_param
 
   def to_s
     name.blank? ? public_key : name

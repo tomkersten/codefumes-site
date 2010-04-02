@@ -29,4 +29,20 @@ describe "Project Administration" do
     end
     response.should have_tag(".visibility.private")
   end
+
+  it "deleting a project" do
+    extra_project = Project.make(:owner => @user)
+    visit edit_my_project_path(@project)
+    within("#delete_project_#{@project.id}") do |delete_form|
+      delete_form.click_button
+    end
+
+    within(".projects") do |project_list|
+      project_list.should_not have_text(@project)
+    end
+
+    within(".notice") do |notice_box|
+      notice_box.should have_tag(".notice")
+    end
+  end
 end

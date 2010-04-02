@@ -5,3 +5,5 @@
     = f.submit "Save changes"
     or
     = link_to "Cancel", short_uri_path(@project)
+  - form_for [:my, @project], :html => {:method => :delete, :class => :delete_project, :id => dom_id(@project, :delete)} do |f|
+    = f.submit "Click here to delete this project"
