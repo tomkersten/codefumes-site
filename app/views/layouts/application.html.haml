@@ -3,21 +3,23 @@
 !!! Strict
 %html
   %head
-    = stylesheet_link_tag 'tenplate'
+    = stylesheet_link_tag 'compiled/ie'
+    = stylesheet_link_tag 'compiled/screen'
+    = stylesheet_link_tag 'compiled/application'
     = yield :head
-  %body
-    #header
-      .grid
+  %body.bp.three-col
+    #container
+      #header
         %h1
-          = link_to image_tag('logo_visual.png', :alt => ''), root_path, :class => 'logo visual'
-          = link_to image_tag('logo_textual.png', :alt => 'Codefumes'), root_path, :class => 'logo textual'
-        %p What does your code smell like?
+          = link_to "Codefumes.com", root_path, :class => 'logo visual'
         .session
           = render :partial => 'layouts/session_info_and_links'
 
-    #grid
-      = render :partial => "layouts/flashes"
-      = yield
+      #content
+        = render :partial => "layouts/flashes"
+        = yield
+      #footer
+        = link_to "Codefumes.com", root_path
 
   = javascript_include_tag %w(raphael jquery initializer jquery.dates grid svgmodal visualizer main application)
 

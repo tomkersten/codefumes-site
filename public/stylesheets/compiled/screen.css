@@ -437,20 +437,18 @@ body.three-col #header, body.three-col #footer {
   * html body.three-col #header, * html body.three-col #footer {
     overflow-x: hidden; }
 /* line 31, ../../../app/stylesheets/screen.sass */
-body.three-col #sidebar {
+body.three-col #sidebar, body.three-col #content {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 310px; }
-  /* line 101, ../../../vendor/gems/compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html body.three-col #sidebar {
-    overflow-x: hidden; }
-/* line 35, ../../../app/stylesheets/screen.sass */
-body.three-col #content {
+  width: 470px;
   display: inline;
   float: left;
   margin-right: 0;
-  width: 630px; }
+  width: 470px; }
   /* line 101, ../../../vendor/gems/compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-  * html body.three-col #content {
+  * html body.three-col #sidebar, * html body.three-col #content {
+    overflow-x: hidden; }
+  /* line 101, ../../../vendor/gems/compass-0.8.17/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
+  * html body.three-col #sidebar, * html body.three-col #content {
     overflow-x: hidden; }
