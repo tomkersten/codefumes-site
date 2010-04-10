@@ -1,6 +1,6 @@
 .main
   %h1 Send me a link to reset my password
-  - form_for User.new, :url => support_password_reset_request_path, :method => :post, :html => {:id => :new_reset_password_request, :class => nil} do |f|
+  - semantic_form_for User.new, :url => support_password_reset_request_path, :method => :post, :html => {:id => :new_reset_password_request, :class => "float-right"} do |f|
     = f.label :email
     = f.text_field :email
     = submit_tag "Submit"

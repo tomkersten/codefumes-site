@@ -1,0 +1,27 @@
+dl.account_info
+  :text-align left
+  dt
+    :font-size 2em
+  dd
+    :font-size 1.0em
+  #current_plan span
+    :font-weight bold
+
+ul
+  :text-align left
+  :margin 0
+  li
+    :list-style-type none
+  &.projects
+    :width 100%
+    :line-height 2em
+    :font-size 2em
+    li
+      :margin .5em 0
+      :padding-left 0.5em
+      &.passing_build
+        :background-color #B8FFBE
+      &.failed_build
+        :background-color #FF948A
+      &.running_build
+        :background-color #FFF2A8

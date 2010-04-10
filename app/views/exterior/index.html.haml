@@ -1,15 +1,32 @@
 .main
-  %h1 Track. Review. Improve.
-  %ul
-    %li
-      %h2 Step 1. Install codefumes_harvester:
-      %p
-        sudo gem install codefumes_harvester
-    %li
-      %h2 Step 2. Run this:
-      %p
-        = "harvest_repo_metrics  --project_key #{@public_key}"
-    %li
-      %h2 Step 3. Review:
-      %p
-        = link_to short_uri_url(@public_key), short_uri_url(@public_key), :id => :short_uri
+  - if RAILS_ENV == "production"
+    %h1 Track. Review. Improve.
+    %ul
+      %li
+        %h2 Step 1. Install codefumes_harvester:
+        %p
+          sudo gem install codefumes_harvester
+      %li
+        %h2 Step 2. Run this:
+        %p
+          = "cf_harvest_repo_metrics  --project_key #{@public_key}"
+      %li
+        %h2 Step 3. Review:
+        %p
+          = link_to short_uri_url(@public_key), short_uri_url(@public_key), :id => :short_uri
+  - else
+    - content_for(:page_layout_class) do
+      one-col
+
+    .notify_form
+      %h1 Get notified when we launch.
+      %p We'll never spam you or share your email address. Promise.
+      %form{:action => 'http://madmimi.com/signups/subscribe/2652', :method => 'post', :id => "launch_signup"}
+        %fieldset{:class => "inputs"}
+          %ol
+            %li{:class => "string optional"}
+              %input{:id => 'signup_email', :name => 'signup[email]', :type => 'text'}
+        %fieldset{:class => "buttons"}
+          %ol
+            %li{:class => "commit"}
+              %input{:name => 'commit', :type => 'submit', :value => 'Sign me up'}

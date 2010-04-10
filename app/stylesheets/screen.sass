@@ -12,19 +12,30 @@
 
 //Recommended Blueprint configuration with scoping and semantic layout:
 +blueprint-typography("body.bp")
-+blueprint-scaffolding("body.bp")
+//+blueprint-scaffolding("body.bp")
+
 body.bp
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
+  ul
+    :margin 0
 form.bp
   +blueprint-form
 
+body.one-col
+  #usable_area
+    +container
+  #header, #footer
+    +column(!blueprint_grid_columns)
+  #content
+    +column(!blueprint_grid_columns, true)
+
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.three-col
-  #container
+  #usable_area
     +container
   #header, #footer
     +column(!blueprint_grid_columns)
@@ -37,3 +48,4 @@ body.three-col
     !content_columns = floor(!blueprint_grid_columns / 2)
     // true means it's the last column in the row
     +column(!content_columns, true)
+

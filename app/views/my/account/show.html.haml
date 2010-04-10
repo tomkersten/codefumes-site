@@ -1,16 +1,22 @@
+- content_for(:page_layout_class) do
+  one-col
+
 .main
-  %h1 Your Info
-  %dl
-    %dt Login
-    %dd= @user.login
-    %dt API key
-    %dd= @user.single_access_token
-    %dt Email address
-    %dd= @user.email
+  %dl.account_info
+    %dt Account Information
+    %dd
+      Login:
+      = @user.login
+    %dd
+      API key:
+      = @user.single_access_token
+    %dd
+      Email address:
+      = @user.email
     - paying_user_content do
-      %dt#current_plan Current Plan
-      %dd
-        = @user.current_plan
+      %dd#current_plan
+        Current Plan:
+        %span= @user.current_plan
         = link_to "Edit", edit_my_subscription_path
     - non_paying_user_content do
       = link_to "Track your private projects too", new_my_subscription_path, :id => 'new_subscription'

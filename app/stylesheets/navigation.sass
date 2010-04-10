@@ -1,9 +1,20 @@
-#header h1
-  +clearfix
-  :float left
+#header
+  a
+    :text-decoration none
+    &:hover
+      :text-decoration underline
+  h1
+    +clearfix
+    :float left
 div.session
   +clearfix
-  li
-    :float right
-    :padding 0 0.5em
-    :list-style-type none
+  :float right
+  ul
+    +horizontal-list
+
+#footer
+  :text-align right
+  a
+    :color #AAA
+    :text-decoration none
+

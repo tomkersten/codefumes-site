@@ -7,19 +7,16 @@
     = stylesheet_link_tag 'compiled/screen'
     = stylesheet_link_tag 'compiled/application'
     = yield :head
-  %body.bp.three-col
-    #container
+  %body.bp{:class => yield(:page_layout_class) || "three-col"}
+    #usable_area.content
       #header
         %h1
           = link_to "Codefumes.com", root_path, :class => 'logo visual'
         .session
           = render :partial => 'layouts/session_info_and_links'
-
       #content
         = render :partial => "layouts/flashes"
         = yield
-      #footer
-        = link_to "Codefumes.com", root_path
 
   = javascript_include_tag %w(raphael jquery initializer jquery.dates grid svgmodal visualizer main application)
 

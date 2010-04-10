@@ -1,0 +1,55 @@
+form
+  +bold-labels
+.stack
+  +stack-form(100%,92%,3%)
+  &.buttons-right
+    +stack-form(100%,92%,3%,"buttons-right")
+
+.float-left
+  +float-form-left(100%,20%,70%,3%)
+  &.buttons-right
+    +float-form-left(100%,20%,70%,3%,"buttons-right")
+  .buttons .text
+    :display inline
+    :align left
+    :margin 0.5em 0.5em 0 0
+    a
+      :display inline
+      :padding 0.6em
+      :line-height 2.5em
+
+.float-right
+  +float-form-right(100%,20%,70%,3%)
+  &.buttons-right
+    +float-form-right(100%,20%,70%,3%,"buttons-right")
+  .buttons .text
+    :display inline
+    :align right
+    :margin 0.5em 0.5em 0 0
+    a
+      :display inline
+      :padding 0.6em
+      :line-height 2.5em
+
+.float-right, .float-left, .stack
+  &.input-float
+    +float-inputs
+  &.input-grid
+    +grid-inputs(200px)
+
+#login_form
+  :width 40em
+  :padding 5em 0 0 17em
+
+.notify_form
+  :width 45em
+  :padding 5em 0 0 17em
+  form#launch_signup
+    ol
+      :list-style-type none
+    .inputs
+      :display inline
+      input
+        :width 20em
+    .buttons
+      :display inline

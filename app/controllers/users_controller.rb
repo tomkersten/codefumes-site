@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
 
   def new
+    redirect_to root_path if RAILS_ENV == "production"
     @user = User.new
   end
 
