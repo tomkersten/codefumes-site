@@ -6,7 +6,7 @@
     = stylesheet_link_tag 'compiled/ie'
     = stylesheet_link_tag 'compiled/screen'
     = yield :head
-  %body{:class => yield(:page_layout_class) || "three-col"}
+  %body{:class => yield(:page_layout_class)}
     #usable_area
       #header
         %h1
@@ -16,6 +16,9 @@
       #content
         = render :partial => "layouts/flashes"
         = yield
+      - if sidebar_content = yield(:sidebar)
+        #sidebar
+          = sidebar_content
 
   = javascript_include_tag %w(raphael jquery initializer jquery.dates grid svgmodal visualizer main application)
 

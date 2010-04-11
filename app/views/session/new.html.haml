@@ -1,6 +1,3 @@
-- content_for(:page_layout_class) do
-  one-col
-
 .main
   - semantic_form_for @user_session, :url => session_path, :method => :post, :html => {:id => :login_form, :class => 'float-right'} do |f|
     %h1 Sign in
