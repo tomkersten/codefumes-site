@@ -1,6 +1,12 @@
+- content_for(:page_layout_class) do
+  one-col
 .main
-  %h1 Send me a link to reset my password
-  - semantic_form_for User.new, :url => support_password_reset_request_path, :method => :post, :html => {:id => :new_reset_password_request, :class => "float-right"} do |f|
-    = f.label :email
-    = f.text_field :email
-    = submit_tag "Submit"
+  %h1 Enter your email...
+  %h2 and we'll send you a link to reset your password
+  - semantic_form_for User.new, :url => support_password_reset_request_path, :method => :post, :html => {:id => :new_reset_password_request, :class => "float-right primary-content"} do |f|
+    = f.input :email
+    - f.buttons do
+      = f.commit_button "Send a link"
+      %li.text
+        = link_to "Nevermind", login_path
+        or

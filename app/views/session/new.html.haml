@@ -3,7 +3,7 @@
 
 .main
   - semantic_form_for @user_session, :url => session_path, :method => :post, :html => {:id => :login_form, :class => 'float-right'} do |f|
-    = f.error_messages
+    %h1 Sign in
     = f.inputs :login, :password
     - f.buttons do
       = f.commit_button :button_html => {:id => "attempt_login", :value => "Login"}

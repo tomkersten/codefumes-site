@@ -5,10 +5,9 @@
   %head
     = stylesheet_link_tag 'compiled/ie'
     = stylesheet_link_tag 'compiled/screen'
-    = stylesheet_link_tag 'compiled/application'
     = yield :head
-  %body.bp{:class => yield(:page_layout_class) || "three-col"}
-    #usable_area.content
+  %body{:class => yield(:page_layout_class) || "three-col"}
+    #usable_area
       #header
         %h1
           = link_to "Codefumes.com", root_path, :class => 'logo visual'

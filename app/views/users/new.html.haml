@@ -1,18 +1,13 @@
+- content_for(:page_layout_class) do
+  one-col
+
 .main
-  %h1 Setting up a new account
-  - form_for @user do |f|
-    = error_messages_for(:user)
-    %div
-      = f.label :email
-      = f.text_field :email
-    %div
-      = f.label :login
-      = f.text_field :login
-    %div
-      = f.label :password
-      = f.password_field :password
-    %div
-      = f.label :password_confirmation, "Confirm Password"
-      = f.password_field :password_confirmation
-    %div
-      = submit_tag "Sign up", :id => :create_user
+  - semantic_form_for @user, :html => {:class => "primary-content"} do |f|
+    %h1 Sign up
+    - f.inputs do
+      = f.input :email
+      = f.input :login
+      = f.input :password
+      = f.input :password_confirmation, :label => "Confirm Password"
+    - f.buttons do
+      = f.commit_button "Sign up", :button_html => {:id => :create_user}
