@@ -7,6 +7,14 @@
 // Import all the default blueprint modules so that we can access their mixins.
 @import blueprint
 
+@import compass/utilities.sass
+
+@import navigation.sass
+@import partials/lists.sass
+
+@import partials/formtastic_base.sass
+@import partials/cf_form_customizations.sass
+@import partials/skintastic.sass
 
 //Recommended Blueprint configuration with scoping and semantic layout:
 +blueprint-typography("body")
@@ -24,7 +32,7 @@ body
 //    :margin 0
 
 body
-  #usable_area
+  #usable-area
     +container
   #header, #footer, #content
     +column(!blueprint_grid_columns, true)
@@ -40,3 +48,28 @@ body
       !content_columns = floor(!blueprint_grid_columns / 2)
       // true means it's the last column in the row
       +column(!content_columns, true)
+  &.project-page #content
+    :text-align left
+    a
+      :color= !quiet_color
+    h1
+      +float-left
+    ul
+      &.project-administration, &.visualizations
+        +horizontal-list
+      &.project-administration
+        +float-right
+    dl
+      :clear both
+      :text-align left
+      dt
+        :width 6em
+        :padding-right 0.5em
+        +float-left
+      dd
+        +clearfix
+    #canvas
+      +column(12)
+    #details
+      +prepend(1)
+      +column(11, true)
