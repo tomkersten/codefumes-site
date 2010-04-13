@@ -17,11 +17,4 @@ ul
     :line-height 2em
     :font-size 2em
     li
-      :margin .5em 0
-      :padding-left 0.5em
-      &.passing_build
-        :background-color #B8FFBE
-      &.failed_build
-        :background-color #FF948A
-      &.running_build
-        :background-color #FFF2A8
+      +build_status_styles

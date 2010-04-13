@@ -33,6 +33,8 @@ body
 
 
 body
+  .main
+    +clearfix
   #usable-area
     +container
   #header, #footer, #content
@@ -49,6 +51,7 @@ body
       !content_columns = floor(!blueprint_grid_columns / 2)
       // true means it's the last column in the row
       +column(!content_columns, true)
+
   &.project-page #content
     :text-align left
     a
@@ -60,6 +63,8 @@ body
         +horizontal-list
       &.project-administration
         +float-right
+      &.commits li
+        +build_status_styles
     dl
       :clear both
       :text-align left
@@ -70,6 +75,7 @@ body
       dd
         +clearfix
     #canvas
+      :clear both
       +column(12)
     #details
       +prepend(1)

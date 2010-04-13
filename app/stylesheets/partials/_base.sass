@@ -45,3 +45,14 @@
 // Use this to calculate the width based on the total width.
 // Or you can set !blueprint_grid_width to a fixed value and unset !blueprint_container_size -- it will be calculated for you.
 !blueprint_grid_width   = (!blueprint_container_size + !blueprint_grid_margin) / !blueprint_grid_columns - !blueprint_grid_margin
+
+=build_status_styles
+  :margin .5em 0
+  :padding-left 0.5em
+  &.passing_build
+    :background-color #B8FFBE
+  &.failed_build
+    :background-color #FF948A
+  &.running_build
+    :background-color #FFF2A8
+
