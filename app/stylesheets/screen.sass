@@ -58,13 +58,25 @@ body
       :color= !quiet_color
     h1
       +float-left
+    p.reserve
+      :clear both
+      :font-size 1.5em
     ul
       &.project-administration, &.visualizations
         +horizontal-list
       &.project-administration
+        :padding-top .5em
         +float-right
+        .visibility
+          :line-height 2.5em
       &.commits li
         +build_status_styles
+      &.instructions
+        :color= !quiet_color
+        li
+          p
+            :font-size 1.5em
+            +prepend(1)
     dl
       :clear both
       :text-align left
