@@ -315,13 +315,11 @@ describe Project do
   end
 
   describe "build_status" do
-    xit "delegates the call down to the project's commit head" do
-      project = Project.make(:public)
-      build_state = "call_delegated"
-      mock_commit = mock('Commit', :build_status => build_state)
-
-      project.should_receive(:commit_head).and_return(mock_commit)
-      project.build_status.should == build_state
+    it "returns the status of the commit_head" do
+      project = Project.make
+      commit = Commit.make(:project => project)
+      Build.make(:commit => commit, :state => 'running')
+      project.build_status.should == 'running_build'
     end
   end
 end
