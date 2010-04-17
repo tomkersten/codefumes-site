@@ -75,7 +75,7 @@ class Project < ActiveRecord::Base
   end
 
   def build_status
-    commit_head && commit_head.build_status
+    commit_head && commit_head.build_status || Commit::NOBUILDS
   end
 
   private

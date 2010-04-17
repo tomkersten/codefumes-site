@@ -321,5 +321,12 @@ describe Project do
       Build.make(:commit => commit, :state => 'running')
       project.build_status.should == 'running_build'
     end
+
+    context "when the commit_head is nil" do
+      it "returns 'nobuilds'" do
+        project = Project.make
+        project.build_status.should == Commit::NOBUILDS
+      end
+    end
   end
 end
