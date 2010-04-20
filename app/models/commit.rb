@@ -1,5 +1,5 @@
 class Commit < ActiveRecord::Base
-  PASSING_BUILD= "passing_build"
+  SUCCESSFUL_BUILD= "successful_build"
   NOBUILDS     = "nobuilds"
   FAILED_BUILD = "failed_build"
   RUNNING_BUILD = "running_build"
@@ -86,7 +86,7 @@ class Commit < ActiveRecord::Base
   def build_status
     return NOBUILDS if builds.empty?
     return RUNNING_BUILD unless builds.running.empty?
-    builds.failing.empty? ? PASSING_BUILD : FAILED_BUILD
+    builds.failing.empty? ? SUCCESSFUL_BUILD : FAILED_BUILD
   end
 
   private

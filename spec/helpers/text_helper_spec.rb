@@ -15,9 +15,9 @@ describe TextHelper do
 
   describe "build_status_class_for" do
     context "when passed in a Project" do
-      it "returns '#{Commit::PASSING_BUILD}' if the project passed in is in a '#{Commit::PASSING_BUILD}' state" do
-        project = mock_model(Project, :build_status => Commit::PASSING_BUILD)
-        helper.build_status_class_for(project).should == Commit::PASSING_BUILD
+      it "returns '#{Commit::SUCCESSFUL_BUILD}' if the project passed in is in a '#{Commit::SUCCESSFUL_BUILD}' state" do
+        project = mock_model(Project, :build_status => Commit::SUCCESSFUL_BUILD)
+        helper.build_status_class_for(project).should == Commit::SUCCESSFUL_BUILD
       end
 
       it "returns '#{Commit::FAILED_BUILD}' if the project passed in is in a '#{Commit::FAILED_BUILD}' state" do
@@ -32,9 +32,9 @@ describe TextHelper do
     end
 
     context "when passed in a Commit" do
-      it "returns '#{Commit::PASSING_BUILD}' if the project passed in is in a '#{Commit::PASSING_BUILD}' state" do
-        project = mock_model(Project, :build_status => Commit::PASSING_BUILD)
-        helper.build_status_class_for(project).should == Commit::PASSING_BUILD
+      it "returns '#{Commit::SUCCESSFUL_BUILD}' if the project passed in is in a '#{Commit::SUCCESSFUL_BUILD}' state" do
+        project = mock_model(Project, :build_status => Commit::SUCCESSFUL_BUILD)
+        helper.build_status_class_for(project).should == Commit::SUCCESSFUL_BUILD
       end
 
       it "returns '#{Commit::FAILED_BUILD}' if the project passed in is in a '#{Commit::FAILED_BUILD}' state" do

@@ -126,6 +126,6 @@ Build.blueprint do
   state      "running"
 end
 
-Build.blueprint(:failure) {state "failed"}
-Build.blueprint(:success) {state "success"}
+Build.blueprint(:failed) {state "failed"}
+Build.blueprint(:successful) {state "successful"}
 Build.blueprint(:running) {}

@@ -23,7 +23,7 @@ describe "Project Builds" do
   end
 
   it "marking projects with a failed build associated with the most recent commit" do
-    @commit.builds.create!(Build.plan(:failure))
+    @commit.builds.create!(Build.plan(:failed))
     visit my_projects_path
     response.should have_tag(".#{Commit::FAILED_BUILD}")
   end
@@ -34,10 +34,10 @@ describe "Project Builds" do
     response.should_not have_tag(".#{Commit::FAILED_BUILD}")
   end
 
-  it "marks projects in a 'clean' state as '#{Commit::PASSING_BUILD}'" do
-    @commit.builds.create!(Build.plan(:success))
+  it "marks projects in a 'clean' state as '#{Commit::SUCCESSFUL_BUILD}'" do
+    @commit.builds.create!(Build.plan(:successful))
     visit my_projects_path
-    response.should have_tag(".#{Commit::PASSING_BUILD}")
+    response.should have_tag(".#{Commit::SUCCESSFUL_BUILD}")
   end
 
   it "doesn't throw an error if a project does not have a build status" do
