@@ -7,13 +7,12 @@
         %p
           sudo gem install codefumes_harvester
       %li
-        %h2 Step 2. Run this:
+        %h2 Step 2. Run this on your project's repository:
         %p
-          = "cf_harvest_repo_metrics  --project_key #{@public_key}"
+          = "cf_harvest_repo_metrics"
       %li
         %h2 Step 3. Review:
-        %p
-          = link_to short_uri_url(@public_key), short_uri_url(@public_key), :id => :short_uri
+        %p Visit the link printed out when the command finishes
   - else
     .notify_form
       %h1 Get notified when we launch.

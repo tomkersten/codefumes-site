@@ -28,15 +28,15 @@ describe Api::V1::ProjectsController do
   end
 
   describe "a POST to create" do
+    before(:each) do
+      @params = Project.plan
+    end
+
     def perform_request
       post :create, :project => @params
     end
 
     context "with valid params" do
-      before(:each) do
-        @params = Project.plan
-      end
-
       it "creates a project" do
         lambda {
           perform_request
@@ -52,8 +52,7 @@ describe Api::V1::ProjectsController do
 
     context "with invalid parameters" do
       before(:each) do
-        existing_project = Project.make
-        @params = Project.plan.merge(:public_key => existing_project.public_key)
+        Project.stub!(:new).and_return(mock_model(Project, :save => false))
       end
 
       it "does not set the location header" do

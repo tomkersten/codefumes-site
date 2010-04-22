@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
   before_validation_on_create :assign_private_key
   before_validation :set_privatized_at
 
-  attr_accessible :name, :public_key
+  attr_accessible :name
 
   has_many :commits, :include => [:custom_attributes, :parents], :dependent => :destroy
   has_many :payloads, :dependent => :destroy
@@ -80,9 +80,7 @@ class Project < ActiveRecord::Base
 
   private
     def assign_public_key
-      if self.public_key.blank?
-        self.public_key = self.class.generate_public_key
-      end
+      self.public_key = self.class.generate_public_key
     end
 
     def assign_private_key

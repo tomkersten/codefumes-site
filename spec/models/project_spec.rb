@@ -13,16 +13,24 @@ describe Project do
     end
   end
 
-  describe "validation" do
-    def initialize_with(options)
-      Project.new(Project.plan(options))
-    end
+  describe "validations" do
+    context "on visibility" do
+      before {@project = Project.new}
 
-    it "requires a unique public_key" do
-      @existing_project = Project.make
-      @project2 = initialize_with(:public_key => @existing_project.public_key)
-      lambda{@project2.save!}.should raise_error
-      @project2.errors.on(:public_key).should_not be_nil
+      it "supports 'private'" do
+        @project.visibility = 'private'
+        @project.should be_valid
+      end
+
+      it "supports 'public'" do
+        @project.visibility = 'public'
+        @project.should be_valid
+      end
+
+      it "doesn't support other values" do
+        @project.visibility = 'cilbup'
+        @project.should_not be_valid
+      end
     end
   end
 
@@ -33,11 +41,11 @@ describe Project do
         @project.public_key.should_not be_nil
       end
 
-      it "does not modify the public_key if a valid one is supplied" do
+      it "does not allow a custom public key" do
         params = Project.plan
         public_key = params[:public_key]
         @project = Project.create(params)
-        @project.public_key.should == public_key
+        @project.public_key.should_not == public_key
       end
 
       it "generates a private_key" do
@@ -93,7 +101,7 @@ describe Project do
       end
     end
   end
-  
+
   describe "visibility" do
     it "defaults to public" do
       Project.new.visibility.should == Project::PUBLIC
@@ -105,7 +113,7 @@ describe Project do
       @project = Project.make
     end
 
-    [:private_key].each do |attribute_name|
+    [:private_key, :public_key].each do |attribute_name|
       it "attribute.to_s" do
         original_attribute_value = @project.send(attribute_name)
         new_attribute_value = original_attribute_value + "_different_value"
@@ -114,14 +122,13 @@ describe Project do
         @project.send(attribute_name).should == original_attribute_value
       end
     end
-    
+
     it "visibility" do
       @project.visibility.should == Project::PUBLIC
       @project.update_attributes(:visibility => Project::PRIVATE)
       @project.reload
       @project.visibility.should == Project::PUBLIC
     end
-    
   end
 
   describe "commits" do
