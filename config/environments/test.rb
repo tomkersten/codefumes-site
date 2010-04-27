@@ -1,25 +1,27 @@
 # Settings specified here will take precedence over those in config/environment.rb
 config.gem 'webrat', :lib => false
-config.gem 'rspec-rails', :lib => false, :version => '>= 1.2.2'
-config.gem 'rspec', :lib => false, :version => '>= 1.2.2'
-config.gem 'cucumber', :version => ">= 0.3.103"
+config.gem 'rspec-rails', :lib => false, :version => '>= 1.3.2'
+config.gem 'rspec', :lib => false, :version => '>= 1.3.0'
+config.gem 'cucumber', :version => ">= 0.6.2"
+config.gem 'cucumber-rails', :version => ">= 0.3.0"
 config.gem 'ZenTest', :lib => 'zentest'
 config.gem 'builder'
 config.gem 'diff-lcs', :lib => 'diff/lcs'
 config.gem 'nokogiri'
 config.gem 'treetop'
 config.gem 'term-ansicolor', :lib => 'term/ansicolor'
-config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com', :version => '>= 1.0.3'
+config.gem 'notahat-machinist', :lib => 'machinist', :version => '>= 1.0.3'
 config.gem 'faker', :version => '>= 0.3.1'
 config.gem 'bmabey-email_spec', :lib => 'email_spec', :source => 'http://gems.github.com'
-config.gem 'jscruggs-metric_fu', :version => '1.1.5', :lib => 'metric_fu', :source => 'http://gems.github.com'
+config.gem 'metric_fu', :version => '1.3.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
 config.gem 'topfunky-gruff', :version => '0.3.5', :lib => 'gruff', :source => 'http://gems.github.com'
 config.gem 'flay', :version => ">= 1.3.0"
-config.gem 'sexp_processor', :version => ">= 3.0.1"
-config.gem 'ruby_parser', :version => ">= 2.0.2"
-config.gem 'flog', :version => ">= 2.1.2"
+config.gem 'sexp_processor', :version => ">= 3.0.3"
+config.gem 'ruby_parser', :version => ">= 2.0.4"
+config.gem 'flog', :version => ">= 2.2.0"
 config.gem 'relevance-rcov', :version => ">= 0.8.3.4", :lib => 'rcov'
-config.gem 'mojombo-chronic', :version => ">= 0.3.0", :source => 'http://gems.github.com', :lib => 'chronic'
+config.gem 'caleb-chronic', :version => ">= 0.3.0", :lib => 'chronic'
+config.gem 'polyglot', :version => ">= 0.3.1"
 
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
