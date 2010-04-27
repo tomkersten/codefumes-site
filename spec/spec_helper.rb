@@ -8,6 +8,7 @@ require 'machinist/active_record'
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 require 'authlogic/test_case'
 require 'webrat'
+require 'cucumber/rails/rspec'
 
 
 Webrat.configure do |config|

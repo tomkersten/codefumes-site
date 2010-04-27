@@ -5,9 +5,9 @@ Given /^no projects exist$/ do
   Project.destroy_all
 end
 
-Given /^the "(.*)" project has been created$/ do |public_key|
-  @project = Project.make(public_key.to_sym)
-  raise "Project not created correctly (public_key: #{@project.public_key}" unless @project.public_key == public_key.to_s
+Given /^the "(.*)" project has been created$/ do |name|
+  @project = Project.make(name.to_sym)
+  raise "Project not created correctly (public_key: #{@project.public_key}" unless @project.name == name.to_s
 end
 
 Given /^the project has (\d+) commits$/ do |count|

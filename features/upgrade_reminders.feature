@@ -10,10 +10,10 @@ be able to "add" content to a project).
     Given the database has been set up with the standard plans
     And Dora signs in
     And she has claimed the following projects:
-    |public_key  |visibility  |privatized_at  |
-    |project1    |private     |9.days.ago     |
-    |project2    |private     |8.days.ago     |
-    |project3    |private     |6.days.ago     |
+    |name        |public_key  |visibility  |privatized_at  |
+    |project1    |project1    |private     |9.days.ago     |
+    |project2    |project2    |private     |8.days.ago     |
+    |project3    |project3    |private     |6.days.ago     |
 
 
   Scenario: Being prompted to upgrade on "extra" private projects

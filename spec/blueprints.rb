@@ -52,17 +52,17 @@ Project.blueprint(:private) do
 end
 
 Project.blueprint(:twitter_tagger) do
-  name        "Twitter Tagger"
+  name        "twitter_tagger"
   public_key  "twitter_tagger"
   visibility  Project::PUBLIC
-  owner       {User.make(:dora)}
+  owner       {User.find_by_login("dora.developer") || User.make(:dora)}
 end
 
 Project.blueprint(:prideo) do
-  name        "Private Video Application"
+  name        "prideo"
   public_key  "prideo"
   visibility  Project::PRIVATE
-  owner       {User.make(:dora)}
+  owner       {User.find_by_login("dora.developer") || User.make(:dora)}
 end
 
 Commit.blueprint do

@@ -1,6 +1,6 @@
 When /^he fills out and submits in the subscription form, selecting the (\w+) plan$/ do |plan_type|
   # fill in form elements when we know wtf they are
-  Given "I choose \"#{plan_type}\""
+  choose(plan_type)
   click_button("Review purchase")
 end
 
