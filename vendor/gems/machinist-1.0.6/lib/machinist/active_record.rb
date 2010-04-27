@@ -1,5 +1,6 @@
 require 'machinist'
 require 'machinist/blueprints'
+require 'active_record'
 
 module Machinist
   
@@ -31,7 +32,7 @@ module Machinist
       attributes = {}
       lathe.assigned_attributes.each_pair do |attribute, value|
         association = lathe.object.class.reflect_on_association(attribute)
-        if association && association.macro == :belongs_to
+        if association && association.macro == :belongs_to && !value.nil?
           attributes[association.primary_key_name.to_sym] = value.id
         else
           attributes[attribute] = value
@@ -58,9 +59,9 @@ module Machinist
       end
 
       def make_unsaved(*args)
-        returning(Machinist.with_save_nerfed { make(*args) }) do |object|
-          yield object if block_given?
-        end
+        object = Machinist.with_save_nerfed { make(*args) }
+        yield object if block_given?
+        object
       end
         
       def plan(*args)
