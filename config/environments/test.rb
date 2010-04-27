@@ -3,6 +3,7 @@ config.gem 'webrat', :lib => false
 config.gem 'rspec-rails', :lib => false, :version => '>= 1.3.2'
 config.gem 'rspec', :lib => false, :version => '>= 1.3.0'
 config.gem 'cucumber', :version => ">= 0.6.2"
+config.gem 'cucumber-rails', :lib => false, :version => ">= 0.3.0"
 config.gem 'ZenTest', :lib => 'zentest'
 config.gem 'builder'
 config.gem 'diff-lcs', :lib => 'diff/lcs'
