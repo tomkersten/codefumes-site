@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'session', :action => 'destroy', :method => :delete
   map.login  '/login',  :controller => 'session', :action => 'new', :method => :get
 
+  map.invalid_project '/what', :controller => 'Exterior', :action => 'invalid_public_key', :method => :get
+
   map.short_uri '/p/:public_key', :controller => 'Community::Projects', :action => 'short_uri', :method => :get
   map.resources :p, :controller => 'Community::Projects'
   map.namespace :community do |community|

@@ -336,4 +336,46 @@ describe Project do
       end
     end
   end
+
+  describe "#viewable_by" do
+    let(:project) {Project.make}
+    let(:user) {User.make(:dora)}
+
+    context "on a private project" do
+      before(:each) do
+        project.set_visibility_to(:private)
+      end
+
+      context "when the user supplied owns the project" do
+        before(:each) {user.projects << project}
+        specify {project.viewable_by?(user).should be_true}
+      end
+
+      context "when the user supplied does not own the project" do
+        let(:other_user) {User.make(:sam)}
+        before(:each) {other_user.projects << project}
+        specify {project.viewable_by?(user).should be_false}
+      end
+    end
+
+    context "on a public project" do
+      before(:each) {project.set_visibility_to(:public)}
+
+      context "when the user supplied owns the project" do
+        before(:each) {user.projects << project}
+        specify {project.viewable_by?(user).should be_true}
+      end
+
+      context "when the user supplied does not own the project" do
+        let(:other_user) {User.make(:sam)}
+        before(:each) {other_user.projects << project}
+        specify {project.viewable_by?(user).should be_true}
+      end
+
+      context "when project does not have an owner" do
+        before(:each) {project.owner = nil}
+        specify {project.viewable_by?(user).should be_true}
+      end
+    end
+  end
 end

@@ -36,10 +36,6 @@ Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of commits with (\d+) items in it$
   end
 end
 
-Then /^he should see instructions for how to reserve that URI$/ do
-  response.should have_tag(".instructions")
-end
-
 Then /^he should see a list of his claimed projects$/ do
   response.should have_tag("ul.projects")
 end
@@ -58,4 +54,8 @@ end
 
 Then /^he should see the "new_subscription" link$/ do
   response.should have_tag("a#new_subscription")
+end
+
+Then /^he should see a private project message$/ do
+  response.should have_tag(".access_denied")
 end

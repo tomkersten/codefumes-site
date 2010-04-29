@@ -78,6 +78,12 @@ class Project < ActiveRecord::Base
     commit_head && commit_head.build_status || Commit::NOBUILDS
   end
 
+  def viewable_by?(user_supplied)
+    return true if self.public?
+    return true if owner == user_supplied
+    false
+  end
+
   private
     def assign_public_key
       self.public_key = self.class.generate_public_key

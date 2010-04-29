@@ -4,22 +4,30 @@ Feature: Viewing Commits
   be the "points" used for reference, and are therefore, an
   imperative component of a project 
 
-  Scenario: Viewing "twitter_tagger" commits
+  Scenario: Viewing a public project owned by visitor
+    Given the "twitter_tagger" project has been created
+    And the project has 5 commits
+    When Dora goes to the project's short_uri page
+    Then he sees a list of commits with 5 items in it
+    And she sees the private key of the project
+
+  Scenario: Viewing a public project not owned by visitor
     Given the "twitter_tagger" project has been created
     And the project has 5 commits
     When Sam goes to the project's short_uri page
     Then he sees a list of commits with 5 items in it
+    And he does not see the private key of the project
 
-  Scenario: Dora views "prideo"
+  Scenario: Viewing a private project owned by visitor
     Given the "prideo" project has been created
     And the project has 5 commits
     When Dora goes to the project's short_uri page
     Then she sees a list of commits with 5 items in it
     And she sees the private key of the project
 
-  Scenario: Sam views "prideo"
+  Scenario: Attempting to view a private project you don't own
     Given the "prideo" project has been created
     And the project has 5 commits
     When Sam goes to the project's short_uri page
-    Then he sees a list of commits with 5 items in it
+    Then he should see a private project message
     And he does not see the private key of the project

@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
+
 describe Api::V1::ProjectsController do
   before(:each) do
     @request.env["HTTP_ACCEPT"] = "application/xml"

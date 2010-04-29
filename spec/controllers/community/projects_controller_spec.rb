@@ -3,9 +3,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Community::ProjectsController do
   describe "a get to show" do
     before(:each) do
-      (1..2).each {Project.make}
+      Project.make
       @project = Project.make
-      (1..2).each {Project.make}
+      Project.make
     end
 
     it "assigns the requested project for the view template" do
@@ -16,25 +16,18 @@ describe Community::ProjectsController do
 
   describe "a GET to short_uri" do
     context "with a non-existant public key" do
-      before(:each) do
-        Project.destroy_all
-        @public_key = Project.generate_public_key
-      end
-
-      it "renders the 'short_uri' view" do
-        get :short_uri, :public_key => @public_key
-        response.should render_template('community/projects/short_uri')
+      it "redirects the user to the 'non-existant project' page" do
+        get :short_uri, :public_key => "non_existant_key"
+        response.should redirect_to(invalid_project_path)
       end
     end
 
     context "with a public key of an existing project" do
-      before(:each) do
-        @project = Project.make
-      end
+      let(:project) {Project.make}
 
       it "assigns the project with the specified public key for the view template" do
-        get :short_uri, :public_key => @project.public_key
-        assigns[:project].should == @project
+        get :short_uri, :public_key => project.to_param
+        assigns[:project].should == project
       end
     end
   end
