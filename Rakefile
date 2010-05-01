@@ -7,7 +7,12 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
-require 'metric_fu'
+
+begin
+  require 'metric_fu'
+rescue LoadError
+  puts "metric_fu not loaded....\nContinuing..."
+end
 
 begin ; require 'codefumes_harvester' ; rescue LoadError ; end
 
