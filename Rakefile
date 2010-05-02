@@ -9,6 +9,7 @@ require 'rake/rdoctask'
 require 'tasks/rails'
 
 begin
+  gem 'metric_fu'
   require 'metric_fu'
 rescue LoadError
 end
