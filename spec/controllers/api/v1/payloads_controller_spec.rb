@@ -77,7 +77,6 @@ describe Api::V1::PayloadsController do
       it "returns 401 unauthorized" do
         setup_basic_auth('some', 'garbage')
         post :create, :project_id => @project.public_key, :payload => @payload_params
-        puts response.status
         response.status.should == "401 Unauthorized"
       end
     end

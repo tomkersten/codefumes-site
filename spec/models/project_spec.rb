@@ -326,7 +326,7 @@ describe Project do
       project = Project.make
       commit = Commit.make(:project => project)
       Build.make(:commit => commit, :state => 'running')
-      project.build_status.should == 'running_build'
+      project.build_status.should == Build::RUNNING
     end
 
     context "when the commit_head is nil" do

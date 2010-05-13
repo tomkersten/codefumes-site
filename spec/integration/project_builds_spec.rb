@@ -25,19 +25,19 @@ describe "Project Builds" do
   it "marking projects with a failed build associated with the most recent commit" do
     @commit.builds.create!(Build.plan(:failed))
     visit my_projects_path
-    response.should have_tag(".#{Commit::FAILED_BUILD}")
+    response.should have_tag(".#{Build::FAILED}")
   end
 
-  it "doesn't mark projects in a 'clean' state as '#{Commit::FAILED_BUILD}'" do
+  it "doesn't mark projects in a 'clean' state as '#{Build::FAILED}'" do
     @commit.builds.create!(Build.plan(:success))
     visit my_projects_path
-    response.should_not have_tag(".#{Commit::FAILED_BUILD}")
+    response.should_not have_tag(".#{Build::FAILED}")
   end
 
-  it "marks projects in a 'clean' state as '#{Commit::SUCCESSFUL_BUILD}'" do
+  it "marks projects in a 'clean' state as '#{Build::SUCCESSFUL}'" do
     @commit.builds.create!(Build.plan(:successful))
     visit my_projects_path
-    response.should have_tag(".#{Commit::SUCCESSFUL_BUILD}")
+    response.should have_tag(".#{Build::SUCCESSFUL}")
   end
 
   it "doesn't throw an error if a project does not have a build status" do

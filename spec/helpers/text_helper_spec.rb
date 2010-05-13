@@ -15,34 +15,34 @@ describe TextHelper do
 
   describe "build_status_class_for" do
     context "when passed in a Project" do
-      it "returns '#{Commit::SUCCESSFUL_BUILD}' if the project passed in is in a '#{Commit::SUCCESSFUL_BUILD}' state" do
-        project = mock_model(Project, :build_status => Commit::SUCCESSFUL_BUILD)
-        helper.build_status_class_for(project).should == Commit::SUCCESSFUL_BUILD
+      it "returns '#{Build::SUCCESSFUL}' if the project passed in is in a '#{Build::SUCCESSFUL}' state" do
+        project = mock_model(Project, :build_status => Build::SUCCESSFUL)
+        helper.build_status_class_for(project).should == Build::SUCCESSFUL
       end
 
-      it "returns '#{Commit::FAILED_BUILD}' if the project passed in is in a '#{Commit::FAILED_BUILD}' state" do
-        project = mock_model(Project, :build_status => Commit::FAILED_BUILD)
-        helper.build_status_class_for(project).should == Commit::FAILED_BUILD
+      it "returns '#{Build::FAILED}' if the project passed in is in a '#{Build::FAILED}' state" do
+        project = mock_model(Project, :build_status => Build::FAILED)
+        helper.build_status_class_for(project).should == Build::FAILED
       end
 
-      it "returns nil if the project passed in is in a '#{Commit::FAILED_BUILD}' state" do
+      it "returns nil if the project passed in is in a '#{Build::FAILED}' state" do
         project = mock_model(Project, :build_status => nil)
         helper.build_status_class_for(project).should == nil
       end
     end
 
     context "when passed in a Commit" do
-      it "returns '#{Commit::SUCCESSFUL_BUILD}' if the project passed in is in a '#{Commit::SUCCESSFUL_BUILD}' state" do
-        project = mock_model(Project, :build_status => Commit::SUCCESSFUL_BUILD)
-        helper.build_status_class_for(project).should == Commit::SUCCESSFUL_BUILD
+      it "returns '#{Build::SUCCESSFUL}' if the project passed in is in a '#{Build::SUCCESSFUL}' state" do
+        project = mock_model(Project, :build_status => Build::SUCCESSFUL)
+        helper.build_status_class_for(project).should == Build::SUCCESSFUL
       end
 
-      it "returns '#{Commit::FAILED_BUILD}' if the project passed in is in a '#{Commit::FAILED_BUILD}' state" do
-        project = mock_model(Project, :build_status => Commit::FAILED_BUILD)
-        helper.build_status_class_for(project).should == Commit::FAILED_BUILD
+      it "returns '#{Build::FAILED}' if the project passed in is in a '#{Build::FAILED}' state" do
+        project = mock_model(Project, :build_status => Build::FAILED)
+        helper.build_status_class_for(project).should == Build::FAILED
       end
 
-      it "returns nil if the project passed in is in a '#{Commit::FAILED_BUILD}' state" do
+      it "returns nil if the project passed in is in a '#{Build::FAILED}' state" do
         project = mock_model(Project, :build_status => nil)
         helper.build_status_class_for(project).should == nil
       end
@@ -51,7 +51,7 @@ describe TextHelper do
 
   describe "commit_classes_for" do
     before(:each) do
-      @method_responses = {:merge? => true, :build_status => Commit::FAILED_BUILD}
+      @method_responses = {:merge? => true, :build_status => Build::FAILED}
     end
 
     it "includes 'merge' if the commit is a merge commit" do

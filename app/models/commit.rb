@@ -1,8 +1,5 @@
 class Commit < ActiveRecord::Base
-  SUCCESSFUL_BUILD= "successful_build"
   NOBUILDS     = "nobuilds"
-  FAILED_BUILD = "failed_build"
-  RUNNING_BUILD = "running_build"
 
   identifier :identifier
   attribute_assignment_order :project_id, :identifier
@@ -85,8 +82,8 @@ class Commit < ActiveRecord::Base
 
   def build_status
     return NOBUILDS if builds.empty?
-    return RUNNING_BUILD unless builds.running.empty?
-    builds.failing.empty? ? SUCCESSFUL_BUILD : FAILED_BUILD
+    return Build::RUNNING unless builds.running.empty?
+    builds.failing.empty? ? Build::SUCCESSFUL : Build::FAILED
   end
 
   private

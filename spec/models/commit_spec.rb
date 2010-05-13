@@ -359,20 +359,20 @@ describe Commit do
 
     it "returns the value of Commit::PASSING_BUILD when only passing builds are associated with the commit" do
       @commit.builds.create!(Build.plan(:successful))
-      @commit.build_status.should  == Commit::SUCCESSFUL_BUILD
+      @commit.build_status.should  == Build::SUCCESSFUL
     end
 
     it "returns the value of Commit::FAILED_BUILD when a build in a 'failure' state is associated with the commit" do
       @commit.builds.create!(Build.plan(:successful))
       @commit.builds.create!(Build.plan(:failed))
-      @commit.build_status.should == Commit::FAILED_BUILD
+      @commit.build_status.should == Build::FAILED
     end
 
     it "returns the value of Commit::RUNNING when there is a build in a 'running' state associated with the commit" do
       @commit.builds.create!(Build.plan(:successful))
       @commit.builds.create!(Build.plan(:running))
       @commit.builds.create!(Build.plan(:failed))
-      @commit.build_status.should == Commit::RUNNING_BUILD
+      @commit.build_status.should == Build::RUNNING
     end
   end
 end
