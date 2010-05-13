@@ -29,6 +29,11 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'exterior'
 
   map.api_v1_commit '/api/v1/:format/commits/:id', :controller => "Api::V1::Commits", :action => 'show', :method => :get
+  map.api_v1_user_projects '/api/v1/:format/users/:user_id/projects',
+                            :controller => "Api::V1::Users::Projects",
+                            :action => 'index',
+                            :method => :get
+
   map.namespace :api do |api|
     api.namespace :v1 do |v1|
       v1.resources :projects, :path_prefix => '/api/v1/:format' do |project|
