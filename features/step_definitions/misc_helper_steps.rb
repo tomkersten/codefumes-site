@@ -19,3 +19,7 @@ end
 When /^s?he follows the link to edit the  project$/ do
   click_link(".edit.project")
 end
+
+Given /^the rest is undecided functionality$/ do
+  pending "Then the remaining steps are skipped."
+end

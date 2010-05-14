@@ -33,36 +33,30 @@
         %h3 Visuals would be here. Please upgrade your account.
 
     #details
-      - if @project.recent_commits.empty?
-        %p.no_commits
-          No commits posted yet
-      - else
-        %ul.commits
-          - for commit in @project.recent_commits
-            %li{:class => commit_classes_for(commit)}
-              - if commit.message.blank?
-                %h2.no_commit_message [No commit message? Tsk! Tsk!]
-              - else
-                %h2= commit.message.gsub("\n", "<br/>")
-              - if commit.merge?
-                %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-              %ul
-                %li= "Identifier: #{commit.short_identifier}"
-                %li= "Author: #{commit.author}"
-                %li= "Committer #{commit.committer}"
-                %li= "Authored at: #{commit.authored_at}"
-                %li= "Committed at: #{commit.committed_at}"
-                %li= "Lines added: #{commit.line_additions}"
-                %li= "Lines deleted: #{commit.line_deletions}"
-                %li= "Total lines: #{commit.line_total}"
-                %li= "Files affected: #{commit.affected_file_count}"
-                - unless commit.custom_attributes.empty?
-                  %li.custom_attributes
-                    %ul
-                      - for custom_attribute in commit.custom_attributes
-                        %li= "#{custom_attribute.name}: #{custom_attribute.value}"
+      %h2 What can your commits <em>show</em> you?
+      %p Expose interesting aspects of your codebase in its current state...or its evolution...by attaching meta-data to commits.
 
--content_for :onReady do
+      %h3 Do your build failures have a pattern?
+      %p.desc
+        Mark the commits that break your build. Identify patterns. Change your habits.
+        = link_to "Set up your build server...", ""
+
+      %h3 Does test coverage really matter?
+      %p.desc
+        Track standard code metrics to find out.
+        = link_to "Here's how to set it up...", ""
+
+      %h3 Do death marches affect product quality?
+      %p.desc
+        Attach custom meta-data to commits. Show the relationship between hours worked, exceptions raised, and support requests to convince stakeholders.
+        = link_to "Here's how...", ""
+
+      %h3 Looking for that link?
+      %p.desc
+        Add direct links to commit-specific information, such as commit diffs, build output, and release packages, by using the
+        = link_to "auto-matching commit attribute names...", ""
+
+- content_for :onReady do
   vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
 
   $('#vis_2').click(function(){
@@ -70,10 +64,9 @@
   vis = new Visualizer("canvas");
   return false;
   });
-  
+
   $('#vis_1').click(function(event){
   vis.clear();
   vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
   return false;
   });
-

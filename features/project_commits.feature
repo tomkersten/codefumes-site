@@ -8,22 +8,25 @@ Feature: Viewing Commits
     Given the "twitter_tagger" project has been created
     And the project has 5 commits
     When Dora goes to the project's short_uri page
-    Then he sees a list of commits with 5 items in it
-    And she sees the private key of the project
+    Then she sees the private key of the project
+    And the rest is undecided functionality
+    And she sees a list of commits with 5 items in it
 
   Scenario: Viewing a public project not owned by visitor
     Given the "twitter_tagger" project has been created
     And the project has 5 commits
     When Sam goes to the project's short_uri page
-    Then he sees a list of commits with 5 items in it
-    And he does not see the private key of the project
+    Then he does not see the private key of the project
+    And the rest is undecided functionality
+    And he sees a list of commits with 5 items in it
 
   Scenario: Viewing a private project owned by visitor
     Given the "prideo" project has been created
     And the project has 5 commits
     When Dora goes to the project's short_uri page
-    Then she sees a list of commits with 5 items in it
-    And she sees the private key of the project
+    Then she sees the private key of the project
+    And the rest is undecided functionality
+    And she sees a list of commits with 5 items in it
 
   Scenario: Attempting to view a private project you don't own
     Given the "prideo" project has been created
