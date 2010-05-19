@@ -23,11 +23,14 @@ describe "Project Administration" do
 
   it "converting a public project to private" do
     visit short_uri_path(@project)
-    response.should_not have_tag(".private")
+    response.should_not have_tag(".private-project")
+    response.should have_tag(".public-project")
+    click_link("Edit Project")
     within("#update_visibility") do |update_form|
       update_form.click_button
     end
-    response.should have_tag(".visibility.private")
+    response.should have_tag(".private-project")
+    response.should_not have_tag(".public-project")
   end
 
   it "deleting a project" do

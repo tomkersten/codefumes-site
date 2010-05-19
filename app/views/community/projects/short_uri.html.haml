@@ -1,27 +1,54 @@
 - content_for(:page_layout_class) do
-  project-page
+  = "project-page #{@project.visibility}-project"
 .main
   - if !@project.viewable_by?(current_user)
     .access_denied
       %h1= "'#{params[:public_key]}' is a private project"
   - else
-    %h1.project_name
-      = @project
-      - priveleged_user_or_owner_content(@project) do
-        = link_to '[edit]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit_project'
-    - priveleged_user_or_owner_content(@project) do
-      %ul.project-administration
-        %li.visibility{:class => @project.visibility}= @project.visibility
+    .new-project-info
+      %h2 Things to keep in mind:
+      %ol
         %li
-          - form_for [:my, @project], :url => set_visibility_my_project_path(@project), :html => {:id => 'update_visibility'} do |f|
-            = f.hidden_field :visibility, :value => inverted_visibility_of(@project)
-            %button{:type => :submit}= "make #{inverted_visibility_of(@project)}"
-    - priveleged_user_or_owner_content(@project) do
-      %dl#project_keys
-        %dt Public key
-        %dd= @project.public_key
-        %dt Private key
-        %dd= @project.private_key
+          %h3
+            This is a public project.
+            %small Anyone can see it if they have (or guess) the URL. (Only you can edit it though)
+        %li
+          %h3
+            You should bookmark the URL
+            %small ...or set up an account and claim the project
+        %li
+          %h3
+            You can secure the project
+            %small ...by claiming it & making it 'private'
+      %p
+        = link_to "Cool, got it...", "", :class => "hide-parent"
+    .project-overview
+      %h1
+        = @project
+        - priveleged_user_or_owner_content(@project) do
+          .admin-content
+            = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
+      %ul.commits
+        - commit = @project.commit_head
+        %li{:class => commit_classes_for(commit)}
+          - if commit.message.blank?
+            %h2.no_commit_message [No commit message? Tsk! Tsk!]
+          - else
+            %h2
+              = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
+            - if commit.merge?
+              %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
+            %span.duration 3min 32secs
+            %ul
+              %li= "Identifier: #{commit.identifier}"
+              %li= "Author: #{commit.author}"
+              %li= "Committer #{commit.committer}"
+              %li= "Authored at: #{commit.authored_at}"
+              %li= "Committed at: #{commit.committed_at}"
+              %li= "Lines added: #{commit.line_additions}"
+              %li= "Lines deleted: #{commit.line_deletions}"
+              %li= "Total lines: #{commit.line_total}"
+              %li= "Files affected: #{commit.affected_file_count}"
 
     - if @project.covered_by_plan?
       #canvas
@@ -33,9 +60,6 @@
         %h3 Visuals would be here. Please upgrade your account.
 
     #details
-      %h2 What can your commits <em>show</em> you?
-      %p Expose interesting aspects of your codebase in its current state...or its evolution...by attaching meta-data to commits.
-
       %h3 Do your build failures have a pattern?
       %p.desc
         Mark the commits that break your build. Identify patterns. Change your habits.

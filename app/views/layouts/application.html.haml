@@ -9,8 +9,11 @@
   %body{:class => yield(:page_layout_class)}
     #usable-area
       #header
-        %h1
+        .logo
           = link_to "Codefumes.com", root_path, :class => 'logo visual'
+        .tagline
+          Track. Review.
+          %em Improve.
         .session
           = render :partial => 'layouts/session_info_and_links'
       #content

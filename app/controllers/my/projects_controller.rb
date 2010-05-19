@@ -9,7 +9,7 @@ class My::ProjectsController < My::BaseController
 
   def update
     project.update_attributes(project_params)
-    flash[:notice] = "updated stuff"
+    flash[:notice] = "Project details updated successfully."
     redirect_to short_uri_path(@project)
 
     rescue ActiveRecord::RecordNotFound

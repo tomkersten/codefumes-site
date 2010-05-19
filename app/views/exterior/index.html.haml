@@ -1,18 +1,25 @@
+- content_for(:page_layout_class) do
+  landing-page
+
 .main
   - if RAILS_ENV != "production"
-    %h1 Track. Review. Improve.
-    %ul
-      %li
-        %h2 Step 1. Install codefumes_harvester:
-        %p
-          sudo gem install codefumes_harvester
-      %li
-        %h2 Step 2. Run this on your project's repository:
-        %p
-          = "cf_harvest_repo_metrics"
-      %li
-        %h2 Step 3. Review:
-        %p Visit the link printed out when the command finishes
+    %div.carousel
+      %h1 What can your commits <em>show</em> you?
+    %div.instructions
+      %h2 Find out for free:
+      %ul
+        %li
+          %h3 Step 1. Install codefumes_harvester:
+          %p
+            sudo gem install codefumes_harvester
+        %li
+          %h3 Step 2. Run this on your repository:
+          %p
+            = "cf_harvest_repo_metrics"
+        %li
+          %h3 Step 3. Review:
+          %p Visit the URL returned from command
+
   - else
     .notify_form
       %h1 Get notified when we launch.
