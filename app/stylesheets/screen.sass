@@ -111,6 +111,8 @@ body
         +float-left
       dd
         +clearfix
+    #visualization-area
+      +clearfix
     #canvas
       :clear both
       +column(12)
@@ -128,7 +130,7 @@ body
         +prepend(1)
 
   &.project-page #content
-    .new-project-info
+    .new-project-reminder
       :padding 0.5em 0em 0em 1em
       :margin-bottom 1em
       :background-color= !notice_bg_color
@@ -144,7 +146,7 @@ body
             :color= !quiet_color
           pre
             :padding-left 1em
-      a.hide-parent
+      a.hide-grandparent
         :font-size 1.8em
         :font-weight bold
     .project-overview
@@ -162,6 +164,8 @@ body
   :text-align left
   :border-bottom 1px dotted #CCC
   :margin-bottom 2em
+  a
+    :color= !quiet_color
   small
     :font-size 0.5em
   ul
@@ -176,6 +180,7 @@ body
     a
       :display block
       :width 20em
+      :height 5em
   .tagline
     :position absolute
     :top 3.25em

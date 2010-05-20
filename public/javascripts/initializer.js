@@ -2,6 +2,12 @@ $(function(){
 
   $('ul.commits li ul').css('display', 'none');
 
+  $('.hide-grandparent').click(function(event) {
+      event.preventDefault();
+      $(this).parent().parent().slideToggle("0.5");
+    }
+  );
+
   $('ul.commits li h2').hover(
   function(){
     $(this).css({'cursor' : 'hand'});

@@ -5,80 +5,48 @@
     .access_denied
       %h1= "'#{params[:public_key]}' is a private project"
   - else
-    .new-project-info
-      %h2 Things to keep in mind:
-      %ol
-        %li
-          %h3
-            This is a public project.
-            %small Anyone can see it if they have (or guess) the URL. (Only you can edit it though)
-        %li
-          %h3
-            You should bookmark the URL
-            %small ...or set up an account and claim the project
-        %li
-          %h3
-            You can secure the project
-            %small ...by claiming it & making it 'private'
-      %p
-        = link_to "Cool, got it...", "", :class => "hide-parent"
+    = render :partial => 'community/projects/new_project_reminder'
     .project-overview
       %h1
         = @project
         - priveleged_user_or_owner_content(@project) do
           .admin-content
             = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
+
+    #visualization-area
+      - if @project.covered_by_plan?
+        #canvas
+          %ul#visualizations
+            %li= link_to 'Visual 1', '', :id => 'vis_1'
+            %li= link_to 'Visual 2', '', :id => 'vis_2'
+      - else
+        #upgrade_required
+          %h3 Visuals would be here. Please upgrade your account.
+
+      #details
+        = render :partial => 'community/projects/tracking_ideas'
+    #textual-commit-area
       %ul.commits
-        - commit = @project.commit_head
-        %li{:class => commit_classes_for(commit)}
-          - if commit.message.blank?
-            %h2.no_commit_message [No commit message? Tsk! Tsk!]
-          - else
-            %h2
-              = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
-            - if commit.merge?
-              %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-            %span.duration 3min 32secs
-            %ul
-              %li= "Identifier: #{commit.identifier}"
-              %li= "Author: #{commit.author}"
-              %li= "Committer #{commit.committer}"
-              %li= "Authored at: #{commit.authored_at}"
-              %li= "Committed at: #{commit.committed_at}"
-              %li= "Lines added: #{commit.line_additions}"
-              %li= "Lines deleted: #{commit.line_deletions}"
-              %li= "Total lines: #{commit.line_total}"
-              %li= "Files affected: #{commit.affected_file_count}"
-
-    - if @project.covered_by_plan?
-      #canvas
-        %ul#visualizations
-          %li= link_to 'Visual 1', '', :id => 'vis_1'
-          %li= link_to 'Visual 2', '', :id => 'vis_2'
-    - else
-      #upgrade_required
-        %h3 Visuals would be here. Please upgrade your account.
-
-    #details
-      %h3 Do your build failures have a pattern?
-      %p.desc
-        Mark the commits that break your build. Identify patterns. Change your habits.
-        = link_to "Set up your build server...", ""
-
-      %h3 Does test coverage really matter?
-      %p.desc
-        Track standard code metrics to find out.
-        = link_to "Here's how to set it up...", ""
-
-      %h3 Do death marches affect product quality?
-      %p.desc
-        Attach custom meta-data to commits. Show the relationship between hours worked, exceptions raised, and support requests to convince stakeholders.
-        = link_to "Here's how...", ""
-
-      %h3 Looking for that link?
-      %p.desc
-        Add direct links to commit-specific information, such as commit diffs, build output, and release packages, by using the
-        = link_to "auto-matching commit attribute names...", ""
+        - if commit = @project.commit_head
+          %li{:class => commit_classes_for(commit)}
+            - if commit.message.blank?
+              %h2.no_commit_message [No commit message? Tsk! Tsk!]
+            - else
+              %h2
+                = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
+              - if commit.merge?
+                %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
+              %span.duration 3min 32secs
+              %ul
+                %li= "Identifier: #{commit.identifier}"
+                %li= "Author: #{commit.author}"
+                %li= "Committer #{commit.committer}"
+                %li= "Authored at: #{commit.authored_at}"
+                %li= "Committed at: #{commit.committed_at}"
+                %li= "Lines added: #{commit.line_additions}"
+                %li= "Lines deleted: #{commit.line_deletions}"
+                %li= "Total lines: #{commit.line_total}"
+                %li= "Files affected: #{commit.affected_file_count}"
 
 - content_for :onReady do
   vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
