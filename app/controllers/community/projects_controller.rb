@@ -12,4 +12,10 @@ class Community::ProjectsController < ApplicationController
 
     redirect_to(invalid_project_path)  && return if @project.nil?
   end
+
+  def acknowledge
+    @project = Project[params[:id]]
+    @project.acknowledge_visibility!
+    redirect_to short_uri_path(@project)
+  end
 end

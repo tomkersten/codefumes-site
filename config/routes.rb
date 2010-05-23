@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.short_uri '/p/:public_key', :controller => 'Community::Projects', :action => 'short_uri', :method => :get
   map.resources :p, :controller => 'Community::Projects'
   map.namespace :community do |community|
-    community.resources :projects
+    community.resources :projects, :member => {:acknowledge => :get}
   end
 
   map.namespace :my do |my|

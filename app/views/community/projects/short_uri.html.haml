@@ -5,7 +5,8 @@
     .access_denied
       %h1= "'#{params[:public_key]}' is a private project"
   - else
-    = render :partial => 'community/projects/new_project_reminder'
+    - unless @project.visibility_acknowledged?
+      = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
     .project-overview
       %h1
         = @project
@@ -27,8 +28,10 @@
         = render :partial => 'community/projects/tracking_ideas'
     #textual-commit-area
       %ul.commits
-        - if commit = @project.commit_head
-          %li{:class => commit_classes_for(commit)}
+        - @project.recent_commits.each do |commit|
+          - css_classes = commit_classes_for(commit)
+          - css_classes += " head" if commit == @project.commit_head
+          %li{:class => css_classes}
             - if commit.message.blank?
               %h2.no_commit_message [No commit message? Tsk! Tsk!]
             - else

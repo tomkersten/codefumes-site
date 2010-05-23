@@ -11,6 +11,7 @@ class Project < ActiveRecord::Base
   before_validation_on_create :assign_public_key
   before_validation_on_create :assign_private_key
   before_validation :set_privatized_at
+  after_save :update_acknowledged_at_if_claimed
 
   attr_accessible :name
 
@@ -23,6 +24,10 @@ class Project < ActiveRecord::Base
 
   def self.generate_public_key
     generate_unique_key
+  end
+
+  def acknowledge_visibility!
+    update_attribute(:acknowledged_at, Time.now) unless visibility_acknowledged?
   end
 
   def to_param
@@ -84,6 +89,10 @@ class Project < ActiveRecord::Base
     false
   end
 
+  def visibility_acknowledged?
+    !acknowledged_at.nil?
+  end
+
   private
     def assign_public_key
       self.public_key = self.class.generate_public_key
@@ -126,5 +135,9 @@ class Project < ActiveRecord::Base
       if private? and privatized_at.blank?
         self.privatized_at = Time.now.utc
       end
+    end
+
+    def update_acknowledged_at_if_claimed
+      acknowledge_visibility! if claimed?
     end
 end

@@ -1,12 +1,12 @@
 $(function(){
-
   $('ul.commits li ul').css('display', 'none');
 
-  $('.hide-grandparent').click(function(event) {
+  $('.hide-grandparent').click(
+    function(event) {
       event.preventDefault();
+      $.ajax({url: event.currentTarget.href});  // this should probably be elsewhere
       $(this).parent().parent().slideToggle("0.5");
-    }
-  );
+  });
 
   $('ul.commits li h2').hover(
   function(){
@@ -23,5 +23,4 @@ $(function(){
   function(){
     $(this).parent().find('ul').slideToggle('fast');
   });
-
 });

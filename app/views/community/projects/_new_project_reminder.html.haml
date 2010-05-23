@@ -4,14 +4,14 @@
     %li
       %h3
         This is a public project.
-        %small ...anyone can see it if they have (or guess) the URL. (Only you can edit it though)
+        %small ...anyone can see it if they have (or guess) the URL. (Only the creator can edit it though)
     %li
       %h3
-        You should bookmark this page
-        %small ...or set up an account and claim the project, linking it to your login.
+        If you created this project
+        %small ...you may want to bookmark this page...or set up an account and claim the project.
     %li
       %h3
-        You can secure the project
-        %small ...by claiming it & making it 'private'.
+        This project can be hidden from the public
+        %small ...if the creator claims it & makes it 'private'.
   %p
-    = link_to "Cool, got it...", "", :class => "hide-grandparent"
+    = link_to "Cool, got it...", acknowledge_community_project_path(project), :class => "hide-grandparent", :id => "acknowledge-visibility"

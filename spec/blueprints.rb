@@ -114,7 +114,7 @@ Subscription.blueprint(:confirmed) do
 end
 
 Subscription.blueprint(:doras) do
-  user {User.make(:dora)}
+  user {User['dora.developer'] || User.make(:dora)}
   state "confirmed"
 end
 

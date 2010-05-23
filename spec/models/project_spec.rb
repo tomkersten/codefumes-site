@@ -378,4 +378,37 @@ describe Project do
       end
     end
   end
+
+  describe "visibility_acknowledged?" do
+    context "when acknowledged_at is not set" do
+      let(:project) {Project.make(:acknowledged_at => nil)}
+      specify {project.visibility_acknowledged?.should be_false}
+    end
+
+    context "when acknowledged_at is set" do
+      let(:project) {Project.make(:acknowledged_at => Time.now)}
+      specify {project.visibility_acknowledged?.should be_true}
+    end
+  end
+
+  describe "#acknowledge_visibility!" do
+    context "when the project visibility has not been acknowledged yet" do
+      let(:project) {Project.make(:acknowledged_at => nil)}
+      it "sets the value of acknowledged_at" do
+        project.visibility_acknowledged?.should be_false
+        project.acknowledge_visibility!
+        project.visibility_acknowledged?.should be_true
+      end
+    end
+
+    context "when the project visibility has not been acknowledged yet" do
+      let(:original_time) {10.minutes.ago}
+      let(:project) {Project.make(:acknowledged_at => original_time)}
+
+      it "does not update the value of acknowledged_at" do
+        project.acknowledge_visibility!
+        project.acknowledged_at.to_s.should == original_time.to_s
+      end
+    end
+  end
 end

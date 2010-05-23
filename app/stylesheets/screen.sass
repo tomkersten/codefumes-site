@@ -92,9 +92,12 @@ body
         :margin-left 0
         :margin-right 0
         :margin-bottom 3em
-        li
+        > li
           +build_status_styles
           :position relative
+          :display none
+          &.head
+            :display inherit
           span.duration
             :color #4AC45A
             :position absolute

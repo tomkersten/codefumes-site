@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   def claim(project, visibility=nil)
     project.visibility = visibility if visibility
-    project.privatized_at = Time.now
+    project.privatized_at = Time.now  # this seems wrong TODO: revisit
     if project.save
       projects << project
       true

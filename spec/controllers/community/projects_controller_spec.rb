@@ -31,4 +31,22 @@ describe Community::ProjectsController do
       end
     end
   end
+
+  describe "a GET to acknowledge" do
+    let(:project) {Project.make(:acknowledged_at => nil)}
+
+    def perform_request
+      get :acknowledge, :id => project.to_param
+    end
+
+    it "marks the project as 'acknowledged'" do
+      perform_request
+      assigns[:project].visibility_acknowledged?.should be_true
+    end
+
+    it "renders the short_uri view of the project page" do
+      perform_request
+      response.should redirect_to(short_uri_path(project))
+    end
+  end
 end
