@@ -12,14 +12,13 @@ config.gem 'treetop'
 config.gem 'term-ansicolor', :lib => 'term/ansicolor'
 config.gem 'machinist', :version => '>= 1.0.6'
 config.gem 'faker', :version => '>= 0.3.1'
-config.gem 'bmabey-email_spec', :lib => 'email_spec', :source => 'http://gems.github.com'
-config.gem 'metric_fu', :version => '1.3.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
-config.gem 'topfunky-gruff', :version => '0.3.5', :lib => 'gruff', :source => 'http://gems.github.com'
+config.gem 'email_spec', :version => '= 0.6.2'
+config.gem 'metric_fu', :version => '1.3.0', :lib => 'metric_fu'
 config.gem 'flay', :version => ">= 1.3.0"
 config.gem 'sexp_processor', :version => ">= 3.0.3"
 config.gem 'ruby_parser', :version => ">= 2.0.4"
 config.gem 'flog', :version => ">= 2.2.0"
-config.gem 'relevance-rcov', :version => ">= 0.8.3.4", :lib => 'rcov'
+config.gem 'rcov', :version => "= 0.9.8"
 config.gem 'caleb-chronic', :version => ">= 0.3.0", :lib => 'chronic'
 config.gem 'polyglot', :version => ">= 0.3.1"
 
