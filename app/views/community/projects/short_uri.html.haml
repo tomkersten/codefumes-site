@@ -14,7 +14,7 @@
           .admin-content
             = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
     #details
-      = link_to 'What can this do for me?', '', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
+      = link_to 'What can this do for me?', '#tracking_ideas', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #visualization-area
       - if @project.covered_by_plan?
         #canvas
@@ -49,7 +49,9 @@
                 %li= "Lines deleted: #{commit.line_deletions}"
                 %li= "Total lines: #{commit.line_total}"
                 %li= "Files affected: #{commit.affected_file_count}"
-
+  #tracking_ideas
+    = render :partial => 'community/projects/tracking_ideas'
+  
 - content_for :onReady do
   vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
 
