@@ -155,7 +155,7 @@ body
         
   &.project-page #content
     .new-project-reminder
-      :padding 0.5em 0em 0em 1em
+      :padding 0.5em 0em 0em 0em
       :margin-bottom 1em
       :background-color= !notice_bg_color
       :border= 1px solid !notice_border_color
@@ -163,8 +163,10 @@ body
         :color= !notice_color
       ol
         :padding-left 2em
+        :text-align left
         li
-          :font-size 1.25em
+          :font-size 1em
+          :list-style-type none
           small
             :font-size 0.6em
             :color= !quiet_color
