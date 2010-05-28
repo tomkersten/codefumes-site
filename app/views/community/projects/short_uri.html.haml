@@ -13,18 +13,18 @@
         - priveleged_user_or_owner_content(@project) do
           .admin-content
             = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
-
+    #details
+      = link_to 'What can this do for me?', '', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #visualization-area
       - if @project.covered_by_plan?
         #canvas
-          %ul#visualizations
-            %li= link_to 'Visual 1', '', :id => 'vis_1'
-            %li= link_to 'Visual 2', '', :id => 'vis_2'
+          / A little to early for this. Need to picture w/ these links
+          / %ul#visualizations
+          /    %li= link_to 'Visual 1', '', :id => 'vis_1'
+          /    %li= link_to 'Visual 2', '', :id => 'vis_2'
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
-    #details
-      = link_to 'What can this do for me?', '', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #textual-commit-area
       %ul.commits
         - @project.recent_commits.each do |commit|

@@ -123,6 +123,9 @@ body
       +prepend(1)
       +column(11, true)
       :float none
+      :width 100%
+      :display block
+      :text-align center
       h2
         :font-weight bold
       h3
@@ -132,9 +135,9 @@ body
         :color= !quiet_color
       h3, p.desc
         +prepend(1)
-    .do_for_me 
-      :font-size 20px
-
+      .do_for_me 
+        :font-size 20px
+        
   &.project-page #content
     .new-project-reminder
       :padding 0.5em 0em 0em 1em
