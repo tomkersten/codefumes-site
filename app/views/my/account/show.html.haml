@@ -18,3 +18,7 @@
     - non_paying_user_content do
       = link_to "Track your private projects too", new_my_subscription_path, :id => 'new_subscription'
 
+  - semantic_form_for @user, :url => my_account_path, :html => {:method => :put, :class => "float-left"} do |f|
+    = f.inputs :password, :password_confirmation
+    - f.buttons do
+      = f.commit_button :button_html => {:value => "Update password"}
