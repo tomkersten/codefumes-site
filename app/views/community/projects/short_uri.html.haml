@@ -23,9 +23,8 @@
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
-
-      #details
-        = render :partial => 'community/projects/tracking_ideas'
+    #details
+      = link_to 'What can this do for me?', '', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #textual-commit-area
       %ul.commits
         - @project.recent_commits.each do |commit|

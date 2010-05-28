@@ -3,7 +3,7 @@ var CommitsOverTime = function(canvas,url,options){
   this.options = $.extend({
       grid: {x:475/8, y:12},
       axis: {x:8, y:25},
-      width: 475,
+      width: 950,
       height: (12*25)+10,
       offset: {l:30,t:20,b:20},
       opacity: '.5'
