@@ -54,6 +54,7 @@ body
           :padding-left 2em
   .main
     +clearfix
+    :text-align center
   #usable-area
     +container
   #header, #footer, #content
@@ -137,6 +138,20 @@ body
         +prepend(1)
       .do_for_me 
         :font-size 20px
+  .tracking_ideas
+    +clearfix
+    :margin 50px 0 20px
+    :padding-top 30px
+    :border-top 1px solid #CCC
+  .tracking_ideas li
+    :width 23%
+    :float left
+    :padding-left 20px
+  .tracking_ideas li:first-child 
+    :padding-left 0px
+    
+  .i_want_it
+    :font-size 30px
         
   &.project-page #content
     .new-project-reminder
@@ -204,7 +219,9 @@ div.session
     +horizontal-list
 
 #footer
-  :text-align right
+  :border-top 1px dotted #CCC
+  :margin 100px 0
+  :padding-top 30px
   a
     :color #AAA
     :text-decoration none

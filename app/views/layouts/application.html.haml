@@ -22,7 +22,8 @@
       - if sidebar_content = yield(:sidebar)
         #sidebar
           = sidebar_content
-
+      #footer
+        footer
   = javascript_include_tag %w(raphael jquery initializer jquery.dates grid svgmodal visualizer main application)
 
   = yield :javascript
