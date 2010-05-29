@@ -10,6 +10,10 @@ Given /^the "(.*)" project has been created$/ do |name|
   raise "Project not created correctly (public_key: #{@project.public_key}" unless @project.name == name.to_s
 end
 
+Given /^a public project has been created$/ do
+  @project = Project.make(:public)
+end
+
 Given /^the project has (\d+) commits$/ do |count|
   raise "@project must be set" unless @project.is_a?(Project)
   commits = count.to_i.times.map {Commit.make(:project => @project)}
