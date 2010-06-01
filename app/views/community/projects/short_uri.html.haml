@@ -49,6 +49,11 @@
                 %li= "Lines deleted: #{commit.line_deletions}"
                 %li= "Total lines: #{commit.line_total}"
                 %li= "Files affected: #{commit.affected_file_count}"
+                - unless commit.custom_attributes.empty?
+                  %li.custom_attributes
+                    %ul
+                      - for custom_attribute in commit.custom_attributes
+                        %li= "#{custom_attribute.name}: #{custom_attribute.value}"
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
