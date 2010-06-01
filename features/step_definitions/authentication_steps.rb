@@ -13,9 +13,9 @@ When /^s?he presses the button to create a(?:n)? (\w+)$/ do |model_type|
   click_button(button_dom_id)
 end
 
-When /^I go to the login page$/ do
-  visit login_path
-end
+#When /^I go to the login page$/ do
+#  visit login_path
+#end
 
 When /^(?:Oscar|Sam|Dora|Someone) attempts to sign in with incorrect credentials$/ do
   When "I go to the login page"

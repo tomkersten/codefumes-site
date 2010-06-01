@@ -32,4 +32,3 @@ Feature: Signing into a session
       Then he should see an error message
       And he should see the login form
       And he should not see link to logout
-
