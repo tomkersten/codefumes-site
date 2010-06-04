@@ -61,6 +61,16 @@ class Project < ActiveRecord::Base
       end
     end.compact
   end
+  
+  def unique_custom_attributes
+    custom_attributes = []
+    commits(:all, :include => :custom_attributes).collect do |commit| 
+      commit.custom_attributes.collect do |custom_attribute| 
+        custom_attributes << custom_attribute.name unless custom_attribute.name.nil?
+      end
+    end
+    custom_attributes.uniq
+  end
 
   def public?
     visibility == PUBLIC

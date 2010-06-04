@@ -23,6 +23,10 @@
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
+    #custom-attributes
+      %ul.attributes
+        -@project.unique_custom_attributes.each do |custom_attribute|
+          %li= "#{custom_attribute}"
     #textual-commit-area
       %ul.commits
         - @project.recent_commits.each do |commit|

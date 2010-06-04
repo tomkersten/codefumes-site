@@ -33,6 +33,25 @@ describe Project do
       end
     end
   end
+  
+  describe "custom_attributes" do
+    before(:each) do
+      @project = Project.make
+      @project.commits.create!(Commit.plan)
+      @commit = @project.commits.create!(Commit.plan)
+      @commit.custom_attributes.create!({ :name => 'temperature', :value => '72' })
+    end
+    
+    it "returns all custom attributes" do
+      @project.unique_custom_attributes.length.should == 1
+    end
+    
+    it "should not return duplicates" do
+      @commit.custom_attributes.create!({ :name => 'dogs', :value => '72' })
+      @commit.custom_attributes.create!({ :name => 'temperature', :value => '3' })
+      @project.unique_custom_attributes.length.should == 2
+    end
+  end
 
   describe "save hooks" do
     context "on creation" do
