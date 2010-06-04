@@ -120,25 +120,6 @@ body
     #canvas
       :clear both
       +column(12)
-    #details
-      +prepend(1)
-      +column(11, true)
-      :float none
-      :width 100%
-      :display block
-      :text-align center
-      :padding-left 0
-      h2
-        :font-weight bold
-      h3
-        :font-weight bold
-      p
-        :font-weight normal
-        :color= !quiet_color
-      h3, p.desc
-        +prepend(1)
-      .do_for_me 
-        :font-size 20px
   .tracking_ideas
     +clearfix
     :margin 50px 0 20px
@@ -150,24 +131,22 @@ body
     :padding-left 20px
   .tracking_ideas li:first-child 
     :padding-left 0px
-    
   .i_want_it
     :font-size 30px
-        
+
   &.project-page #content
     .new-project-reminder
-      :padding 0.5em 0em 0em 0em
+      :padding 0.5em 0em 0em 1em
       :margin-bottom 1em
       :background-color= !notice_bg_color
       :border= 1px solid !notice_border_color
+      :text-align left
       h2, li
         :color= !notice_color
       ol
         :padding-left 2em
-        :text-align left
         li
-          :font-size 1em
-          :list-style-type none
+          :font-size 1.25em
           small
             :font-size 0.6em
             :color= !quiet_color
