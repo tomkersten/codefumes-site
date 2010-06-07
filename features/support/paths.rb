@@ -19,6 +19,8 @@ module NavigationHelpers
       my_account_path
     when /[his|her] list of projects/i
       my_projects_path
+    when /project's attribute page/i
+      show_project_attribute_path(@project, @attribute )
     else
       begin
         page_name =~ /the (.*) page/

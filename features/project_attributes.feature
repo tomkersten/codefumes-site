@@ -6,8 +6,13 @@ Feature: Viewing Attributes
 	
 	Background:
 		Given the "twitter_tagger" project has been created
+		Given the project has 2 unique custom attributes
 		
 	Scenario: Viewing attributes being tracked
-		Given the project has 2 unique custom attributes
-    When Dora goes to the project's short_uri page
-    Then she sees a list of attributes with 2 items in it
+		When Dora goes to the project's short_uri page
+		Then she sees a list of attributes with 2 items in it
+
+	Scenario: Viewing a specific attribute
+		When Dora goes to the project's short_uri page
+		And she follows the link to view temperature_attribute
+		Then she sees the attribute name selected

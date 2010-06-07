@@ -7,7 +7,9 @@ ActionController::Routing::Routes.draw do |map|
   map.invalid_project '/what', :controller => 'Exterior', :action => 'invalid_public_key', :method => :get
 
   map.short_uri '/p/:public_key', :controller => 'Community::Projects', :action => 'short_uri', :method => :get
-  map.resources :p, :controller => 'Community::Projects'
+  map.show_project_attributes '/p/:public_key/attributes/:attribute.:format', :controller => 'Community::Attributes', :action => 'show', :method => :get
+  
+  map.resources :p, :controller => 'Community::Projects' 
   map.namespace :community do |community|
     community.resources :projects, :member => {:acknowledge => :get}
   end

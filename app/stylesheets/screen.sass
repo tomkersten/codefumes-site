@@ -120,6 +120,33 @@ body
     #canvas
       :clear both
       +column(12)
+    #details
+      +prepend(1)
+      +column(11, true)
+      :float none
+      :width 100%
+      :display block
+      :text-align center
+      :padding-left 0
+      h2
+        :font-weight bold
+      h3
+        :font-weight bold
+      p
+        :font-weight normal
+        :color= !quiet_color
+      h3, p.desc
+        +prepend(1)
+      .do_for_me 
+        :font-size 20px
+        
+    .attributes
+      a
+        :padding 5px 10px
+      a.selected 
+        :background #000
+        :color #FFF
+        
   .tracking_ideas
     +clearfix
     :margin 50px 0 20px
