@@ -72,8 +72,7 @@ class Project < ActiveRecord::Base
     custom_attributes.uniq
   end
 
-  # NOTE: Not speced... strictly experiment. Prehaps Commits needs to be a many to many join table?
-  def custom_attribute(attribute_name)
+  def custom_attribute_data(attribute_name)
     custom_attributes = []
     commits(:all, :include => :custom_attributes).collect do |commit| 
       commit.custom_attributes.collect do |custom_attribute| 
