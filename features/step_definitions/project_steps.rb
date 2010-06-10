@@ -78,6 +78,10 @@ Then /^he should see a private project message$/ do
   response.should have_tag(".access_denied")
 end
 
-Then /^she sees the attribute name selected$/ do
+Then /^she sees temperature_attribute name selected$/ do
   response.should have_tag('#temperature_attribute.selected')
+end
+
+Then /^chairs_attribute should not be selected$/ do
+  response.should have_tag('#chairs_attribute')
 end

@@ -15,4 +15,5 @@ Feature: Viewing Attributes
 	Scenario: Viewing a specific attribute
 		When Dora goes to the project's short_uri page
 		And she follows the link to view temperature_attribute
-		Then she sees the attribute name selected
+		Then she sees temperature_attribute name selected
+		And chairs_attribute should not be selected

@@ -31,7 +31,7 @@
       %ul.attributes
         -@project.unique_custom_attributes.each do |attribute|
           %li
-            =link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => 'selected' if attribute = @attribute
+            =link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => ('selected' if attribute == @attribute)
     #textual-commit-area
       %ul.commits
         - @project.recent_commits.each do |commit|
