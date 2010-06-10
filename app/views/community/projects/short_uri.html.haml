@@ -26,7 +26,7 @@
     #custom-attributes
       %ul.attributes
         -@project.unique_custom_attributes.each do |attribute|
-          %li
+          %li.attribute
             =link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
     #textual-commit-area
       %ul.commits
