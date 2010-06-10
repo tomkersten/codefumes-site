@@ -18,12 +18,6 @@
     #visualization-area
       - if @project.covered_by_plan?
         #canvas
-          %h2
-            TODO: Add specific attribute visualization
-          / A little to early for this. Need to picture w/ these links
-          / %ul#visualizations
-          /    %li= link_to 'Visual 1', '', :id => 'vis_1'
-          /    %li= link_to 'Visual 2', '', :id => 'vis_2'
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
@@ -64,3 +58,6 @@
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
+- content_for :onReady do
+  var attributeGraph = Raphael("canvas");
+  attributeGraph.g.linechart(10, 10, 900, 220, [1, 2, 3, 4, 5, 6], [[1, 2, 2, 4, 6.5, 2]])
