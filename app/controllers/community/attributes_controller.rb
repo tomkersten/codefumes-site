@@ -5,7 +5,7 @@ class Community::AttributesController < ApplicationController
     
     respond_to do |format|
        format.html
-       format.js {render :json => @project.custom_attribute(@attribute)}
+       format.js {render :json => @project.custom_attribute_data(@attribute)}
      end
   end
 end
