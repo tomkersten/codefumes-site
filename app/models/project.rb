@@ -61,7 +61,8 @@ class Project < ActiveRecord::Base
       end
     end.compact
   end
-  
+
+  # TODO: Review for optimization possibilities
   def unique_custom_attributes
     custom_attributes = []
     commits(:all, :include => :custom_attributes).collect do |commit| 

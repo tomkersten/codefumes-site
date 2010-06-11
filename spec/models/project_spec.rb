@@ -33,48 +33,39 @@ describe Project do
       end
     end
   end
-  
-  describe "custom_attributes" do
-    describe "unique_custom_attributes" do
-      before(:each) do
-        @project = Project.make
-        @project.commits.create!(Commit.plan)
-        @commit = @project.commits.create!(Commit.plan)
-        @commit.custom_attributes.create!({ :name => 'temperature', :value => '72' })
-      end
 
+  describe "custom attributes" do
+    let(:project) {Project.make}
+    let(:commit) {project.commits.create!(Commit.plan)}
+
+    before(:each) do
+      commit.custom_attributes.create!({:name => 'temperature', :value => '72'})
+    end
+
+    describe "#unique_custom_attributes" do
       it "returns all custom attributes" do
-        @project.unique_custom_attributes.length.should == 1
+        project.unique_custom_attributes.length.should == 1
       end
 
-      it "should not return duplicates" do
-        @commit.custom_attributes.create!({ :name => 'dogs', :value => '72' })
-        @commit.custom_attributes.create!({ :name => 'temperature', :value => '3' })
-        @project.unique_custom_attributes.length.should == 2
+      it "does not return duplicates" do
+        commit.custom_attributes.create!({:name => 'dogs', :value => '72'})
+        commit.custom_attributes.create!({:name => 'temperature', :value => '3'})
+
+        project.unique_custom_attributes.length.should == 2
       end
     end
-    
-    describe "custom_attribute" do
-      before(:each) do
-        @project = Project.make
-        @project.commits.create!(Commit.plan)
-        @commit = @project.commits.create!(Commit.plan)
-        @commit.custom_attributes.create!({ :name => 'temperature', :value => '72' })
-      end
-      
+
+    describe "#custom_attribute_data" do
       it "returns all the custom attribute commit data for the attribute name it was passed" do
-        @project.custom_attribute_data('temperature').length.should == 1
+        project.custom_attribute_data('temperature').length.should == 1
       end
-      
-      it "should only return data from the attribute requested" do
-        @commit = @project.commits.create!(Commit.plan)
-        @commit.custom_attributes.create!({ :name => 'temperature', :value => '73' })
-        @commit.custom_attributes.create!({ :name => 'chairs in area', :value => '3' })
-        
-        @project.custom_attribute_data('temperature').length.should == 2
-        
+
+      it "only returns data from the attribute requested" do
+        commit.custom_attributes.create!({:name => 'temperature', :value => '73'})
+        commit.custom_attributes.create!({:name => 'chairs in area', :value => '3'})
+
+        project.custom_attribute_data('temperature').length.should == 2
       end
-      
     end
   end
 
