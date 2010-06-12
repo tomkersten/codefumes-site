@@ -41,7 +41,7 @@
                 = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
               - if commit.merge?
                 %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-              %span.duration 3min 32secs
+              - avg_build_duration_text_for(commit)
               %ul
                 %li= "Identifier: #{commit.identifier}"
                 %li= "Author: #{commit.author}"

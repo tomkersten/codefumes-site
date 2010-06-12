@@ -375,4 +375,22 @@ describe Commit do
       @commit.build_status.should == Build::RUNNING
     end
   end
+
+  describe '#average_build_duration' do
+    let(:commit) {Commit.make}
+
+    context "when the commit has associated builds" do
+      before(:each) do
+        started_at = 10.minutes.ago
+        Build.make(:successful, :commit_id => commit.id, :started_at => started_at, :ended_at => started_at + 2.minutes)
+        Build.make(:successful, :commit_id => commit.id, :started_at => started_at, :ended_at => started_at + 4.minutes)
+      end
+
+      specify {commit.average_build_duration.should be_close(180, 1)}
+    end
+
+    context "when the commit does not have any associated builds" do
+      specify {commit.average_build_duration.should be(0)}
+    end
+  end
 end

@@ -86,6 +86,11 @@ class Commit < ActiveRecord::Base
     builds.failing.empty? ? Build::SUCCESSFUL : Build::FAILED
   end
 
+  def average_build_duration
+    return 0 if builds.count == 0
+    builds.map(&:duration).sum / builds.count
+  end
+
   private
     def self.standard_attribute?(some_key)
       some_key.to_s == 'parent_identifiers' || column_names.include?(some_key.to_s)

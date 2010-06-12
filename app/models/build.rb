@@ -14,4 +14,12 @@ class Build < ActiveRecord::Base
   named_scope :failing, :conditions => {:state => FAILED}
   named_scope :passing, :conditions => {:state => SUCCESSFUL}
   named_scope :running, :conditions => {:state => RUNNING}
+
+  def duration
+    if state != RUNNING
+      ended_at - started_at
+    else
+      Time.now - started_at
+    end
+  end
 end
