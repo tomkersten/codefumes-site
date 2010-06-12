@@ -3,7 +3,7 @@ class Community::ProjectsController < ApplicationController
     @project = Project.find(:first, :conditions => ["public_key = ?", params[:id]])
     respond_to do |format|
       format.html
-      format.js {render :json => @project.to_json(:include => [:commits])}
+      format.js {render :json => @project.to_json(:include => [:commits], :methods => [:build_status])}
     end
   end
 
