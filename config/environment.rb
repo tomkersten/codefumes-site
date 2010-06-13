@@ -7,11 +7,11 @@ RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'compass', :version => '>= 0.8.17'
-  config.gem 'haml', :version => '>=2.2.20'
+  config.gem 'compass', :version => '= 0.8.17'
+  config.gem 'haml', :version => '= 2.2.20'
   config.gem 'authlogic'
   config.gem 'rubyist-aasm', :lib => 'aasm'
-  config.gem 'formtastic', :version => '>=0.9.8'
+  config.gem 'formtastic', :version => '= 0.9.8'
   config.gem 'hoptoad_notifier', :version => '= 2.2.6'
 
   # Settings in config/environments/* take precedence over those specified here.
