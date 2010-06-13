@@ -13,6 +13,7 @@ gem 'rails', '2.3.8'
 group :test do
   gem 'builder', '2.1.2'
   gem 'caleb-chronic', '0.3.0', :require => 'chronic'
+  gem 'codefumes_harvester', '0.1.8'
   gem 'cucumber', '0.7.3'
   gem 'cucumber-rails', '0.3.1'
   gem 'database_cleaner', '0.5.2'

@@ -30,18 +30,22 @@ dependencies:
     version: = 1.1.2
     require: 
     - diff/lcs
-  authlogic: 
+  codefumes_harvester: 
     group: 
-    - :default
-    version: = 2.1.2
-  haml: 
-    group: 
-    - :default
-    version: = 2.2.20
+    - :test
+    version: = 0.1.8
   mysql: 
     group: 
     - :default
     version: = 2.8.1
+  haml: 
+    group: 
+    - :default
+    version: = 2.2.20
+  authlogic: 
+    group: 
+    - :default
+    version: = 2.1.2
   polyglot: 
     group: 
     - :test
@@ -104,14 +108,14 @@ dependencies:
     group: 
     - :test
     version: = 1.16.2
-  hoptoad_notifier: 
-    group: 
-    - :default
-    version: = 2.2.6
   aasm: 
     group: 
     - :default
     version: = 2.1.5
+  hoptoad_notifier: 
+    group: 
+    - :default
+    version: = 2.2.6
   cucumber: 
     group: 
     - :test
@@ -193,12 +197,24 @@ specs:
     version: 2.0.4
 - churn: 
     version: 0.0.12
+- crack: 
+    version: 0.1.6
+- httparty: 
+    version: 0.5.2
+- codefumes: 
+    version: 0.1.10
+- diff-lcs: 
+    version: 1.1.2
+- mime-types: 
+    version: "1.16"
+- grit: 
+    version: 2.0.0
+- codefumes_harvester: 
+    version: 0.1.8
 - haml: 
     version: 2.2.20
 - compass: 
     version: 0.8.17
-- diff-lcs: 
-    version: 1.1.2
 - trollop: 
     version: 1.16.2
 - gherkin: 
@@ -249,7 +265,7 @@ specs:
     version: 1.2.5
 - webrat: 
     version: 0.7.0
-hash: d1ec878e1c238cce63cdfc252ff10c31dbe6bea0
+hash: b5405bf479fcf5f5b17006fc8c63e7fe4948607c
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
