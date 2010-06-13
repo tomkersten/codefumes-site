@@ -31,6 +31,7 @@ group :test do
   gem 'rspec-rails', '1.3.2'
   gem 'ruby_parser', '2.0.4'
   gem 'sexp_processor', '3.0.3'
+  gem 'sqlite3-ruby', '1.2.5'
   gem 'term-ansicolor', '1.0.4', :require => 'term/ansicolor'
   gem 'treetop', '1.2.5'
   gem 'trollop', '1.16.2'
