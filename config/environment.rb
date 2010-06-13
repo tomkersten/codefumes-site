@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem 'rubyist-aasm', :lib => 'aasm'
   config.gem 'formtastic', :version => '>=0.9.8'
+  config.gem 'hoptoad_notifier', :version => '= 2.2.6'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
