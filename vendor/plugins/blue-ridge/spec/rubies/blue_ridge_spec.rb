@@ -66,8 +66,8 @@ describe BlueRidge do
   end
 
   describe "finding all spec names that live under the current directory" do
-    it "returns the list of '*_spec.js' filenames under the current directory" do
-      Dir.expects(:glob).with("*_spec.js").returns(:some_filenames)
+    it "returns the list of '*_spec.js' filenames under the current directory and any subdirectories" do
+      Dir.expects(:glob).with("**/*_spec.js").returns(:some_filenames)
       BlueRidge.find_specs_under_current_dir.should == :some_filenames
     end
   end

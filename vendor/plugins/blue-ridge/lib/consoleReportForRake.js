@@ -1,32 +1,28 @@
 (function($) {
-  $(Screw).bind("before", function(){
-    function example_name(element){
-      // TODO: handle nested describes!
-      var context_name = $(element).parents(".describe").children("h1").text();
-      var example_name = $(element).children("h2").text();
-
-      return context_name + " - " + example_name;
-    }
-
+  $(Screw).bind("before.screwunit", function(){
     $('.it')
-      .bind('passed', function(){ 
+      .bind('passed.screwunit', function(){ 
         java.lang.System.out.print(".");
       })
-      .bind('failed', function(e, reason){
-        print("\nFAILED: " + example_name(this));
+      .bind('failed.screwunit', function(e, reason){
+        print("\nFAILED: " + BlueRidge.CommandLine.exampleName(this));
         print("          " + reason + "\n");
       });
   });
 
-  $(Screw).bind("after", function(){
+  $(Screw).bind("after.screwunit", function(){
     var testCount = $('.passed').length + $('.failed').length;
     var failures = $('.failed').length;
     var elapsedTime = ((new Date() - Screw.suite_start_time)/1000.0);
     
-    print("\n")
+    print("\n");
     print(testCount + ' test(s), ' + failures + ' failure(s)');
     print(elapsedTime.toString() + " seconds elapsed");
     
-    if(failures > 0) { java.lang.System.exit(1) };
+    if (failures > 0) {
+      java.lang.System.exit(1);
+    } else {
+      java.lang.System.exit(0);
+    }
   });
 })(jQuery);

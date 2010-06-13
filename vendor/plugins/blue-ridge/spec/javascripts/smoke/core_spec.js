@@ -90,6 +90,15 @@ Screw.Unit(function() {
         it("should return false if the two number are not equal", function() {
           expect(Smoke.compare(number, 2)).to(equal, false);
         });
+
+        it("returns false if one of the parameters is undefined", function() {
+          expect(Smoke.compare(string, undefined)).to(equal, false);
+          expect(Smoke.compare(undefined, string)).to(equal, false);
+        });
+
+        it("returns false if the object types do not match", function() {
+          expect(Smoke.compare({foo: 'foo'}, ['foo'])).to(equal, false);
+        });
       })
 
       describe("with mixed types", function() {

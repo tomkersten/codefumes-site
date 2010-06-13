@@ -1,6 +1,6 @@
 (function($) {
   $(Screw)
-    .bind('loaded', function() {    
+    .bind('loaded.screwunit', function() {    
       $('.describe, .it')
         .click(function() {
           document.location = location.href.split('?')[0] + '?' + $(this).fn('selector');
@@ -14,32 +14,32 @@
         });
 
       $('.it')
-        .bind('enqueued', function() {
+        .bind('enqueued.screwunit', function() {
           $(this).addClass('enqueued');
         })
-        .bind('running', function() {
+        .bind('running.screwunit', function() {
           $(this).addClass('running');
         })
-        .bind('passed', function() {
+        .bind('passed.screwunit', function() {
           $(this).addClass('passed');
         })
-        .bind('failed', function(e, reason) {
+        .bind('failed.screwunit', function(e, reason) {
           $(this)
             .addClass('failed')
-            .append($('<p class="error"></p>').text(reason.toString()));
+            .append($('<p class="error"></p>').text(reason.message || reason.toString()));
 
           var file = reason.fileName || reason.sourceURL;
           var line = reason.lineNumber || reason.line;          
           if (file || line) {
             $(this).append($('<p class="error"></p>').text('line ' + line + ', ' + file));
           }
-        })
+        });
     })
-    .bind('before', function() {
+    .bind('before.screwunit', function() {
       Screw.suite_start_time = new Date();
       $('.status').text('Running...');
     })
-    .bind('after', function() {
-      $('.status').fn('display')
-    })
+    .bind('after.screwunit', function() {
+      $('body .status').fn('display');
+    });
 })(jQuery);

@@ -149,26 +149,104 @@ Screw.Unit(function() {
         });
       });
 
-      // LJK: commented-out this section because it's meant to fail; but we want
-      // to have a "green" build when running via continuous integration. 
-      // Need to find a way to test a failure without creating a "red" build.
-      //
-      // describe("A describe block with exceptions", function() {
-      //   var after_invoked = false;
-      //   after(function() {
-      //     after_invoked = true;
-      //   });
-      //   
-      //   describe("an exception in a test", function() {
-      //     it("fails because it throws an exception", function() {
-      //       throw('an exception');
-      //     });
-      //     
-      //     it("invokes [after]s even if the previous [it] raised an exception", function() {
-      //       expect(after_invoked).to(equal, true);
-      //     });
-      //   });
-      // });
+      describe("A describe block with exceptions", function() {
+        var after_invoked = false;
+        after(function() {
+          after_invoked = true;
+        });
+        
+        describe("an exception in a test", function() {
+          it("fails because it throws an exception", function() {
+            throw('an exception');
+          });
+          
+          it("invokes [after]s even if the previous [it] raised an exception", function() {
+            expect(after_invoked).to(equal, true);
+          });
+        });
+      });
+
+      describe("A describe with [wait]", function () {
+        it("executes the [wait] after a delay", function () {
+          var v = "now";
+
+          setTimeout(function () {
+            v = "later";
+          }, 300);
+
+          wait(function () {
+            expect(v).to(equal, "later");
+          }, 600);
+        });
+        
+        it("does not execute any code after the [wait]", function () {
+          wait(function () { });
+          expect("this ran").to_not(be_true);
+        });
+
+        describe("and nested [wait]s", function () {
+          it("executes the [wait]s serially", function () {
+            var v = "now";
+
+            setTimeout(function () {
+              v = "later";
+            }, 600);
+
+            wait(function () {
+              expect(v).to(equal, "now");
+
+              wait(function () {
+                expect(v).to(equal, "later");
+              }, 500);
+            }, 300);
+          });
+        });
+
+        describe("with [before]", function () {
+          var befores = [];
+
+          before(function () {
+            befores.push("executed");
+          });
+
+          it("does not re-execute the before clause before a wait", function () {
+            wait(function () {
+              expect(befores).to(have_length, 1);
+            }, 100);
+          });
+        });
+
+        describe("with [after]", function () {
+          var runs = [];
+
+          before(function () {
+            runs.push("before");
+          });
+
+          after(function () {
+            runs.push("after");
+          })
+
+          it("does not execute [after] before the [wait]", function () {
+            wait(function () {
+              expect(runs).to(equal, ["before"]);
+            }, 100);
+          });
+
+          it("does execute the [after] after the [wait]", function () {
+            wait(function () {
+              expect(runs).to(equal, ["before", "after", "before"]);
+            }, 150);
+          });
+        });
+      });
+      
+      describe("the wait exception", function () {
+        it("is self-describing", function () {
+          var w = new Screw.Wait(function () { }, 450);
+          expect(w.toString()).to(match, /Screw.Wait for 450ms and then execute\s+function/);
+        })
+      });
     });
 
     describe("#selector", function() {

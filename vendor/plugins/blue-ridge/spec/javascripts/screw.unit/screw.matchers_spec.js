@@ -111,7 +111,31 @@ Screw.Unit(function() {
         });
       });
     });
-    
+
+    describe('#include', function() {
+      it('matches an array including the element', function () {
+        expect([1, 2, 3]).to(include, 2);
+      });
+
+      it('does not match an array not including the element', function () {
+        expect([1, 2, 3]).to_not(include, 29);
+      });
+
+      describe(".failure_message", function() {
+        it('prints "expected [actual] to include [expected]', function() {
+          var message = null;
+          try { expect(["hello"]).to(include, "goodbye") } catch(e) { message = e }
+          expect(message).to(equal, 'expected [ "hello" ] to include "goodbye"');
+        });
+
+        it('prints "expected [actual] to not include [expected]', function() {
+          var message = null;
+          try { expect(["hello"]).to_not(include, "hello") } catch(e) { message = e }
+          expect(message).to(equal, 'expected [ "hello" ] to not include "hello"');
+        });
+      });
+    });
+
     describe('#be_empty', function() {
       it("matches Arrays with no elements", function() {
         expect([]).to(be_empty);

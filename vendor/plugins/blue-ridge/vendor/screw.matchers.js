@@ -1,6 +1,21 @@
 Screw.Matchers = (function($) {
   return matchers = {
     expect: function(actual) {
+      var funcname = function(f) {
+          var s = f.toString().match(/function (\w*)/)[1];
+          if ((s == null) || (s.length == 0)) return "anonymous";
+          return s;
+      };
+
+      var stacktrace = function() {
+          var s = "";
+          for(var a = arguments.caller; a != null; a = a.caller) {
+              s += funcname(a.callee) + "\n";
+              if (a.caller == a) break;
+          }
+          return s;
+      };
+
       return {
         to: function(matcher, expected, not) {
           var matched = matcher.match(expected, actual);
@@ -12,7 +27,7 @@ Screw.Matchers = (function($) {
         to_not: function(matcher, expected) {
           this.to(matcher, expected, true);
         }
-      }
+      };
     },
 
     equal: {
@@ -38,7 +53,7 @@ Screw.Matchers = (function($) {
         return 'expected ' + $.print(actual) + (not ? ' to not equal ' : ' to equal ') + $.print(expected);
       }
     },
-    
+
     be_gt: {
       match: function(expected, actual) {
         return actual > expected;
@@ -78,6 +93,16 @@ Screw.Matchers = (function($) {
         return 'expected ' + $.print(actual) + (not ? ' to not ' : ' to ') + 'be less than or equal to ' + $.print(expected);
       }
     },
+    
+    be_instance_of: {
+      match: function(cls, instance) {
+        return instance instanceof cls;
+      },
+      
+      failure_message: function(cls, instance, not) {
+        return 'expected ' + $.print(instance) + (not ? ' to not ' : ' to ') + 'be an instance of ' + cls;
+      }
+    },
 
     match: {
       match: function(expected, actual) {
@@ -92,6 +117,16 @@ Screw.Matchers = (function($) {
       }
     },
 
+    include: {
+      match: function(expected, actual) {
+        return $.inArray(expected, actual) >= 0;
+      },
+
+      failure_message: function(expected, actual, not) {
+        return 'expected ' + $.print(actual) + (not ? ' to not include ' : ' to include ') + $.print(expected);
+      }
+    },
+
     be_empty: {
       match: function(expected, actual) {
         if (actual.length == undefined) throw(actual.toString() + " does not respond to length");
@@ -101,6 +136,18 @@ Screw.Matchers = (function($) {
 
       failure_message: function(expected, actual, not) {
         return 'expected ' + $.print(actual) + (not ? ' to not be empty' : ' to be empty');
+      }
+    },
+
+    be_blank: {
+      match: function(expected, actual) {
+        if (actual == undefined) return true;
+        if (typeof(actual) == "string") actual = actual.replace(/^\s*(.*?)\s*$/, "$1");
+        return Screw.Matchers.be_empty.match(expected, actual);
+      },
+
+      failure_message: function(expected, actual, not) {
+        return 'expected ' + $.print(actual) + (not ? ' to not be blank' : ' to be blank');
       }
     },
 
@@ -125,7 +172,7 @@ Screw.Matchers = (function($) {
         return 'expected ' + $.print(actual) + (not ? ' to not be null' : ' to be null');
       }
     },
-
+    
     be_undefined: {
       match: function(expected, actual) {
         return actual == undefined;
@@ -133,6 +180,16 @@ Screw.Matchers = (function($) {
 
       failure_message: function(expected, actual, not) {
         return 'expected ' + $.print(actual) + (not ? ' to not be undefined' : ' to be undefined');
+      }
+    },
+    
+    be_defined: {
+      match: function(expected, actual) {
+        return actual != undefined;
+      },
+
+      failure_message: function(expected, actual, not) {
+        return 'expected ' + $.print(actual) + (not ? ' to not be defined' : ' to be defined');
       }
     },
 
@@ -156,10 +213,40 @@ Screw.Matchers = (function($) {
       }
     },
 
+    match_html: {
+      munge: function(mungee) {
+        if (mungee instanceof jQuery) {
+          mungee = mungee.html();
+        } else if (typeof(mungee) == "string") {
+          var span = document.createElement("span");
+          span.innerHTML = mungee;
+          mungee = span.innerHTML;
+        }
+
+        var regEx = /\sjQuery\d+=['"]\d+['"]/g;
+        mungee = mungee.replace(regEx, "");
+
+        return mungee;
+      },
+
+      match: function(expected, actual) {
+        var trimmedExpected = this.munge(expected);
+        var trimmedActual = this.munge(actual);
+        return trimmedActual.indexOf(trimmedExpected) > -1;
+      },
+
+      failure_message: function(expected, actual, not) {
+        var trimmedExpected = this.munge(expected);
+        var trimmedActual = this.munge(actual);
+        return 'expected ' + $.print(trimmedActual, { max_string: 300 }) +
+               (not ? ' to not contain ' : ' to contain ') + $.print(trimmedExpected, { max_string: 300 });
+      }
+    },
+
     match_selector: {
       match: function(expected, actual) {
         if (!(actual instanceof jQuery)) {
-          throw expected.toString() + " must be an instance of jQuery to match against a selector"
+          throw expected.toString() + " must be an instance of jQuery to match against a selector";
         }
 
         return actual.is(expected);
@@ -173,7 +260,7 @@ Screw.Matchers = (function($) {
     contain_selector: {
       match: function(expected, actual) {
         if (!(actual instanceof jQuery)) {
-          throw expected.toString() + " must be an instance of jQuery to match against a selector"
+          throw expected.toString() + " must be an instance of jQuery to match against a selector";
         }
 
         return actual.find(expected).length > 0;
@@ -183,5 +270,5 @@ Screw.Matchers = (function($) {
         return 'expected ' + $.print(actual) + (not ? ' to not contain selector ' : ' to contain selector ') + expected;
       }
     }
-  }
+  };
 })(jQuery);

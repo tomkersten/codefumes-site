@@ -28,6 +28,7 @@ Smoke = {
   
   compare: function(a, b) {
     if (a === b) return true;
+    if (typeof(a) != typeof(b)) return false;
     if (a instanceof Array) {
       if (b.length != a.length) return false;
       for (var i = 0; i < b.length; i++)

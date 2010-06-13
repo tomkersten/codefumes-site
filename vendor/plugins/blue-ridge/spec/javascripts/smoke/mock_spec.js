@@ -1,11 +1,11 @@
 Screw.Unit(function() {
-	describe("mocking", function() {	
-		describe("basics", function() {					
+	describe("mocking", function() {
+		describe("basics", function() {
 			it("allows stubbing directly on mock objects", function() {
 				mockObj = mock().stub('bar').and_return('baz');
 				expect(mockObj.bar()).to(equal, 'baz');
 			});
-		
+
 			it("should check an exact call count", function() {
 				var m = mock()
 				m.should_receive('bar').exactly('twice');
@@ -51,6 +51,12 @@ Screw.Unit(function() {
 				m.bar();
 			});
 		
+			it("should check a minimum call count when defined via must_receive shortcut", function() {
+				var m = mock()
+				m.must_receive('bar');
+				m.bar();
+			});
+
 			it("should check a maximum call count", function() {
 				var m = mock()
 				m.should_receive('bar').at_most(2,'times');
@@ -94,8 +100,8 @@ Screw.Unit(function() {
 				mockObj.should_receive('foo').with_arguments('bar').exactly('once');
 				mockObj.foo('bar')
 			});
-		});
-		
+			});
+
 		describe("added on top of an existing object", function() {
 			before(function() {
 				obj = { say: "hello", shout: function() { return this.say.toUpperCase(); } }
@@ -213,6 +219,12 @@ Screw.Unit(function() {
         mockObj('a');
       });
 
+      it("should check for at least one invokation when defined via must_be_invoked shortcut", function() {
+        mockObj.must_be_invoked();
+        mockObj();
+        mockObj();
+			});
+
       it("should allow a return value to be set", function() {
         mockObj.should_be_invoked().and_return('bar');
         expect(mockObj('foo')).to(equal, 'bar');
@@ -269,5 +281,36 @@ Screw.Unit(function() {
 				(new Aobj()).aFunction();
 			});
 		});	    
+	  
+	  describe("Smoke.Mock.Expectation", function() {
+	    describe(".parseCount", function() {
+        describe("when called with a string", function() {
+  	      it("should return 1 when called with 'once'", function() {
+  	        expect(Smoke.Mock.Expectation.prototype.parseCount('once')).to(equal, 1);
+  	      });
+
+  	      it("should return 2 when called with 'twice'", function() {
+  	        expect(Smoke.Mock.Expectation.prototype.parseCount('twice')).to(equal, 2);
+  	      });          
+
+        });
+        
+        describe("when called with a number", function() {
+          it("should return the number", function() {
+  	        expect(Smoke.Mock.Expectation.prototype.parseCount(1)).to(equal, 1);                        
+          }); 
+        }); 
+        
+        describe("when called when a value that cannot be explicitly conversed to a number", function() {
+          it("should throw a TypeError", function() {
+            try {
+              Smoke.Mock.Expectation.prototype.parseCount('test');
+            } catch(e) {
+              expect(e.name).to(equal, 'TypeError');
+            }
+          });          
+        });
+	    });
+	  });
 	});
 });

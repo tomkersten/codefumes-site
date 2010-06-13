@@ -6,7 +6,7 @@ module BlueRidge
   end
   
   def self.rhino_command
-    "java -Dblue.ridge.prefix=\"#{plugin_prefix}\" -jar #{plugin_prefix}/lib/js.jar -w -debug"
+    "java -Dblue.ridge.prefix=\"#{plugin_prefix}\" -jar #{plugin_prefix}/vendor/env-js.jar -w -debug"
   end
   
   def self.test_runner_command
@@ -30,7 +30,7 @@ module BlueRidge
   end
   
   def self.find_specs_under_current_dir
-    Dir.glob("*_spec.js")
+    Dir.glob("**/*_spec.js")
   end
   
   def self.run_spec(spec_filename)

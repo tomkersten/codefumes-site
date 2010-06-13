@@ -1,17 +1,40 @@
 var Screw = (function($) {
   var screw = {
     Unit: function(fn) {
-      var contents = fn.toString().match(/^[^\{]*{((.*\n*)*)}/m)[1];
-      var fn = new Function("matchers", "specifications",
+      var wrappedFn;
+      if(fn.length == 0) {
+        var contents = fn.toString().match(/^[^\{]*{((.*\n*)*)}/m)[1];
+        wrappedFn = new Function("matchers", "specifications",
         "with (specifications) { with (matchers) { " + contents + " } }"
-      );
+        );
+      } else {
+        wrappedFn = function(matchers, specifications) {
+          var screwContext = {};
+          for(var method in matchers) {
+            screwContext[method] = matchers[method];
+          }
+          for(var method in specifications) {
+            screwContext[method] = specifications[method];
+          }
+          fn(screwContext);
+        };
+      }
 
       $(Screw).queue(function() {
         Screw.Specifications.context.push($('body > .describe'));
-        fn.call(this, Screw.Matchers, Screw.Specifications);
+        wrappedFn.call(this, Screw.Matchers, Screw.Specifications);
         Screw.Specifications.context.pop();
         $(this).dequeue();
       });
+    },
+
+    Wait: function (fn, ms) {
+      this.func = fn;
+      this.delay = ms;
+      
+      this.toString = function () {
+        return "Screw.Wait for " + this.delay + "ms and then execute " + this.func;
+      };
     },
 
     Specifications: {
@@ -60,12 +83,15 @@ var Screw = (function($) {
         this.context[this.context.length-1]
           .children('.afters')
             .append(after);
+      },
+
+      wait: function(fn, ms) {
+        throw new Screw.Wait(fn, ms);
       }
     }
   };
 
-  $(screw).queue(function() { $(screw).trigger('loading') });
-  
+  $(screw).queue(function() { $(screw).trigger('loading.screwunit'); });
   $(window).load(function(){
     $('<div class="describe"></div>')
       .append('<h3 class="status"></h3>')
@@ -75,7 +101,7 @@ var Screw = (function($) {
       .appendTo('body');
   
     $(screw).dequeue();
-    $(screw).trigger('loaded');
+    $(screw).trigger('loaded.screwunit');
   });
   
   return screw;

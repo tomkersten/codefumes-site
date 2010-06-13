@@ -14,13 +14,12 @@ Screw.Matchers.stub = function(obj, attr) {
 };
 
 (function($) {
-  $(Screw).bind("before", function(){
+  $(Screw).bind("before.screwunit", function(){
     function checkAndResetSmoke() {
       Smoke.checkExpectations();
       Smoke.reset();
     }
 
-    $('.it').bind('passed', function(){ checkAndResetSmoke() });
-    $('.it').bind('failed', function(){ checkAndResetSmoke() });
+    $('.it').bind('finished_run.screwunit', function(){ checkAndResetSmoke(); });
   });
 })(jQuery);

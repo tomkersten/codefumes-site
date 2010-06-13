@@ -9,21 +9,21 @@ Smoke.Stub.prototype = {
 	property: function(p){
 		this.property = p;
 		this.and_set_to(this.defaultReturn);
-		return this
+		return this;
 	},
 	method: function(f){
 		this.func = f;
 		this.and_return(this.defaultReturn);
-		return this
+		return this;
 	},
 	and_return: function(v){
 		this.obj[this.attribute] = function() {
-			return v
+			return v;
 		};
-		return this.obj
+		return this.obj;
 	},
 	and_set_to: function(v){
 		this.obj[this.attribute] = v;
-		return this.obj
+		return this.obj;
 	}
 };

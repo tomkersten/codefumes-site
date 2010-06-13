@@ -11,7 +11,7 @@ Smoke.failed = function(mock, message){
 // Some helpers
 Smoke.reset = function(){
 	Smoke.mocks = Smoke.mocks || [];
-	for(var i=0; i<Smoke.mocks.length; i++) Smoke.mocks[i]._resetMocks();
+	for(var i=0; i<Smoke.mocks.length; i++) { Smoke.mocks[i]._resetMocks(); }
 	Smoke.mocks = [];
 	Smoke.passCount = 0;
 	Smoke.failCount = 0;
@@ -19,7 +19,7 @@ Smoke.reset = function(){
 Smoke.reset();
 
 Smoke.checkExpectations = function(){
-	for(var i=0; i<Smoke.mocks.length; i++) Smoke.mocks[i]._checkExpectations();
+	for(var i=0; i<Smoke.mocks.length; i++) { Smoke.mocks[i]._checkExpectations(); }
 };
 
 Smoke.Mock = function(originalObj) {
@@ -37,13 +37,19 @@ Smoke.Mock = function(originalObj) {
 		this._valuesBeforeMocking[attr] = this[attr];
 		if(this._expectations[attr].length == 1) {
   		this[attr] = Smoke.Mock.Expectation.stub(this, attr);
-		} 
+		}
 		return expectation;
+	};
+
+	obj.must_receive = function(attr) {
+	  var expectation = obj.should_receive(attr);
+	  expectation.at_least("once");
+	  return expectation;
 	};
 
 	obj._checkExpectations = function(){
 		for(var e in this._expectations) {
-			var expectations = this._expectations[e]
+			var expectations = this._expectations[e];
 			for(var i=0; i < expectations.length; i++) expectations[i].check();
 		};
 	};
@@ -51,33 +57,35 @@ Smoke.Mock = function(originalObj) {
 	obj._resetMocks = function(){
 		for(var attr in this._valuesBeforeMocking) {
 			this[attr] = this._valuesBeforeMocking[attr];
-		}
+    }
 		
 		delete this._valuesBeforeMocking;
 		delete this._expectations;
-		delete this._resetMocks;
 		delete this._checkExpectations;
 		delete this.stub;
 		delete this.should_receive;
+		delete this.must_receive;
+		delete this._resetMocks;
 	};
-	
+
 	Smoke.mocks.push(obj);
 	return obj;
 };
 
-Smoke.MockFunction = function(originalFunction, name) {
-  name = name || 'anonymous_function';
+Smoke.MockFunction = function(original_function, name) {
+  if (arguments.length < 2) {
+    name = 'anonymous_function';
+  }
   var mock = Smoke.Mock(function() {
-    var return_value = arguments.callee[name].apply(this, arguments);
-    if (return_value === undefined) {
-      return_value = (originalFunction || new Function()).apply(this, arguments)
-    }
-    return return_value;
+    return arguments.callee[name].apply(this, arguments);
   });
-  mock[name] = (originalFunction || new Function());
+  mock[name] = (original_function || new Function());
   mock.should_be_invoked = function() {
     return this.should_receive(name);
-  }
+  };
+  mock.must_be_invoked = function() {
+    return this.should_receive(name).at_least("once");
+  };
   return mock;
 };
 
@@ -88,28 +96,30 @@ Smoke.Mock.Expectation = function(mock, attr) {
 	this.returnValue = undefined;
 	this.callerArgs = undefined;
 	this.hasReturnValue = false;
+  this.minCount = undefined;
+  this.maxCount = undefined;
+  this.exactCount = undefined;
 };
 
 Smoke.Mock.Expectation.stub = function(mock, attr) {
   return function() {
     return function() {
       var matched, return_value, args = arguments;
-      jQuery.each(this, function() {
-    	  this.run(args) && (matched = true) && (return_value = this.returnValue);
-      });
+      for (var i = 0; i < this.length; i++) {
+        this[i].run(args) && (matched = true) && (return_value = this[i].returnValue);
+    	  }
       if (!matched) {
-        this[0].argumentMismatchError(args)
+        this[0].argumentMismatchError(args);
       }
-      return return_value;        
+      return return_value;
     }.apply(mock._expectations[attr], arguments);
-  }
-} 
+  };
+}; 
 
 
 Smoke.Mock.Expectation.prototype = {
 	exactly: function(count,type){
 		// type isn't used for now, it's just syntax ;)
-		this.minCount = this.maxCount = undefined;
 		this.exactCount = this.parseCount(count);
 		return this;
 	},
@@ -123,34 +133,43 @@ Smoke.Mock.Expectation.prototype = {
 	},
 	with_arguments: function(){
 		this.callerArgs = arguments;
-		return this
+		return this;
 	},
 	run: function(args){
 		if((this.callerArgs === undefined) || Smoke.compareArguments(args, this.callerArgs)) {
 			return !!(this.callCount+=1);
 		};
-		return false
+		return false;
 	},
 	and_return: function(v){
 	  this.hasReturnValue = true;
 		this.returnValue = v;
-	},
+  },
 	check: function(){
-		if(this.exactCount!=undefined) this.checkExactCount();
-		if(this.minCount!=undefined) this.checkMinCount();
-		if(this.maxCount!=undefined) this.checkMaxCount();
+		(this.exactCount !== undefined) && this.checkExactCount();
+		(this.minCount !== undefined) && this.checkMinCount();
+		(this.maxCount !== undefined) && this.checkMaxCount();
 	},
 	checkExactCount: function(){
-		if(this.exactCount==this.callCount) Smoke.passed(this)//console.log('Mock passed!')
-		else Smoke.failed(this, 'expected '+this.methodSignature()+' to be called exactly '+this.exactCount+" times but it got called "+this.callCount+' times');
+		if (this.exactCount === this.callCount) {
+		  Smoke.passed(this);
+		} else {
+		  Smoke.failed(this, 'expected '+this.methodSignature()+' to be called exactly '+this.exactCount+" times but it got called "+this.callCount+' times');
+		}
 	},
 	checkMinCount: function(){
-		if(this.minCount<=this.callCount) Smoke.passed(this);
-		else Smoke.failed(this, 'expected '+this.methodSignature()+' to be called at least '+this.minCount+" times but it only got called "+this.callCount+' times');
+		if (this.minCount <= this.callCount) {
+		  Smoke.passed(this);
+		} else {
+		  Smoke.failed(this, 'expected '+this.methodSignature()+' to be called at least '+this.minCount+" times but it only got called "+this.callCount+' times');
+		}
 	},
 	checkMaxCount: function(){
-		if(this.maxCount>=this.callCount) Smoke.passed(this);//console.log('Mock passed!')
-		else Smoke.failed(this, 'expected '+this.methodSignature()+' to be called at most '+this.maxCount+" times but it actually got called "+this.callCount+' times');
+		if (this.maxCount >= this.callCount) {
+		  Smoke.passed(this);
+		} else {
+		  Smoke.failed(this, 'expected '+this.methodSignature()+' to be called at most '+this.maxCount+" times but it actually got called "+this.callCount+' times');
+		}
 	},
 	argumentMismatchError: function(args) {
 	  Smoke.failed(this, 'expected ' + this._attr + ' with ' + Smoke.printArguments(this.callerArgs) + ' but received it with ' + Smoke.printArguments(args));
@@ -165,7 +184,10 @@ Smoke.Mock.Expectation.prototype = {
 			case 'twice':
 				return 2;
 			default:
-				return c;
+        if (isNaN(Number(c))) {
+          throw(new TypeError('Invalid Count:' + Smoke.print(c)));
+        }
+				return Number(c);
 		}
 	}
 };
