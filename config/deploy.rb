@@ -22,6 +22,11 @@ namespace :vlad do
   Rake.clear_tasks('vlad:start_app')
   set :web_command, "sudo /etc/init.d/apache2"
 
+  desc "Executes 'bundle install' on the app codebase".cleanup
+  remote_task :bundlify, :roles => :app do
+    run "bundle install"
+  end
+
   desc "Updates the symlinks for shared paths".cleanup
   remote_task :update_symlinks, :roles => :app do
     run "ln -s #{shared_path}/config/database.yml #{current_release}/config/"
@@ -40,4 +45,4 @@ namespace :vlad do
 end
 
 desc "Deploys application, migrates db, symlinks, and cycles web/app servers"
-task :deploy => %w[vlad:update vlad:migrate vlad:start vlad:cleanup]
+task :deploy => %w[vlad:update vlad:bundlify vlad:migrate vlad:start vlad:cleanup]
