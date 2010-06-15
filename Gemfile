@@ -10,6 +10,11 @@ gem 'hoptoad_notifier', '2.2.6'
 gem 'mysql', '2.8.1'
 gem 'rails', '2.3.8'
 
+group :development do
+  gem 'vlad'
+  gem 'vlad-git'
+end
+
 group :test do
   gem 'builder', '2.1.2'
   gem 'caleb-chronic', '0.3.0', :require => 'chronic'
