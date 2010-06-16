@@ -1,10 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  # Static pages
+  map.page 'pages/:template_name', :controller => 'pages', :action => 'show'
+  map.howto_page 'pages/howto/:template_name', :controller => 'pages', :action => 'show', :dir => 'howto'
+
   map.signup '/signup',  :controller => 'users', :action => 'new', :method => :get
   map.confirm_logout '/logout/confirm', :controller => 'session', :action => 'confirm_logout', :method => :get
   map.logout '/logout', :controller => 'session', :action => 'destroy', :method => :delete
   map.login  '/login',  :controller => 'session', :action => 'new', :method => :get
 
-  map.invalid_project '/what', :controller => 'Exterior', :action => 'invalid_public_key', :method => :get
+  map.invalid_project '/what', :controller => 'pages', :action => 'invalid_public_key', :method => :get
 
   map.short_uri '/p/:public_key', :controller => 'Community::Projects', :action => 'short_uri', :method => :get
   map.show_project_attributes '/p/:public_key/attributes/:attribute.:format', :controller => 'Community::Attributes', :action => 'show', :method => :get
@@ -28,7 +32,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
   map.resource :session, :controller => 'session'
-  map.root :controller => 'exterior'
+  map.root :controller => 'pages'
 
   map.api_v1_commit '/api/v1/:format/commits/:id', :controller => "Api::V1::Commits", :action => 'show', :method => :get
   map.api_v1_user_projects '/api/v1/:format/users/:user_id/projects',
