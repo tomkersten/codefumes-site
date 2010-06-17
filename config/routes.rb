@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   # Static pages
   map.page 'pages/:template_name', :controller => 'pages', :action => 'show'
-  map.howto_page 'pages/howto/:template_name', :controller => 'pages', :action => 'show', :dir => 'howto'
+  map.howto_page 'howto/:template_name', :controller => 'pages', :action => 'show', :dir => 'howto'
 
   map.signup '/signup',  :controller => 'users', :action => 'new', :method => :get
   map.confirm_logout '/logout/confirm', :controller => 'session', :action => 'confirm_logout', :method => :get
