@@ -120,10 +120,220 @@ U)?[0][M](b):arguments;a&&m.is(a,ea)&&c[o]-1&&(a=a[I](Jb,function(d,f){return c[
  */
 (function(){var a=Math.max,c=Math.min;Raphael.fn.g=Raphael.fn.g||{};Raphael.fn.g.markers={disc:"disc",o:"disc",flower:"flower",f:"flower",diamond:"diamond",d:"diamond",square:"square",s:"square",triangle:"triangle",t:"triangle",star:"star","*":"star",cross:"cross",x:"cross",plus:"plus","+":"plus",arrow:"arrow","->":"arrow"};Raphael.fn.g.shim={stroke:"none",fill:"#000","fill-opacity":0};Raphael.fn.g.txtattr={font:"12px Arial, sans-serif"};Raphael.fn.g.colors=[];var e=[0.6,0.2,0.05,0.1333,0.75,0];for(var b=0;b<10;b++){if(b<e.length){Raphael.fn.g.colors.push("hsb("+e[b]+", .75, .75)");}else{Raphael.fn.g.colors.push("hsb("+e[b-e.length]+", 1, .5)");}}Raphael.fn.g.text=function(f,h,g){return this.text(f,h,g).attr(this.g.txtattr);};Raphael.fn.g.labelise=function(f,h,g){if(f){return(f+"").replace(/(##+(?:\.#+)?)|(%%+(?:\.%+)?)/g,function(i,k,j){if(k){return(+h).toFixed(k.replace(/^#+\.?/g,"").length);}if(j){return(h*100/g).toFixed(j.replace(/^%+\.?/g,"").length)+"%";}});}else{return(+h).toFixed(0);}};Raphael.fn.g.finger=function(l,k,g,m,h,i,j){if((h&&!m)||(!h&&!g)){return j?"":this.path();}i={square:"square",sharp:"sharp",soft:"soft"}[i]||"round";var o;m=Math.round(m);g=Math.round(g);l=Math.round(l);k=Math.round(k);switch(i){case"round":if(!h){var f=~~(m/2);if(g<f){f=g;o=["M",l+0.5,k+0.5-~~(m/2),"l",0,0,"a",f,~~(m/2),0,0,1,0,m,"l",0,0,"z"];}else{o=["M",l+0.5,k+0.5-f,"l",g-f,0,"a",f,f,0,1,1,0,m,"l",f-g,0,"z"];}}else{f=~~(g/2);if(m<f){f=m;o=["M",l-~~(g/2),k,"l",0,0,"a",~~(g/2),f,0,0,1,g,0,"l",0,0,"z"];}else{o=["M",l-f,k,"l",0,f-m,"a",f,f,0,1,1,g,0,"l",0,m-f,"z"];}}break;case"sharp":if(!h){var n=~~(m/2);o=["M",l,k+n,"l",0,-m,a(g-n,0),0,c(n,g),n,-c(n,g),n+(n*2<m),"z"];}else{n=~~(g/2);o=["M",l+n,k,"l",-g,0,0,-a(m-n,0),n,-c(n,m),n,c(n,m),n,"z"];}break;case"square":if(!h){o=["M",l,k+~~(m/2),"l",0,-m,g,0,0,m,"z"];}else{o=["M",l+~~(g/2),k,"l",1-g,0,0,-m,g-1,0,"z"];}break;case"soft":if(!h){f=c(g,Math.round(m/5));o=["M",l+0.5,k+0.5-~~(m/2),"l",g-f,0,"a",f,f,0,0,1,f,f,"l",0,m-f*2,"a",f,f,0,0,1,-f,f,"l",f-g,0,"z"];}else{f=c(Math.round(g/5),m);o=["M",l-~~(g/2),k,"l",0,f-m,"a",f,f,0,0,1,f,-f,"l",g-2*f,0,"a",f,f,0,0,1,f,f,"l",0,m-f,"z"];}}if(j){return o.join(",");}else{return this.path(o);}};Raphael.fn.g.disc=function(f,h,g){return this.circle(f,h,g);};Raphael.fn.g.line=function(f,h,g){return this.rect(f-g,h-g/5,2*g,2*g/5);};Raphael.fn.g.square=function(f,h,g){g=g*0.7;return this.rect(f-g,h-g,2*g,2*g);};Raphael.fn.g.triangle=function(f,h,g){g*=1.75;return this.path("M".concat(f,",",h,"m0-",g*0.58,"l",g*0.5,",",g*0.87,"-",g,",0z"));};Raphael.fn.g.diamond=function(f,h,g){return this.path(["M",f,h-g,"l",g,g,-g,g,-g,-g,g,-g,"z"]);};Raphael.fn.g.flower=function(j,h,f,g){f=f*1.25;var o=f,m=o*0.5;g=+g<3||!g?5:g;var p=["M",j,h+m,"Q"],l;for(var k=1;k<g*2+1;k++){l=k%2?o:m;p=p.concat([+(j+l*Math.sin(k*Math.PI/g)).toFixed(3),+(h+l*Math.cos(k*Math.PI/g)).toFixed(3)]);}p.push("z");return this.path(p.join(","));};Raphael.fn.g.star=function(f,n,m,h,g){h=h||m*0.382;g=g||5;var l=["M",f,n+h,"L"],k;for(var j=1;j<g*2;j++){k=j%2?m:h;l=l.concat([(f+k*Math.sin(j*Math.PI/g)),(n+k*Math.cos(j*Math.PI/g))]);}l.push("z");return this.path(l.join(","));};Raphael.fn.g.cross=function(f,h,g){g=g/2.5;return this.path("M".concat(f-g,",",h,"l",[-g,-g,g,-g,g,g,g,-g,g,g,-g,g,g,g,-g,g,-g,-g,-g,g,-g,-g,"z"]));};Raphael.fn.g.plus=function(f,h,g){g=g/2;return this.path("M".concat(f-g/2,",",h-g/2,"l",[0,-g,g,0,0,g,g,0,0,g,-g,0,0,g,-g,0,0,-g,-g,0,0,-g,"z"]));};Raphael.fn.g.arrow=function(f,h,g){return this.path("M".concat(f-g*0.7,",",h-g*0.4,"l",[g*0.6,0,0,-g*0.4,g,g*0.8,-g,g*0.8,0,-g*0.4,-g*0.6,0],"z"));};Raphael.fn.g.tag=function(f,m,l,k,i){k=k||0;i=i==null?5:i;l=l==null?"$9.99":l;var h=0.5522*i,g=this.set(),j=3;g.push(this.path().attr({fill:"#000",stroke:"#000"}));g.push(this.text(f,m,l).attr(this.g.txtattr).attr({fill:"#fff","font-family":"Helvetica, Arial"}));g.update=function(){this.rotate(0,f,m);var o=this[1].getBBox();if(o.height>=i*2){this[0].attr({path:["M",f,m+i,"a",i,i,0,1,1,0,-i*2,i,i,0,1,1,0,i*2,"m",0,-i*2-j,"a",i+j,i+j,0,1,0,0,(i+j)*2,"L",f+i+j,m+o.height/2+j,"l",o.width+2*j,0,0,-o.height-2*j,-o.width-2*j,0,"L",f,m-i-j].join(",")});}else{var n=Math.sqrt(Math.pow(i+j,2)-Math.pow(o.height/2+j,2));this[0].attr({path:["M",f,m+i,"c",-h,0,-i,h-i,-i,-i,0,-h,i-h,-i,i,-i,h,0,i,i-h,i,i,0,h,h-i,i,-i,i,"M",f+n,m-o.height/2-j,"a",i+j,i+j,0,1,0,0,o.height+2*j,"l",i+j-n+o.width+2*j,0,0,-o.height-2*j,"L",f+n,m-o.height/2-j].join(",")});}this[1].attr({x:f+i+j+o.width/2,y:m});k=(360-k)%360;this.rotate(k,f,m);k>90&&k<270&&this[1].attr({x:f-i-j-o.width/2,y:m,rotation:[180+k,f,m]});return this;};g.update();return g;};Raphael.fn.g.popupit=function(l,k,m,g,t){g=g==null?2:g;t=t||5;l=Math.round(l);k=Math.round(k);var j=m.getBBox(),n=Math.round(j.width/2),i=Math.round(j.height/2),s=[0,n+t*2,0,-n-t*2],o=[-i*2-t*3,-i-t,0,-i-t],f=["M",l-s[g],k-o[g],"l",-t,(g==2)*-t,-a(n-t,0),0,"a",t,t,0,0,1,-t,-t,"l",0,-a(i-t,0),(g==3)*-t,-t,(g==3)*t,-t,0,-a(i-t,0),"a",t,t,0,0,1,t,-t,"l",a(n-t,0),0,t,!g*-t,t,!g*t,a(n-t,0),0,"a",t,t,0,0,1,t,t,"l",0,a(i-t,0),(g==1)*t,t,(g==1)*-t,t,0,a(i-t,0),"a",t,t,0,0,1,-t,t,"l",-a(n-t,0),0,"z"].join(","),q=[{x:l,y:k+t*2+i},{x:l-t*2-n,y:k},{x:l,y:k-t*2-i},{x:l+t*2+n,y:k}][g];m.translate(q.x-n-j.x,q.y-i-j.y);return this.path(f).attr({fill:"#000",stroke:"none"}).insertBefore(m.node?m:m[0]);};Raphael.fn.g.popup=function(f,l,k,g,i){g=g==null?2:g>3?3:g;i=i||5;k=k||"$9.99";var h=this.set(),j=3;h.push(this.path().attr({fill:"#000",stroke:"#000"}));h.push(this.text(f,l,k).attr(this.g.txtattr).attr({fill:"#fff","font-family":"Helvetica, Arial"}));h.update=function(o,n,q){o=o||f;n=n||l;var t=this[1].getBBox(),u=t.width/2,s=t.height/2,y=[0,u+i*2,0,-u-i*2],v=[-s*2-i*3,-s-i,0,-s-i],m=["M",o-y[g],n-v[g],"l",-i,(g==2)*-i,-a(u-i,0),0,"a",i,i,0,0,1,-i,-i,"l",0,-a(s-i,0),(g==3)*-i,-i,(g==3)*i,-i,0,-a(s-i,0),"a",i,i,0,0,1,i,-i,"l",a(u-i,0),0,i,!g*-i,i,!g*i,a(u-i,0),0,"a",i,i,0,0,1,i,i,"l",0,a(s-i,0),(g==1)*i,i,(g==1)*-i,i,0,a(s-i,0),"a",i,i,0,0,1,-i,i,"l",-a(u-i,0),0,"z"].join(","),x=[{x:o,y:n+i*2+s},{x:o-i*2-u,y:n},{x:o,y:n-i*2-s},{x:o+i*2+u,y:n}][g];x.path=m;if(q){this.animate(x,500,">");}else{this.attr(x);}return this;};return h.update(f,l);};Raphael.fn.g.flag=function(f,k,j,i){i=i||0;j=j||"$9.99";var g=this.set(),h=3;g.push(this.path().attr({fill:"#000",stroke:"#000"}));g.push(this.text(f,k,j).attr(this.g.txtattr).attr({fill:"#fff","font-family":"Helvetica, Arial"}));g.update=function(l,o){this.rotate(0,l,o);var n=this[1].getBBox(),m=n.height/2;this[0].attr({path:["M",l,o,"l",m+h,-m-h,n.width+2*h,0,0,n.height+2*h,-n.width-2*h,0,"z"].join(",")});this[1].attr({x:l+m+h+n.width/2,y:o});i=360-i;this.rotate(i,l,o);i>90&&i<270&&this[1].attr({x:l-r-h-n.width/2,y:o,rotation:[180+i,l,o]});return this;};return g.update(f,k);};Raphael.fn.g.label=function(f,i,h){var g=this.set();g.push(this.rect(f,i,10,10).attr({stroke:"none",fill:"#000"}));g.push(this.text(f,i,h).attr(this.g.txtattr).attr({fill:"#fff"}));g.update=function(){var k=this[1].getBBox(),j=c(k.width+10,k.height+10)/2;this[0].attr({x:k.x-j/2,y:k.y-j/2,width:k.width+j,height:k.height+j,r:j});};g.update();return g;};Raphael.fn.g.labelit=function(h){var g=h.getBBox(),f=c(20,g.width+10,g.height+10)/2;return this.rect(g.x-f/2,g.y-f/2,g.width+f,g.height+f,f).attr({stroke:"none",fill:"#000"}).insertBefore(h.node?h:h[0]);};Raphael.fn.g.drop=function(f,k,j,h,i){h=h||30;i=i||0;var g=this.set();g.push(this.path(["M",f,k,"l",h,0,"A",h*0.4,h*0.4,0,1,0,f+h*0.7,k-h*0.7,"z"]).attr({fill:"#000",stroke:"none",rotation:[22.5-i,f,k]}));i=(i+90)*Math.PI/180;g.push(this.text(f+h*Math.sin(i),k+h*Math.cos(i),j).attr(this.g.txtattr).attr({"font-size":h*12/30,fill:"#fff"}));g.drop=g[0];g.text=g[1];return g;};Raphael.fn.g.blob=function(g,m,l,k,i){k=(+k+1?k:45)+90;i=i||12;var f=Math.PI/180,j=i*12/12;var h=this.set();h.push(this.path().attr({fill:"#000",stroke:"none"}));h.push(this.text(g+i*Math.sin((k)*f),m+i*Math.cos((k)*f)-j/2,l).attr(this.g.txtattr).attr({"font-size":j,fill:"#fff"}));h.update=function(t,s,y){t=t||g;s=s||m;var A=this[1].getBBox(),D=a(A.width+j,i*25/12),z=a(A.height+j,i*25/12),o=t+i*Math.sin((k-22.5)*f),B=s+i*Math.cos((k-22.5)*f),q=t+i*Math.sin((k+22.5)*f),C=s+i*Math.cos((k+22.5)*f),F=(q-o)/2,E=(C-B)/2,p=D/2,n=z/2,x=-Math.sqrt(Math.abs(p*p*n*n-p*p*E*E-n*n*F*F)/(p*p*E*E+n*n*F*F)),v=x*p*E/n+(q+o)/2,u=x*-n*F/p+(C+B)/2;if(y){this.animate({x:v,y:u,path:["M",g,m,"L",q,C,"A",p,n,0,1,1,o,B,"z"].join(",")},500,">");}else{this.attr({x:v,y:u,path:["M",g,m,"L",q,C,"A",p,n,0,1,1,o,B,"z"].join(",")});}return this;};h.update(g,m);return h;};Raphael.fn.g.colorValue=function(i,h,g,f){return"hsb("+[c((1-i/h)*0.4,1),g||0.75,f||0.75]+")";};Raphael.fn.g.snapEnds=function(n,o,m){var k=n,p=o;if(k==p){return{from:k,to:p,power:0};}function q(f){return Math.abs(f-0.5)<0.25?~~(f)+0.5:Math.round(f);}var l=(p-k)/m,g=~~(l),j=g,h=0;if(g){while(j){h--;j=~~(l*Math.pow(10,h))/Math.pow(10,h);}h++;}else{while(!g){h=h||1;g=~~(l*Math.pow(10,h))/Math.pow(10,h);h++;}h&&h--;}p=q(o*Math.pow(10,h))/Math.pow(10,h);if(p<o){p=q((o+0.5)*Math.pow(10,h))/Math.pow(10,h);}k=q((n-(h>0?0:0.5))*Math.pow(10,h))/Math.pow(10,h);return{from:k,to:p,power:h};};Raphael.fn.g.axis=function(v,u,o,G,l,J,m,L,n,g){g=g==null?2:g;n=n||"t";J=J||10;var F=n=="|"||n==" "?["M",v+0.5,u,"l",0,0.001]:m==1||m==3?["M",v+0.5,u,"l",0,-o]:["M",v,u+0.5,"l",o,0],z=this.g.snapEnds(G,l,J),K=z.from,B=z.to,I=z.power,H=0,C=this.set();d=(B-K)/J;var s=K,q=I>0?I:0;w=o/J;if(+m==1||+m==3){var h=u,A=(m-1?1:-1)*(g+3+!!(m-1));while(h>=u-o){n!="-"&&n!=" "&&(F=F.concat(["M",v-(n=="+"||n=="|"?g:!(m-1)*g*2),h+0.5,"l",g*2+1,0]));C.push(this.text(v+A,h,(L&&L[H++])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr).attr({"text-anchor":m-1?"start":"end"}));s+=d;h-=w;}if(Math.round(h+w-(u-o))){n!="-"&&n!=" "&&(F=F.concat(["M",v-(n=="+"||n=="|"?g:!(m-1)*g*2),u-o+0.5,"l",g*2+1,0]));C.push(this.text(v+A,u-o,(L&&L[H])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr).attr({"text-anchor":m-1?"start":"end"}));}}else{s=K;q=(I>0)*I;A=(m?-1:1)*(g+9+!m);var k=v,w=o/J,D=0,E=0;while(k<=v+o){n!="-"&&n!=" "&&(F=F.concat(["M",k+0.5,u-(n=="+"?g:!!m*g*2),"l",0,g*2+1]));C.push(D=this.text(k,u+A,(L&&L[H++])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr));var p=D.getBBox();if(E>=p.x-5){C.pop(C.length-1).remove();}else{E=p.x+p.width;}s+=d;k+=w;}if(Math.round(k-w-v-o)){n!="-"&&n!=" "&&(F=F.concat(["M",v+o+0.5,u-(n=="+"?g:!!m*g*2),"l",0,g*2+1]));C.push(this.text(v+o,u+A,(L&&L[H])||(Math.round(s)==s?s:+s.toFixed(q))).attr(this.g.txtattr));}}var M=this.path(F);M.text=C;M.all=this.set([M,C]);M.remove=function(){this.text.remove();this.constructor.prototype.remove.call(this);};return M;};Raphael.el.lighter=function(g){g=g||2;var f=[this.attrs.fill,this.attrs.stroke];this.fs=this.fs||[f[0],f[1]];f[0]=Raphael.rgb2hsb(Raphael.getRGB(f[0]).hex);f[1]=Raphael.rgb2hsb(Raphael.getRGB(f[1]).hex);f[0].b=c(f[0].b*g,1);f[0].s=f[0].s/g;f[1].b=c(f[1].b*g,1);f[1].s=f[1].s/g;this.attr({fill:"hsb("+[f[0].h,f[0].s,f[0].b]+")",stroke:"hsb("+[f[1].h,f[1].s,f[1].b]+")"});};Raphael.el.darker=function(g){g=g||2;var f=[this.attrs.fill,this.attrs.stroke];this.fs=this.fs||[f[0],f[1]];f[0]=Raphael.rgb2hsb(Raphael.getRGB(f[0]).hex);f[1]=Raphael.rgb2hsb(Raphael.getRGB(f[1]).hex);f[0].s=c(f[0].s*g,1);f[0].b=f[0].b/g;f[1].s=c(f[1].s*g,1);f[1].b=f[1].b/g;this.attr({fill:"hsb("+[f[0].h,f[0].s,f[0].b]+")",stroke:"hsb("+[f[1].h,f[1].s,f[1].b]+")"});};Raphael.el.original=function(){if(this.fs){this.attr({fill:this.fs[0],stroke:this.fs[1]});delete this.fs;}};})();
 
-/*
+/*!
  * g.Raphael 0.4.1 - Charting library, based on Raphaël
  *
  * Copyright (c) 2009 Dmitry Baranovskiy (http://g.raphaeljs.com)
  * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
  */
-Raphael.fn.g.linechart=function(J,I,a,c,s,r,C){function B(y,Y){var x=y.length/Y,V=0,i=x,X=0,W=[];while(V<y.length){i--;if(i<0){X+=y[V]*(1+i);W.push(X/x);X=y[V++]*-i;i+=x;}else{X+=y[V++];}}return W;}C=C||{};if(!this.raphael.is(s[0],"array")){s=[s];}if(!this.raphael.is(r[0],"array")){r=[r];}var O=Array.prototype.concat.apply([],s),M=Array.prototype.concat.apply([],r),o=this.g.snapEnds(Math.min.apply(Math,O),Math.max.apply(Math,O),s[0].length-1),v=o.from,h=o.to,l=C.gutter||10,P=(a-l*2)/(h-v),G=this.g.snapEnds(Math.min.apply(Math,M),Math.max.apply(Math,M),r[0].length-1),u=G.from,g=G.to,N=(c-l*2)/(g-u),t=Math.max(s[0].length,r[0].length),n=C.symbol||"",K=C.colors||Raphael.fn.g.colors,H=this,p=null,k=null,T=this.set(),L=[];for(var S=0,E=r.length;S<E;S++){t=Math.max(t,r[S].length);}var U=this.set();for(var S=0,E=r.length;S<E;S++){if(C.shade){U.push(this.path().attr({stroke:"none",fill:K[S],opacity:C.nostroke?1:0.3}));}if(r[S].length>a-2*l){r[S]=B(r[S],a-2*l);t=a-2*l;}if(s[S]&&s[S].length>a-2*l){s[S]=B(s[S],a-2*l);}}var w=this.set();if(C.axis){var f=(C.axis+"").split(/[,\s]+/);+f[0]&&w.push(this.g.axis(J+l,I+l,a-2*l,v,h,C.axisxstep||Math.floor((a-2*l)/20),2));+f[1]&&w.push(this.g.axis(J+a-l,I+c-l,c-2*l,u,g,C.axisystep||Math.floor((c-2*l)/20),3));+f[2]&&w.push(this.g.axis(J+l,I+c-l,a-2*l,v,h,C.axisxstep||Math.floor((a-2*l)/20),0));+f[3]&&w.push(this.g.axis(J+l,I+c-l,c-2*l,u,g,C.axisystep||Math.floor((c-2*l)/20),1));}var F=this.set(),Q=this.set(),m;for(var S=0,E=r.length;S<E;S++){if(!C.nostroke){F.push(m=this.path().attr({stroke:K[S],"stroke-width":C.width||2,"stroke-linejoin":"round","stroke-linecap":"round","stroke-dasharray":C.dash||""}));}var b=this.raphael.is(n,"array")?n[S]:n,z=this.set();L=[];for(var R=0,q=r[S].length;R<q;R++){var e=J+l+((s[S]||s[0])[R]-v)*P;var d=I+c-l-(r[S][R]-u)*N;(Raphael.is(b,"array")?b[R]:b)&&z.push(this.g[Raphael.fn.g.markers[this.raphael.is(b,"array")?b[R]:b]](e,d,(C.width||2)*3).attr({fill:K[S],stroke:"none"}));L=L.concat([R?"L":"M",e,d]);}Q.push(z);if(C.shade){U[S].attr({path:L.concat(["L",e,I+c-l,"L",J+l+((s[S]||s[0])[0]-v)*P,I+c-l,"z"]).join(",")});}!C.nostroke&&m.attr({path:L.join(",")});}function D(ae){var ab=[];for(var ac=0,ag=s.length;ac<ag;ac++){ab=ab.concat(s[ac]);}ab.sort();var ah=[],Y=[];for(var ac=0,ag=ab.length;ac<ag;ac++){ab[ac]!=ab[ac-1]&&ah.push(ab[ac])&&Y.push(J+l+(ab[ac]-v)*P);}ab=ah;ag=ab.length;var W=ae||H.set();for(var ac=0;ac<ag;ac++){var V=Y[ac]-(Y[ac]-(Y[ac-1]||J))/2,af=((Y[ac+1]||J+a)-Y[ac])/2+(Y[ac]-(Y[ac-1]||J))/2,x;ae?(x={}):W.push(x=H.rect(V-1,I,Math.max(af+1,1),c).attr({stroke:"none",fill:"#000",opacity:0}));x.values=[];x.symbols=H.set();x.y=[];x.x=Y[ac];x.axis=ab[ac];for(var aa=0,ad=r.length;aa<ad;aa++){ah=s[aa]||s[0];for(var Z=0,y=ah.length;Z<y;Z++){if(ah[Z]==ab[ac]){x.values.push(r[aa][Z]);x.y.push(I+c-l-(r[aa][Z]-u)*N);x.symbols.push(T.symbols[aa][Z]);}}}ae&&ae.call(x);}!ae&&(p=W);}function A(ac){var W=ac||H.set(),x;for(var aa=0,ae=r.length;aa<ae;aa++){for(var Z=0,ab=r[aa].length;Z<ab;Z++){var V=J+l+((s[aa]||s[0])[Z]-v)*P,ad=J+l+((s[aa]||s[0])[Z?Z-1:1]-v)*P,y=I+c-l-(r[aa][Z]-u)*N;ac?(x={}):W.push(x=H.circle(V,y,Math.abs(ad-V)/2).attr({stroke:"none",fill:"#000",opacity:0}));x.x=V;x.y=y;x.value=r[aa][Z];x.line=T.lines[aa];x.shade=T.shades[aa];x.symbol=T.symbols[aa][Z];x.symbols=T.symbols[aa];x.axis=(s[aa]||s[0])[Z];ac&&ac.call(x);}}!ac&&(k=W);}T.push(F,U,Q,w,p,k);T.lines=F;T.shades=U;T.symbols=Q;T.axis=w;T.hoverColumn=function(j,i){!p&&D();p.mouseover(j).mouseout(i);return this;};T.clickColumn=function(i){!p&&D();p.click(i);return this;};T.hrefColumn=function(W){var X=H.raphael.is(arguments[0],"array")?arguments[0]:arguments;if(!(arguments.length-1)&&typeof W=="object"){for(var j in W){for(var y=0,V=p.length;y<V;y++){if(p[y].axis==j){p[y].attr("href",W[j]);}}}}!p&&D();for(var y=0,V=X.length;y<V;y++){p[y]&&p[y].attr("href",X[y]);}return this;};T.hover=function(j,i){!k&&A();k.mouseover(j).mouseout(i);return this;};T.click=function(i){!k&&A();k.click(i);return this;};T.each=function(i){A(i);return this;};T.eachColumn=function(i){D(i);return this;};return T;};
+Raphael.fn.g.linechart = function (x, y, width, height, valuesx, valuesy, opts) {
+    function shrink(values, dim) {
+        var k = values.length / dim,
+            j = 0,
+            l = k,
+            sum = 0,
+            res = [];
+        while (j < values.length) {
+            l--;
+            if (l < 0) {
+                sum += values[j] * (1 + l);
+                res.push(sum / k);
+                sum = values[j++] * -l;
+                l += k;
+            } else {
+                sum += values[j++];
+            }
+        }
+        return res;
+    }
+    opts = opts || {};
+    if (!this.raphael.is(valuesx[0], "array")) {
+        valuesx = [valuesx];
+    }
+    if (!this.raphael.is(valuesy[0], "array")) {
+        valuesy = [valuesy];
+    }
+    var allx = Array.prototype.concat.apply([], valuesx),
+        ally = Array.prototype.concat.apply([], valuesy),
+        xdim = this.g.snapEnds(Math.min.apply(Math, allx), Math.max.apply(Math, allx), valuesx[0].length - 1),
+        minx = xdim.from,
+        maxx = xdim.to,
+        gutter = opts.gutter || 10,
+        kx = (width - gutter * 2) / (maxx - minx),
+        ydim = this.g.snapEnds(Math.min.apply(Math, ally), Math.max.apply(Math, ally), valuesy[0].length - 1),
+        miny = ydim.from,
+        maxy = ydim.to,
+        ky = (height - gutter * 2) / (maxy - miny),
+        len = Math.max(valuesx[0].length, valuesy[0].length),
+        symbol = opts.symbol || "",
+        colors = opts.colors || Raphael.fn.g.colors,
+        that = this,
+        columns = null,
+        dots = null,
+        chart = this.set(),
+        path = [];
+
+    for (var i = 0, ii = valuesy.length; i < ii; i++) {
+        len = Math.max(len, valuesy[i].length);
+    }
+    var shades = this.set();
+    for (var i = 0, ii = valuesy.length; i < ii; i++) {
+        if (opts.shade) {
+            shades.push(this.path().attr({stroke: "none", fill: colors[i], opacity: opts.nostroke ? 1 : .3}));
+        }
+        if (valuesy[i].length > width - 2 * gutter) {
+            valuesy[i] = shrink(valuesy[i], width - 2 * gutter);
+            len = width - 2 * gutter;
+        }
+        if (valuesx[i] && valuesx[i].length > width - 2 * gutter) {
+            valuesx[i] = shrink(valuesx[i], width - 2 * gutter);
+        }
+    }
+    var axis = this.set();
+    if (opts.axis) {
+        var ax = (opts.axis + "").split(/[,\s]+/);
+        +ax[0] && axis.push(this.g.axis(x + gutter, y + gutter, width - 2 * gutter, minx, maxx, opts.axisxstep || Math.floor((width - 2 * gutter) / 20), 2));
+        +ax[1] && axis.push(this.g.axis(x + width - gutter, y + height - gutter, height - 2 * gutter, miny, maxy, opts.axisystep || Math.floor((height - 2 * gutter) / 20), 3));
+        +ax[2] && axis.push(this.g.axis(x + gutter, y + height - gutter, width - 2 * gutter, minx, maxx, opts.axisxstep || Math.floor((width - 2 * gutter) / 20), 0));
+        +ax[3] && axis.push(this.g.axis(x + gutter, y + height - gutter, height - 2 * gutter, miny, maxy, opts.axisystep || Math.floor((height - 2 * gutter) / 20), 1));
+    }
+    var lines = this.set(),
+        symbols = this.set(),
+        line;
+    for (var i = 0, ii = valuesy.length; i < ii; i++) {
+        if (!opts.nostroke) {
+            lines.push(line = this.path().attr({
+                stroke: colors[i],
+                "stroke-width": opts.width || 2,
+                "stroke-linejoin": "round",
+                "stroke-linecap": "round",
+                "stroke-dasharray": opts.dash || ""
+            }));
+        }
+        var sym = this.raphael.is(symbol, "array") ? symbol[i] : symbol,
+            symset = this.set();
+        path = [];
+        for (var j = 0, jj = valuesy[i].length; j < jj; j++) {
+            var X = x + gutter + ((valuesx[i] || valuesx[0])[j] - minx) * kx;
+            var Y = y + height - gutter - (valuesy[i][j] - miny) * ky;
+            (Raphael.is(sym, "array") ? sym[j] : sym) && symset.push(this.g[Raphael.fn.g.markers[this.raphael.is(sym, "array") ? sym[j] : sym]](X, Y, (opts.width || 2) * 3).attr({fill: colors[i], stroke: "none"}));
+            path = path.concat([j ? "L" : "M", X, Y]);
+        }
+        symbols.push(symset);
+        if (opts.shade) {
+            shades[i].attr({path: path.concat(["L", X, y + height - gutter, "L",  x + gutter + ((valuesx[i] || valuesx[0])[0] - minx) * kx, y + height - gutter, "z"]).join(",")});
+        }
+        !opts.nostroke && line.attr({path: path.join(",")});
+    }
+    function createColumns(f) {
+        // unite Xs together
+        var Xs = [];
+        for (var i = 0, ii = valuesx.length; i < ii; i++) {
+            Xs = Xs.concat(valuesx[i]);
+        }
+        Xs.sort();
+        // remove duplicates
+        var Xs2 = [],
+            xs = [];
+        for (var i = 0, ii = Xs.length; i < ii; i++) {
+            Xs[i] != Xs[i - 1] && Xs2.push(Xs[i]) && xs.push(x + gutter + (Xs[i] - minx) * kx);
+        }
+        Xs = Xs2;
+        ii = Xs.length;
+        var cvrs = f || that.set();
+        for (var i = 0; i < ii; i++) {
+            var X = xs[i] - (xs[i] - (xs[i - 1] || x)) / 2,
+                w = ((xs[i + 1] || x + width) - xs[i]) / 2 + (xs[i] - (xs[i - 1] || x)) / 2,
+                C;
+            f ? (C = {}) : cvrs.push(C = that.rect(X - 1, y, Math.max(w + 1, 1), height).attr({stroke: "none", fill: "#000", opacity: 0}));
+            C.values = [];
+            C.symbols = that.set();
+            C.y = [];
+            C.x = xs[i];
+            C.axis = Xs[i];
+            for (var j = 0, jj = valuesy.length; j < jj; j++) {
+                Xs2 = valuesx[j] || valuesx[0];
+                for (var k = 0, kk = Xs2.length; k < kk; k++) {
+                    if (Xs2[k] == Xs[i]) {
+                        C.values.push(valuesy[j][k]);
+                        C.y.push(y + height - gutter - (valuesy[j][k] - miny) * ky);
+                        C.symbols.push(chart.symbols[j][k]);
+                    }
+                }
+            }
+            f && f.call(C);
+        }
+        !f && (columns = cvrs);
+    }
+    function createDots(f) {
+        var cvrs = f || that.set(),
+            C;
+        for (var i = 0, ii = valuesy.length; i < ii; i++) {
+            for (var j = 0, jj = valuesy[i].length; j < jj; j++) {
+                var X = x + gutter + ((valuesx[i] || valuesx[0])[j] - minx) * kx,
+                    nearX = x + gutter + ((valuesx[i] || valuesx[0])[j ? j - 1 : 1] - minx) * kx,
+                    Y = y + height - gutter - (valuesy[i][j] - miny) * ky;
+                f ? (C = {}) : cvrs.push(C = that.circle(X, Y, Math.abs(nearX - X) / 2).attr({stroke: "none", fill: "#000", opacity: 0}));
+                C.x = X;
+                C.y = Y;
+                C.value = valuesy[i][j];
+                C.line = chart.lines[i];
+                C.shade = chart.shades[i];
+                C.symbol = chart.symbols[i][j];
+                C.symbols = chart.symbols[i];
+                C.axis = (valuesx[i] || valuesx[0])[j];
+                f && f.call(C);
+            }
+        }
+        !f && (dots = cvrs);
+    }
+    chart.push(lines, shades, symbols, axis, columns, dots);
+    chart.lines = lines;
+    chart.shades = shades;
+    chart.symbols = symbols;
+    chart.axis = axis;
+    chart.hoverColumn = function (fin, fout) {
+        !columns && createColumns();
+        columns.mouseover(fin).mouseout(fout);
+        return this;
+    };
+    chart.clickColumn = function (f) {
+        !columns && createColumns();
+        columns.click(f);
+        return this;
+    };
+    chart.hrefColumn = function (cols) {
+        var hrefs = that.raphael.is(arguments[0], "array") ? arguments[0] : arguments;
+        if (!(arguments.length - 1) && typeof cols == "object") {
+            for (var x in cols) {
+                for (var i = 0, ii = columns.length; i < ii; i++) if (columns[i].axis == x) {
+                    columns[i].attr("href", cols[x]);
+                }
+            }
+        }
+        !columns && createColumns();
+        for (var i = 0, ii = hrefs.length; i < ii; i++) {
+            columns[i] && columns[i].attr("href", hrefs[i]);
+        }
+        return this;
+    };
+    chart.hover = function (fin, fout) {
+        !dots && createDots();
+        dots.mouseover(fin).mouseout(fout);
+        return this;
+    };
+    chart.click = function (f) {
+        !dots && createDots();
+        dots.click(f);
+        return this;
+    };
+    chart.each = function (f) {
+        createDots(f);
+        return this;
+    };
+    chart.eachColumn = function (f) {
+        createColumns(f);
+        return this;
+    };
+    return chart;
+};

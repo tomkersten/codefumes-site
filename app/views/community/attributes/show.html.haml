@@ -59,7 +59,7 @@
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
 - content_for :onReady do
-  new VisualizeAttribute('canvas');
+  new Linegraph('canvas', window.location + '.js').requestAttributeData();
 
   
   
