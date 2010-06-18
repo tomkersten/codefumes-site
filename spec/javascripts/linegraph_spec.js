@@ -1,7 +1,7 @@
 require("spec_helper.js");
 require("fixtures/linegraph_responses.js");
-require("../../public/javascripts/linegraph.js");
-require("../../public/javascripts/array.js");
+require("../../public/javascripts/graphs/linegraph.js");
+require("../../public/javascripts/frameworks/array.js");
 
 // TODO: Better place for this?
 function Raphael() { }
