@@ -62,6 +62,27 @@ class Project < ActiveRecord::Base
     end.compact
   end
 
+  # TODO: Review for optimization possibilities
+  def unique_custom_attributes
+    custom_attributes = []
+    commits(:all, :include => :custom_attributes).collect do |commit| 
+      commit.custom_attributes.collect do |custom_attribute| 
+        custom_attributes << custom_attribute.name unless custom_attribute.name.nil?
+      end
+    end
+    custom_attributes.uniq
+  end
+
+  def custom_attribute_data(attribute_name)
+    custom_attributes = []
+    commits(:all, :include => :custom_attributes).collect do |commit| 
+      commit.custom_attributes.collect do |custom_attribute| 
+        custom_attributes << custom_attribute if(attribute_name == custom_attribute.name)
+      end
+    end
+    custom_attributes
+  end
+
   def public?
     visibility == PUBLIC
   end

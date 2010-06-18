@@ -9,25 +9,23 @@
       = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
     .project-overview
       %h1
-        = @project
+        = "#{@project}: #{@attribute}"
         - priveleged_user_or_owner_content(@project) do
           .admin-content
             = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
+    #details
+      = link_to 'What can this do for me?', '#tracking_ideas', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #visualization-area
       - if @project.covered_by_plan?
         #canvas
-          / A little to early for this. Need to picture w/ these links
-          / %ul#visualizations
-          /    %li= link_to 'Visual 1', '', :id => 'vis_1'
-          /    %li= link_to 'Visual 2', '', :id => 'vis_2'
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
     #custom-attributes
       %ul.attributes
-        - @project.unique_custom_attributes.each do |attribute|
+        -@project.unique_custom_attributes.each do |attribute|
           %li.attribute
-            = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
+            =link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => ('selected' if attribute == @attribute)
     #textual-commit-area
       %ul.commits
         - @project.recent_commits.each do |commit|
@@ -41,7 +39,7 @@
                 = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
               - if commit.merge?
                 %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-              - avg_build_duration_text_for(commit)
+              %span.duration 3min 32secs
               %ul
                 %li= "Identifier: #{commit.identifier}"
                 %li= "Author: #{commit.author}"
@@ -60,19 +58,8 @@
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
-  
-  
 - content_for :onReady do
-  vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
+  new VisualizeAttribute('canvas');
 
-  $('#vis_2').click(function(){
-  vis.clear();
-  vis = new Visualizer("canvas");
-  return false;
-  });
-
-  $('#vis_1').click(function(event){
-  vis.clear();
-  vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
-  return false;
-  });
+  
+  

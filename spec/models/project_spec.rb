@@ -34,6 +34,41 @@ describe Project do
     end
   end
 
+  describe "custom attributes" do
+    let(:project) {Project.make}
+    let(:commit) {project.commits.create!(Commit.plan)}
+
+    before(:each) do
+      commit.custom_attributes.create!({:name => 'temperature', :value => '72'})
+    end
+
+    describe "#unique_custom_attributes" do
+      it "returns all custom attributes" do
+        project.unique_custom_attributes.length.should == 1
+      end
+
+      it "does not return duplicates" do
+        commit.custom_attributes.create!({:name => 'dogs', :value => '72'})
+        commit.custom_attributes.create!({:name => 'temperature', :value => '3'})
+
+        project.unique_custom_attributes.length.should == 2
+      end
+    end
+
+    describe "#custom_attribute_data" do
+      it "returns all the custom attribute commit data for the attribute name it was passed" do
+        project.custom_attribute_data('temperature').length.should == 1
+      end
+
+      it "only returns data from the attribute requested" do
+        commit.custom_attributes.create!({:name => 'temperature', :value => '73'})
+        commit.custom_attributes.create!({:name => 'chairs in area', :value => '3'})
+
+        project.custom_attribute_data('temperature').length.should == 2
+      end
+    end
+  end
+
   describe "save hooks" do
     context "on creation" do
       it "generates a public_key if one is not supplied" do

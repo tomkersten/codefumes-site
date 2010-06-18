@@ -14,6 +14,12 @@ Given /^a public project has been created$/ do
   @project = Project.make(:public)
 end
 
+Given /^the project has (\d+) unique custom attributes$/ do |unique_attributes|
+  commit = Commit.make(:project => @project)
+  commit.custom_attributes.create!({ :name => 'temperature', :value => '72' })
+  commit.custom_attributes.create!({ :name => 'chairs', :value => '3' })
+end
+
 Given /^the project has (\d+) commits$/ do |count|
   raise "@project must be set" unless @project.is_a?(Project)
   commits = count.to_i.times.map {Commit.make(:project => @project)}
@@ -26,6 +32,7 @@ Given /^the project has (\d+) commits$/ do |count|
   raise "Commits not created correctly" unless @project.commits.count == count.to_i
 end
 
+
 Given /^(?:he|she|Sam|Dora|Oscar) has claimed the following projects:$/ do |table|
   projects = table.hashes.each {|params_hash| Project.make(params_hash.merge(:owner_id => @user.id))}
 end
@@ -37,6 +44,13 @@ Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of commits with (\d+) items in it$
   response.should have_tag("ul.commits")
   response.should have_tag("ul.commits") do
     with_tag("li", :count => commit_count.to_i)
+  end
+end
+
+Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of attributes with (\d+) items in it$/ do |attribute_count|
+  response.should have_tag("ul.attributes")
+  response.should have_tag("ul.attributes") do
+    with_tag("li", :count => attribute_count.to_i)
   end
 end
 
@@ -62,4 +76,12 @@ end
 
 Then /^he should see a private project message$/ do
   response.should have_tag(".access_denied")
+end
+
+Then /^she sees temperature_attribute name selected$/ do
+  response.should have_tag('#temperature_attribute.selected')
+end
+
+Then /^chairs_attribute should not be selected$/ do
+  response.should have_tag('#chairs_attribute')
 end
