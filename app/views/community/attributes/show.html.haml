@@ -28,35 +28,6 @@
         - @project.unique_custom_attributes.each do |attribute|
           %li.attribute
             = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => ('selected' if attribute == @attribute)
-    #textual-commit-area
-      %ul.commits
-        - @project.recent_commits.each do |commit|
-          - css_classes = commit_classes_for(commit)
-          - css_classes += " head" if commit == @project.commit_head
-          %li{:class => css_classes}
-            - if commit.message.blank?
-              %h2.no_commit_message [No commit message? Tsk! Tsk!]
-            - else
-              %h2
-                = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
-              - if commit.merge?
-                %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-              %span.duration 3min 32secs
-              %ul
-                %li= "Identifier: #{commit.identifier}"
-                %li= "Author: #{commit.author}"
-                %li= "Committer #{commit.committer}"
-                %li= "Authored at: #{commit.authored_at}"
-                %li= "Committed at: #{commit.committed_at}"
-                %li= "Lines added: #{commit.line_additions}"
-                %li= "Lines deleted: #{commit.line_deletions}"
-                %li= "Total lines: #{commit.line_total}"
-                %li= "Files affected: #{commit.affected_file_count}"
-                - unless commit.custom_attributes.empty?
-                  %li.custom_attributes
-                    %ul
-                      - for custom_attribute in commit.custom_attributes
-                        %li= "#{custom_attribute.name}: #{custom_attribute.value}"
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'

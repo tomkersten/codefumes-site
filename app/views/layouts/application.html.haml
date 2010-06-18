@@ -26,12 +26,10 @@
         = link_to "codefumes.com", root_path
   = javascript_include_tag %w(frameworks/raphael frameworks/jquery frameworks/jquery.dates frameworks/array)
   = javascript_include_tag %w(graphs/linegraph)
-  = javascript_include_tag %w(graphs/linegraph initializergrid svgmodal visualizer main application)
+  = javascript_include_tag %w(initializer grid svgmodal visualizer main application template)
 
   = yield :javascript
   :javascript
-    $(
-    function(){
+    $(function(){
     #{yield :onReady}
-    }
-    );
+    });
