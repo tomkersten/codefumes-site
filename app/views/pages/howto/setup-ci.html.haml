@@ -1,79 +1,20 @@
 - content_for(:page_layout_class) do
   howto
 .main
-  = image_tag('howtos/build_failures.png')
-  %h1 How to: Integrate your build server with CodeFumes
+  %h1 Integrate your build server with CodeFumes
+  .build-logos
+    = link_to image_tag('howtos/hudson.png'), howto_page_path('hudson')
+    = link_to image_tag('howtos/integrity.png'), howto_page_path('integrity')
+    = link_to image_tag('howtos/cruise_control.png'), howto_page_path('cruise_control')
   %h2 Why?
   %ol
-    %li To easily spot behavior trends that break the build and try to change those habits.
-    %li Easily create a unified "build status" dashboard across all your projects.
-    %li Creating a build light using the API is simple and uniform, regardless of your build server.
+    %li Simplify process of identifying behavior trends that break the build and try to change those habits.
+    %li Create a unified "build status" dashboard across all your projects.
+    %li Construct a build light using the API is simple and uniform, regardless of your build server.
 
-  %h2 How?
+  %h2 Which build server are you using?
   %ul
-    %li
-      %h3 Generally speaking...
-      %ol
-        %li Each commit can have any number of named "builds" associated with it.
-        %li To "start" a build, you must supply a name and the time it was started (and the commit identifier).
-        %li To "finish" a build, you must supply the build name, the time it was finished, and the final build state.
-        %li.quiet (NOTE: Valid "states" for a build are "running", "successful", or "failed")
-
-    %li
-      %h3 Stuff you'll need to have or want to know...
-      %ol
-        %li Grab the project's public & private key (from the project's CodeFumes.com "admin page")
-        %li
-          Know that
-          = link_to "git", "http://git-scm.org"
-          is the only source code management system we have developed tools for at this point. We know this is lame, but there are only so many hours in the day, and we had to pick our battles.  Feel free to fork the
-          = link_to "CodeFumesHarvester gem", "http://cosyn.github.com/codefumes_harvester/"
-          and start adding other systems, if you are interested.
-          %p.note
-            Note: Using other SCMs is not a problem, but you will have to grab the commit information you want to track manually from the repository (author, timestamp, commit identifier, etc).  Don't forget you can use the
-            = link_to "CodeFumes gem", "http://cosyn.github.com/codefumes/"
-            to send data to and from the site, which will hopefully make it a little bit easier.
-
-  %ul
-    %li
-      %h3 Integrating with Integrity...
-      %p
-        If you have vX.X or newer installed, you can use the CodeFumes plugin included in the
-        %code CodeFumesHarvester
-        gem
-      %ol
-        %li
-          Add the following line to your Integrity installation's
-          %code Gemfile
-          \:
-          %pre
-            gem 'codefumes_harvester', '>= 0.1.7'
-        %li
-          Add the following line to the
-          %code init.rb
-          file in your Integrity installtion's root directory.
-          %pre
-            require "codefumes_harvester/integrity_notifier/codefumes"
-        %li Cycle your build server to pick up the new gem requirement.
-        %li
-          Edit the project on your build server, and add a name, public key, and private key to the CodeFumes form (be sure to amake sure the check box is checked as well so the plugin is enabled)
-          %p.howto-image= image_tag('howtos/integrity_plugin.png')
-        %li Save the project updates.
-        %li Done!
-    %li
-      %h3 Integrating with Hudson...
-      %p
-        We haven't developed a plugin for Hudson yet. However, assuming you're OK with running a Ruby script around your build process, the setup isn't too bad...
-      %ol
-        %li
-          Grab
-          = link_to "this gist", 
-        %li Add this to your build configuration...
-        %li Save your changes to the build.
-        %li Done!
-    %li
-      %h3 Integrating with CruiseControl...
-      %ol
-        %li Each commit can have any number of named "builds" associated with it.
-        %li To track a build, you must supply a name and the time it was started (and the commit identifier).
-        %li Valid "states" for a build to be in are "running", "successful", or "failed".
+    %li= link_to "Integrity", howto_page_path('integrity')
+    %li= link_to "Hudson", howto_page_path('hudson')
+    %li= link_to "CruiseControl.rb", howto_page_path('cruise_control')
+    %li= link_to "None of these...", howto_page_path('any_ci_setup')

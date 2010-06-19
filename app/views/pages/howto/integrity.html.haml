@@ -1,0 +1,24 @@
+%h3 Integrating with Integrity
+%p
+  If you have vX.X or newer installed, you can use the CodeFumes plugin included in the
+  %code CodeFumesHarvester
+  gem
+%ol
+  %li
+    Add the following line to your Integrity installation's
+    %code Gemfile
+    \:
+    %pre
+      gem 'codefumes_harvester', '>= 0.1.7'
+  %li
+    Add the following line to the
+    %code init.rb
+    file in your Integrity installtion's root directory.
+    %pre
+      require "codefumes_harvester/integrity_notifier/codefumes"
+  %li Cycle your build server to pick up the new gem requirement.
+  %li
+    Edit the project on your build server, and add a name, public key, and private key to the CodeFumes form (be sure to amake sure the check box is checked as well so the plugin is enabled)
+    %p.howto-image= image_tag('howtos/integrity_plugin.png')
+  %li Save the project updates.
+  %li Done!
