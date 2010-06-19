@@ -28,7 +28,6 @@ var CommitsOverTime = function(canvas,url,options){
 
 CommitsOverTime.prototype = {
   parseData: function(data){
-    
     var self = this;
 //    cycle through each commit in the object.
 //    var commits = $.grep(data.project.commits, function(c,i){
@@ -37,19 +36,11 @@ CommitsOverTime.prototype = {
     $(data.project.commits).each(
       function(index){
         self.createDate(this);
-        //console.log(this.committed_at.getDay());
-          //if(this.committed_at.getHours() < 18 && this.committed_at.getHours() > 5){
-          if(index == 4 || index == 9 || index == 11){
-            this.build_outcome="failed"
-          }
-          
-          self.drawPoint(this,index);
-          //}
+        self.drawPoint(this,index);
       }
     );
   },
   createDate: function(commit){
-      
       d = commit.committed_at.split("T");
       cal = d[0].split('-');
       var theDate = new Date(cal[0]+"/"+cal[1]+"/"+cal[2]+" "+d[1].replace("Z",""));
@@ -73,7 +64,7 @@ CommitsOverTime.prototype = {
       c.setAttribute("cx",x);
       c.setAttribute("cy",y);
       c.setAttribute("style","display:block;");
-      if(commit.build_outcome=="failed"){
+      if(commit.build_status=="failed"){
         c.setAttribute("fill","#ff0000");
       }
       c.onclick = function(){
