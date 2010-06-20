@@ -15,7 +15,7 @@
             = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
     #visualization-area
       - if @project.covered_by_plan?
-        #canvas
+        #canvas.js_build_status
           / A little to early for this. Need to picture w/ these links
           / %ul#visualizations
           /    %li= link_to 'Visual 1', '', :id => 'vis_1'
@@ -60,8 +60,3 @@
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
-  
-  
-- content_for :onReady do
-  vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
-  

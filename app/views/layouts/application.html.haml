@@ -24,9 +24,6 @@
           = sidebar_content
       #footer
         = link_to "codefumes.com", root_path
-    = javascript_include_tag :all, :recursive => true
-  = yield :javascript
-  :javascript
-    $(function(){
-    #{yield :onReady}
-    });
+    = javascript_include_tag :frameworks
+    = javascript_include_tag :visualizations
+    = javascript_include_tag 'initializer'

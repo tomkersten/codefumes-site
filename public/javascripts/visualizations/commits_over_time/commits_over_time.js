@@ -41,6 +41,7 @@ CommitsOverTime.prototype = {
     );
   },
   createDate: function(commit){
+    console.log(commit.committed_at)
       d = commit.committed_at.split("T");
       cal = d[0].split('-');
       var theDate = new Date(cal[0]+"/"+cal[1]+"/"+cal[2]+" "+d[1].replace("Z",""));

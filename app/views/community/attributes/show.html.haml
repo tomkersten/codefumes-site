@@ -17,7 +17,7 @@
       = link_to 'What can this do for me?', '#tracking_ideas', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #visualization-area
       - if @project.covered_by_plan?
-        #canvas
+        #canvas.js_linegraph
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
@@ -31,8 +31,3 @@
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
-- content_for :onReady do
-  new Linegraph('canvas', window.location + '.js').requestAttributeData();
-
-  
-  

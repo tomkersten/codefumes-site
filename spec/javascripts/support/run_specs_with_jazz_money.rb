@@ -5,7 +5,6 @@ javascript_files = [
   'public/javascripts/frameworks/jquery.js',
   'public/javascripts/frameworks/jquery.dates.js',
   'public/javascripts/frameworks/raphael.js',
-  'public/javascripts/application.js',
   'public/javascripts/monkey_patches.js',
   'public/javascripts/visualizations/commits_over_time/commits_over_time.js',
   'public/javascripts/visualizations/commits_over_time/grid.js',
