@@ -25,6 +25,11 @@ namespace :jasmine do
 
     Jasmine::Config.new.start_server
   end
+  
+  desc "Run specs via commandline"
+  task :headless do
+    system("ruby spec/javascripts/support/run_specs_with_jazz_money.rb")
+  end
 end
 
 desc "Run specs via server"

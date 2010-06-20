@@ -29,6 +29,7 @@ group :test do
   gem 'flog', '2.2.0'
   gem 'gherkin', '1.0.30'
   gem 'jasmine', '0.10.4.0'
+  gem 'jazz_money', '0.0.3'
   gem 'machinist', '1.0.6'
   gem 'metric_fu', '1.3.0'
   gem 'nokogiri', '1.4.1'
