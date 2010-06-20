@@ -56,13 +56,23 @@ Linegraph.prototype = {
   
   renderGraph: function(values, count) {
     if(this.hasEnoughUniqueValues(values)) {
-      gRaphael = Raphael('canvas');
-      gRaphael.g.linechart(30, 30, 900, 400, count, values, {
-        shade: true,
-        nostroke: false, 
-        axis: "0 0 0 1",
-        symbol: 'o'
-      });
+      this.createRaphaelGraph(values, count);
+    } else {
+      this.createVisualizationError("Need more unique values to render graph");
     }
+  },
+  
+  createVisualizationError: function(message) {
+    new VisualizationError(message, this.id).buildAndInsert();
+  },
+  
+  createRaphaelGraph: function(values, count) {
+    gRaphael = Raphael('canvas');
+    gRaphael.g.linechart(30, 30, 900, 400, count, values, {
+      shade: true,
+      nostroke: false, 
+      axis: "0 0 0 1",
+      symbol: 'o'
+    });    
   }
 };

@@ -1,12 +1,3 @@
-// TODO: Better place for this?
-function Raphael() { }
-Raphael.prototype = {
-  g: {
-    linegraph: function() {
-      
-    }
-  }
-}
 var responseWithStringValue = [
   {"commit_attribute":{"name":"chairs","created_at":"2010-06-13T20:37:50Z","updated_at":"2010-06-13T20:37:50Z","commit_id":6,"id":2,"value":"50"}},
   {"commit_attribute":{"name":"chairs","created_at":"2010-06-13T21:16:04Z","updated_at":"2010-06-13T21:16:04Z","commit_id":9,"id":4,"value":"the"}},
@@ -116,5 +107,19 @@ describe("Linegraph", function(){
     it("return false when there are less than 2 values to graph", function() {
       expect(linegraph.hasEnoughUniqueValues([40])).toBeFalsy();
     });
+  });
+  
+  describe("#renderGraph", function() {
+    it("renders graph when value requirements are met", function() {
+      spyOn(linegraph, 'createRaphaelGraph');
+      linegraph.renderGraph([40,50]);
+      expect(linegraph.createRaphaelGraph).wasCalled();
+    });
+    
+    it("creates a visualization error when requirements are not met", function() {
+      spyOn(linegraph, 'createVisualizationError');
+      linegraph.renderGraph([40]);
+      expect(linegraph.createVisualizationError).wasCalled();
+    })
   });
 });
