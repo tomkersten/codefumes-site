@@ -14,6 +14,7 @@ javascript_files = [
 ]
 
 jasmine_spec_files = [
+  'spec/javascripts/monkey_patches_spec.js',
   'spec/javascripts/linegraph_spec.js',
   'spec/javascripts/commits_over_time_spec.js',
   'spec/javascripts/grid_spec.js',
