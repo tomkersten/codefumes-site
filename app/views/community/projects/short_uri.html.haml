@@ -64,15 +64,4 @@
   
 - content_for :onReady do
   vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
-
-  $('#vis_2').click(function(){
-  vis.clear();
-  vis = new Visualizer("canvas");
-  return false;
-  });
-
-  $('#vis_1').click(function(event){
-  vis.clear();
-  vis = new CommitsOverTime('canvas',document.location.href+'.js',{background: '#333'})
-  return false;
-  });
+  

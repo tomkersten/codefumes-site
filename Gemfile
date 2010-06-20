@@ -28,6 +28,7 @@ group :test do
   gem 'flay', '1.3.0'
   gem 'flog', '2.2.0'
   gem 'gherkin', '1.0.30'
+  gem 'jasmine', '0.10.4.0'
   gem 'machinist', '1.0.6'
   gem 'metric_fu', '1.3.0'
   gem 'nokogiri', '1.4.1'
@@ -41,6 +42,6 @@ group :test do
   gem 'term-ansicolor', '1.0.4', :require => 'term/ansicolor'
   gem 'treetop', '1.2.5'
   gem 'trollop', '1.16.2'
-  gem 'webrat', '0.7.0'
+  gem 'webrat', '0.7.0'  
   gem 'ZenTest', '4.1.3', :require => 'zentest'
 end

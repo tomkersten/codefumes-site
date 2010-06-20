@@ -24,10 +24,7 @@
           = sidebar_content
       #footer
         = link_to "codefumes.com", root_path
-  = javascript_include_tag %w(frameworks/raphael frameworks/jquery frameworks/jquery.dates frameworks/array)
-  = javascript_include_tag %w(graphs/linegraph)
-  = javascript_include_tag %w(initializer grid svgmodal visualizer main application template)
-
+    = javascript_include_tag :all, :recursive => true
   = yield :javascript
   :javascript
     $(function(){
