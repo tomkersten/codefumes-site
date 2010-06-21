@@ -6,6 +6,8 @@ function ExpandCollapse(id) {
 
 ExpandCollapse.prototype = {
   attachBehavior: function() {
+    $(this.container).hide();
+    
     var self = this;
     $(this.handle).click(function() {
       self.toggleVisibility();

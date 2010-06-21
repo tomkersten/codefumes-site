@@ -26,6 +26,12 @@ describe("ExpandCollapse", function() {
       expandCollapse.attachBehavior();
       expect($.fn.click).wasCalled();
     });
+    
+    it("closes the container", function() {
+      spyOn($.fn, 'hide');
+      expandCollapse.attachBehavior();
+      expect($.fn.hide).wasCalled();      
+    });
   });
   
   describe("#toggleVisiblity", function() {
