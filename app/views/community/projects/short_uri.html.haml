@@ -25,9 +25,13 @@
           %h3 Visuals would be here. Please upgrade your account.
     #custom-attributes
       %ul.attributes
-        - @project.unique_custom_attributes.each do |attribute|
+        - unless @project.unique_custom_attributes.empty?
+          - @project.unique_custom_attributes.each do |attribute|
+            %li.attribute
+              = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
+        - else
           %li.attribute
-            = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
+            = link_to "Codefumes is all about tracking attributes. You should try it!", {}, :class => 'intro_to_attributes'
     #textual-commit-area
       %ul.commits
         - @project.recent_commits.each do |commit|

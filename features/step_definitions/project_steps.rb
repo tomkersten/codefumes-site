@@ -85,3 +85,8 @@ end
 Then /^chairs_attribute should not be selected$/ do
   response.should have_tag('#chairs_attribute')
 end
+
+Then /^she sees a link about custom attributes$/ do
+  response.should have_tag('a.intro_to_attributes')
+end
+
