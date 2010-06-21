@@ -32,7 +32,7 @@
         - else
           %li.attribute
             = link_to "Codefumes is all about tracking attributes. You should try it!", {}, :class => 'intro_to_attributes'
-    #textual-commit-area
+    #textual-commit-area.js_expand_collapse
       %ul.commits
         - @project.recent_commits.each do |commit|
           - css_classes = commit_classes_for(commit)
@@ -41,12 +41,12 @@
             - if commit.message.blank?
               %h2.no_commit_message [No commit message? Tsk! Tsk!]
             - else
-              %h2
+              %h2.js_handle
                 = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
               - if commit.merge?
                 %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
               - avg_build_duration_text_for(commit)
-              %ul
+              %ul.js_container
                 %li= "Identifier: #{commit.identifier}"
                 %li= "Author: #{commit.author}"
                 %li= "Committer #{commit.committer}"

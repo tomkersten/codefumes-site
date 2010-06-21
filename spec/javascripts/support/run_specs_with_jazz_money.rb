@@ -10,7 +10,8 @@ javascript_files = [
   'public/javascripts/visualizations/commits_over_time/grid.js',
   'public/javascripts/visualizations/commits_over_time/svgmodal.js',
   'public/javascripts/visualizations/linegraph.js',
-  'public/javascripts/visualizations/visualization_error.js'
+  'public/javascripts/visualizations/visualization_error.js',
+  'public/javascripts/expand_collapse.js'
 ]
 
 jasmine_spec_files = [
@@ -19,7 +20,8 @@ jasmine_spec_files = [
   'spec/javascripts/commits_over_time_spec.js',
   'spec/javascripts/grid_spec.js',
   'spec/javascripts/svgmodal_spec.js',
-  'spec/javascripts/visualization_error_spec.js'
+  'spec/javascripts/visualization_error_spec.js',
+  'spec/javascripts/expand_collapse_spec.js'
 ]
 
 JazzMoney::Runner.new(javascript_files, jasmine_spec_files).call

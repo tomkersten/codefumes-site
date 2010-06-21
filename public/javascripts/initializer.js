@@ -8,4 +8,8 @@ $(document).ready(function() {
   $('.js_build_status').each(function() {
     new CommitsOverTime('canvas', jsonUrl, {});
   });
+  
+  $('.js_expand_collapse').each(function() {
+    new ExpandCollapse(this).attachBehavior();
+  });
 });
