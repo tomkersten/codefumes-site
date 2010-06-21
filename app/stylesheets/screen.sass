@@ -55,6 +55,16 @@ body
   .main
     +clearfix
     :text-align center
+    &.style-guide
+      .section-content
+        :padding-left 2em
+        &:after
+          :clear both
+        .rendered
+          :float left
+          :padding-right 5em
+      h1,h2,h3,h4,h5,p,ul,li
+        :text-align left
   #usable-area
     +container
   #header, #footer, #content
