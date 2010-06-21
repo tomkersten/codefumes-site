@@ -9,12 +9,10 @@
       = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
     .project-overview
       %h1
-        = "#{@project}: #{@attribute}"
+        = "#{@project} / #{@attribute}"
         - priveleged_user_or_owner_content(@project) do
           .admin-content
             = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
-    #details
-      = link_to 'What can this do for me?', '#tracking_ideas', :class => 'do_for_me', :title => 'you better sit down, because we\'re about to rock your world.'
     #visualization-area
       - if @project.covered_by_plan?
         #canvas.js_linegraph

@@ -3,7 +3,7 @@ var Grid = function(canvas,options){
   this.options = $.extend({
       width: 500,
       height: 200,
-      background: '#CCC',
+      background: '#2F69BF',
       grid: {x:20, y:40},
       axis: {x:100, y:80},
       offset: {r:0,t:0,l:0,b:0}
@@ -24,19 +24,19 @@ Grid.prototype = {
     for (i=1;i < (yAxis+1);i++){
       var y = (i*this.options.grid.y)+this.options.offset.t;
       if(y<this.options.height)
-        this.svg.path("M{2} {0}L{1} {0}",y,this.options.width,this.options.offset.l).attr({stroke:'#CCC',opacity:'.2'});
+        this.svg.path("M{2} {0}L{1} {0}",y,this.options.width,this.options.offset.l).attr({stroke:'#FFF',opacity:'.5'});
       
     }
     
     for (i=0;i < (xAxis+1);i++){
       var x = (i*this.options.grid.x)+this.options.offset.l;
       if (x < this.options.width)
-        this.svg.path("M{0} {2} L{0} {1}",x,this.options.height,this.options.offset.t).attr({stroke:'#CCC',opacity:'.2'});
+        this.svg.path("M{0} {2} L{0} {1}",x,this.options.height,this.options.offset.t).attr({stroke:'#FFF',opacity:'.5'});
     }
        
   },
   drawFrame: function(){
-    this.svg.path("M{2} {3}L{2} {0}L{1} {0}L{1} {3}L{2} {3}",this.options.height,this.options.width,this.options.offset.l,this.options.offset.t).attr({stroke:'#ACD373',opacity:'1',fill: this.options.background,'fill-opacity':'.5'});
+    this.svg.path("M{2} {3}L{2} {0}L{1} {0}L{1} {3}L{2} {3}",this.options.height,this.options.width,this.options.offset.l,this.options.offset.t).attr({stroke:'#2F69BF',opacity:'1',fill: this.options.background,'fill-opacity':'.5'});
   }
 }
 

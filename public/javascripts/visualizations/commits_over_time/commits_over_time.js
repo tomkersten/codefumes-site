@@ -1,19 +1,20 @@
 var CommitsOverTime = function(canvas,url,options){
 
   this.options = $.extend({
-      grid: {x:900/8, y:12},
+      grid: {x:900/8, y:16},
       axis: {x:8, y:25},
       width: 900,
       height: (16*25)+10,
       offset: {l:20,t:20,b:20},
-      opacity: '.5'
+      opacity: '.5',
+      background: '#889ab5'
   }, options);
   var self = this;
   this.pathData = [];
   
   //create a grid svg on the canvas div.
   this.svg = new Grid(canvas,this.options);
-  this.circle = this.svg.circle(0,0,8).attr({"stroke":"none","fill":"#ACD373","fill-opacity":.5}).hide();
+  this.circle = this.svg.circle(0,0,8).attr({"stroke":"none","fill":"#167400","fill-opacity":.8}).hide();
 
   //grab our json object from the server
   $.getJSON(
@@ -80,12 +81,12 @@ CommitsOverTime.prototype = {
     for(i=1;i<=24;i++){
       if(i==1 || i==6 || i==12 || i==18 || i == 24){
         if(i==24){text="24"}else{text=i}
-        this.svg.text(0, (this.options.grid.y*i)+this.options.offset.t, text).attr({"text-anchor":"start", "stroke":"#ACD373"});
+        this.svg.text(0, (this.options.grid.y*i)+this.options.offset.t, text).attr({"text-anchor":"start", 'font-size':'12px', 'font-weight':'normal'});
       }
     }
     $(this.weekdays).each(
       function(d,day){
-        self.svg.text((self.options.grid.x*d)+(self.options.offset.l+self.options.grid.x),self.options.height+self.options.offset.b-5, day).attr({ "stroke":"#ACD373"});
+        self.svg.text((self.options.grid.x*d)+(self.options.offset.l+self.options.grid.x),self.options.height+self.options.offset.b-5, day).attr({'font-size':'12px', 'font-weight':'normal'});
       }
     );
     this.svg.path("M{2} {3}L{2} {0}L{1} {0}L{1} {3}L{2} {3}",this.options.height-(this.options.grid.y*6),this.options.width,this.options.offset.l,this.options.offset.t+(this.options.grid.y*5)).attr({fill: "#556677",'fill-opacity':this.options.opacity,stroke:'none'}).toBack();

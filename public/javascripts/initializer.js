@@ -6,6 +6,6 @@ $(document).ready(function() {
   });
   
   $('.js_build_status').each(function() {
-    new CommitsOverTime('canvas', jsonUrl, {background: '#333'});
+    new CommitsOverTime('canvas', jsonUrl, {});
   });
 });
