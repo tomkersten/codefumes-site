@@ -46,21 +46,56 @@
               - if commit.merge?
                 %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
               - avg_build_duration_text_for(commit)
-              %ul.js_container
-                %li= "Identifier: #{commit.identifier}"
-                %li= "Author: #{commit.author}"
-                %li= "Committer #{commit.committer}"
-                %li= "Authored at: #{commit.authored_at}"
-                %li= "Committed at: #{commit.committed_at}"
-                %li= "Lines added: #{commit.line_additions}"
-                %li= "Lines deleted: #{commit.line_deletions}"
-                %li= "Total lines: #{commit.line_total}"
-                %li= "Files affected: #{commit.affected_file_count}"
-                - unless commit.custom_attributes.empty?
-                  %li.custom_attributes
-                    %ul
+              %div.js_container.container
+                %div.left
+                  %h4 Standard Data
+                  %ul
+                    %li
+                      %strong
+                        = "Identifier:"
+                      = "#{commit.identifier}"
+                    %li
+                      %strong
+                        = "Author:"
+                      = "#{commit.author}"
+                    %li
+                      %strong
+                        = "Committer:"
+                      = "#{commit.committer}"
+                    %li
+                      %strong
+                        = "Authored at:"
+                      = "#{commit.authored_at}"
+                    %li
+                      %strong
+                        = "Committed at:"
+                      = "#{commit.committed_at}"
+                    %li
+                      %strong
+                        = "Lines added:"
+                      = "#{commit.line_additions}"
+                    %li
+                      %strong
+                        = "Lines deleted:"
+                      = "#{commit.line_deletions}"
+                    %li
+                      %strong
+                        = "Total lines:"
+                      = "#{commit.line_total}"
+                    %li
+                      %strong
+                        = "Files affected:"
+                      = "#{commit.affected_file_count}"
+                %div.right
+                  %h4 Custom Attributes
+                  - unless commit.custom_attributes.empty?
+                    %ul.custom_attributes
                       - for custom_attribute in commit.custom_attributes
-                        %li= "#{custom_attribute.name}: #{custom_attribute.value}"
+                        %li
+                          %strong
+                            = "#{custom_attribute.name}:"
+                          = "#{custom_attribute.value}"
+                
   #tracking_ideas
     = render :partial => 'community/projects/tracking_ideas'
   = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
