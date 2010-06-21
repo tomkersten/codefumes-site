@@ -1,11 +1,11 @@
 var CommitsOverTime = function(canvas,url,options){
 
   this.options = $.extend({
-      grid: {x:950/8, y:12},
+      grid: {x:900/8, y:12},
       axis: {x:8, y:25},
-      width: 950,
-      height: (12*25)+10,
-      offset: {l:30,t:20,b:20},
+      width: 900,
+      height: (16*25)+10,
+      offset: {l:20,t:20,b:20},
       opacity: '.5'
   }, options);
   var self = this;
@@ -79,7 +79,7 @@ CommitsOverTime.prototype = {
     this.weekdays=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     for(i=1;i<=24;i++){
       if(i==1 || i==6 || i==12 || i==18 || i == 24){
-        if(i==24){text="END"}else{text=i}
+        if(i==24){text="24"}else{text=i}
         this.svg.text(0, (this.options.grid.y*i)+this.options.offset.t, text).attr({"text-anchor":"start", "stroke":"#ACD373"});
       }
     }

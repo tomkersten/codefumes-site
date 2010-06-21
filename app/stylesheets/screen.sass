@@ -20,7 +20,7 @@
 
 
 body
-  :background-color #FAFAFA
+  :background-color #EEE
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
@@ -117,6 +117,9 @@ body
         +clearfix
     #visualization-area
       +clearfix
+      :border 5px solid #666
+      :border-radius 10px
+      :background #FFF
     #canvas
       :clear both
       :width 946px
@@ -160,8 +163,9 @@ body
       a
         :padding 3px 10px
         :display block
+        :font-size 14px
       a.selected 
-        :background #000
+        :background #666
         :color #FFF
         
   .tracking_ideas
