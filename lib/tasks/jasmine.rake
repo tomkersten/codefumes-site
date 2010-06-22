@@ -28,7 +28,7 @@ namespace :jasmine do
   
   desc "Run specs via commandline"
   task :headless do
-    system("ruby spec/javascripts/support/run_specs_with_jazz_money.rb")
+    system("ruby spec/javascripts/support/jazz_runner.rb")
   end
 end
 
