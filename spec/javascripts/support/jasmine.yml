@@ -11,7 +11,11 @@
 #   - dist/**/*.js
 #
 src_files:
-  - public/javascripts/**/*.js 
+  - public/javascripts/frameworks/jquery.js
+  - public/javascripts/frameworks/jquery.date.js
+  - public/javascripts/frameworks/raphael.js
+  - public/javascripts/visualizations/**/*.js
+  - public/javascripts/*.js
 
 # stylesheets
 #
@@ -38,7 +42,6 @@ stylesheets:
 #   - helpers/**/*.js
 #
 helpers:
-  - helpers/**/*.js
 
 # spec_files
 #
