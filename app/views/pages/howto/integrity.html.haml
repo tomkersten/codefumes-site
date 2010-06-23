@@ -8,14 +8,12 @@
     Add the following line to your Integrity installation's
     %code Gemfile
     \:
-    %pre
-      gem 'codefumes_harvester', '>= 0.1.7'
+    %script{ :src => "http://gist.github.com/449388.js" }
   %li
     Add the following line to the
     %code init.rb
     file in your Integrity installtion's root directory.
-    %pre
-      require "codefumes_harvester/integrity_notifier/codefumes"
+    %script{ :src => "http://gist.github.com/449390.js" }
   %li Cycle your build server to pick up the new gem requirement.
   %li
     Edit the project on your build server, and add a name, public key, and private key to the CodeFumes form (be sure to amake sure the check box is checked as well so the plugin is enabled)

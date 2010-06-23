@@ -1,5 +1,31 @@
 %h3 Manually Integrate...
-%ol
-  %li Each commit can have any number of named "builds" associated with it.
-  %li To track a build, you must supply a name and the time it was started (and the commit identifier).
-  %li Valid "states" for a build to be in are "running", "successful", or "failed".
+%ul
+  %li
+    %h5 Quick note
+    Know that
+    = link_to "git", "http://git-scm.org"
+    is the only SCM system we have developed tools for at this point. We know this is lame, but there are only so many hours in the day, and we had to pick our battles.  Feel free to fork the
+    = link_to "CodeFumesHarvester gem", "http://cosyn.github.com/codefumes_harvester/"
+    and start adding other systems, if you are interested.
+    %p.note
+      Note: Using other SCMs is not a problem, but you will have to grab the commit information you want to track manually from the repository (author, timestamp, commit identifier, etc).  Don't forget you can use the
+      = link_to "CodeFumes gem", "http://cosyn.github.com/codefumes/"
+      to send data to and from the site, which will hopefully make it a little bit easier.
+  %li
+    %ol
+      %li 
+        %h3 Harvest your repository
+        %p 
+          If you have not done this, follow 
+          = link_to "these instructions"
+      %li 
+        %h3 Start the build 
+        %p Supply what you are building and that you have started the build
+        %script{ :src => "http://gist.github.com/449362.js" }
+
+      %li 
+        %h3 Finish the build 
+        %p Supply what you are building, the time it finished, and the build state.
+        %strong ROY: can we leave the time it was finished out? Everytime time is mentioned in programming, I get turned off.
+        %script{ :src => "http://gist.github.com/449377.js" }  
+        %p.quiet Valid "states" for a build are "running", "successful", or "failed"
