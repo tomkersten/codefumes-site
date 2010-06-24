@@ -3,11 +3,12 @@
 !!! Strict
 %html
   %head
-    = stylesheet_link_tag 'compiled/ie'
-    = stylesheet_link_tag 'compiled/screen'
+    / = stylesheet_link_tag 'compiled/ie'
+    / = stylesheet_link_tag 'compiled/screen'
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Droid+Sans'
+    %link{ :href => '/stylesheets/codefumes.css', :media => 'screen', :rel => 'stylesheet/less', :type => 'text/css'}
     = yield :head
-  %body{:class => yield(:page_layout_class)}
+  %body{:id => 'www-codefumes-com', :class => yield(:page_layout_class)}
     #usable-area
       #header
         .logo
