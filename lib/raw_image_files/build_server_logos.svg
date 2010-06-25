@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="build_server_logos.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3788">
+      <stop
+         style="stop-color:#ececec;stop-opacity:1;"
+         offset="0"
+         id="stop3790" />
+      <stop
+         style="stop-color:#ececec;stop-opacity:0;"
+         offset="1"
+         id="stop3792" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2884"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2925"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3794"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,56.771903,-261.94758)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3810"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,47.733504,-174.62237)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3814"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,43.001141,-73.318805)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3875"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,47.733504,-174.62237)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3877"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,43.001141,-73.318805)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3911"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,43.001141,-73.318805)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3913"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,47.733504,-174.62237)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3915"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,56.771903,-261.94758)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3922"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,61.52264,209.35066)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3975"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,61.52264,209.35066)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3977"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,47.733504,-174.62237)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3979"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,56.771903,-261.94758)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3989"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,-310.22335,209.35066)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient3997"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,56.771903,-261.94758)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient4004"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,-329.7978,1.945015)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient4015"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,47.733504,-174.62237)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient4020"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,-337.02583,108.0471)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient4039"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,-329.7978,1.945015)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="linearGradient4041"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0294443,0,0,0.99980359,-337.02583,108.0471)"
+       x1="382.11874"
+       y1="428.03506"
+       x2="382.95859"
+       y2="390.58292" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="187.87915"
+     inkscape:cy="641.19084"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1332"
+     inkscape:window-height="801"
+     inkscape:window-x="575"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+       x="90.111702"
+       y="232.72748"
+       id="text2890"
+       inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/integrity.png"
+       inkscape:export-xdpi="89.375"
+       inkscape:export-ydpi="89.375"><tspan
+         sodipodi:role="line"
+         id="tspan2892"
+         x="90.111702"
+         y="232.72748"
+         style="font-size:55.75567245px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Helvetica Bold">integrity</tspan></text>
+    <g
+       id="g2898"
+       inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/hudson.png"
+       inkscape:export-xdpi="89.375"
+       inkscape:export-ydpi="89.375"
+       transform="matrix(0.87118238,0,0,0.87118238,11.705288,7.6468948)">
+      <image
+         xlink:href="file:///Users/tom/Desktop/butler.png"
+         width="96"
+         height="96"
+         id="image2886"
+         x="92"
+         y="59.362183" />
+      <text
+         id="text2894"
+         y="154.26843"
+         x="183"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         xml:space="preserve"><tspan
+           style="font-size:64px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
+           y="154.26843"
+           x="183"
+           id="tspan2896"
+           sodipodi:role="line">Hudson</tspan></text>
+    </g>
+    <g
+       id="g3767"
+       transform="matrix(1.0957761,0,0,1.0957761,1.41992,-39.011534)"
+       inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/cruise_control.png"
+       inkscape:export-xdpi="89.375"
+       inkscape:export-ydpi="89.375">
+      <text
+         xml:space="preserve"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         x="78.441605"
+         y="344.32629"
+         id="text2935"><tspan
+           sodipodi:role="line"
+           id="tspan2937"
+           x="78.441605"
+           y="344.32629"
+           style="font-size:64px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Helvetica Bold"><tspan
+             id="tspan2939"
+             style="fill:#3668af;fill-opacity:1">CC </tspan><tspan
+             id="tspan3745"
+             style="fill:#f28218;fill-opacity:1">rb</tspan></tspan></text>
+      <path
+         transform="translate(-408.47357,-10.917668)"
+         d="m 597.95289,349.43164 c 0,3.71057 -3.00801,6.71857 -6.71858,6.71857 -3.71056,0 -6.71857,-3.008 -6.71857,-6.71857 0,-3.71056 3.00801,-6.71857 6.71857,-6.71857 3.71057,0 6.71858,3.00801 6.71858,6.71857 z"
+         sodipodi:ry="6.7185717"
+         sodipodi:rx="6.7185717"
+         sodipodi:cy="349.43164"
+         sodipodi:cx="591.23431"
+         id="path3747"
+         style="fill:#f28218;fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       id="g3866"
+       transform="translate(13.770752,0)">
+      <rect
+         ry="14.27416"
+         y="280.24249"
+         x="404.33011"
+         height="73.889771"
+         width="322.4769"
+         id="rect3812"
+         style="fill:url(#linearGradient3877);fill-opacity:1;stroke:#333333;stroke-width:1.01451564" />
+      <g
+         id="g3774"
+         transform="matrix(1.0957761,0,0,1.0957761,373.46081,-33.972606)"
+         inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/cruise_control.png"
+         inkscape:export-xdpi="89.375"
+         inkscape:export-ydpi="89.375">
+        <text
+           xml:space="preserve"
+           style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+           x="78.441605"
+           y="344.32629"
+           id="text3776"><tspan
+             sodipodi:role="line"
+             id="tspan3778"
+             x="78.441605"
+             y="344.32629"
+             style="font-size:64px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Helvetica Bold"><tspan
+               id="tspan3780"
+               style="fill:#3668af;fill-opacity:1">CC </tspan><tspan
+               id="tspan3782"
+               style="fill:#f28218;fill-opacity:1">rb</tspan></tspan></text>
+        <path
+           transform="translate(-408.47357,-10.917668)"
+           d="m 597.95289,349.43164 c 0,3.71057 -3.00801,6.71857 -6.71858,6.71857 -3.71056,0 -6.71857,-3.008 -6.71857,-6.71857 0,-3.71056 3.00801,-6.71857 6.71857,-6.71857 3.71057,0 6.71858,3.00801 6.71858,6.71857 z"
+           sodipodi:ry="6.7185717"
+           sodipodi:rx="6.7185717"
+           sodipodi:cy="349.43164"
+           sodipodi:cx="591.23431"
+           id="path3784"
+           style="fill:#f28218;fill-opacity:1;stroke:none"
+           sodipodi:type="arc" />
+      </g>
+    </g>
+    <g
+       id="g3861"
+       transform="translate(9.0383911,0)">
+      <rect
+         style="fill:url(#linearGradient3875);fill-opacity:1;stroke:#333333;stroke-width:1.01451564"
+         id="rect3808"
+         width="322.4769"
+         height="73.889771"
+         x="409.06247"
+         y="178.93893"
+         ry="14.27416" />
+      <text
+         xml:space="preserve"
+         style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         x="431.91904"
+         y="235.04784"
+         id="text3796"
+         inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/integrity.png"
+         inkscape:export-xdpi="89.375"
+         inkscape:export-ydpi="89.375"><tspan
+           sodipodi:role="line"
+           id="tspan3798"
+           x="431.91904"
+           y="235.04784"
+           style="font-size:55.75567245px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Helvetica Bold">integrity</tspan></text>
+    </g>
+    <g
+       id="g3856">
+      <rect
+         ry="14.27416"
+         y="91.613724"
+         x="418.10086"
+         height="73.889771"
+         width="322.4769"
+         id="rect3786"
+         style="fill:url(#linearGradient3794);fill-opacity:1;stroke:#333333;stroke-width:1.01451564" />
+      <text
+         xml:space="preserve"
+         style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         x="460.69516"
+         y="149.60123"
+         id="text3804"><tspan
+           sodipodi:role="line"
+           id="tspan3806"
+           x="460.69516"
+           y="149.60123"
+           style="font-size:55.75567245px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold">Hudson</tspan></text>
+    </g>
+    <g
+       id="g3927">
+      <rect
+         style="fill:url(#linearGradient3922);fill-opacity:1;stroke:#333333;stroke-width:1.01451564"
+         id="rect3881"
+         width="322.4769"
+         height="73.889771"
+         x="422.85159"
+         y="562.91199"
+         ry="14.27416" />
+      <text
+         xml:space="preserve"
+         style="font-size:26.29862595px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         x="477.93674"
+         y="626.0014"
+         id="text3885"><tspan
+           sodipodi:role="line"
+           id="tspan3887"
+           x="477.93674"
+           y="626.0014"
+           style="font-size:70.12966919000000132px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Sans Bold">CC rb</tspan></text>
+      <path
+         transform="matrix(1.0957761,0,0,1.0957761,-55.613265,236.73354)"
+         d="m 597.95289,349.43164 a 6.7185717,6.7185717 0 1 1 -13.43715,0 6.7185717,6.7185717 0 1 1 13.43715,0 z"
+         sodipodi:ry="6.7185717"
+         sodipodi:rx="6.7185717"
+         sodipodi:cy="349.43164"
+         sodipodi:cx="591.23431"
+         id="path3893"
+         style="fill:#4d4d4d;fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       id="g3933">
+      <g
+         id="g3895"
+         transform="translate(13.789139,282.66947)">
+        <rect
+           style="fill:url(#linearGradient3913);fill-opacity:1;stroke:#333333;stroke-width:1.01451564"
+           id="rect3897"
+           width="322.4769"
+           height="73.889771"
+           x="409.06247"
+           y="178.93893"
+           ry="14.27416" />
+        <text
+           xml:space="preserve"
+           style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+           x="431.91904"
+           y="235.04784"
+           id="text3899"
+           inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/integrity.png"
+           inkscape:export-xdpi="89.375"
+           inkscape:export-ydpi="89.375"><tspan
+             sodipodi:role="line"
+             id="tspan3901"
+             x="431.91904"
+             y="235.04784"
+             style="font-size:55.75567244999999872px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Helvetica Bold">integrity</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g3939">
+      <g
+         transform="translate(4.7507474,282.66947)"
+         id="g3903">
+        <rect
+           ry="14.27416"
+           y="91.613724"
+           x="418.10086"
+           height="73.889771"
+           width="322.4769"
+           id="rect3905"
+           style="fill:url(#linearGradient3915);fill-opacity:1;stroke:#333333;stroke-width:1.01451564" />
+        <text
+           xml:space="preserve"
+           style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+           x="460.69516"
+           y="149.60123"
+           id="text3907"><tspan
+             sodipodi:role="line"
+             id="tspan3909"
+             x="460.69516"
+             y="149.60123"
+             style="font-size:55.75567244999999161px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans Bold;fill:#4d4d4d">Hudson</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g4027"
+       inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/cruise_control.png"
+       inkscape:export-xdpi="89.375"
+       inkscape:export-ydpi="89.375">
+      <rect
+         ry="14.27416"
+         y="562.91199"
+         x="51.105602"
+         height="73.889771"
+         width="322.4769"
+         id="rect3947"
+         style="fill:url(#linearGradient3989);fill-opacity:1;stroke:#333333;stroke-width:1.01451564" />
+      <g
+         style="fill:#4d4d4d"
+         transform="translate(49.412853,4.289954)"
+         id="g4006">
+        <text
+           xml:space="preserve"
+           style="font-size:20.90837669000000076px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+           x="86.573776"
+           y="615.17444"
+           id="text3981"><tspan
+             sodipodi:role="line"
+             id="tspan3983"
+             x="86.573776"
+             y="615.17444"
+             style="font-size:56px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Arial;-inkscape-font-specification:Arial Bold">CC.rb</tspan></text>
+        <path
+           transform="matrix(0.80928976,0,0,0.80928976,-303.5318,328.50021)"
+           d="m 597.95289,349.43164 c 0,3.71057 -3.00801,6.71857 -6.71858,6.71857 -3.71056,0 -6.71857,-3.008 -6.71857,-6.71857 0,-3.71056 3.00801,-6.71857 6.71857,-6.71857 3.71057,0 6.71858,3.00801 6.71858,6.71857 z"
+           sodipodi:ry="6.7185717"
+           sodipodi:rx="6.7185717"
+           sodipodi:cy="349.43164"
+           sodipodi:cx="591.23431"
+           id="path3953"
+           style="fill:#4d4d4d;fill-opacity:1;stroke:none"
+           sodipodi:type="arc" />
+      </g>
+    </g>
+    <g
+       id="g4022"
+       transform="translate(26.80246,0)"
+       inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/integrity.png"
+       inkscape:export-xdpi="89.375"
+       inkscape:export-ydpi="89.375">
+      <rect
+         style="fill:url(#linearGradient4041);fill-opacity:1;stroke:#333333;stroke-width:1.01451564"
+         id="rect3959"
+         width="322.4769"
+         height="73.889771"
+         x="24.303143"
+         y="461.6084"
+         ry="14.27416" />
+      <text
+         xml:space="preserve"
+         style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         x="73.962189"
+         y="517.71729"
+         id="text3961"
+         inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/integrity.png"
+         inkscape:export-xdpi="89.375"
+         inkscape:export-ydpi="89.375"><tspan
+           sodipodi:role="line"
+           id="tspan3963"
+           x="73.962189"
+           y="517.71729"
+           style="font-size:55.75567245px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Arial;-inkscape-font-specification:Arial Bold">integrity</tspan></text>
+    </g>
+    <g
+       id="g4034"
+       transform="translate(19.574442,0)"
+       inkscape:export-filename="/Volumes/codefumes/website/public/images/howtos/hudson.png"
+       inkscape:export-xdpi="89.375"
+       inkscape:export-ydpi="89.375">
+      <rect
+         ry="14.27416"
+         y="355.50632"
+         x="31.53116"
+         height="73.889771"
+         width="322.4769"
+         id="rect3969"
+         style="fill:url(#linearGradient4039);fill-opacity:1;stroke:#333333;stroke-width:1.01451564" />
+      <text
+         xml:space="preserve"
+         style="font-size:20.90837669px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Helvetica"
+         x="88.949173"
+         y="412.08002"
+         id="text3971"><tspan
+           sodipodi:role="line"
+           id="tspan3973"
+           x="88.949173"
+           y="412.08002"
+           style="font-size:55.75567245px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4d4d4d;font-family:Arial;-inkscape-font-specification:Arial Bold">Hudson</tspan></text>
+    </g>
+  </g>
+</svg>
