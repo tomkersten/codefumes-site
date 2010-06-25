@@ -1,4 +1,4 @@
-%ul.session_info
+%ul.inline.right
   - if logged_in?
     %li= link_to current_user.handle, my_account_path, :class => "edit_account", :title => "Edit Account"
     %li= link_to "My Projects", my_projects_path, :class => "project_list"

@@ -9,22 +9,25 @@
     %link{ :href => '/stylesheets/codefumes.css', :media => 'screen', :rel => 'stylesheet/less', :type => 'text/css'}
     = yield :head
   %body{:id => 'www-codefumes-com', :class => yield(:page_layout_class)}
-    #usable-area
-      #header
-        .logo
-          = link_to "Codefumes.com", root_path, :class => 'logo visual'
-        .tagline
-          Track. Review.
-          %em Improve.
-        .session
-          = render :partial => 'layouts/session_info_and_links'
-      #content
+    .page
+      .header
+        .columns.two_columns
+          .column
+            .logo
+              = link_to "Codefumes.com", root_path, :class => 'logo visual'
+            .tagline
+              Track. Review.
+              %em Improve.
+          .column
+            .session
+              = render :partial => 'layouts/session_info_and_links'
+      .content
         = render :partial => "layouts/flashes"
         = yield
       - if sidebar_content = yield(:sidebar)
-        #sidebar
+        .sidebar
           = sidebar_content
-      #footer
+      .footer
         = link_to "codefumes.com", root_path
     = javascript_include_tag :frameworks
     = javascript_include_tag :visualizations
