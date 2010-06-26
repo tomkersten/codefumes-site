@@ -1,28 +1,30 @@
-- content_for(:page_layout_class) do
-  landing-page
-
-.main
-  - if RAILS_ENV != "production"
-    %div.carousel
-      %h1 What can your commits <em>show</em> you?
-    %div.instructions
-      %h2 Find out for free:
-      %ul
-        %li
-          %h3 Step 1. Install codefumes_harvester:
-          %p
-            sudo gem install codefumes_harvester
-        %li
-          %h3 Step 2. Run this on your repository:
-          %p
-            = "cf_harvest_repo_metrics"
-        %li
-          %h3 Step 3. Review:
-          %p Visit the URL returned from command
-
-  - else
+- if RAILS_ENV != "production"
+  .header
+    %h1.title What can your commits <em>show</em> you?
+  .content
+    .columns.two_columns
+      .column
+        todo
+      .column
+        %div.instructions
+          %h2 Find out for free:
+          %ul
+            %li
+              %h4.shadow Step 1. Install codefumes_harvester:
+              %p
+                sudo gem install codefumes_harvester
+            %li
+              %h4.shadow Step 2. Run this on your repository:
+              %p
+                = "cf_harvest_repo_metrics"
+            %li
+              %h4.shadow Step 3. Review:
+              %p Visit the URL returned from command
+- else
+  .header
+    %h1.title Get notified when we launch.
+  .content
     .notify_form
-      %h1 Get notified when we launch.
       %p We'll never spam you or share your email address. Promise.
       %form{:action => 'http://madmimi.com/signups/subscribe/2652', :method => 'post', :id => "launch_signup"}
         %fieldset{:class => "inputs"}

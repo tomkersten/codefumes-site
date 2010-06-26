@@ -1,26 +1,34 @@
-.main
-  - if @projects.empty?
-    %h1 You haven't claimed any projects yet?
+- if @projects.empty?
+  .header
+    %h1.title You haven't claimed any projects yet?
+  .content
     %ul
       %li
-        %h2 Step 1. Install codefumes_harvester:
+        %h3.shadow Step 1. Install codefumes_harvester:
         %p
           sudo gem install codefumes_harvester
       %li
-        %h2 Step 2. Run this:
+        %h3.shadow Step 2. Run this:
         %p
           - public_key = Project.generate_public_key
           = "harvest_repo_metrics  --project_key #{public_key}"
       %li
-        %h2 Step 3. Review:
+        %h3.shadow Step 3. Review:
         %p
           = link_to short_uri_url(public_key), short_uri_url(public_key), :id => :short_uri
-  - else
+- else
+  .header
+    %h1.title Projects
+  .content
     %ul.projects
       - for project in @projects
-        %li{:class => [project.visibility, build_status_class_for(project)].join(" ")}
-          = link_to project, short_uri_path(:public_key => project)
-          = "(#{project.visibility})"
+        %li.project{:class => [project.visibility, build_status_class_for(project)].join(" ")}
+          .columns.two_columns
+            .column
+              %h1.title
+                = link_to project, short_uri_path(:public_key => project)
+            .column.align_right
+              %h5= "(#{project.visibility})"
 
   - non_paying_user_content do
     = link_to "Track your private projects too", new_my_subscription_path, :id => 'new_subscription'

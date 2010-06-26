@@ -1,6 +1,8 @@
-.main
+.header
+  %h1.title Sign up
+.content
   - semantic_form_for @user, :html => {:class => "primary-content"} do |f|
-    %h1 Sign up
+    
     - f.inputs do
       = f.input :email
       = f.input :login

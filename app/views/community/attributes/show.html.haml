@@ -8,8 +8,7 @@
     %h1.title
       = "#{@project} / #{@attribute}"
       - priveleged_user_or_owner_content(@project) do
-        .admin-content
-          = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
+        = link_to 'admin', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project right'
 .content
   .attributes
     %ul.inline.selectable
@@ -42,35 +41,35 @@
                 - if commit.merge?
                   %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
             .column.align_right
-              %h3.build_duration.highlight
+              %h3.build_duration
                 - avg_build_duration_text_for(commit)
         .content
           .columns.two_columns
             .column
               %h5.title Standard Data
-              %dl
-                %dt Identifier:
-                %dd= commit.identifier
-                %dt Author:
-                %dd= commit.author
-                %dt Committer:
-                %dd= commit.committer
-                %dt Authored at:
-                %dd= commit.authored_at
-                %dt Committed at:
-                %dd= commit.committed_at
-                %dt Lines added:
-                %dd= commit.line_additions
-                %dt Lines deleted:
-                %dd= commit.line_deletions
-                %dt Total lines:
-                %dd= commit.line_total
-                %dt Files affected:
-                %dd= commit.affected_file_count
+              %dl.payload
+                %dt.key Identifier:
+                %dd.value= commit.identifier
+                %dt.key Author:
+                %dd.value= commit.author
+                %dt.key Committer:
+                %dd.value= commit.committer
+                %dt.key Authored at:
+                %dd.value= commit.authored_at
+                %dt.key Committed at:
+                %dd.value= commit.committed_at
+                %dt.key Lines added:
+                %dd.value= commit.line_additions
+                %dt.key Lines deleted:
+                %dd.value= commit.line_deletions
+                %dt.key Total lines:
+                %dd.value= commit.line_total
+                %dt.key Files affected:
+                %dd.value= commit.affected_file_count
             .column
               %h5.title Custom Attributes
               - unless commit.custom_attributes.empty?
-                %dl
+                %dl.payload
                   - for custom_attribute in commit.custom_attributes
-                    %dt= "#{custom_attribute.name}:"
-                    %dd= custom_attribute.value
+                    %dt.key= "#{custom_attribute.name}:"
+                    %dd.value= custom_attribute.value

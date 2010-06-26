@@ -4,7 +4,7 @@ module TextHelper
 
     minutes, seconds = commit.average_build_duration.divmod(60.0)
 
-    haml_tag :span, :class => :duration do
+    haml_tag :span, :class => "duration, highlight" do
       haml_concat "#{minutes}min #{seconds.round}secs"
     end
   end
