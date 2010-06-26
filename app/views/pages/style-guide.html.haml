@@ -1,5 +1,6 @@
-.main.style-guide
-  %h1 CodeFumes Style Guide
+.header
+  %h1.title CodeFumes Style Guide
+.content
   %p
     Please include any standard containers with examples of mark-up escaped so you don't have to view the source to replicate.
   .columns.three_columns
@@ -24,7 +25,7 @@
         %a{ :href => 'http://codefumes.com' }yeaho
   %h2
     %span.highlight Lists
-  .columns.three_columns
+  .columns.four_columns
     .column
       %h3.heading Standard list
       %ul
@@ -46,6 +47,17 @@
         %li Item 2
         %li Item 3
         %li Item 4
+    .column
+      %h3.heading Selectable list
+      %ul.inline.selectable
+        %li 
+          %a Item 1
+        %li 
+          %a Item 2
+        %li 
+          %a Item 3
+        %li 
+          %a Item 4
   %h2.heading 
     %span.highlight Boxes
   .columns
@@ -82,8 +94,17 @@
     .column
       .box
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ornare neque eu libero sollicitudin eu laoreet felis dignissim. Pellentesque rutrum nulla eget erat facilisis ultrices. Suspendisse vehicula lobortis semper. Proin viverra varius turpis at mollis. Vestibulum mattis orci ante, vitae scelerisque lorem. Proin id eros augue. Quisque aliquam ligula sit amet enim luctus volutpat. Pellentesque in lacus dui.
+  %h2.heading 
+    %span.highlight Boxes: Structured
+  .columns
+    .column
+      .box.structured_box
+        .header
+          .title this is the title
+        .content
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ornare neque eu libero sollicitudin eu laoreet felis dignissim. Pellentesque rutrum nulla eget erat facilisis ultrices. Suspendisse vehicula lobortis semper. Proin viverra varius turpis at mollis. Vestibulum mattis orci ante, vitae scelerisque lorem. Proin id eros augue. Quisque aliquam ligula sit amet enim luctus volutpat. Pellentesque in lacus dui.
   %h2
-    %span.highlight Containers
+    %span.highlight Paragraphers
   %div
     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ornare neque eu libero sollicitudin eu laoreet felis dignissim. Pellentesque rutrum nulla eget erat facilisis ultrices. Suspendisse vehicula lobortis semper. Proin viverra varius turpis at mollis. Vestibulum mattis orci ante, vitae scelerisque lorem. Proin id eros augue. Quisque aliquam ligula sit amet enim luctus volutpat. Pellentesque in lacus dui. 
     %p Pellentesque malesuada augue at diam vestibulum dictum. Fusce condimentum porttitor tortor eget aliquam. Phasellus aliquet condimentum blandit. Nam lobortis enim eget ligula auctor volutpat. Phasellus a tortor augue. Morbi quam ligula, convallis a consequat id, commodo sit amet ligula. In auctor elementum faucibus. Praesent malesuada aliquet lorem sit amet lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam id enim metus. Quisque tempor accumsan bibendum. Donec varius, magna in egestas lobortis, nisi leo porta elit, tincidunt molestie nibh dolor at magna.

@@ -68,7 +68,7 @@ Linegraph.prototype = {
   
   createRaphaelGraph: function(values, count) {
     gRaphael = Raphael('canvas');
-    gRaphael.g.linechart(30, 20, 900, 400, count, values, {
+    gRaphael.g.linechart(30, 20, 930, 400, count, values, {
       shade: true,
       nostroke: false, 
       axis: "0 0 0 1",

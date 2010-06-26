@@ -1,101 +1,81 @@
-- content_for(:page_layout_class) do
-  = "project-page #{@project.visibility}-project"
-.main
+.header
   - if !@project.viewable_by?(current_user)
     .access_denied
-      %h1= "'#{params[:public_key]}' is a private project"
-  - else
+      %h1.title= "'#{params[:public_key]}' is a private project"
+  - else     
     - unless @project.visibility_acknowledged?
       = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
-    .project-overview
-      %h1
-        = @project
-        - priveleged_user_or_owner_content(@project) do
-          .admin-content
-            = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
-    #visualization-area
+    %h1.title
+      = @project
+      - priveleged_user_or_owner_content(@project) do
+        .admin-content
+          = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
+.content
+  .attributes
+    %ul.inline.selectable
+      - unless @project.unique_custom_attributes.empty?
+        - @project.unique_custom_attributes.each do |attribute|
+          %li.attribute
+            = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
+      - else
+        %li.attribute
+          = link_to "Codefumes is all about tracking attributes. You should try it!", {}, :class => 'intro_to_attributes'
+  .visualization
+    %h3.title.shadow Build Status Overtime
+    .canvas
       - if @project.covered_by_plan?
         #canvas.js_build_status
-          / A little to early for this. Need to picture w/ these links
-          / %ul#visualizations
-          /    %li= link_to 'Visual 1', '', :id => 'vis_1'
-          /    %li= link_to 'Visual 2', '', :id => 'vis_2'
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
-    #custom-attributes
-      %ul.attributes
-        - unless @project.unique_custom_attributes.empty?
-          - @project.unique_custom_attributes.each do |attribute|
-            %li.attribute
-              = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
-        - else
-          %li.attribute
-            = link_to "Codefumes is all about tracking attributes. You should try it!", {}, :class => 'intro_to_attributes'
-    #textual-commit-area.js_expand_collapse
-      %ul.commits
-        - @project.recent_commits.each do |commit|
-          - css_classes = commit_classes_for(commit)
-          - css_classes += " head" if commit == @project.commit_head
-          %li{:class => css_classes}
-            - if commit.message.blank?
-              %h2.no_commit_message [No commit message? Tsk! Tsk!]
-            - else
-              %h2.js_handle
-                = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
-              - if commit.merge?
-                %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-              - avg_build_duration_text_for(commit)
-              %div.js_container.container
-                %div.left
-                  %h4 Standard Data
-                  %ul
-                    %li
-                      %strong
-                        = "Identifier:"
-                      = "#{commit.identifier}"
-                    %li
-                      %strong
-                        = "Author:"
-                      = "#{commit.author}"
-                    %li
-                      %strong
-                        = "Committer:"
-                      = "#{commit.committer}"
-                    %li
-                      %strong
-                        = "Authored at:"
-                      = "#{commit.authored_at}"
-                    %li
-                      %strong
-                        = "Committed at:"
-                      = "#{commit.committed_at}"
-                    %li
-                      %strong
-                        = "Lines added:"
-                      = "#{commit.line_additions}"
-                    %li
-                      %strong
-                        = "Lines deleted:"
-                      = "#{commit.line_deletions}"
-                    %li
-                      %strong
-                        = "Total lines:"
-                      = "#{commit.line_total}"
-                    %li
-                      %strong
-                        = "Files affected:"
-                      = "#{commit.affected_file_count}"
-                %div.right
-                  %h4 Custom Attributes
-                  - unless commit.custom_attributes.empty?
-                    %ul.custom_attributes
-                      - for custom_attribute in commit.custom_attributes
-                        %li
-                          %strong
-                            = "#{custom_attribute.name}:"
-                          = "#{custom_attribute.value}"
-                
-  #tracking_ideas
-    = render :partial => 'community/projects/tracking_ideas'
-  = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
+  %ul.commits
+    - @project.recent_commits.each do |commit|
+      - css_classes = commit_classes_for(commit)
+      - css_classes += " head" if commit == @project.commit_head
+      %li.commit{:class => css_classes}
+        .header
+          .columns.two_columns
+            .column
+              - if commit.message.blank?
+                %h3.title.shadow.no_commit_message [No commit message? Tsk! Tsk!]
+              - else
+                %h3.title.shadow
+                  = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
+                - if commit.merge?
+                  %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
+            .column.align_right
+              %h3.build_duration.highlight
+                - avg_build_duration_text_for(commit)
+        .content
+          .columns.two_columns
+            .column
+              %h5.title Standard Data
+              %dl
+                %dt Identifier:
+                %dd= commit.identifier
+                %dt Author:
+                %dd= commit.author
+                %dt Committer:
+                %dd= commit.committer
+                %dt Authored at:
+                %dd= commit.authored_at
+                %dt Committed at:
+                %dd= commit.committed_at
+                %dt Lines added:
+                %dd= commit.line_additions
+                %dt Lines deleted:
+                %dd= commit.line_deletions
+                %dt Total lines:
+                %dd= commit.line_total
+                %dt Files affected:
+                %dd= commit.affected_file_count
+            .column
+              %h5.title Custom Attributes
+              - unless commit.custom_attributes.empty?
+                %dl
+                  - for custom_attribute in commit.custom_attributes
+                    %dt= "#{custom_attribute.name}:"
+                    %dd= custom_attribute.value
+  .footer
+    .tracking_ideas
+      = render :partial => 'community/projects/tracking_ideas'

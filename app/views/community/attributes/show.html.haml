@@ -1,31 +1,76 @@
-- content_for(:page_layout_class) do
-  = "project-page #{@project.visibility}-project"
-.main
+.header
   - if !@project.viewable_by?(current_user)
     .access_denied
-      %h1= "'#{params[:public_key]}' is a private project"
+      %h1.title= "'#{params[:public_key]}' is a private project"
   - else
     - unless @project.visibility_acknowledged?
       = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
-    .project-overview
-      %h1
-        = "#{@project} / #{@attribute}"
-        - priveleged_user_or_owner_content(@project) do
-          .admin-content
-            = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
-    #visualization-area
+    %h1.title
+      = "#{@project} / #{@attribute}"
+      - priveleged_user_or_owner_content(@project) do
+        .admin-content
+          = link_to '[admin]', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project'
+.content
+  .attributes
+    %ul.inline.selectable
+      %li.attribute
+        = link_to "Back to project", short_uri_path(@project)
+      - @project.unique_custom_attributes.each do |attribute|
+        %li.attribute
+          = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => ('selected' if attribute == @attribute)
+  .visualization
+    %h3.shadow.title= "#{@attribute} Linegraph"
+    .canvas
       - if @project.covered_by_plan?
         #canvas.js_linegraph
       - else
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
-    #custom-attributes
-      %ul.attributes
-        %li.attribute
-          = link_to "Back to project", short_uri_path(@project)
-        - @project.unique_custom_attributes.each do |attribute|
-          %li.attribute
-            = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => ('selected' if attribute == @attribute)
-  #tracking_ideas
-    = render :partial => 'community/projects/tracking_ideas'
-  = link_to 'I get it, I want it, Tell me how already!', '/signup', :class => 'i_want_it'
+  %ul.commits
+    - @project.recent_commits.each do |commit|
+      - css_classes = commit_classes_for(commit)
+      - css_classes += " head" if commit == @project.commit_head
+      %li.commit{:class => css_classes}
+        .header
+          .columns.two_columns
+            .column
+              - if commit.message.blank?
+                %h3.shadow.title.no_commit_message [No commit message? Tsk! Tsk!]
+              - else
+                %h3.shadow.title
+                  = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
+                - if commit.merge?
+                  %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
+            .column.align_right
+              %h3.build_duration.highlight
+                - avg_build_duration_text_for(commit)
+        .content
+          .columns.two_columns
+            .column
+              %h5.title Standard Data
+              %dl
+                %dt Identifier:
+                %dd= commit.identifier
+                %dt Author:
+                %dd= commit.author
+                %dt Committer:
+                %dd= commit.committer
+                %dt Authored at:
+                %dd= commit.authored_at
+                %dt Committed at:
+                %dd= commit.committed_at
+                %dt Lines added:
+                %dd= commit.line_additions
+                %dt Lines deleted:
+                %dd= commit.line_deletions
+                %dt Total lines:
+                %dd= commit.line_total
+                %dt Files affected:
+                %dd= commit.affected_file_count
+            .column
+              %h5.title Custom Attributes
+              - unless commit.custom_attributes.empty?
+                %dl
+                  - for custom_attribute in commit.custom_attributes
+                    %dt= "#{custom_attribute.name}:"
+                    %dd= custom_attribute.value
