@@ -4,22 +4,25 @@
   %h1 Integrate your build server with CodeFumes
   %h2 Why?
   %ol
-    %li 
-      %h4 Identify the reason(s) your build breaks.
-    %li 
+    %li
+      = image_tag('howtos/spot_reasons.png')
+      %h4 Identify trends in broken builds.
+    %li
+      = image_tag('howtos/unified_dashboard.png')
       %h4 Unify your projects with one Build Status Dashboard.
-    %li 
-      %h4 
-        Unlease your creativity with the Codefumes API. 
+    %li
+      = image_tag('howtos/api_access.png')
+      %h4
+        Unleash your creativity with the Codefumes API.
         %strong Build light!
   %div.columns.two_columns
     %div.column
       %h2 No build server? No problem.
-      %script{ :src => "http://gist.github.com/449485.js" }
+      %script{ :src => "http://gist.github.com/453704.js" }
       = link_to "More...", howto_page_path('any_ci_setup')
     %div.column
       %h2 Have a build Server? Even Better.
       %ul.build-logos
-        %li= link_to image_tag('howtos/hudson.png'), howto_page_path('hudson')
-        %li= link_to image_tag('howtos/integrity.png'), howto_page_path('integrity')
-        %li= link_to image_tag('howtos/cruise_control.png'), howto_page_path('cruise_control')
+        %li= link_to "Hudson", howto_page_path('hudson')
+        %li= link_to "integrity", howto_page_path('integrity')
+        %li= link_to "CC.rb", howto_page_path('cruise_control')
