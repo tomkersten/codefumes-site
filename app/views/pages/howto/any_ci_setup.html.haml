@@ -1,7 +1,7 @@
-%h3 Manually Integrate...
+%h1 Integrate with any build server manually
 %ul
   %li
-    %h5 Quick note
+    %h3 Quick note
     Know that
     = link_to "git", "http://git-scm.org"
     is the only SCM system we have developed tools for at this point. We know this is lame, but there are only so many hours in the day, and we had to pick our battles.  Feel free to fork the
@@ -13,19 +13,18 @@
       to send data to and from the site, which will hopefully make it a little bit easier.
   %li
     %ol
-      %li 
-        %h3 Harvest your repository
-        %p 
+      %li
+        %h2 Harvest your repository
+        %p
           If you have not done this, follow 
           = link_to "these instructions"
-      %li 
-        %h3 Start the build 
+      %li
+        %h2 Start the build 
         %p Supply what you are building and that you have started the build
         %script{ :src => "http://gist.github.com/449362.js" }
 
-      %li 
-        %h3 Finish the build 
+      %li
+        %h2 Finish the build 
         %p Supply what you are building, the time it finished, and the build state.
-        %strong ROY: can we leave the time it was finished out? Everytime time is mentioned in programming, I get turned off.
         %script{ :src => "http://gist.github.com/449377.js" }  
         %p.quiet Valid "states" for a build are "running", "successful", or "failed"
