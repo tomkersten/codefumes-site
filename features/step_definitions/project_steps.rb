@@ -48,9 +48,9 @@ Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of commits with (\d+) items in it$
 end
 
 Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of attributes with (\d+) items in it$/ do |attribute_count|
-  response.should have_tag("ul.attributes")
-  response.should have_tag("ul.attributes") do
-    with_tag("li", :count => attribute_count.to_i)
+  response.should have_tag("div.attributes")
+  response.should have_tag("div.attributes") do
+    with_tag("li.attribute", :count => attribute_count.to_i)
   end
 end
 
