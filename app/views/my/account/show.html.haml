@@ -14,7 +14,7 @@
     %dd= @user.email
     - paying_user_content do
       %dt Current Plan:
-      %dd
+      %dd#current_plan
         %span= @user.current_plan
         = link_to "Edit", edit_my_subscription_path
   
