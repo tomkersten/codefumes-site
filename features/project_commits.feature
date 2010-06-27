@@ -10,6 +10,7 @@ Feature: Viewing Commits
     When Dora goes to the project's short_uri page
     Then she sees a list of commits with 5 items in it
     And she does not see a new project reminder message
+    And she sees build status selected
 
   Scenario: Hiding new project reminder message
     Given a public project has been created

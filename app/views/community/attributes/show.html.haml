@@ -13,7 +13,7 @@
   .attributes
     %ul.inline.selectable
       %li.attribute
-        = link_to "Back to project", short_uri_path(@project)
+        = link_to "Build status", short_uri_path(@project), :id => 'build_status'
       - @project.unique_custom_attributes.each do |attribute|
         %li.attribute
           = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute", :class => ('selected' if attribute == @attribute)

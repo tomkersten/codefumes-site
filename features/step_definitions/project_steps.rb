@@ -47,10 +47,10 @@ Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of commits with (\d+) items in it$
   end
 end
 
-Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of attributes with (\d+) items in it$/ do |attribute_count|
+Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of custom attributes with (\d+) items in it$/ do |attribute_count|
   response.should have_tag("div.attributes")
   response.should have_tag("div.attributes") do
-    with_tag("li.attribute", :count => attribute_count.to_i)
+    with_tag("li.custom_attribute", :count => attribute_count.to_i)
   end
 end
 
@@ -88,5 +88,9 @@ end
 
 Then /^s?he sees a link about custom attributes$/ do
   response.should have_tag('a.intro_to_attributes')
+end
+
+Then /^s?he sees build status selected$/ do
+  response.should have_tag('a#build_status.selected')
 end
 

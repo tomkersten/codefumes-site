@@ -8,7 +8,7 @@ Feature: Viewing Attributes
     Given the "twitter_tagger" project has been created
     Given the project has 2 unique custom attributes
     When Dora goes to the project's short_uri page
-    Then she sees a list of attributes with 2 items in it
+    Then she sees a list of custom attributes with 2 items in it
 
   Scenario: Viewing a specific attribute
     Given the "twitter_tagger" project has been created

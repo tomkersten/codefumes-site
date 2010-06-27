@@ -13,10 +13,12 @@
         = link_to 'admin', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project right'
 .content
   .attributes
-    %ul.inline.selectable
+    %ul.inline.selectable    
+      %li.attribute
+        = link_to "Build status", short_uri_path(@project), :id => 'build_status', :class => 'selected'
       - unless @project.unique_custom_attributes.empty?
         - @project.unique_custom_attributes.each do |attribute|
-          %li.attribute
+          %li.attribute.custom_attribute
             = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
       - else
         %li.attribute
