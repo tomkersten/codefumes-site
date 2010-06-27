@@ -54,7 +54,7 @@ Then /^(?:he|she|Sam|Dora|Oscar) sees? a list of attributes with (\d+) items in 
   end
 end
 
-Then /^he should see a list of his claimed projects$/ do
+Then /^s?he should see a list of his claimed projects$/ do
   response.should have_tag("ul.projects")
 end
 
@@ -66,19 +66,19 @@ Then /^s?he does not see the private key of the project$/ do
   response.should_not have_tag("#private_key")
 end
 
-Then /^he should not see the "new_subscription" link$/ do
+Then /^s?he should not see the "new_subscription" link$/ do
   response.should_not have_tag("a#new_subscription")
 end
 
-Then /^he should see the "new_subscription" link$/ do
+Then /^s?he should see the "new_subscription" link$/ do
   response.should have_tag("a#new_subscription")
 end
 
-Then /^he should see a private project message$/ do
+Then /^s?he should see a private project message$/ do
   response.should have_tag(".access_denied")
 end
 
-Then /^she sees temperature_attribute name selected$/ do
+Then /^s?he sees temperature_attribute name selected$/ do
   response.should have_tag('#temperature_attribute.selected')
 end
 
@@ -86,7 +86,7 @@ Then /^chairs_attribute should not be selected$/ do
   response.should have_tag('#chairs_attribute')
 end
 
-Then /^she sees a link about custom attributes$/ do
+Then /^s?he sees a link about custom attributes$/ do
   response.should have_tag('a.intro_to_attributes')
 end
 

@@ -4,7 +4,6 @@ Sham.define do
   email       {Faker::Internet.email}
   user_name   {Faker::Internet.user_name}
   name        {Faker::Name.name}
-  public_key  {Digest::SHA1.hexdigest(Time.now.to_s + Kernel.rand(1000).to_s)[0..5]}
   private_key {Project.generate_private_key}
 end
 
@@ -36,7 +35,6 @@ end
 
 Project.blueprint do
   name        {Faker::Lorem.words(2).join(' ')}
-  public_key
   private_key
   visibility   Project::PUBLIC
 end
@@ -46,23 +44,26 @@ end
 
 Project.blueprint(:private) do
   name        {Faker::Lorem.words(2).join(' ')}
-  public_key
   private_key
   visibility  Project::PRIVATE
 end
 
 Project.blueprint(:twitter_tagger) do
   name        "twitter_tagger"
-  public_key  "twitter_tagger"
   visibility  Project::PUBLIC
   owner       {User.find_by_login("dora.developer") || User.make(:dora)}
 end
 
 Project.blueprint(:prideo) do
   name        "prideo"
-  public_key  "prideo"
   visibility  Project::PRIVATE
   owner       {User.find_by_login("dora.developer") || User.make(:dora)}
+end
+
+Project.blueprint(:open_source) do
+  name        "open_source"
+  visibility  Project::PUBLIC
+  owner       {User.find_by_login("oscar.opensource") || User.make(:oscar)}
 end
 
 Commit.blueprint do
