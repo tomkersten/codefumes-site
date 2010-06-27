@@ -85,14 +85,14 @@ dl {
   background-image: -moz-linear-gradient(100% 100% 90deg, @foreground, @background);
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@foreground), to(@background));
 }
-.header_gradient(@foreground: #CCC, @background: #AAA) {
-  .gradient(@foreground, @background);
+.header_gradient() {
+  .gradient(#CCC, #AAA);
 }
-.selectable_gradient(@foreground: #5377BA, @background: #3f5989) {
-  .gradient(@foreground, @background);
+.selectable_gradient() {
+  .gradient(#5377BA, #3f5989);
 }
-.selected_selectable_gradient(@foreground: #9569b1, @background: #c393e1) {
-  .gradient(@foreground, @background);
+.selected_selectable_gradient() {
+  .gradient(#9569b1, #c393e1);
 }
 
 
