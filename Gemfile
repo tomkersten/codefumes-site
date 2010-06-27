@@ -16,6 +16,7 @@ group :development do
 end
 
 group :test do
+  gem 'autotest-rails', '4.1.0'
   gem 'builder', '2.1.2'
   gem 'caleb-chronic', '0.3.0', :require => 'chronic'
   gem 'codefumes_harvester', '0.1.8'
