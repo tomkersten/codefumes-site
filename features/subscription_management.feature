@@ -9,6 +9,7 @@ Feature: Subscription Management
 
   # Oscar decides to set up a subscription for an internal project
   Scenario: Setting up a new subscription with an existing account
+    Given the "open_source" project has been created
     When Oscar goes to his list of projects
     Then he should see the "new_subscription" link
     When he follows "new_subscription"
