@@ -28,7 +28,7 @@
               %h1.title
                 = link_to project, short_uri_path(:public_key => project)
             .column.align_right
-              %h5= "(#{project.visibility})"
+              %h5.visibility= "(#{project.visibility})"
 
   - non_paying_user_content do
     = link_to "Track your private projects too", new_my_subscription_path, :id => 'new_subscription'

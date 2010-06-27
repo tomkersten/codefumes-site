@@ -6,17 +6,31 @@
   %div.columns.two_columns
     .column
       %h2
-        %span.highlight Build Colors
+        %span.highlight Build Colors / Duration
     .column
-      %h1.successful 
+      %h1.build_duration.successful 
         .highlight
           This is a successful build
-      %h2.running 
+      %h2.build_duration.running 
         .highlight
           This is a running build
-      %h3.failed 
+      %h3.build_duration.failed 
         .highlight
           This is a failed build
+  %div.columns.two_columns
+    .column
+      %h2
+        %span.highlight Project List
+    .column
+      %ul.projects
+        %li.project.nobuilds
+          Great Project
+        %li.project.successful
+          Great Project
+        %li.project.failed
+          Great Project
+        %li.project.running
+          Great Project
   .columns.two_columns
     .column
       %h2
