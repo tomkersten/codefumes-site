@@ -6,54 +6,58 @@ dependencies:
     version: = 1.0.4
     require: 
     - term/ansicolor
-  faker: 
+  ruby-debug: 
     group: 
     - :test
-    version: = 0.3.1
+    version: = 0.10.3
   compass: 
     group: 
     - :default
     version: = 0.8.17
+  faker: 
+    group: 
+    - :test
+    version: = 0.3.1
   ZenTest: 
     group: 
     - :test
     version: = 4.1.3
     require: 
     - zentest
-  vlad-git: 
-    group: 
-    - :development
-    version: ">= 0"
   rails: 
     group: 
     - :default
     version: = 2.3.8
+  vlad-git: 
+    group: 
+    - :development
+    version: ">= 0"
+  polyglot: 
+    group: 
+    - :test
+    version: = 0.3.1
+  mysql: 
+    group: 
+    - :default
+    version: = 2.8.1
+  haml: 
+    group: 
+    - :default
+    version: = 2.2.20
+  authlogic: 
+    group: 
+    - :default
+    version: = 2.1.2
+  codefumes_harvester: 
+    group: 
+    - :test
+    version: = 0.1.8
   diff-lcs: 
     group: 
     - :test
     version: = 1.1.2
     require: 
     - diff/lcs
-  codefumes_harvester: 
-    group: 
-    - :test
-    version: = 0.1.8
-  authlogic: 
-    group: 
-    - :default
-    version: = 2.1.2
-  haml: 
-    group: 
-    - :default
-    version: = 2.2.20
-  mysql: 
-    group: 
-    - :default
-    version: = 2.8.1
-  polyglot: 
-    group: 
-    - :test
-    version: = 0.3.1
   sqlite3-ruby: 
     group: 
     - :test
@@ -66,52 +70,52 @@ dependencies:
     group: 
     - :test
     version: = 1.2.5
-  jazz_money: 
-    group: 
-    - :test
-    version: = 0.0.3
   rspec: 
     group: 
     - :test
     version: = 1.3.0
-  rspec-rails: 
+  jazz_money: 
     group: 
     - :test
-    version: = 1.3.2
-  formtastic: 
-    group: 
-    - :default
-    version: = 0.9.8
-  vlad: 
-    group: 
-    - :development
-    version: ">= 0"
+    version: = 0.0.3
   database_cleaner: 
     group: 
     - :test
     version: = 0.5.2
-  rcov: 
+  vlad: 
     group: 
-    - :test
+    - :development
+    version: ">= 0"
+  formtastic: 
+    group: 
+    - :default
     version: = 0.9.8
-  jasmine: 
+  rspec-rails: 
     group: 
     - :test
-    version: = 0.10.4.0
-  cucumber-rails: 
+    version: = 1.3.2
+  gherkin: 
     group: 
     - :test
-    version: = 0.3.1
+    version: = 1.0.30
   caleb-chronic: 
     group: 
     - :test
     version: = 0.3.0
     require: 
     - chronic
-  gherkin: 
+  cucumber-rails: 
     group: 
     - :test
-    version: = 1.0.30
+    version: = 0.3.1
+  jasmine: 
+    group: 
+    - :test
+    version: = 0.10.4.0
+  rcov: 
+    group: 
+    - :test
+    version: = 0.9.8
   ruby_parser: 
     group: 
     - :test
@@ -124,26 +128,26 @@ dependencies:
     group: 
     - :test
     version: = 1.16.2
-  hoptoad_notifier: 
-    group: 
-    - :default
-    version: = 2.2.6
-  aasm: 
-    group: 
-    - :default
-    version: = 2.1.5
-  cucumber: 
-    group: 
-    - :test
-    version: = 0.7.3
-  email_spec: 
-    group: 
-    - :test
-    version: = 0.6.2
   metric_fu: 
     group: 
     - :test
     version: = 1.3.0
+  email_spec: 
+    group: 
+    - :test
+    version: = 0.6.2
+  cucumber: 
+    group: 
+    - :test
+    version: = 0.7.3
+  aasm: 
+    group: 
+    - :default
+    version: = 2.1.5
+  hoptoad_notifier: 
+    group: 
+    - :default
+    version: = 2.2.6
   sexp_processor: 
     group: 
     - :test
@@ -152,22 +156,22 @@ dependencies:
     group: 
     - :test
     version: = 2.1.2
-  nokogiri: 
-    group: 
-    - :test
-    version: = 1.4.1
-  flog: 
-    group: 
-    - :test
-    version: = 2.2.0
-  autotest-rails: 
-    group: 
-    - :test
-    version: = 4.1.0
   flay: 
     group: 
     - :test
     version: = 1.3.0
+  autotest-rails: 
+    group: 
+    - :test
+    version: = 4.1.0
+  flog: 
+    group: 
+    - :test
+    version: = 2.2.0
+  nokogiri: 
+    group: 
+    - :test
+    version: = 1.4.1
 specs: 
 - rake: 
     version: 0.8.7
@@ -233,6 +237,8 @@ specs:
     version: 2.0.0
 - codefumes_harvester: 
     version: 0.1.8
+- columnize: 
+    version: 0.3.1
 - haml: 
     version: 2.2.20
 - compass: 
@@ -279,6 +285,8 @@ specs:
     version: 0.10.4.0
 - jazz_money: 
     version: 0.0.3
+- linecache: 
+    version: "0.43"
 - machinist: 
     version: 1.0.6
 - rcov: 
@@ -299,6 +307,10 @@ specs:
     version: 2.3.8
 - rspec-rails: 
     version: 1.3.2
+- ruby-debug-base: 
+    version: 0.10.3
+- ruby-debug: 
+    version: 0.10.3
 - sqlite3-ruby: 
     version: 1.2.5
 - treetop: 
@@ -309,7 +321,7 @@ specs:
     version: 2.1.0
 - webrat: 
     version: 0.7.0
-hash: 1bfb775d48930f612a94bf31c7654139622d1060
+hash: 052aeda1488c6d8d166064d16dad2a125bd6fee9
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

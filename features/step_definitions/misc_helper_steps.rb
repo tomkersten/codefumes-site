@@ -23,3 +23,7 @@ end
 Given /^the rest is undecided functionality$/ do
   pending "Then the remaining steps are skipped."
 end
+
+Given /^this scenario is disabled due to a bug with Rails 2.3.8 and Webrat 0.7.0/ do
+  pending if Rails.version == "2.3.8" && Webrat::VERSION == "0.7.0"
+end

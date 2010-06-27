@@ -38,6 +38,7 @@ group :test do
   gem 'rcov', '0.9.8'
   gem 'rspec', '1.3.0'
   gem 'rspec-rails', '1.3.2'
+  gem 'ruby-debug', '0.10.3'
   gem 'ruby_parser', '2.0.4'
   gem 'sexp_processor', '3.0.3'
   gem 'sqlite3-ruby', '1.2.5'
