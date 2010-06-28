@@ -30,7 +30,7 @@
       - css_classes = commit_classes_for(commit)
       - css_classes += " head" if commit == @project.commit_head
       %li.commit{:class => css_classes}
-        .header
+        .header.division
           .columns.two_columns
             .column
               - if commit.message.blank?
