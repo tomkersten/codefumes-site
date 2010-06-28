@@ -61,11 +61,6 @@ describe TextHelper do
       commit = mock_model(Commit, method_responses.merge(:merge? => false))
       helper.commit_classes_for(commit).should_not have_text(/merge/)
     end
-
-    it "includes the build status of the commit" do
-      commit = mock_model(Commit, method_responses.merge(:merge? => false))
-      helper.commit_classes_for(commit).should have_text(/#{helper.build_status_class_for(commit)}/)
-    end
   end
 
   # This is messy as shit, but not sure how else to do it w/ a helper method

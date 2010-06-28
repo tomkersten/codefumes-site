@@ -1,11 +1,11 @@
 .header
   - if !@project.viewable_by?(current_user)
     .access_denied
-      %h1.title= "'#{params[:public_key]}' is a private project"
+      %h1= "'#{params[:public_key]}' is a private project"
   - else
     - unless @project.visibility_acknowledged?
       = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
-    %h1.title
+    %h1
       = "#{@project} / #{@attribute}"
       - priveleged_user_or_owner_content(@project) do
         = link_to 'admin', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project right'

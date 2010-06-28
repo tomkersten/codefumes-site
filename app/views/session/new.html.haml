@@ -1,5 +1,5 @@
 .header
-  %h1.title Sign in
+  %h1 Sign in
 .content
   - semantic_form_for @user_session, :url => session_path, :method => :post, :html => {:id => :login_form, :class => 'float-right'} do |f|
     = f.inputs :login, :password

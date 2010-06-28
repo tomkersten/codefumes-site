@@ -1,5 +1,5 @@
 .header
-  %h1.title CodeFumes Style Guide
+  %h1 CodeFumes Style Guide
 .content
   %p
     Please include any standard containers with examples of mark-up escaped so you don't have to view the source to replicate.
@@ -8,28 +8,22 @@
       %h2
         %span.highlight Build Colors / Duration
     .column
-      %h1.build_duration.successful 
-        .highlight
-          This is a successful build
-      %h2.build_duration.running 
-        .highlight
-          This is a running build
-      %h3.build_duration.failed 
-        .highlight
-          This is a failed build
+      %h1.build_duration.successful This is a successful build
+      %h2.build_duration.running This is a running build
+      %h3.build_duration.failed This is a failed build
   %div.columns.two_columns
     .column
       %h2
         %span.highlight Project List
     .column
       %ul.projects
-        %li.project.nobuilds
+        %li.nobuilds
           Great Project
-        %li.project.successful
+        %li.successful
           Great Project
-        %li.project.failed
+        %li.failed
           Great Project
-        %li.project.running
+        %li.running
           Great Project
   .columns.two_columns
     .column
@@ -46,12 +40,12 @@
         %dd Value
       %h3.heading Playload DL
       %dl.payload.clearfix
-        %dt.key key
-        %dd.value Value
-        %dt.key key
-        %dd.value Value
-        %dt.key key
-        %dd.value Value
+        %dt key
+        %dd Value
+        %dt key
+        %dd Value
+        %dt key
+        %dd Value
         
   .columns.two_columns
     .column
@@ -125,4 +119,18 @@
     .column
       %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ornare neque eu libero sollicitudin eu laoreet felis dignissim. Pellentesque rutrum nulla eget erat facilisis ultrices. Suspendisse vehicula lobortis semper. Proin viverra varius turpis at mollis. Vestibulum mattis orci ante, vitae scelerisque lorem. Proin id eros augue. Quisque aliquam ligula sit amet enim luctus volutpat. Pellentesque in lacus dui. 
       %p Pellentesque malesuada augue at diam vestibulum dictum. Fusce condimentum porttitor tortor eget aliquam. Phasellus aliquet condimentum blandit. Nam lobortis enim eget ligula auctor volutpat. Phasellus a tortor augue. Morbi quam ligula, convallis a consequat id, commodo sit amet ligula. In auctor elementum faucibus. Praesent malesuada aliquet lorem sit amet lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam id enim metus. Quisque tempor accumsan bibendum. Donec varius, magna in egestas lobortis, nisi leo porta elit, tincidunt molestie nibh dolor at magna.
-      %p.quiet Pellentesque malesuada augue at diam vestibulum dictum. Fusce condimentum porttitor tortor eget aliquam. Phasellus aliquet condimentum blandit. Nam lobortis enim eget ligula auctor volutpat. Phasellus a tortor augue. Morbi quam ligula, convallis a consequat id, commodo sit amet ligula. In auctor elementum faucibus. Praesent malesuada aliquet lorem sit amet lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam id enim metus. Quisque tempor accumsan bibendum. Donec varius, magna in egestas lobortis, nisi leo porta elit, tincidunt molestie nibh dolor at magna.
+  .columns.two_columns  
+    .column
+      %h2
+        %span.highlight Randoms
+    .column
+      .columns.two_column
+        .column
+          %p.left to the left
+        .column
+          %p.right to the right
+      %p.shadow shadow right here!
+      %p.align_right align right please
+      %p.align_left align left please
+      %p.division division right here!
+      %p.quiet hangover

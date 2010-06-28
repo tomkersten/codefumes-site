@@ -4,7 +4,7 @@ module TextHelper
 
     minutes, seconds = commit.average_build_duration.divmod(60.0)
 
-    haml_tag :span, :class => "duration, highlight" do
+    haml_tag :span, :class => "duration" do
       haml_concat "#{minutes}min #{seconds.round}secs"
     end
   end
@@ -20,6 +20,6 @@ module TextHelper
   end
 
   def commit_classes_for(commit)
-    [commit.merge? ? "merge" : nil, build_status_class_for(commit)].join(" ")
+    commit.merge? ? "merge" : ''
   end
 end

@@ -1,6 +1,6 @@
 - if @projects.empty?
   .header
-    %h1.title You haven't claimed any projects yet? (THIS IS OUTDATED)
+    %h1 You haven't claimed any projects yet? (THIS IS OUTDATED)
   .content
     %ul
       %li
@@ -25,10 +25,10 @@
         %li.project{:class => [project.visibility, build_status_class_for(project)].join(" ")}
           .columns.two_columns
             .column
-              %h1.title
+              %h3
                 = link_to project, short_uri_path(:public_key => project)
             .column.align_right
-              %h5.visibility= "(#{project.visibility})"
+              %h5= "(#{project.visibility})"
 
   - non_paying_user_content do
     = link_to "Track your private projects too", new_my_subscription_path, :id => 'new_subscription'
