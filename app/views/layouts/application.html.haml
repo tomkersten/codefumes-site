@@ -3,7 +3,7 @@
 !!! Strict
 %html
   %head
-    %link{ :href => '/stylesheets/codefumes.css', :media => 'screen', :rel => 'stylesheet/less', :type => 'text/css'}
+    %link{ :href => '/stylesheets/codefumes.less', :media => 'screen', :rel => 'stylesheet/less', :type => 'text/css'}
     = yield :head
   %body{:id => 'www-codefumes-com', :class => yield(:page_layout_class)}
     .page
@@ -27,6 +27,4 @@
             = sidebar_content
       .footer
         = link_to "codefumes.com", root_path
-    = javascript_include_tag :frameworks
-    = javascript_include_tag :visualizations
-    = javascript_include_tag :interface
+    = javascript_include_tag :frameworks, :visualizations, :interface
