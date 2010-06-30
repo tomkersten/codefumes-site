@@ -1,22 +1,24 @@
-%h3 Integrating with Integrity
-%p
-  If you have vX.X or newer installed, you can use the CodeFumes plugin included in the
-  %code CodeFumesHarvester
-  gem
-%ol
-  %li
-    Add the following line to your Integrity installation's
-    %code Gemfile
-    \:
-    %script{ :src => "http://gist.github.com/449388.js" }
-  %li
-    Add the following line to the
-    %code init.rb
-    file in your Integrity installtion's root directory.
-    %script{ :src => "http://gist.github.com/449390.js" }
-  %li Cycle your build server to pick up the new gem requirement.
-  %li
-    Edit the project on your build server, and add a name, public key, and private key to the CodeFumes form (be sure to amake sure the check box is checked as well so the plugin is enabled)
-    %p.howto-image= image_tag('howtos/integrity_plugin.png')
-  %li Save the project updates.
-  %li Done!
+.header
+  %h1 Integrating with Integrity
+.content
+  %p
+    If you have vX.X or newer installed, you can use the CodeFumes plugin included in the
+    %code CodeFumesHarvester
+    gem
+  %ol
+    %li
+      Add the following line to your Integrity installation's
+      %code Gemfile
+      \:
+      %script{ :src => "http://gist.github.com/449388.js" }
+    %li
+      Add the following line to the
+      %code init.rb
+      file in your Integrity installtion's root directory.
+      %script{ :src => "http://gist.github.com/449390.js" }
+    %li Cycle your build server to pick up the new gem requirement.
+    %li
+      Edit the project on your build server, and add a name, public key, and private key to the CodeFumes form (be sure to amake sure the check box is checked as well so the plugin is enabled)
+      %p.howto-image= image_tag('howtos/integrity_plugin.png')
+    %li Save the project updates.
+    %li Done!
