@@ -19,6 +19,9 @@
 .selected_selectable_gradient() {
   .gradient(#9569b1, #c393e1);
 }
+.huge_button_gradient() {
+  .gradient(#EEE, #CCC);
+}
 
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; } 
 .clearfix { display: inline-block; } html[xmlns] .clearfix { display: block; }* html .clearfix { height: 1%; }
@@ -227,8 +230,11 @@ ul {
     .header_gradient();
   }
   .content {
-    background:#EEE;
+    background:#FFF;
     padding:10px;
+  }
+  .project_content {
+    background:#EEE;
   }
   .footer {
     background:#FFF;
@@ -309,6 +315,22 @@ ul {
 }
 
 
+/* Buttons
+========================================== */
+.huge_button {
+  border:1px solid #CCC;
+  display:block;
+  font-size:30px;
+  margin-bottom:20px;  
+  padding:18px 20px;
+  .border_radius(10px);
+  .huge_button_gradient();
+}
+.huge_button:hover {
+  .border_radius(10px);
+}
+
+
 /* Randoms
 ========================================== */
 .highlight {
@@ -322,6 +344,7 @@ ul {
 .quiet { color:#AAA; }
 .align_right { text-align:right; }
 .align_left { text-align:left; }
+.align_center { text-align:center; }
 .shadow { text-shadow: 1px 2px 2px #AAA; }
 .division { border-bottom:1px solid #CCC; }
 

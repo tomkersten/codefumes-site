@@ -1,27 +1,29 @@
 - content_for(:page_layout_class) do
   howto
-.main
+.header
   %h1 Integrate your build server with CodeFumes
-  %h2 Why?
-  %ol.reasons
-    %li
-      = image_tag('howtos/spot_reasons.png')
-      %h4 Identify trends in broken builds.
-    %li
-      = image_tag('howtos/unified_dashboard.png')
-      %h4 Unify your CI dashboards.
-    %li
-      = image_tag('howtos/api_access.png')
-      %h4
-        Unleash your creativity via the API.
+.content
+  .box.no_borders
+    .columns.three_columns.division.align_center
+      .column
+        = image_tag('howtos/spot_reasons.png')
+        %h4.quiet Identify trends in broken builds.
+      .column
+        = image_tag('howtos/unified_dashboard.png')
+        %h4.quiet Unify your CI dashboards.
+      .column
+        = image_tag('howtos/api_access.png')
+        %h4.quiet Unleash your creativity via the API.
   %div.columns.two_columns
     %div.column
-      %h2 No build server? No problem.
-      %script{ :src => "http://gist.github.com/453704.js" }
-      = link_to "More...", howto_page_path('any_ci_setup')
+      .box.no_borders
+        %h2 No build server? No problem.
+        %script{ :src => "http://gist.github.com/453704.js" }
+        = link_to "More...", howto_page_path('any_ci_setup')
     %div.column
-      %h2 Have a build Server? Even Better.
-      %ul.build-logos
-        %li= link_to "Hudson", howto_page_path('hudson')
-        %li= link_to "integrity", howto_page_path('integrity')
-        %li= link_to "CC.rb", howto_page_path('cruise_control')
+      .box.no_borders
+        %h2 Have a build Server? Even Better.
+        %ul.build-logos
+          %li= link_to "Hudson", howto_page_path('hudson'), :class => 'huge_button'
+          %li= link_to "integrity", howto_page_path('integrity'), :class => 'huge_button'
+          %li= link_to "CC.rb", howto_page_path('cruise_control'), :class => 'huge_button'
