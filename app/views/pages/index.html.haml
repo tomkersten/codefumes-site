@@ -1,25 +1,30 @@
 - if RAILS_ENV != "production"
   .header
-    %h1 What can your commits <em>show</em> you?
   .content
     .columns.two_columns
       .column
-        todo
+        .box.no_borders
+          %h2.loud 
+            Your repository is 
+            %em trying to tell
+            you something. You should 
+            %em listen.
       .column
-        %div.instructions
-          %h2 Find out for free:
-          %ul
-            %li
-              %h4.shadow Step 1. Install codefumes_harvester:
-              %p
-                sudo gem install codefumes_harvester
-            %li
-              %h4.shadow Step 2. Run this on your repository:
-              %p
-                = "cf_harvest_repo_metrics"
-            %li
-              %h4.shadow Step 3. Review:
-              %p Visit the URL returned from command
+        .box.no_borders
+          %div.instructions
+            %h2 Find out for free:
+            %ul
+              %li
+                %h4.shadow Step 1. Install codefumes_harvester:
+                %p
+                  sudo gem install codefumes_harvester
+              %li
+                %h4.shadow Step 2. Run this on your repository:
+                %p
+                  = "cf_harvest_repo_metrics"
+              %li
+                %h4.shadow Step 3. Review:
+                %p Visit the URL returned from command
 - else
   .header
     %h1 Get notified when we launch.
