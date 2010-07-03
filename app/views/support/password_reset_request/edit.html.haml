@@ -1,6 +1,6 @@
-.main
+.header
   %h1 Change My Password
-
+.content
   - form_for @user, :url => support_password_reset_request_path(:id => params[:id]), :method => :put do |f|
     - if f.error_messages
       .error

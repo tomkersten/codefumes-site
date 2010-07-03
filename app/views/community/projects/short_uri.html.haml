@@ -11,7 +11,7 @@
       = @project
       - priveleged_user_or_owner_content(@project) do
         = link_to 'admin', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project right'
-.content
+.content.project_content
   .attributes
     %ul.inline.selectable    
       %li.attribute
