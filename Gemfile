@@ -7,7 +7,7 @@ gem 'compass', '0.8.17'
 gem 'formtastic', '0.9.8'
 gem 'haml', '2.2.20'
 gem 'hoptoad_notifier', '2.2.6'
-gem 'mysql', '2.8.1'
+gem 'ruby-mysql', '2.9.3', :require => 'mysql'
 gem 'rails', '2.3.8'
 
 group :development do
@@ -45,6 +45,6 @@ group :test do
   gem 'term-ansicolor', '1.0.4', :require => 'term/ansicolor'
   gem 'treetop', '1.2.5'
   gem 'trollop', '1.16.2'
-  gem 'webrat', '0.7.0'  
+  gem 'webrat', '0.7.0'
   gem 'ZenTest', '4.1.3', :require => 'zentest'
 end
