@@ -4,7 +4,7 @@
   - if !@project.viewable_by?(current_user)
     .access_denied
       %h1= "'#{params[:public_key]}' is a private project"
-  - else     
+  - else
     - unless @project.visibility_acknowledged?
       = render :partial => 'community/projects/new_project_reminder', :locals => {:project => @project}
     %h1
@@ -12,25 +12,6 @@
       - priveleged_user_or_owner_content(@project) do
         = link_to 'admin', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project right'
 .content.project_content
-  .attributes
-    %ul.inline.selectable    
-      %li.attribute
-        = link_to "Build status", short_uri_path(@project), :id => 'build_status', :class => 'selected'
-      - unless @project.unique_custom_attributes.empty?
-        - @project.unique_custom_attributes.each do |attribute|
-          %li.attribute.custom_attribute
-            = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
-      - else
-        %li.attribute
-          = link_to "Codefumes is all about tracking attributes. You should try it!", {}, :class => 'intro_to_attributes'
-  .visualization
-    %h3.shadow Build Status (Over Time)
-    .canvas
-      - if @project.covered_by_plan?
-        #canvas.js_build_status
-      - else
-        #upgrade_required
-          %h3 Visuals would be here. Please upgrade your account.
   %ul.commits
     - @project.recent_commits.each do |commit|
       - css_classes = commit_classes_for(commit)
@@ -52,7 +33,7 @@
         .content
           .columns.two_columns
             .column
-              %h5.title Standard Data
+              %h5.title Commit Details
               %dl.payload
                 %dt Identifier:
                 %dd= commit.identifier
