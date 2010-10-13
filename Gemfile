@@ -16,6 +16,9 @@ group :development do
 end
 
 group :test do
+  # Must be before machinist...
+  gem 'ZenTest', '4.1.3', :require => 'zentest'
+
   gem 'autotest-rails', '4.1.0'
   gem 'builder', '2.1.2'
   gem 'caleb-chronic', '0.3.0', :require => 'chronic'
@@ -46,5 +49,4 @@ group :test do
   gem 'treetop', '1.2.5'
   gem 'trollop', '1.16.2'
   gem 'webrat', '0.7.0'
-  gem 'ZenTest', '4.1.3', :require => 'zentest'
 end
