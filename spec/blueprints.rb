@@ -129,4 +129,4 @@ end
 
 Build.blueprint(:failed) {state "failed"}
 Build.blueprint(:successful) {state "successful"}
-Build.blueprint(:running) {}
+Build.blueprint(:running) {ended_at nil}
