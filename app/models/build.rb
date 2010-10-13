@@ -22,4 +22,5 @@ class Build < ActiveRecord::Base
       Time.now - started_at
     end
   end
+  alias_method :average_build_duration, :duration
 end

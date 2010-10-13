@@ -88,10 +88,14 @@ class Commit < ActiveRecord::Base
 
   def average_build_duration
     return 0 if builds.count == 0
-    builds.map(&:duration).sum / builds.count
+    build_duration / builds.count
   end
 
   private
+    def build_duration
+      builds.map(&:duration).sum
+    end
+
     def self.standard_attribute?(some_key)
       some_key.to_s == 'parent_identifiers' || column_names.include?(some_key.to_s)
     end

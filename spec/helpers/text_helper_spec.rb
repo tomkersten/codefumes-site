@@ -47,6 +47,18 @@ describe TextHelper do
         helper.build_status_class_for(project).should == nil
       end
     end
+
+    context "when passed in a Build" do
+      it "returns '#{Build::SUCCESSFUL}' if the build passed in is in a '#{Build::SUCCESSFUL}' state" do
+        build = mock_model(Build, :state => Build::SUCCESSFUL)
+        helper.build_status_class_for(build).should == Build::SUCCESSFUL
+      end
+
+      it "returns '#{Build::FAILED}' if the build passed in is in a '#{Build::FAILED}' state" do
+        build = mock_model(Build, :state => Build::FAILED)
+        helper.build_status_class_for(build).should == Build::FAILED
+      end
+    end
   end
 
   describe "#commit_classes_for" do
@@ -61,22 +73,40 @@ describe TextHelper do
       commit = mock_model(Commit, method_responses.merge(:merge? => false))
       helper.commit_classes_for(commit).should_not have_text(/merge/)
     end
+
+    it "returns an empty string if nil is passed in" do
+      helper.commit_classes_for(nil).should == ''
+    end
   end
 
   # This is messy as shit, but not sure how else to do it w/ a helper method
   # which uses haml_tag &/or haml_concat
   # Found here: http://bit.ly/c5YGm4
-  describe '#avg_build_duration_text_for' do
+  describe '#build_duration_text_for' do
     before(:each) do
       helper.extend Haml
       helper.extend Haml::Helpers
       helper.send :init_haml_helpers
     end
 
+    it "returns the average time of all builds when passed in a commit" do
+      commit = mock_model(Commit, {:average_build_duration => 93})
+      helper.capture_haml {
+        helper.build_duration_text_for(commit)
+      }.should match(/1min\s33secs/)
+    end
+
+    it "returns the build time of the build when passed in a build" do
+      build = Build.make_unsaved(:failed)
+      helper.capture_haml {
+        helper.build_duration_text_for(build)
+      }.should match(/\dmin\s\d+secs/)
+    end
+
     it "wraps the output in a span with a class of 'duration'" do
       commit = mock_model(Commit, {:average_build_duration => 93})
       helper.capture_haml {
-        helper.avg_build_duration_text_for(commit)
+        helper.build_duration_text_for(commit)
       }.should match(/<span.*class='.*duration.*'/)
     end
 
@@ -84,7 +114,7 @@ describe TextHelper do
       it "returns the average build duration split into 'Xm XXsecs' format" do
         commit = mock_model(Commit, {:average_build_duration => 93})
         helper.capture_haml {
-          helper.avg_build_duration_text_for(commit)
+          helper.build_duration_text_for(commit)
         }.should match(/1min\s33secs/)
       end
     end
@@ -94,7 +124,7 @@ describe TextHelper do
         pending "I wasn't scrazy about how this affected the view...need to think about it"
         commit = mock_model(Commit, {:average_build_duration => 0})
         helper.capture_haml {
-          helper.avg_build_duration_text_for(commit)
+          helper.build_duration_text_for(commit)
         }.should match(/using ci/)
       end
     end

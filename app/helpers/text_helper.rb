@@ -1,13 +1,15 @@
 module TextHelper
-  def avg_build_duration_text_for(commit)
-    return if commit.average_build_duration == 0
+  def build_duration_text_for(buildable)
+    return if buildable.average_build_duration == 0
 
-    minutes, seconds = commit.average_build_duration.divmod(60.0)
+    minutes, seconds = buildable.average_build_duration.divmod(60.0)
 
     haml_tag :span, :class => "duration" do
       haml_concat "#{minutes}min #{seconds.round}secs"
     end
   end
+
+
 
   # ASSUMPTION: expected output is either 'public' or 'private'
   # NOTE: object specified must have #public? implemented
@@ -16,10 +18,10 @@ module TextHelper
   end
 
   def build_status_class_for(some_entity)
-    some_entity.build_status
+    some_entity.is_a?(Build) ? some_entity.state : some_entity.build_status
   end
 
   def commit_classes_for(commit)
-    commit.merge? ? "merge" : ''
+    commit && commit.merge? ? "merge" : ''
   end
 end
