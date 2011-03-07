@@ -43,10 +43,26 @@ h2. Anything to note in the codebase?
 # PayloadProcessor has a single method that seems like it should be cleaner
 # The API controllers could probably be migrated to use one of the many "restful controller" frameworks without breaking the gem. When I started out on the project I wanted to dig into doing "REST right" because I didn't like how many of the frameworks always returned the same status code for failures, didn't use linked data, etc. What am I doing as it stands in the codebase? Always returning the same status code. The irony...
 # The db doesn't have any indexes, which will slow things down w/ the way the commit relationships are set up...I wanted to see how bad it would get...and then see the impace of adding the indexes. I never got to a "ridiculously painful" dataset. ;-)
+# I was playing around with using personas in the cucumber features at the time. I don't know what I think of it at this point...but..that's why they may look a little odd.
 
 h2. Where do I want to see it go?
 
 If people are interested in moving the project forward, I wouldn't mind picking it back up again. I still think the idea is interesting and could be pretty cool. However, I don't know if I have the steam to make a go of it alone. The official site is still up & should function with the current release of the 'codefumes' gem. I would love to discuss ideas on moving it forward. If you are interested, ping me "@tomkersten":http://twitter.com/tomkersten.
+
+h2. Working with the code
+
+# Fork the repo
+# `bundle install`
+# rake features
+# rake spec
+# ...hack...
+# ...rebase from HEAD
+# rake spec
+# rake features
+# git push
+# ...send pull request
+
+;-)
 
 h2. Credits
 
