@@ -8,7 +8,8 @@ class Community::ProjectsController < ApplicationController
   end
 
   def short_uri
-    @project = Project.find_by_public_key(params[:public_key])
+    @project = Project[params[:public_key]]
+    @commit = @project && @project.commit_head
 
     redirect_to(invalid_project_path)  && return if @project.nil?
   end

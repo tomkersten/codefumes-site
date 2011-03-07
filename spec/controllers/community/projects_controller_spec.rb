@@ -29,6 +29,12 @@ describe Community::ProjectsController do
         get :short_uri, :public_key => project.to_param
         assigns[:project].should == project
       end
+
+      it "assigns the project's head commit for the view template" do
+        commit = Commit.make(:project => project)
+        get :short_uri, :public_key => project.to_param
+        assigns[:commit].should == commit
+      end
     end
   end
 

@@ -13,35 +13,77 @@
         = link_to 'admin', edit_my_project_path(@project), :title => "Edit Project", :class => 'edit-project right'
 
 .content.project_content
+  .attributes
+    %ul.inline.selectable
+      %li.attribute
+        = link_to "Build status", short_uri_path(@project), :id => 'build_status', :class => 'selected'
+      - unless @project.unique_custom_attributes.empty?
+        - @project.unique_custom_attributes.each do |attribute|
+          %li.attribute.custom_attribute
+            = link_to "#{attribute}", show_project_attributes_path(@project, attribute), :id => "#{attribute}_attribute"
+      - else
+        %li.attribute
+          = link_to "Codefumes is all about tracking attributes. You should try it!", {}, :class => 'intro_to_attributes'
+  .visualization
+    %h3.shadow Build Status (Over Time)
+    .canvas
+      - if @project.covered_by_plan?
+        #canvas.js_build_status
+      - else
+        #upgrade_required
+          %h3 Visuals would be here. Please upgrade your account.
+
   .division.content
-    - commit = @project.commit_head
-    - if commit.blank?
+    - if @commit.blank?
       %h2 No commits yet!
       %p Run "fumes sync" on your repository
     - else
       .column.commit
         .overview
-          = gravatar_image_tag(commit.committer_email, :alt => commit.committer_name, :title => commit.committer_name)
-          - if commit.message.blank?
+          = gravatar_image_tag(@commit.committer_email, :alt => @commit.committer_name, :title => @commit.committer_name)
+          - if @commit.message.blank?
             %h3.shadow.no_commit_message [No commit message? Tsk! Tsk!]
           - else
             %h3.shadow
-              = "#{commit.short_identifier}: #{commit.short_message.gsub("\n", "<br/>")}"
-            - if commit.merge?
-              %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
-        .details
-          %dl
-            %dt Identifier:
-            %dd= commit.identifier
-            %dt Author:
-            %dd= commit.author
+              = "#{@commit.short_identifier}: #{@commit.short_message.gsub("\n", "<br/>")}"
+            - if @commit.merge?
+              %p= "Merge of: #{@commit.parent_identifiers(:short).to_sentence}"
+        .content
+          .columns.two_columns
+            .column
+              %h5.title Commit Details
+              %dl.payload
+                %dt Identifier:
+                %dd= @commit.identifier
+                %dt Author:
+                %dd= @commit.author
+                %dt Committer:
+                %dd= @commit.committer
+                %dt Authored at:
+                %dd= @commit.authored_at
+                %dt Committed at:
+                %dd= @commit.committed_at
+                %dt Lines added:
+                %dd= @commit.line_additions
+                %dt Lines deleted:
+                %dd= @commit.line_deletions
+                %dt Total lines:
+                %dd= @commit.line_total
+                %dt Files affected:
+                %dd= @commit.affected_file_count
+            .column
+              %h5.title Custom Attributes
+              - unless @commit.custom_attributes.empty?
+                %dl.payload
+                  - @commit.custom_attributes.each do |custom_attribute|
+                    %dt= "#{custom_attribute.name}:"
+                    %dd= custom_attribute.value
 
     .division
-      - if commit.nil?
-        %h2 No commits yet!
-      - else
+      - unless @commit.blank?
+        %h2 Builds
         %ul.builds
-          - commit.builds.each do |build|
+          - @commit.builds.each do |build|
             %li.build{:class => build_status_class_for(build)}
               .columns.two_columns
                 .column

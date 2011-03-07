@@ -26,7 +26,7 @@
         #upgrade_required
           %h3 Visuals would be here. Please upgrade your account.
   %ul.commits
-    - @project.recent_commits.each do |commit|
+    - @commits.each do |commit|
       - css_classes = commit_classes_for(commit)
       - css_classes += " head" if commit == @project.commit_head
       %li.commit{:class => css_classes}
@@ -42,7 +42,7 @@
                   %p= "Merge of: #{commit.parent_identifiers(:short).to_sentence}"
             .column.align_right
               %h3.build_duration
-                - avg_build_duration_text_for(commit)
+                - commit.average_build_duration
         .content
           .columns.two_columns
             .column
