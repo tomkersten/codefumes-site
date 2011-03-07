@@ -1,0 +1,65 @@
+h1. CodeFumes.com
+
+h2. What is it?
+
+The idea behind CodeFumes.com was: There are smells in software projects which can be detected via metrics, but teams don't generally track them consistently on projects.
+
+The goals of the site were this:
+
+# *Provide a service which made it dead simple to track whatever metric you wanted.*
+## Coverage? Hours worked per week? Number of times poeple walked by? Whatever you want...
+# *Simple integration with your build server*
+## ...with automatic tracking of things like average build duration.
+# *Unified API across build servers*
+## If you worked on several build servers say, across several clients, you would be able to have a single dashboard for all of your projects. You could use the dashboard "built into" the site, or make your own with the API...not having to worry about differences between, say, Hudson, CruiseControl, and Integrity. This would make it easy to make cool stuff to reflect your build status (Arduino-bots, anyone?).
+
+h2. How does it work?
+
+You host this codebase somewhere and use the 'codefumes' gem to send repository data up. The primary way of doing so is via the `fumes` command-line tool...and a couple convenience classes for sending up custom metrics for commits.
+
+h3. Rough overview...
+
+# Users have many projects
+# Projects have many commits
+# Commits have many parents and many children (via a nasty relationship definition in the db)
+## The latest commit (`.commit_head`) of a project is determined by the first commit it finds without any children. Yes it's brittle...
+# Commits have custom attributes, which, again, is a bit of a cludge...just a table with name/value columns (we're talking mostly proof-of-concept stuff here ;-))
+# All information is sent up in "payloads", which are processed by the PayloadProcessor
+
+h3. Visualizations
+
+# The default visualization is an attempt to make it easy to spot trends in when the build is breaking. The idea was there may be a common time of day when the build breaks...say...just before/after lunch...or right before people leave work for the day...or midnight when they are tired. Spot the trends & stop the habit.
+# If you are tracking "custom attributes" which also happen to be numbers, there is a rough sketch at graphing how those values have changed over time. This is what the AttributesController does right now...in case you are wondering...
+
+h2. What happened...why didn't it ship?
+
+# I started to question how many developers & shops cared enough about this sort of stuff to be willing to pay for it...and I wanted to work on something people would pay for...
+# Life got a bit crazy for a while...time passed...
+
+h2. Anything to note in the codebase?
+
+# It uses Rails 2.3.8
+# There is quite a bit of duplication in the views (Projects#show & #short_uri & Attributes#show)
+# PayloadProcessor has a single method that seems like it should be cleaner
+# The API controllers could probably be migrated to use one of the many "restful controller" frameworks without breaking the gem. When I started out on the project I wanted to dig into doing "REST right" because I didn't like how many of the frameworks always returned the same status code for failures, didn't use linked data, etc. What am I doing as it stands in the codebase? Always returning the same status code. The irony...
+# The db doesn't have any indexes, which will slow things down w/ the way the commit relationships are set up...I wanted to see how bad it would get...and then see the impace of adding the indexes. I never got to a "ridiculously painful" dataset. ;-)
+
+h2. Where do I want to see it go?
+
+If people are interested in moving the project forward, I wouldn't mind picking it back up again. I still think the idea is interesting and could be pretty cool. However, I don't know if I have the steam to make a go of it alone. The official site is still up & should function with the current release of the 'codefumes' gem. I would love to discuss ideas on moving it forward. If you are interested, ping me "@tomkersten":http://twitter.com/tomkersten.
+
+h2. Credits
+
+This idea was something I have been thinking about for quite a while. I finally kicked it off while I was working at "Obtiva":http://obtiva.com because it seemed to really fit well into the business we were in. While there, I had the help & support of several people via code contributions, rubber ducks, project definition, management support, etc. After leaving Obtiva, several people have worked with me on it in various capacities. Here is a list of people I'd like to thank (...in alphabetical order):
+
+* Corey Haines
+* Dan Nawara
+* Dave Hoover
+* Fred Polgardy
+* Joe Banks
+* Joseph Leddy
+* Kevin Taylor
+* Leah Welty-Rieger
+* Pete Nawara
+* Roy Kolak
+* Todd Webb
