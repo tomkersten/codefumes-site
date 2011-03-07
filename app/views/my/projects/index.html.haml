@@ -6,16 +6,13 @@
       %li
         %h3.shadow Step 1. Install codefumes_harvester:
         %p
-          sudo gem install codefumes_harvester
+          sudo gem install codefumes
       %li
         %h3.shadow Step 2. Run this:
-        %p
-          - public_key = Project.generate_public_key
-          = "harvest_repo_metrics  --project_key #{public_key}"
+        %p fumes sync
       %li
         %h3.shadow Step 3. Review:
-        %p
-          = link_to short_uri_url(public_key), short_uri_url(public_key), :id => :short_uri
+        %p Visit the link that is printed out...
 - else
   .header
     %h1 Projects

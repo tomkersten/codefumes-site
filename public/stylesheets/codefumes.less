@@ -23,9 +23,22 @@
   .gradient(#EEE, #CCC);
 }
 
-.clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; } 
+.clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 .clearfix { display: inline-block; } html[xmlns] .clearfix { display: block; }* html .clearfix { height: 1%; }
 
+.large_list {
+  li {
+    margin:10px 0;
+    padding:20px 10px;
+    .border_radius(4px);
+    h3 { margin:0 0 0 20px; }
+    a { text-decoration:none; }
+    h5 {
+      margin:8px 20px 0 0;
+      font-weight:normal;
+    }
+  }
+}
 
 /* Global
 ========================================== */
@@ -54,19 +67,19 @@ form {
     color:red;
     margin-top:0;
   }
-  ol, ul { 
-    list-style-type:none; 
+  ol, ul {
+    list-style-type:none;
     margin:0;
     padding:0;
   }
-  li { 
+  li {
     padding-bottom:10px;
-    list-style-type:none;  
+    list-style-type:none;
   }
   fieldset { border:0; }
-  label { 
+  label {
     color:#666;
-    display:block; 
+    display:block;
     font-size:16px;
   }
   input { font-size:20px; }
@@ -90,15 +103,15 @@ h6 { font-size:14px; }
 ========================================== */
 dl {
   margin:0 10px 10px;
-  dt { 
-    clear:both; 
+  dt {
+    clear:both;
     font-weight:bold;
     width:150px;
   }
-  dd { width:200px; }
-  dt, dd { 
+  dd { width:300px; }
+  dt, dd {
     border-bottom:1px solid #CCC;
-    float:left; 
+    float:left;
     margin:3px 0;
     padding:3px 0;
   }
@@ -107,13 +120,13 @@ dl {
 .payload {
   dt { width:125px; }
   dd { width:auto; }
-  dt, dd { 
+  dt, dd {
     background:#DDD;
     border-bottom:1px solid #CCC;
-    float:left; 
+    float:left;
     margin:3px 0;
     padding:3px 5px;
-  } 
+  }
 }
 
 
@@ -129,10 +142,10 @@ ol {
 }
 
 .inline {
-  li { 
-    display:inline; 
+  li {
+    display:inline;
     padding:0 5px;
-  }  
+  }
   li:first-child { padding-left:0px; }
   li:last-child { padding-right:0px; }
 }
@@ -161,17 +174,7 @@ ol {
 }
 
 .projects {
-  li { 
-    margin:10px 0;
-    padding:20px 10px;
-    .border_radius(4px);
-    h3 { margin:0 0 0 20px; }
-    a { text-decoration:none; }
-    h5 { 
-      margin:8px 20px 0 0;
-      font-weight:normal; 
-    }
-  }
+  .large_list
 }
 
 
@@ -201,7 +204,7 @@ ol {
     font-family:"Droid Sans";
     a {
       color:#FFF;
-      font-size:25px; 
+      font-size:25px;
     }
     .tagline {
       color:#DDD;
@@ -227,7 +230,7 @@ ol {
 .structured_box {
   margin:0px;
   padding:0px;
-  .header { 
+  .header {
     padding:8px 10px 5px;
     h1 { margin:0px; }
     .header_gradient();
@@ -278,13 +281,28 @@ ol {
 /* Commit
 ========================================== */
 .commit {
-  display:none;
   .header {
     background:none;
     padding-top:0;
     h3 { margin:5px -10px 0; }
   }
-  .content { padding-top:0; }
+  .content {
+    padding-top:0;
+  }
+  .overview {
+    img {
+      border: 1px solid #CCC;
+      padding: 2px;
+      background-color: white;
+      margin: -2px 0;
+      height: 65px;
+      width: 65px;
+      display: inline-block;
+    }
+    h3 {display: inline;}
+  }
+  .details {
+  }
 }
 .head { display:block; }
 
@@ -292,12 +310,18 @@ ol {
 /* Build duration
 ========================================== */
 .build_duration {
-  display:inline-block; 
+  display:inline-block;
   margin:0;
   padding:5px 40px;
   .border_radius(5px);
 }
 
+/* Build list
+   */
+.builds {
+  clear:both;
+  .large_list
+}
 
 /* Build colors
 ========================================== */
@@ -317,14 +341,13 @@ ol {
   border:2px solid #888;
 }
 
-
 /* Buttons
 ========================================== */
 .huge_button {
   border:1px solid #CCC;
   display:block;
   font-size:30px;
-  margin-bottom:20px;  
+  margin-bottom:20px;
   padding:18px 20px;
   .border_radius(10px);
   .huge_button_gradient();
@@ -350,11 +373,11 @@ ol {
 .align_center { text-align:center; }
 .shadow { text-shadow: 1px 2px 2px #AAA; }
 .division { border-bottom:1px solid #CCC; }
-.loud { 
+.loud {
   color:#999;
   font-size:55px;
   em { color:#333; }
-} 
+}
 
 
 /* Default JavaScript Styles
