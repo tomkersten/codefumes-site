@@ -1,15 +1,17 @@
 source :gemcutter
 
 # Please keep gem declarations in alphabetical order
+gem 'rake', '~> 0.9.2'
 gem 'aasm', '2.1.5'
-gem 'authlogic', '2.1.2'
+gem 'authlogic', '~> 2.1.6'
 gem 'compass', '0.8.17'
-gem 'formtastic', '0.9.8'
+gem 'formtastic'
 gem 'haml', '2.2.20'
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'hoptoad_notifier', '2.2.6'
 gem 'ruby-mysql', '2.9.3', :require => 'mysql'
-gem 'rails', '2.3.8'
+gem 'rails', '~> 2.3.14'
+gem 'iconv'
 
 group :development do
   gem 'vlad'
