@@ -11,6 +11,7 @@ gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'hoptoad_notifier', '2.2.6'
 gem 'rails', '~> 2.3.14'
 gem 'iconv'
+gem 'unicorn'
 
 group :production do
   gem 'pg'
