@@ -58,3 +58,8 @@ group :test do
   gem 'trollop', '1.16.2'
   gem 'webrat', '0.7.0'
 end
+
+group :rake do
+  gem 'vlad'
+  gem 'hoe'
+end

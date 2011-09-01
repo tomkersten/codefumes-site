@@ -75,6 +75,8 @@ GEM
       envjs (= 0.2.0)
       johnson (= 2.0.0.pre3)
     hirb (0.5.0)
+    hoe (2.12.2)
+      rake (~> 0.8)
     hoptoad_notifier (2.2.6)
       activesupport
     httparty (0.7.8)
@@ -194,6 +196,7 @@ DEPENDENCIES
   gherkin (= 1.0.30)
   gravatar_image_tag (= 1.0.0.pre2)
   haml (= 2.2.20)
+  hoe
   hoptoad_notifier (= 2.2.6)
   iconv
   jasmine (= 0.10.4.0)

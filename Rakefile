@@ -24,6 +24,8 @@ begin
   # it is no longer included in vlad's core.
   require 'vlad'
   require 'hoe'
+  require 'lib/tasks/custom_vlad_tasks'
+
   Vlad.load :scm => nil, :web => nil, :app => nil
   Rake.clear_tasks("vlad:setup_app", "vlad:rollback", "vlad:update", "vlad:update_symlinks")
 rescue LoadError
