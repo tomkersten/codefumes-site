@@ -9,11 +9,15 @@ gem 'formtastic'
 gem 'haml', '2.2.20'
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'hoptoad_notifier', '2.2.6'
-gem 'ruby-mysql', '2.9.3', :require => 'mysql'
 gem 'rails', '~> 2.3.14'
 gem 'iconv'
 
+group :production do
+  gem 'pg'
+end
+
 group :development do
+  gem 'ruby-mysql', '2.9.3', :require => 'mysql'
   gem 'vlad'
   gem 'vlad-git'
 end
